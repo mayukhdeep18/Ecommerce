@@ -1,0 +1,7 @@
+{
+  "env": {
+    "Zoom_user": "zoom_admin",
+    "ZOOM_PWD": "zoom123",
+    "JWT_KEY": "ZOOM_KEY"
+  }
+}
