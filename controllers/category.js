@@ -1,17 +1,14 @@
-//const express = require("express");
-//const router = express.Router();
 const mongoose = require("mongoose");
-
-//const checkAuth = require('../middleware/check-auth');
 const Category = require("../models/category");
 
+//get all active categories
 exports.category_get_all = (req, res, next) => {
-    Category.find()
+    Category.find({ACTIVE_FLAG:'Y'})
         .select('PRODUCT_CATEGORY_NAME PRODUCT_CATEGORY_DESCRIPTION UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id')
         .exec()
         .then(docs => {
             const response = {
-                count: docs.length,
+                //count: docs.length,
                 categories: docs.map(doc => {
                     return {
                         PRODUCT_CATEGORY_NAME: doc.PRODUCT_CATEGORY_NAME,
@@ -19,30 +16,34 @@ exports.category_get_all = (req, res, next) => {
                         UPDATED_BY: doc.UPDATED_BY,
                         UPDATED_DATE: doc.UPDATED_DATE,
                         ACTIVE_FLAG: doc.ACTIVE_FLAG,
-                        _id: doc._id,
-                        request: {
-                            type: "GET",
-                            url: "http://localhost:3000/category/" + doc._id
-                        }
+                        _id: doc._id
                     };
                 })
             };
             // if (docs.length >= 0) {
-            res.status(200).json(response);
-            // } else {
-            // res.status(404).json({
-            // message: 'No entries found'
-            // });
-            // }
+            res.status(200).json({
+                status:"success",
+                error_msg:"",
+                data: {
+                    message: 'Below are the category details',
+                    response
+                }
+            });
         })
         .catch(err => {
             console.log(err);
             res.status(500).json({
-                error: err
+                status: "error",
+                error: err,
+                data:{
+                    message: "An error has occurred as mentioned above"
+                }
             });
         });
 };
 
+
+//create a new category
 exports.category_create_category = (req, res, next) =>{
     const category = new Category({
         _id: new mongoose.Types.ObjectId(),
@@ -57,17 +58,17 @@ exports.category_create_category = (req, res, next) =>{
         .then(result => {
             console.log(result);
             res.status(201).json({
-                message: "Created category successfully",
-                createdcategory: {
-                    PRODUCT_CATEGORY_NAME: result.PRODUCT_CATEGORY_NAME,
-                    PRODUCT_CATEGORY_DESCRIPTION: result.PRODUCT_CATEGORY_DESCRIPTION,
-                    UPDATED_BY: result.UPDATED_BY,
-                    UPDATED_DATE: result.UPDATED_DATE,
-                    ACTIVE_FLAG: result.ACTIVE_FLAG,
-                    _id: result._id,
-                    request: {
-                        type: 'GET',
-                        url: "http://localhost:3000/category/" + result._id
+                status:"success",
+                error_msg:"",
+                data: {
+                    message: "Created category successfully",
+                    createdcategory: {
+                        PRODUCT_CATEGORY_NAME: result.PRODUCT_CATEGORY_NAME,
+                        PRODUCT_CATEGORY_DESCRIPTION: result.PRODUCT_CATEGORY_DESCRIPTION,
+                        UPDATED_BY: result.UPDATED_BY,
+                        UPDATED_DATE: result.UPDATED_DATE,
+                        ACTIVE_FLAG: result.ACTIVE_FLAG,
+                        _id: result._id
                     }
                 }
             });
@@ -75,11 +76,16 @@ exports.category_create_category = (req, res, next) =>{
         .catch(err => {
             console.log(err);
             res.status(500).json({
-                error: err
+                status: "error",
+                error: err,
+                data: {
+                    message: "An error has occurred as mentioned above"
+                }
             });
         });
 };
 
+//get category by id
 exports.category_get_category = (req, res, next) =>{
     const id = req.params.categoryId;
     Category.findById(id)
@@ -89,10 +95,10 @@ exports.category_get_category = (req, res, next) =>{
             console.log("From database", doc);
             if (doc) {
                 res.status(200).json({
-                    category: doc,
-                    request: {
-                        type: 'GET',
-                        url: 'http://localhost:3000/category'
+                    status:"success",
+                    error_msg:"",
+                    data: {
+                        category: doc
                     }
                 });
             } else {
@@ -103,10 +109,17 @@ exports.category_get_category = (req, res, next) =>{
         })
         .catch(err => {
             console.log(err);
-            res.status(500).json({ error: err });
+            res.status(500).json({
+                status: "error",
+                error: err,
+                data: {
+                    message: "An error has occurred as mentioned above"
+                }
+            });
         });
 };
 
+//update category details by id
 exports.category_update_category = (req, res, next) =>{
     const id = req.params.categoryId;
     const updateOps = {};
@@ -117,37 +130,36 @@ exports.category_update_category = (req, res, next) =>{
         .exec()
         .then(result => {
             res.status(200).json({
-                message: 'category updated',
-                request: {
-                    type: 'GET',
-                    url: 'http://localhost:3000/category/' + id
+                status: "success",
+                error: "",
+                data: {
+                    message: "category updated"
                 }
             });
         })
         .catch(err => {
             console.log(err);
             res.status(500).json({
-                error: err
+                status: "error",
+                error: err,
+                data: {
+                    message: "An error has occurred as mentioned above"
+                }
             });
         });
 };
 
+//delete a category by id
 exports.category_delete = (req, res, next) =>{
     const id = req.params.categoryId;
     Category.remove({ _id: id })
         .exec()
         .then(result => {
             res.status(200).json({
-                message: 'category deleted',
-                request: {
-                    type: 'POST',
-                    url: 'http://localhost:3000/category',
-                    body: {
-                        PRODUCT_CATEGORY_NAME: 'String',
-                        PRODUCT_CATEGORY_DESCRIPTION: 'String',
-                        UPDATED_BY: 'String',
-                        UPDATED_DATE: 'Date',
-                        ACTIVE_FLAG: 'String'}
+                status: "success",
+                error: "",
+                data: {
+                    message: 'category deleted'
                 }
             });
         })

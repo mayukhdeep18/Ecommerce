@@ -47,10 +47,15 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
+
+
 const categoryRoutes = require("./routes/category");
+const catflagRoutes = require("./routes/category_flag");
 const subcategoryRoutes = require("./routes/subcategory");
 const productimageRoutes = require("./routes/product_images");
 const userRoutes = require('./routes/user');
+const subsubcategoryRoutes = require("./routes/subsubcategory");
+const subsubcatflagRoutes = require("./routes/subsubcategory_flag");
 
 mongoose.connect(
     "mongodb://zoom:"+
@@ -81,9 +86,12 @@ app.use((req, res, next) => {
 
 // Routes which should handle requests
 app.use("/category", categoryRoutes);
+app.use("/category_flag",catflagRoutes);
 app.use("/subcategory", subcategoryRoutes);
 app.use("/product_images", productimageRoutes);
 app.use("/user", userRoutes);
+app.use("/subsubcategory", subsubcategoryRoutes);
+app.use("/subsubcategory_flag",subsubcatflagRoutes);
 
 app.use((req, res, next) => {
     const error = new Error("Not found");

@@ -1,36 +1,124 @@
 const mongoose = require("mongoose");
 const Product_images = require("../models/product_images");
 
+//get all active product image details
 exports.images_get_all = (req, res, next) => {
-    Product_images.find()
+    Product_images.find({ACTIVE_FLAG:'Y'})
         .select('PRODUCT_IMAGE_REF_1 ACTIVE_FLAG _id')
         // .populate('PRODUCT_ID','PRODUCT_NAME')
         .exec()
         .then(docs => {
             res.status(200).json({
-                count: docs.length,
-                productimages: docs.map(doc => {
-                    return {
-                        _id: doc._id,
-                        PRODUCT_IMAGE_REF_1: doc.PRODUCT_IMAGE_REF_1,
-                        UPDATED_BY: doc.UPDATED_BY,
-                        UPDATED_DATE: doc.UPDATED_DATE,
-                        ACTIVE_FLAG: doc.ACTIVE_FLAG,
-                        request: {
-                            type: "GET",
-                            url: "http://localhost:3000/product_images/" + doc._id
-                        }
-                    };
-                })
+                status: "success",
+                error: "",
+                data: {
+                    productimages: docs.map(doc => {
+                        return {
+                            _id: doc._id,
+                            PRODUCT_IMAGE_REF_1: doc.PRODUCT_IMAGE_REF_1,
+                            UPDATED_BY: doc.UPDATED_BY,
+                            UPDATED_DATE: doc.UPDATED_DATE,
+                            ACTIVE_FLAG: doc.ACTIVE_FLAG
+                        };
+                    })
+                }
             });
         })
         .catch(err => {
             res.status(500).json({
-                error: err
+                status: "success",
+                error: err,
+                data: {
+                    message: "An error has occurred as mentioned above"
+                }
             });
         });
 };
 
+
+//get all product image details by active flag
+exports.images_get_all_flag = (req, res, next) => {
+    const actFlag = req.params.activeFlag;
+    if (actFlag === 'Y') {
+        Product_images.find({ACTIVE_FLAG: 'Y'})
+            .select('PRODUCT_IMAGE_REF_1 ACTIVE_FLAG _id')
+            // .populate('PRODUCT_ID','PRODUCT_NAME')
+            .exec()
+            .then(docs => {
+                res.status(200).json({
+                    status: "success",
+                    error: "",
+                    data: {
+                        productimages: docs.map(doc => {
+                            return {
+                                _id: doc._id,
+                                PRODUCT_IMAGE_REF_1: doc.PRODUCT_IMAGE_REF_1,
+                                UPDATED_BY: doc.UPDATED_BY,
+                                UPDATED_DATE: doc.UPDATED_DATE,
+                                ACTIVE_FLAG: doc.ACTIVE_FLAG
+                            };
+                        })
+                    }
+                });
+            })
+            .catch(err => {
+                res.status(500).json({
+                    status: "success",
+                    error: err,
+                    data: {
+                        message: "An error has occurred as mentioned above"
+                    }
+                });
+            });
+    }
+    else if (actFlag === 'N')
+    {
+        Product_images.find({ACTIVE_FLAG: 'N'})
+            .select('PRODUCT_IMAGE_REF_1 ACTIVE_FLAG _id')
+            // .populate('PRODUCT_ID','PRODUCT_NAME')
+            .exec()
+            .then(docs => {
+                res.status(200).json({
+                    status: "success",
+                    error: "",
+                    data: {
+                        productimages: docs.map(doc => {
+                            return {
+                                _id: doc._id,
+                                PRODUCT_IMAGE_REF_1: doc.PRODUCT_IMAGE_REF_1,
+                                UPDATED_BY: doc.UPDATED_BY,
+                                UPDATED_DATE: doc.UPDATED_DATE,
+                                ACTIVE_FLAG: doc.ACTIVE_FLAG
+                            };
+                        })
+                    }
+                });
+            })
+            .catch(err => {
+                res.status(500).json({
+                    status: "success",
+                    error: err,
+                    data: {
+                        message: "An error has occurred as mentioned above"
+                    }
+                });
+            });
+    }
+    else
+    {
+        res
+            .status(500)
+            .json({
+                status: "error",
+                error: "Incorrect flag",
+                data: {
+                    message: "Incorrect flag value. Flag must be either Y or N"
+                }
+            });
+    }
+};
+
+//upload image by product id
 exports.image_upload = (req, res, next) =>  {
     /* Product_details.findById(req.body.PRODUCT_ID)
          .then(product => {
@@ -101,30 +189,34 @@ exports.image_upload = (req, res, next) =>  {
         .then(result => {
             console.log(result);
             res.status(201).json({
-                message: "Product image list created successfully",
-                createdProductimage: {
-                    _id: result._id,
-                    //PRODUCT_ID: result.PRODUCT_ID,
-                    PRODUCT_IMAGE_REF_1: result.PRODUCT_IMAGE_REF_1,
-                    UPDATED_BY: result.UPDATED_BY,
-                    UPDATED_DATE: result.UPDATED_DATE,
-                    ACTIVE_FLAG: result.ACTIVE_FLAG
-                },
-                request: {
-                    type: "GET",
-                    url: "http://localhost:3000/product_images/" + result._id
+                status: "success",
+                error: "",
+                data: {
+                    message: "Product image list created successfully",
+                    createdProductimage: {
+                        _id: result._id,
+                        //PRODUCT_ID: result.PRODUCT_ID,
+                        PRODUCT_IMAGE_REF_1: result.PRODUCT_IMAGE_REF_1,
+                        UPDATED_BY: result.UPDATED_BY,
+                        UPDATED_DATE: result.UPDATED_DATE,
+                        ACTIVE_FLAG: result.ACTIVE_FLAG
+                    }
                 }
             });
         })
         .catch(err => {
             console.log(err);
             res.status(500).json({
-                error: err
+                status: "error",
+                error: err,
+                data: {
+                    message: "An error has occurred as mentioned above"
+                }
             });
         });
 };
 
-
+//get product image details by id
 exports.image_get_image = (req, res, next) => {
     const id = req.params.productimageId;
     Product_images.findById(id)
@@ -135,24 +227,35 @@ exports.image_get_image = (req, res, next) => {
             console.log("From database", doc);
             if (doc) {
                 res.status(200).json({
-                    productimages: doc,
-                    request: {
-                        type: 'GET',
-                        url: 'http://localhost:3000/product_images'
+                    status: "success",
+                    error: "",
+                    data: {
+                        productimages: doc
                     }
                 });
             } else {
                 res
                     .status(404)
-                    .json({ message: "No valid entry found for provided ID" });
+                    .json({
+                        status: "error",
+                        error: "Id not found",
+                        message: "No valid entry found for provided ID"
+                    });
             }
         })
         .catch(err => {
             console.log(err);
-            res.status(500).json({ error: err });
+            res.status(500).json({
+                status: "error",
+                error: err,
+                data: {
+                    message: "An error has occurred as mentioned above"
+                }
+            });
         });
 };
 
+//update product image details by id
 exports.image_update_image = (req, res, next) =>  {
     const id = req.params.productimageId;
     const updateOps = {};
@@ -163,21 +266,24 @@ exports.image_update_image = (req, res, next) =>  {
         .exec()
         .then(result => {
             res.status(200).json({
-                message: 'product image updated',
-                request: {
-                    type: 'GET',
-                    url: 'http://localhost:3000/product_images/' + id
+                status: "success",
+                error: "",
+                data: {
+                    message: 'product image updated'
                 }
             });
         })
         .catch(err => {
             console.log(err);
             res.status(500).json({
-                error: err
+                status: "error",
+                error: err,
+                message: "An error has occurred as mentioned above"
             });
         });
 };
 
+//Delete product image details by id
 exports.image_delete = (req, res, next) => {
     const id = req.params.productimageId;
     Product_images.findById(id);
@@ -186,24 +292,22 @@ exports.image_delete = (req, res, next) => {
         .exec()
         .then(result => {
             res.status(200).json({
-                message: 'product image deleted',
-                request: {
-                    type: 'POST',
-                    url: 'http://localhost:3000/product_images',
-                    body: {
-                        //PRODUCT_ID: 'String',
-                        PRODUCT_IMAGE_REF_1: 'String',
-                        UPDATED_BY: 'String',
-                        UPDATED_DATE: 'Date',
-                        ACTIVE_FLAG: 'String'}
+                status: "success",
+                error: "",
+                data: {
+                    message: 'product image deleted'
                 }
             });
         })
         .catch(err => {
             console.log(err);
             res.status(500).json({
-                error: err
+                status: "error",
+                error: err,
+                data:
+                    {
+                        message: "An error has occurred as mentioned above"
+                    }
             });
         });
 };
-

@@ -35,6 +35,8 @@ const upload = multer({
 
 router.get("/", ImageController.images_get_all);
 
+router.get("/:activeFlag", ImageController.images_get_all_flag);
+
 router.post("/",checkAuth, upload.single('PRODUCT_IMAGE_REF_1'), ImageController.image_upload);
 
 router.get("/:productimageId", ImageController.image_get_image);
