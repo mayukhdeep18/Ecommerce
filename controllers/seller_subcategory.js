@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
-const Subcategory = require("../models/subcategory");
-const Category = require("../models/category");
+const Seller_subcategory = require("../models/seller_subcategory");
+const Seller_category = require("../models/seller_category");
 
-//get all active subcategory details
-exports.subcategory_get_all = (req, res, next) => {
-    Subcategory.find({ACTIVE_FLAG:'Y'})
-        .select("PRODUCT_CATEGORY_ID PRODUCT_SUB_CATEGORY_NAME PRODUCT_SUB_CATEGORY_DESCRIPTION UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
-        .populate('PRODUCT_CATEGORY_ID','PRODUCT_CATEGORY_NAME')
+//get all active seller subcategory details
+exports.seller_subcategory_get_all = (req, res, next) => {
+    Seller_subcategory.find({ACTIVE_FLAG:'Y'})
+        .select("SELLER_CATEGORY_ID SELLER_SUB_CATEGORY_NAME SELLER_SUB_CATEGORY_DESCRIPTION UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
+        .populate('SELLER_CATEGORY_ID','SELLER_CATEGORY_NAME')
         .exec()
         .then(docs => {
             res.status(200).json({
@@ -15,13 +15,13 @@ exports.subcategory_get_all = (req, res, next) => {
                 data: {
                     subcategorys: docs.map(doc => {
                         return {
-                            _id: doc._id,
-                            PRODUCT_CATEGORY_ID: doc.PRODUCT_CATEGORY_ID,
-                            PRODUCT_SUB_CATEGORY_NAME: doc.PRODUCT_SUB_CATEGORY_NAME,
-                            PRODUCT_SUB_CATEGORY_DESCRIPTION: doc.PRODUCT_SUB_CATEGORY_DESCRIPTION,
-                            UPDATED_BY: doc.UPDATED_BY,
-                            UPDATED_DATE: doc.UPDATED_DATE,
-                            ACTIVE_FLAG: doc.ACTIVE_FLAG
+                            seller_sub_category_id: doc._id,
+                            seller_category_id: doc.SELLER_CATEGORY_ID,
+                            seller_sub_category_name: doc.SELLER_SUB_CATEGORY_NAME,
+                            seller_sub_category_description: doc.SELLER_SUB_CATEGORY_DESCRIPTION,
+                            updated_by_user: doc.UPDATED_BY,
+                            updated_on: doc.UPDATED_DATE,
+                            isActive: doc.ACTIVE_FLAG
                         };
                     })
                 }
@@ -41,29 +41,29 @@ exports.subcategory_get_all = (req, res, next) => {
 
 
 
-//create a new subcategory
-exports.subcategory_create = (req, res, next) => {
-    Category.findById(req.body.PRODUCT_CATEGORY_ID)
+//create a new seller subcategory
+exports.seller_subcategory_create = (req, res, next) => {
+    Seller_category.findById(req.body.SELLER_CATEGORY_ID)
         .then(category => {
             if (!category) {
                 return res.status(404).json({
                     status: "error",
-                    error: "Category not found",
+                    error: "Seller_category not found",
                     data: {
-                    message: "Category not found, please try entering subcategory details for an existing category"
+                        message: "Seller_category not found, please try entering subcategory details for an existing category"
                     }
                 });
             }
-            const subcategory = new Subcategory({
+            const seller_subcategory = new Seller_subcategory({
                 _id: new mongoose.Types.ObjectId(),
-                PRODUCT_CATEGORY_ID: req.body.PRODUCT_CATEGORY_ID,
-                PRODUCT_SUB_CATEGORY_NAME: req.body.PRODUCT_SUB_CATEGORY_NAME,
-                PRODUCT_SUB_CATEGORY_DESCRIPTION: req.body.PRODUCT_SUB_CATEGORY_DESCRIPTION,
+                SELLER_CATEGORY_ID: req.body.SELLER_CATEGORY_ID,
+                SELLER_SUB_CATEGORY_NAME: req.body.SELLER_SUB_CATEGORY_NAME,
+                SELLER_SUB_CATEGORY_DESCRIPTION: req.body.SELLER_SUB_CATEGORY_DESCRIPTION,
                 UPDATED_BY: req.body.UPDATED_BY,
                 UPDATED_DATE: new Date(),
                 ACTIVE_FLAG: req.body.ACTIVE_FLAG
             });
-            return subcategory.save();
+            return seller_subcategory.save();
         })
         .then(result => {
             console.log(result);
@@ -71,15 +71,15 @@ exports.subcategory_create = (req, res, next) => {
                 status: "success",
                 error: "",
                 data: {
-                    message: "Subcategory stored",
-                    createdSubcategory: {
+                    message: "Seller_subcategory stored",
+                    createdSeller_subcategory: {
                         _id: result._id,
-                        PRODUCT_CATEGORY_ID: result.PRODUCT_CATEGORY_ID,
-                        PRODUCT_SUB_CATEGORY_NAME: result.PRODUCT_SUB_CATEGORY_NAME,
-                        PRODUCT_SUB_CATEGORY_DESCRIPTION: result.PRODUCT_SUB_CATEGORY_DESCRIPTION,
-                        UPDATED_BY: result.UPDATED_BY,
-                        UPDATED_DATE: result.UPDATED_DATE,
-                        ACTIVE_FLAG: result.ACTIVE_FLAG
+                        seller_category_id: result.SELLER_CATEGORY_ID,
+                        seller_sub_category_name: result.SELLER_SUB_CATEGORY_NAME,
+                        seller_sub_category_description: result.SELLER_SUB_CATEGORY_DESCRIPTION,
+                        updated_by_user: result.UPDATED_BY,
+                        updated_on: result.UPDATED_DATE,
+                        isActive: result.ACTIVE_FLAG
                     }
                 }
             });
@@ -96,31 +96,27 @@ exports.subcategory_create = (req, res, next) => {
         });
 };
 
-//get subcategory details by id
-exports.subcategory_get_subcategory = (req, res, next) => {
-    const id = req.params.subcategoryId;
-    Subcategory.findById(id)
-        .select('PRODUCT_CATEGORY_ID PRODUCT_SUB_CATEGORY_NAME PRODUCT_SUB_CATEGORY_DESCRIPTION UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id')
-        .populate('PRODUCT_CATEGORY_ID','PRODUCT_CATEGORY_NAME')
+//get seller subcategory details by id
+exports.seller_subcategory_get_subcategory = (req, res, next) => {
+    const id = req.params.sellersubcategoryId;
+    Seller_subcategory.findById(id)
+        .select('SELLER_CATEGORY_ID SELLER_SUB_CATEGORY_NAME SELLER_SUB_CATEGORY_DESCRIPTION UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id')
+        .populate('SELLER_CATEGORY_ID','SELLER_CATEGORY_NAME')
         .exec()
         .then(doc => {
             console.log("From database", doc);
             if (doc) {
                 res.status(200).json({
-                    status: "success",
-                    error: "",
+                    status:"success",
+                    error_msg:"",
                     data: {
-                        subcategory: doc
+                        seller_subcategory: doc
                     }
                 });
             } else {
                 res
                     .status(404)
-                    .json({
-                        status: "error",
-                        error: "Id not found",
-                        message: "No valid entry found for provided subcategory ID"
-                    });
+                    .json({ message: "No valid entry found for provided ID" });
             }
         })
         .catch(err => {
@@ -136,21 +132,21 @@ exports.subcategory_get_subcategory = (req, res, next) => {
 };
 
 
-//update subcategory details by id
-exports.subcategory_update = (req, res, next) => {
-    const id = req.params.subcategoryId;
+//update seller subcategory details by id
+exports.seller_subcategory_update = (req, res, next) => {
+    const id = req.params.sellersubcategoryId;
     const updateOps = {};
     for (const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
-    Subcategory.update({ _id: id }, { $set: updateOps })
+    Seller_subcategory.update({ _id: id }, { $set: updateOps })
         .exec()
         .then(result => {
             res.status(200).json({
                 status: "success",
                 error: "",
                 data: {
-                    message: 'subcategory updated'
+                    message: 'seller subcategory updated'
                 }
             });
         })
@@ -167,17 +163,17 @@ exports.subcategory_update = (req, res, next) => {
 };
 
 
-//delete a sub category by id
-exports.subcategory_delete = (req, res, next) => {
-    const id = req.params.subcategoryId;
-    Subcategory.remove({ _id: id })
+//delete a seller sub category by id
+exports.seller_subcategory_delete = (req, res, next) => {
+    const id = req.params.sellersubcategoryId;
+    Seller_subcategory.remove({ _id: id })
         .exec()
         .then(result => {
             res.status(200).json({
                 status: "success",
                 error: "",
                 data: {
-                    message: 'subcategory deleted'
+                    message: 'seller subcategory deleted'
                 }
             });
         })

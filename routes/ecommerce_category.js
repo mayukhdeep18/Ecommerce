@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require('multer');
 const checkAuth = require('../middleware/check-auth');
-const ImageController = require("../controllers/product_images");
+const EcommerceCategoryController = require("../controllers/ecommerce_category");
 
 
 //multer code for image upload
@@ -33,16 +33,16 @@ const upload = multer({
     fileFilter: fileFilter
 });
 
-router.get("/", ImageController.images_get_all);
+router.get("/", EcommerceCategoryController.ecomm_category_get_all);
 
 
 
-router.post("/",checkAuth, upload.single('PRODUCT_IMAGE_REF_1'), ImageController.image_upload);
+router.post("/",checkAuth, upload.single('ECOMMERCE_LOGO'), EcommerceCategoryController.ecommerce_create_category);
 
-router.get("/:productimageId", ImageController.image_get_image);
+router.get("/:ecommcategoryId", EcommerceCategoryController.ecommerce_category_get_by_id);
 
-router.patch("/:productimageId",checkAuth, ImageController.image_update_image);
+router.patch("/:ecommcategoryId",checkAuth, EcommerceCategoryController.ecommerce_category_update_by_id);
 
-router.delete("/:productimageId",checkAuth, ImageController.image_delete);
+router.delete("/:ecommcategoryId",checkAuth, EcommerceCategoryController.ecommerce_category_delete_by_id);
 
 module.exports = router;

@@ -48,14 +48,21 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 
-
 const categoryRoutes = require("./routes/category");
 const catflagRoutes = require("./routes/category_flag");
 const subcategoryRoutes = require("./routes/subcategory");
+const subcatflagRoutes = require("./routes/subcategory_flag");
 const productimageRoutes = require("./routes/product_images");
+const prodimageflagRoutes = require("./routes/product_images_flag");
 const userRoutes = require('./routes/user');
 const subsubcategoryRoutes = require("./routes/subsubcategory");
 const subsubcatflagRoutes = require("./routes/subsubcategory_flag");
+const sellercategoryRoutes = require("./routes/seller_category");
+const sellercatflagRoutes = require("./routes/seller_category_flag");
+const sellersubcategoryRoutes = require("./routes/seller_subcategory");
+const sellersubcatflagRoutes = require("./routes/seller_subcategory_flag");
+const EcommercecategoryRoutes = require("./routes/ecommerce_category");
+const EcommercecatflagRoutes = require("./routes/ecommerce_category_flag");
 
 mongoose.connect(
     "mongodb://zoom:"+
@@ -88,10 +95,19 @@ app.use((req, res, next) => {
 app.use("/category", categoryRoutes);
 app.use("/category_flag",catflagRoutes);
 app.use("/subcategory", subcategoryRoutes);
+app.use("/subcategory_flag", subcatflagRoutes);
 app.use("/product_images", productimageRoutes);
+app.use("/product_images_flag",prodimageflagRoutes);
 app.use("/user", userRoutes);
 app.use("/subsubcategory", subsubcategoryRoutes);
 app.use("/subsubcategory_flag",subsubcatflagRoutes);
+app.use("/seller_category", sellercategoryRoutes);
+app.use("/seller_category_flag",sellercatflagRoutes);
+app.use("/seller_subcategory", sellersubcategoryRoutes);
+app.use("/seller_subcategory_flag",sellersubcatflagRoutes);
+app.use("/ecommerce_category", EcommercecategoryRoutes);
+app.use("/ecommerce_category_flag",EcommercecatflagRoutes);
+
 
 app.use((req, res, next) => {
     const error = new Error("Not found");

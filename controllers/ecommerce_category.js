@@ -1,24 +1,26 @@
 const mongoose = require("mongoose");
-const Product_images = require("../models/product_images");
+const Ecommerce_category = require("../models/ecommerce_category");
 
-//get all active product image details
-exports.images_get_all = (req, res, next) => {
-    Product_images.find({ACTIVE_FLAG:'Y'})
-        .select('PRODUCT_IMAGE_REF_1 ACTIVE_FLAG _id')
-        // .populate('PRODUCT_ID','PRODUCT_NAME')
+//get all active ecommerce category details
+exports.ecomm_category_get_all = (req, res, next) => {
+    Ecommerce_category.find({ACTIVE_FLAG:'Y'})
+        .select('ECOMMERCE_NAME ECOMMERCE_DESCRIPTION ECOMMERCE_LOGO ECOMMERCE_WEB_URL ACTIVE_FLAG _id')
         .exec()
         .then(docs => {
             res.status(200).json({
                 status: "success",
                 error: "",
                 data: {
-                    productimages: docs.map(doc => {
+                    ecommerce_details: docs.map(doc => {
                         return {
-                            _id: doc._id,
-                            PRODUCT_IMAGE_REF_1: doc.PRODUCT_IMAGE_REF_1,
-                            UPDATED_BY: doc.UPDATED_BY,
-                            UPDATED_DATE: doc.UPDATED_DATE,
-                            ACTIVE_FLAG: doc.ACTIVE_FLAG
+                            ecommerce_id: doc._id,
+                            ecommerce_name: doc.ECOMMERCE_NAME,
+                            ecommerce_description: doc.ECOMMERCE_DESCRIPTION,
+                            ecommerce_logo: doc.ECOMMERCE_LOGO,
+                            ecommerce_web_url: doc.ECOMMERCE_WEB_URL,
+                            updated_by_user: doc.UPDATED_BY,
+                            updated_on: doc.UPDATED_DATE,
+                            isActive: doc.ACTIVE_FLAG
                         };
                     })
                 }
@@ -37,8 +39,8 @@ exports.images_get_all = (req, res, next) => {
 
 
 
-//upload image by product id
-exports.image_upload = (req, res, next) =>  {
+//create ecommerce category
+exports.ecommerce_create_category = (req, res, next) =>  {
     /* Product_details.findById(req.body.PRODUCT_ID)
          .then(product => {
              if (!product) {
@@ -46,7 +48,7 @@ exports.image_upload = (req, res, next) =>  {
                      message: "Product not found"
                  });
              }
-             const productimage = new Product_images({
+             const productimage = new Ecommerce_category({
                  _id: new mongoose.Types.ObjectId(),
                  //PRODUCT_ID: req.body.PRODUCT_ID,
                  PRODUCT_IMAGE_REF_1: req.files[0].path,
@@ -95,15 +97,18 @@ exports.image_upload = (req, res, next) =>  {
              });
          });
  });*/
-    const productimage = new Product_images({
+    const ecommerce_category = new Ecommerce_category({
         _id: new mongoose.Types.ObjectId(),
         //PRODUCT_ID: req.body.PRODUCT_ID,
-        PRODUCT_IMAGE_REF_1: req.file.path,
+        ECOMMERCE_NAME: req.body.ECOMMERCE_NAME,
+        ECOMMERCE_DESCRIPTION: req.body.ECOMMERCE_DESCRIPTION,
+        ECOMMERCE_LOGO: req.file.path,
+        ECOMMERCE_WEB_URL: req.body.ECOMMERCE_WEB_URL,
         UPDATED_BY: req.body.UPDATED_BY,
         UPDATED_DATE: new Date(),
         ACTIVE_FLAG: req.body.ACTIVE_FLAG
     });
-    productimage
+   ecommerce_category
         .save()
         .then(result => {
             console.log(result);
@@ -113,12 +118,14 @@ exports.image_upload = (req, res, next) =>  {
                 data: {
                     message: "Product image list created successfully",
                     createdProductimage: {
-                        _id: result._id,
-                        //PRODUCT_ID: result.PRODUCT_ID,
-                        PRODUCT_IMAGE_REF_1: result.PRODUCT_IMAGE_REF_1,
-                        UPDATED_BY: result.UPDATED_BY,
-                        UPDATED_DATE: result.UPDATED_DATE,
-                        ACTIVE_FLAG: result.ACTIVE_FLAG
+                        ecommerce_id: result.ECOMMERCE_ID,
+                        ecommerce_name: result.ECOMMERCE_NAME,
+                        ecommerce_description: result.ECOMMERCE_DESCRIPTION,
+                        ecommerce_logo: result.ECOMMERCE_LOGO,
+                        ecommerce_web_url: result.ECOMMERCE_WEB_URL,
+                        updated_by_user: result.UPDATED_BY,
+                        updated_on: result.UPDATED_DATE,
+                        isActive: result.ACTIVE_FLAG
                     }
                 }
             });
@@ -135,12 +142,11 @@ exports.image_upload = (req, res, next) =>  {
         });
 };
 
-//get product image details by id
-exports.image_get_image = (req, res, next) => {
-    const id = req.params.productimageId;
-    Product_images.findById(id)
-        .select('PRODUCT_IMAGE_REF_1 ACTIVE_FLAG _id')
-        // .populate('PRODUCT_ID','PRODUCT_NAME')
+//get  ecommerce category details by id
+exports.ecommerce_category_get_by_id = (req, res, next) => {
+    const id = req.params.ecommcategoryId;
+    Ecommerce_category.findById(id)
+        .select('ECOMMERCE_NAME ECOMMERCE_DESCRIPTION ECOMMERCE_LOGO ECOMMERCE_WEB_URL ACTIVE_FLAG _id')
         .exec()
         .then(doc => {
             console.log("From database", doc);
@@ -149,7 +155,7 @@ exports.image_get_image = (req, res, next) => {
                     status: "success",
                     error: "",
                     data: {
-                        productimages: doc
+                        ecommerce_category: doc
                     }
                 });
             } else {
@@ -174,14 +180,14 @@ exports.image_get_image = (req, res, next) => {
         });
 };
 
-//update product image details by id
-exports.image_update_image = (req, res, next) =>  {
-    const id = req.params.productimageId;
+//update ecommerce category details by id
+exports.ecommerce_category_update_by_id = (req, res, next) =>  {
+    const id = req.params.ecommcategoryId;
     const updateOps = {};
     for (const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
-    Product_images.update({ _id: id }, { $set: updateOps })
+    Ecommerce_category.update({ _id: id }, { $set: updateOps })
         .exec()
         .then(result => {
             res.status(200).json({
@@ -202,12 +208,12 @@ exports.image_update_image = (req, res, next) =>  {
         });
 };
 
-//Delete product image details by id
-exports.image_delete = (req, res, next) => {
-    const id = req.params.productimageId;
-    Product_images.findById(id);
+//Delete ecommerce category details by id
+exports.ecommerce_category_delete_by_id = (req, res, next) => {
+    const id = req.params.ecommcategoryId;
+    Ecommerce_category.findById(id);
 
-    Product_images.remove({ _id: id })
+    Ecommerce_category.remove({ _id: id })
         .exec()
         .then(result => {
             res.status(200).json({
