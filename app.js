@@ -63,6 +63,8 @@ const sellersubcategoryRoutes = require("./routes/seller_subcategory");
 const sellersubcatflagRoutes = require("./routes/seller_subcategory_flag");
 const EcommercecategoryRoutes = require("./routes/ecommerce_category");
 const EcommercecatflagRoutes = require("./routes/ecommerce_category_flag");
+const CategoryChainRoutes = require("./routes/category_chain_api")
+
 
 mongoose.connect(
     "mongodb://zoom:"+
@@ -107,6 +109,7 @@ app.use("/seller_subcategory", sellersubcategoryRoutes);
 app.use("/seller_subcategory_flag",sellersubcatflagRoutes);
 app.use("/ecommerce_category", EcommercecategoryRoutes);
 app.use("/ecommerce_category_flag",EcommercecatflagRoutes);
+app.use("/category_chain_api",CategoryChainRoutes);
 
 
 app.use((req, res, next) => {

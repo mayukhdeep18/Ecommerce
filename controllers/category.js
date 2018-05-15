@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const changeCase = require('change-case');
 const Category = require("../models/category");
 
 //get all active categories
