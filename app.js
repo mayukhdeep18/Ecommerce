@@ -63,8 +63,10 @@ const sellersubcategoryRoutes = require("./routes/seller_subcategory");
 const sellersubcatflagRoutes = require("./routes/seller_subcategory_flag");
 const EcommercecategoryRoutes = require("./routes/ecommerce_category");
 const EcommercecatflagRoutes = require("./routes/ecommerce_category_flag");
-const CategoryChainRoutes = require("./routes/category_chain_api")
-
+const CategoryChainRoutes = require("./routes/category_chain_api");
+const CategorySubCategoryHierarchyRoutes = require("./routes/category_subcategory_hierarchy");
+const SubcategorySubSubCategoryHierarchyRoutes = require("./routes/subcategory_subsubcategory_hierarchy");
+const CatSubcatSubsubcatHierarchy = require("./routes/cat_subcat_subsubcat_hierarchy");
 
 mongoose.connect(
     "mongodb://zoom:"+
@@ -110,7 +112,9 @@ app.use("/seller_subcategory_flag",sellersubcatflagRoutes);
 app.use("/ecommerce_category", EcommercecategoryRoutes);
 app.use("/ecommerce_category_flag",EcommercecatflagRoutes);
 app.use("/category_chain_api",CategoryChainRoutes);
-
+app.use("/category_subcategory_hierarchy",CategorySubCategoryHierarchyRoutes);
+app.use("/subcategory_subsubcategory_hierarchy",SubcategorySubSubCategoryHierarchyRoutes);
+app.use("/cat_subcat_subsubcat_hierarchy",CatSubcatSubsubcatHierarchy);
 
 app.use((req, res, next) => {
     const error = new Error("Not found");

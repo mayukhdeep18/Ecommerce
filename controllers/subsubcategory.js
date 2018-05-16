@@ -176,7 +176,6 @@ exports.subsubcategory_update = (req, res, next) => {
         });
 };
 
-
 //delete a sub subcategory by id
 exports.subsubcategory_delete = (req, res, next) => {
     const id = req.params.subsubcategoryId;
