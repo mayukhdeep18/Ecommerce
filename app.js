@@ -67,6 +67,8 @@ const CategoryChainRoutes = require("./routes/category_chain_api");
 const CategorySubCategoryHierarchyRoutes = require("./routes/category_subcategory_hierarchy");
 const SubcategorySubSubCategoryHierarchyRoutes = require("./routes/subcategory_subsubcategory_hierarchy");
 const CatSubcatSubsubcatHierarchy = require("./routes/cat_subcat_subsubcat_hierarchy");
+const EcommProductCategoryRoutes = require("./routes/ecommerce_product_details");
+const EcommProdFlagCategoryRoutes = require("./routes/ecommerce_product_details_flag");
 
 mongoose.connect(
     "mongodb://zoom:"+
@@ -115,6 +117,8 @@ app.use("/category_chain_api",CategoryChainRoutes);
 app.use("/category_subcategory_hierarchy",CategorySubCategoryHierarchyRoutes);
 app.use("/subcategory_subsubcategory_hierarchy",SubcategorySubSubCategoryHierarchyRoutes);
 app.use("/cat_subcat_subsubcat_hierarchy",CatSubcatSubsubcatHierarchy);
+app.use("/ecommerce_product_details",EcommProductCategoryRoutes);
+app.use("/ecommerce_product_details_flag",EcommProdFlagCategoryRoutes);
 
 app.use((req, res, next) => {
     const error = new Error("Not found");
