@@ -6,7 +6,7 @@ const EcommProduct = require("../models/ecommerce_product_details");
 exports.ecommproduct_get_all = (req, res, next) => {
     EcommProduct.find({ACTIVE_FLAG:'Y'})
         .select("ECOMMERCE_CATEGORY_ID ECOMMERCE_PRODUCT_NAME ECOMMERCE_PRODUCT_PRICE PRODUCT_URL ECOMMERCE_PRODUCT_ID UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
-        .populate('ECOMMERCE_NAME _id')
+        .populate('ECOMMERCE_CATEGORY_ID')
         .exec()
         .then(docs => {
             res.status(200).json({
@@ -16,7 +16,8 @@ exports.ecommproduct_get_all = (req, res, next) => {
                     ecommproduct: docs.map(doc => {
                         return {
                             ecommerce_product_details_id: doc._id,
-                            ecommerce_category_details: doc.ECOMMERCE_NAME,
+                            ecommerce_category_id: doc.ECOMMERCE_CATEGORY_ID._id,
+                            ecommerce_category_details: doc.ECOMMERCE_CATEGORY_ID.ECOMMERCE_NAME,
                             ecommerce_product_name: doc.ECOMMERCE_PRODUCT_NAME,
                             ecommerce_product_price: doc.ECOMMERCE_PRODUCT_PRICE,
                             ecommerce_prodct_shpmnt_duratn: doc.ECOMMERCE_PRODCT_SHPMNT_DURATN,

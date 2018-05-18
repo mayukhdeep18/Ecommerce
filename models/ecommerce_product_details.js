@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const ecommerceProductSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     ECOMMERCE_CATEGORY_ID: { type: mongoose.Schema.Types.ObjectId, ref: 'Ecommerce_category', required: true },
-    ECOMMERCE_PRODUCT_NAME: {type: String, required: true, unique: true},
+    ECOMMERCE_PRODUCT_NAME: {type: String, required: true,  },
     ECOMMERCE_PRODUCT_PRICE: {type: String, required: true},
     ECOMMERCE_PRODCT_SHPMNT_DURATN: {type: String },
     PRODUCT_URL: {type: String },
