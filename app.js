@@ -71,6 +71,8 @@ const EcommProductCategoryRoutes = require("./routes/ecommerce_product_details")
 const EcommProdFlagCategoryRoutes = require("./routes/ecommerce_product_details_flag");
 const ProductCategoryRoutes = require("./routes/product_details");
 const ProductFlagCategoryRoutes = require("./routes/product_details_flag");
+const FilterCategoryRoutes = require("./routes/filters");
+const FilterFlagRoutes = require("./routes/filters_flag");
 
 mongoose.connect(
     "mongodb://zoom:"+
@@ -123,6 +125,8 @@ app.use("/ecommerce_product_details",EcommProductCategoryRoutes);
 app.use("/ecommerce_product_details_flag",EcommProdFlagCategoryRoutes);
 app.use("/product_details",ProductCategoryRoutes);
 app.use("/product_details_flag",ProductFlagCategoryRoutes);
+app.use("/filters",FilterCategoryRoutes);
+app.use("/filters_flag",FilterFlagRoutes);
 
 app.use((req, res, next) => {
     const error = new Error("Not found");

@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const str2json = require('string-to-json');
 const Prod_flag = require("../models/product_details");
 
 //get all product details by active flag
