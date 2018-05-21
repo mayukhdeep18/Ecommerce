@@ -73,6 +73,8 @@ const ProductCategoryRoutes = require("./routes/product_details");
 const ProductFlagCategoryRoutes = require("./routes/product_details_flag");
 const FilterCategoryRoutes = require("./routes/filters");
 const FilterFlagRoutes = require("./routes/filters_flag");
+const FiltersCategoriesRoutes = require("./routes/filters_categories");
+const FilterCategoriesFlagRoutes = require("./routes/filters_categories_flag");
 
 mongoose.connect(
     "mongodb://zoom:"+
@@ -127,6 +129,8 @@ app.use("/product_details",ProductCategoryRoutes);
 app.use("/product_details_flag",ProductFlagCategoryRoutes);
 app.use("/filters",FilterCategoryRoutes);
 app.use("/filters_flag",FilterFlagRoutes);
+app.use("/filters_categories",FiltersCategoriesRoutes);
+app.use("/filters_categories_flag",FilterCategoriesFlagRoutes);
 
 app.use((req, res, next) => {
     const error = new Error("Not found");
