@@ -91,6 +91,8 @@ const ReviewRoutes = require("./routes/review_details");
 const ReviewFlagRoutes = require("./routes/review_details_flag");
 const AnalyticsRoutes = require("./routes/customer_analytics");
 const AnalyticsFlagRoutes = require("./routes/customer_analytics_flag");
+const OfferRoutes = require("./routes/offer_details");
+const OfferFlagRoutes = require("./routes/offer_details_flag");
 
 mongoose.connect(
     "mongodb://zoom:"+
@@ -163,6 +165,8 @@ app.use("/review_details",ReviewRoutes);
 app.use("/review_details_flag",ReviewFlagRoutes);
 app.use("/customer_analytics",AnalyticsRoutes);
 app.use("/customer_analytics_flag",AnalyticsFlagRoutes);
+app.use("/offer_details",OfferRoutes);
+app.use("/offer_details_flag",OfferFlagRoutes);
 
 app.use((req, res, next) => {
     const error = new Error("Not found");
