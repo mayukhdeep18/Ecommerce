@@ -87,6 +87,8 @@ const WishlistRoutes = require("./routes/wishlist");
 const WishlistFlagRoutes = require("./routes/wishlist_flag");
 const RatingRoutes = require("./routes/rating_details");
 const RatingFlagRoutes = require("./routes/rating_details_flag");
+const ReviewRoutes = require("./routes/review_details");
+const ReviewFlagRoutes = require("./routes/review_details_flag");
 
 mongoose.connect(
     "mongodb://zoom:"+
@@ -155,6 +157,8 @@ app.use("/wishlist",WishlistRoutes);
 app.use("/wishlist_flag",WishlistFlagRoutes);
 app.use("/rating_details",RatingRoutes);
 app.use("/rating_details_flag",RatingFlagRoutes);
+app.use("/review_details",ReviewRoutes);
+app.use("/review_details_flag",ReviewFlagRoutes);
 
 app.use((req, res, next) => {
     const error = new Error("Not found");
