@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Filters = require("../models/filters");
 const category = require("../models/category");
+const Subcategory = require("../models/subcategory");
+const Subsubcategory = require("../models/subsubcategory");
 const Filters_categories = require("../models/filters_categories");
 
 //get all active filter category connection details
@@ -9,6 +11,8 @@ exports.filters_categories_conn_get_all = (req, res, next) => {
         .select("UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         .populate('FILTER_ID')
         .populate('CATEGORY_ID')
+        .populate('SUB_CATEGORY_ID')
+        .populate('SUB_SUB_CATEGORY_ID')
         .exec()
         .then(docs => {
             res.status(200).json({
@@ -22,6 +26,10 @@ exports.filters_categories_conn_get_all = (req, res, next) => {
                             filter_category_name: doc.FILTER_ID.FILTER_CATEGORY_NAME,
                             category_id: doc.CATEGORY_ID._id,
                             category_name: doc.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
+                            product_sub_category_id: doc.SUB_CATEGORY_ID._id,
+                            product_sub_category_name: doc.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME,
+                            product_sub_sub_category_id: doc.SUB_SUB_CATEGORY_ID._id,
+                            product_sub_sub_category_name: doc.SUB_SUB_CATEGORY_ID.PRODUCT_SUB_SUB_CATEGORY_NAME,
                             updated_by_user: doc.UPDATED_BY,
                             updated_on: doc.UPDATED_DATE,
                             isActive: doc.ACTIVE_FLAG
@@ -46,12 +54,17 @@ exports.filters_categories_conn_get_all = (req, res, next) => {
 //create a ne
 exports.filters_categories_conn_create = (req, res, next) => {
 
-    if(Filters.findById(req.body.FILTER_ID) && category.findById(req.body.CATEGORY_ID))
+    if(Filters.findById(req.body.FILTER_ID) &&
+        category.findById(req.body.CATEGORY_ID) &&
+        Subcategory.findById(req.body.SUB_CATEGORY_ID)&&
+        Subsubcategory.findById(req.body.SUB_SUB_CATEGORY_ID))
     {
         const filtercategories = new Filters_categories({
             _id: new mongoose.Types.ObjectId(),
             FILTER_ID: req.body.FILTER_ID,
             CATEGORY_ID: req.body.CATEGORY_ID,
+            SUB_CATEGORY_ID: req.body.SUB_CATEGORY_ID,
+            SUB_SUB_CATEGORY_ID: req.body.SUB_SUB_CATEGORY_ID,
             UPDATED_BY: req.body.UPDATED_BY,
             UPDATED_DATE: new Date(),
             ACTIVE_FLAG: req.body.ACTIVE_FLAG
@@ -69,6 +82,8 @@ exports.filters_categories_conn_create = (req, res, next) => {
                             _id: result._id,
                             FILTER_ID: result.FILTER_ID,
                             CATEGORY_ID: result.CATEGORY_ID,
+                            SUB_CATEGORY_ID: result.body.SUB_CATEGORY_ID,
+                            SUB_SUB_CATEGORY_ID: result.body.SUB_SUB_CATEGORY_ID,
                             UPDATED_BY: result.UPDATED_BY,
                             UPDATED_DATE: result.UPDATED_DATE,
                             ACTIVE_FLAG: result.ACTIVE_FLAG
@@ -109,6 +124,8 @@ exports.filters_categories_conn_get_by_id = (req, res, next) => {
         .select("UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         .populate('FILTER_ID')
         .populate('CATEGORY_ID')
+        .populate('CATEGORY_ID')
+        .populate('SUB_CATEGORY_ID')
         .exec()
         .then(doc => {
             console.log("From database", doc);
@@ -122,6 +139,10 @@ exports.filters_categories_conn_get_by_id = (req, res, next) => {
                         filter_category_name: doc.FILTER_ID.FILTER_CATEGORY_NAME,
                         category_id: doc.CATEGORY_ID._id,
                         category_name: doc.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
+                        product_sub_category_id: doc.SUB_CATEGORY_ID._id,
+                        product_sub_category_name: doc.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME,
+                        product_sub_sub_category_id: doc.SUB_SUB_CATEGORY_ID._id,
+                        product_sub_sub_category_name: doc.SUB_SUB_CATEGORY_ID.PRODUCT_SUB_SUB_CATEGORY_NAME,
                         updated_by_user: doc.UPDATED_BY,
                         updated_on: doc.UPDATED_DATE,
                         isActive: doc.ACTIVE_FLAG

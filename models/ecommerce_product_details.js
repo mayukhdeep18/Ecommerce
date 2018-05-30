@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const ecommerceProductSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     ECOMMERCE_CATEGORY_ID: { type: mongoose.Schema.Types.ObjectId, ref: 'Ecommerce_category', required: true },
+    PRODUCT_ID: {type: mongoose.Schema.Types.ObjectId, ref: 'Product_details', required: true},
+    CATEGORY_ID: {type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
+    SUB_CATEGORY_ID: {type: mongoose.Schema.Types.ObjectId, ref: 'Sub_Category', required: true},
+    SUB_SUB_CATEGORY_ID: {type: mongoose.Schema.Types.ObjectId, ref: 'Sub_Sub_Category', required: true },
     ECOMMERCE_PRODUCT_NAME: {type: String, required: true,  },
     ECOMMERCE_PRODUCT_PRICE: {type: String, required: true},
     ECOMMERCE_PRODCT_SHPMNT_DURATN: {type: String },

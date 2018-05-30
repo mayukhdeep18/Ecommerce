@@ -1,12 +1,14 @@
 const mongoose = require("mongoose");
 const Filters = require("../models/filters");
 const Filter_options = require("../models/filter_options");
+const Category = require("../models/category");
 
 //get all active filter options connection details
 exports.filters_options_conn_get_all = (req, res, next) => {
     Filter_options.find({ACTIVE_FLAG:'Y'})
         .select("URL_SLUG DISPLAY_TEXT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         .populate('FILTER_ID')
+        .populate('CATEGORY_ID')
         .exec()
         .then(docs => {
             res.status(200).json({
@@ -18,6 +20,7 @@ exports.filters_options_conn_get_all = (req, res, next) => {
                             filter_option_conn_id: doc._id,
                             filter_id: doc.FILTER_ID._id,
                             filter_category_name: doc.FILTER_ID.FILTER_CATEGORY_NAME,
+                            category_name: doc.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
                             url_slug: doc.URL_SLUG,
                             display_text: doc.DISPLAY_TEXT,
                             updated_by_user: doc.UPDATED_BY,
@@ -44,11 +47,12 @@ exports.filters_options_conn_get_all = (req, res, next) => {
 //create a new filter option connection
 exports.filters_options_conn_create = (req, res, next) => {
 
-    if(Filters.findById(req.body.FILTER_ID))
+    if(Filters.findById(req.body.FILTER_ID) && Category.findById(req.body.CATEGORY_ID))
     {
         const filteroption = new Filter_options({
             _id: new mongoose.Types.ObjectId(),
             FILTER_ID: req.body.FILTER_ID,
+            CATEGORY_ID: req.CATEGORY_ID,
             URL_SLUG: req.body.URL_SLUG,
             DISPLAY_TEXT: req.body.DISPLAY_TEXT,
             UPDATED_BY: req.body.UPDATED_BY,
@@ -67,6 +71,7 @@ exports.filters_options_conn_create = (req, res, next) => {
                         createdcategory: {
                             _id: result._id,
                             FILTER_ID: result.FILTER_ID,
+                            CATEGORY_ID: result.CATEGORY_ID,
                             URL_SLUG: result.URL_SLUG,
                             DISPLAY_TEXT: result.DISPLAY_TEXT,
                             UPDATED_BY: result.UPDATED_BY,
@@ -108,6 +113,7 @@ exports.filters_options_conn_get_by_id = (req, res, next) => {
     Filter_options.findById(id)
         .select("URL_SLUG DISPLAY_TEXT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         .populate('FILTER_ID')
+        .populate('CATEGORY_ID')
         .exec()
         .then(doc => {
             console.log("From database", doc);
@@ -119,6 +125,7 @@ exports.filters_options_conn_get_by_id = (req, res, next) => {
                         filter_option_conn_id: doc._id,
                         filter_id: doc.FILTER_ID._id,
                         filter_category_name: doc.FILTER_ID.FILTER_CATEGORY_NAME,
+                        category_name: doc.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
                         url_slug: doc.URL_SLUG,
                         display_text: doc.DISPLAY_TEXT,
                         updated_by_user: doc.UPDATED_BY,

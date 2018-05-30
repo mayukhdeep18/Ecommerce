@@ -10,7 +10,7 @@ router.post("/",checkAuth, EcommProdController.ecommproduct_create);
 
 router.get("/:ecommcategoryId", EcommProdController.ecommproduct_details_get_by_id);
 
-router.patch("/:ecommcategoryId",checkAuth,  EcommProdController.ecommproduct_update_by_id);
+router.patch("/:ecommcategoryId",/*checkAuth,*/  EcommProdController.ecommproduct_update_by_id);
 
 router.delete("/:ecommcategoryId",checkAuth, EcommProdController.ecommproduct_delete_by_id);
 
