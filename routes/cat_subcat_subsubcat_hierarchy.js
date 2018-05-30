@@ -6,6 +6,6 @@ const checkAuth = require('../middleware/check-auth');
 
 // Handle incoming GET requests to /subcategory by category id
 
-router.get("/:categoryId", SubcategoryController.category_get_all_by_id);
+router.get("/:categoryId", SubcategoryController.get_category_hierarchy);
 
 module.exports = router;
