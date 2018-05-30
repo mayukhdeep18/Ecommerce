@@ -124,8 +124,8 @@ exports.filters_categories_conn_get_by_id = (req, res, next) => {
         .select("UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         .populate('FILTER_ID')
         .populate('CATEGORY_ID')
-        .populate('CATEGORY_ID')
         .populate('SUB_CATEGORY_ID')
+        .populate('SUB_SUB_CATEGORY_ID')
         .exec()
         .then(doc => {
             console.log("From database", doc);

@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const Filters = require("../models/filters");
 const Filter_options = require("../models/filter_options");
 const Category = require("../models/category");
+const Subcategory = require("../models/subcategory");
+const Subsubcategory = require("../models/subsubcategory");
 
 //get all active filter options connection details
 exports.filters_options_conn_get_all = (req, res, next) => {
@@ -9,6 +11,8 @@ exports.filters_options_conn_get_all = (req, res, next) => {
         .select("URL_SLUG DISPLAY_TEXT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         .populate('FILTER_ID')
         .populate('CATEGORY_ID')
+        .populate('SUB_CATEGORY_ID')
+        .populate('SUB_SUB_CATEGORY_ID')
         .exec()
         .then(docs => {
             res.status(200).json({
@@ -21,6 +25,10 @@ exports.filters_options_conn_get_all = (req, res, next) => {
                             filter_id: doc.FILTER_ID._id,
                             filter_category_name: doc.FILTER_ID.FILTER_CATEGORY_NAME,
                             category_name: doc.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
+                            product_sub_category_id: doc.SUB_CATEGORY_ID._id,
+                            product_sub_category_name: doc.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME,
+                            product_sub_sub_category_id: doc.SUB_SUB_CATEGORY_ID._id,
+                            product_sub_sub_category_name: doc.SUB_SUB_CATEGORY_ID.PRODUCT_SUB_SUB_CATEGORY_NAME,
                             url_slug: doc.URL_SLUG,
                             display_text: doc.DISPLAY_TEXT,
                             updated_by_user: doc.UPDATED_BY,
@@ -47,12 +55,16 @@ exports.filters_options_conn_get_all = (req, res, next) => {
 //create a new filter option connection
 exports.filters_options_conn_create = (req, res, next) => {
 
-    if(Filters.findById(req.body.FILTER_ID) && Category.findById(req.body.CATEGORY_ID))
+    if(Filters.findById(req.body.FILTER_ID) && Category.findById(req.body.CATEGORY_ID)&&
+        Subcategory.findById(req.body.SUB_CATEGORY_ID)&&
+        Subsubcategory.findById(req.body.SUB_SUB_CATEGORY_ID))
     {
         const filteroption = new Filter_options({
             _id: new mongoose.Types.ObjectId(),
             FILTER_ID: req.body.FILTER_ID,
             CATEGORY_ID: req.CATEGORY_ID,
+            SUB_CATEGORY_ID: req.body.SUB_CATEGORY_ID,
+            SUB_SUB_CATEGORY_ID: req.body.SUB_SUB_CATEGORY_ID,
             URL_SLUG: req.body.URL_SLUG,
             DISPLAY_TEXT: req.body.DISPLAY_TEXT,
             UPDATED_BY: req.body.UPDATED_BY,
@@ -72,6 +84,8 @@ exports.filters_options_conn_create = (req, res, next) => {
                             _id: result._id,
                             FILTER_ID: result.FILTER_ID,
                             CATEGORY_ID: result.CATEGORY_ID,
+                            SUB_CATEGORY_ID: result.body.SUB_CATEGORY_ID,
+                            SUB_SUB_CATEGORY_ID: result.body.SUB_SUB_CATEGORY_ID,
                             URL_SLUG: result.URL_SLUG,
                             DISPLAY_TEXT: result.DISPLAY_TEXT,
                             UPDATED_BY: result.UPDATED_BY,
@@ -114,6 +128,8 @@ exports.filters_options_conn_get_by_id = (req, res, next) => {
         .select("URL_SLUG DISPLAY_TEXT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         .populate('FILTER_ID')
         .populate('CATEGORY_ID')
+        .populate('SUB_CATEGORY_ID')
+        .populate('SUB_SUB_CATEGORY_ID')
         .exec()
         .then(doc => {
             console.log("From database", doc);
@@ -126,6 +142,10 @@ exports.filters_options_conn_get_by_id = (req, res, next) => {
                         filter_id: doc.FILTER_ID._id,
                         filter_category_name: doc.FILTER_ID.FILTER_CATEGORY_NAME,
                         category_name: doc.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
+                        product_sub_category_id: doc.SUB_CATEGORY_ID._id,
+                        product_sub_category_name: doc.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME,
+                        product_sub_sub_category_id: doc.SUB_SUB_CATEGORY_ID._id,
+                        product_sub_sub_category_name: doc.SUB_SUB_CATEGORY_ID.PRODUCT_SUB_SUB_CATEGORY_NAME,
                         url_slug: doc.URL_SLUG,
                         display_text: doc.DISPLAY_TEXT,
                         updated_by_user: doc.UPDATED_BY,
