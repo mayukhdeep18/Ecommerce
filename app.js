@@ -96,6 +96,7 @@ const OfferFlagRoutes = require("./routes/offer_details_flag");
 const ProdRatingFilterRoutes = require("./routes/rating_product_filter");
 const CategoryProdRoutes = require("./routes/category_based_product");
 const SubCategoryProdRoutes = require("./routes/sub_category_based_product");
+const SubSubCategoryProdRoutes = require("./routes/sub_sub_category_based_product");
 
 mongoose.connect(
     "mongodb://zoom:"+
@@ -173,6 +174,7 @@ app.use("/offer_details_flag",OfferFlagRoutes);
 app.use("/rating_product_filter",ProdRatingFilterRoutes);
 app.use("/category_based_product",CategoryProdRoutes);
 app.use("/sub_category_based_product",SubCategoryProdRoutes);
+app.use("/sub_sub_category_based_product",SubSubCategoryProdRoutes);
 
 app.use((req, res, next) => {
     const error = new Error("Not found");
