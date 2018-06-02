@@ -98,6 +98,8 @@ const CategoryProdRoutes = require("./routes/category_based_product");
 const SubCategoryProdRoutes = require("./routes/sub_category_based_product");
 const SubSubCategoryProdRoutes = require("./routes/sub_sub_category_based_product");
 const FilterProdRoutes = require("./routes/filtering_products");
+const CalcMeanRatingRoutes = require("./routes/calculate_mean_rating");
+const CalcReviewCountRoutes = require("./routes/calculate_review_count");
 
 mongoose.connect(
     "mongodb://zoom:"+
@@ -177,6 +179,8 @@ app.use("/category_based_product",CategoryProdRoutes);
 app.use("/sub_category_based_product",SubCategoryProdRoutes);
 app.use("/sub_sub_category_based_product",SubSubCategoryProdRoutes);
 app.use("/filtering_products",FilterProdRoutes);
+app.use("/calculate_mean_rating",CalcMeanRatingRoutes);
+app.use("/calculate_review_count",CalcReviewCountRoutes);
 
 app.use((req, res, next) => {
     const error = new Error("Not found");

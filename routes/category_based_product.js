@@ -6,6 +6,6 @@ const checkAuth = require('../middleware/check-auth');
 
 // Handle incoming GET requests to /product by category id
 
-router.get("/:categoryId", CategoryController.get_product_by_categoryId);
+router.get("/:categoryId/:page", CategoryController.get_product_by_categoryId);
 
 module.exports = router;

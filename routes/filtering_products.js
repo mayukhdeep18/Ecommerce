@@ -4,6 +4,6 @@ const ProdController = require("../controllers/filtering_products");
 const checkAuth = require('../middleware/check-auth');
 
 
-router.post("/:categoryId", ProdController.product_get_all);
+router.post("/:categoryId/:page", ProdController.product_get_all);
 
 module.exports = router;

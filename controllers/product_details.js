@@ -14,7 +14,7 @@ const str2json = require("string-to-json");
 //get all active product details
 exports.product_get_all = (req, res, next) => {
     Product.find({ACTIVE_FLAG:'Y'})
-        .select("PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_AVAILABILITY_COUNT PERCENTAGE_DISCOUNT_ON_PRODUCT PRODUCT_SPECIAL_OFFER_PRICE SPECIAL_OFFER_DISCOUNT_FACTOR MINIMUM_ALLOWED_BUY_QUANTITY MAXIMUM_ALLOWED_BUY_QUANTITY PRODUCT_SPECIFICATIONS UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
+        .select("PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_AVAILABILITY_COUNT PERCENTAGE_DISCOUNT_ON_PRODUCT PRODUCT_SPECIAL_OFFER_PRICE SPECIAL_OFFER_DISCOUNT_FACTOR MINIMUM_ALLOWED_BUY_QUANTITY MAXIMUM_ALLOWED_BUY_QUANTITY PRODUCT_SPECIFICATIONS MEAN_RATING REVIEW_COUNT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         .populate('PRODUCT_CATEGORY_ID')
         .populate('PRODUCT_SUB_CATEGORY_ID')
         .populate('PRODUCT_SUB_SUB_CATEGORY_ID')
@@ -59,6 +59,8 @@ exports.product_get_all = (req, res, next) => {
                             minimum_allowed_buy_quantity: doc.MINIMUM_ALLOWED_BUY_QUANTITY,
                             maximum_allowed_buy_quantity: doc.MAXIMUM_ALLOWED_BUY_QUANTITY,
                             product_specifications: JSON.parse(doc.PRODUCT_SPECIFICATIONS),
+                            product_rating: doc.MEAN_RATING,
+                            product_review_count: doc.REVIEW_COUNT,
                             updated_by_user: doc.UPDATED_BY,
                             updated_on: doc.UPDATED_DATE,
                             isActive: doc.ACTIVE_FLAG
@@ -185,7 +187,7 @@ exports.product_create = (req, res, next) => {
 exports.product_details_get_by_id = (req, res, next) => {
     const id = req.params.prodcategoryId;
     Product.findById(id)
-        .select("PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_AVAILABILITY_COUNT PERCENTAGE_DISCOUNT_ON_PRODUCT PRODUCT_SPECIAL_OFFER_PRICE SPECIAL_OFFER_DISCOUNT_FACTOR MINIMUM_ALLOWED_BUY_QUANTITY MAXIMUM_ALLOWED_BUY_QUANTITY PRODUCT_SPECIFICATIONS UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
+        .select("PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_AVAILABILITY_COUNT PERCENTAGE_DISCOUNT_ON_PRODUCT PRODUCT_SPECIAL_OFFER_PRICE SPECIAL_OFFER_DISCOUNT_FACTOR MINIMUM_ALLOWED_BUY_QUANTITY MAXIMUM_ALLOWED_BUY_QUANTITY PRODUCT_SPECIFICATIONS MEAN_RATING REVIEW_COUNT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         .populate('PRODUCT_CATEGORY_ID')
         .populate('PRODUCT_SUB_CATEGORY_ID')
         .populate('PRODUCT_SUB_SUB_CATEGORY_ID')
@@ -230,6 +232,8 @@ exports.product_details_get_by_id = (req, res, next) => {
                     minimum_allowed_buy_quantity: doc.MINIMUM_ALLOWED_BUY_QUANTITY,
                     maximum_allowed_buy_quantity: doc.MAXIMUM_ALLOWED_BUY_QUANTITY,
                     product_specifications: JSON.parse(doc.PRODUCT_SPECIFICATIONS),
+                        product_rating: doc.MEAN_RATING,
+                        product_review_count: doc.REVIEW_COUNT,
                     updated_by_user: doc.UPDATED_BY,
                     updated_on: doc.UPDATED_DATE,
                     isActive: doc.ACTIVE_FLAG
