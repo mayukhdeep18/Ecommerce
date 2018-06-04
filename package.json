@@ -17,6 +17,7 @@
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
     "jsonwebtoken": "^8.2.1",
+    "log4js": "^2.8.0",
     "mongoose": "^5.0.17",
     "mongoose-joins": "0.0.1",
     "morgan": "^1.9.0",
@@ -24,8 +25,10 @@
     "nodemailer": "^4.6.5",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^5.0.0",
     "promise": "^8.0.1",
     "request": "^2.87.0",
+    "save": "^2.3.2",
     "shape-json": "^1.2.4",
     "string-to-json": "^0.1.0"
   },

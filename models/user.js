@@ -1,15 +1,38 @@
-const mongoose = require('mongoose');
+var mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+    userid: String,
+    useremail: String,
+    username: String,
+    password1: String,
+    salt: String,
+    mobile: String,
+    userinfo: {
+        fullname: String,
+        area: String,
+        city: String,
+        state: String,
+        pincode: String,
+        country: String
     },
-    password: { type: String, required: true },
-    isAdmin: {type: Boolean, default: false}
+    emailverified: Boolean,
+    emailactivationtoken: String,
+    forgotpasswordtoken: String,
+    passwordtokenstamp: Date,
+    mobileverificationcode: String,
+    temporarymobile: String,
+    role: String,
+    registrationdate: Date,
+    social: [
+        {
+            connection: String,
+            sId: String,
+            accessToken: String
+        }
+    ]
 });
 
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;

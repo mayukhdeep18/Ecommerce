@@ -54,7 +54,7 @@ const subcategoryRoutes = require("./routes/subcategory");
 const subcatflagRoutes = require("./routes/subcategory_flag");
 const productimageRoutes = require("./routes/product_images");
 const prodimageflagRoutes = require("./routes/product_images_flag");
-const userRoutes = require('./routes/user');
+//const userRoutes = require('./routes/user');
 const subsubcategoryRoutes = require("./routes/subsubcategory");
 const subsubcatflagRoutes = require("./routes/subsubcategory_flag");
 const sellercategoryRoutes = require("./routes/seller_category");
@@ -100,6 +100,7 @@ const SubSubCategoryProdRoutes = require("./routes/sub_sub_category_based_produc
 const FilterProdRoutes = require("./routes/filtering_products");
 const CalcMeanRatingRoutes = require("./routes/calculate_mean_rating");
 const CalcReviewCountRoutes = require("./routes/calculate_review_count");
+const SignupRoutes = require("./routes/signup");
 
 mongoose.connect(
     "mongodb://zoom:"+
@@ -114,6 +115,13 @@ app.use(morgan("dev"));
 app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(require("express-session")({
+    secret: "Once again Rusty wins cutest dog!",
+    resave: false,
+    saveUninitialized: false
+}));
+
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -135,7 +143,7 @@ app.use("/subcategory", subcategoryRoutes);
 app.use("/subcategory_flag", subcatflagRoutes);
 app.use("/product_images", productimageRoutes);
 app.use("/product_images_flag",prodimageflagRoutes);
-app.use("/user", userRoutes);
+//app.use("/user", userRoutes);
 app.use("/subsubcategory", subsubcategoryRoutes);
 app.use("/subsubcategory_flag",subsubcatflagRoutes);
 app.use("/seller_category", sellercategoryRoutes);
@@ -181,6 +189,8 @@ app.use("/sub_sub_category_based_product",SubSubCategoryProdRoutes);
 app.use("/filtering_products",FilterProdRoutes);
 app.use("/calculate_mean_rating",CalcMeanRatingRoutes);
 app.use("/calculate_review_count",CalcReviewCountRoutes);
+app.use("/signup",SignupRoutes);
+
 
 app.use((req, res, next) => {
     const error = new Error("Not found");
