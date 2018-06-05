@@ -167,3 +167,23 @@
   emailactivationtoken: 'qHg7mG49ymlRGUdLSAbtOJyIigUyYJJ3' }
 [2018-06-05T16:37:13.924] [DEBUG] debug - crud common activateEmail
 [2018-06-05T16:37:14.395] [DEBUG] debug - crud result[object Object]
+[2018-06-05T17:26:57.962] [DEBUG] debug - routes login login
+[2018-06-05T17:26:58.001] [DEBUG] debug - validate email
+[2018-06-05T17:26:58.002] [DEBUG] debug - validate username
+[2018-06-05T17:26:58.002] [DEBUG] debug - validate mobile
+[2018-06-05T17:26:58.003] [DEBUG] debug - validate password
+[2018-06-05T17:26:58.003] [DEBUG] debug - crud login doLogin
+[2018-06-05T17:26:58.313] [DEBUG] debug - crud result{ _id: 5b166eb6d16f187034ba2e6e,
+  useremail: 'mayukhdeepmaitra18@gmail.com',
+  username: 'mayu123',
+  password1: '6da1e38df0dc149792ac38ccb4f25482b6f56ad1569856f653f12ec467622941389abd3a2ed0e4b2ee789e7ae5564cf33dceccbef4b1d7f59255b56aa48825b7',
+  role: 'customer',
+  salt: 'd6cd043b37da3b5d',
+  userid: 'raHIQRwYeIaOCkYdjQw3OCn2dwXCiWm3',
+  registrationdate: 2018-06-05T11:06:30.584Z,
+  emailverified: true,
+  __v: 0,
+  emailactivationtoken: null }
+[2018-06-05T17:26:58.314] [DEBUG] debug - config encrypt sha512
+[2018-06-05T17:26:58.315] [DEBUG] debug - config utils fillSession
+[2018-06-05T17:26:58.319] [DEBUG] debug - config utils fillWebSession

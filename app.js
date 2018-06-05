@@ -102,7 +102,8 @@ const CalcMeanRatingRoutes = require("./routes/calculate_mean_rating");
 const CalcReviewCountRoutes = require("./routes/calculate_review_count");
 const SignupRoutes = require("./routes/signup");
 const CommonRoutes = require("./routes/commonroutes");
-const ActivateEmail = require("./routes/activateEmail");
+const ActivateEmailRoutes = require("./routes/activateEmail");
+const LoginRoutes = require("./routes/login");
 
 mongoose.connect(
     "mongodb://zoom:"+
@@ -190,7 +191,8 @@ app.use("/calculate_mean_rating",CalcMeanRatingRoutes);
 app.use("/calculate_review_count",CalcReviewCountRoutes);
 app.use("/signup",SignupRoutes);
 app.use("/commonroutes",CommonRoutes);
-app.use("/activateEmail",ActivateEmail);
+app.use("/activateEmail",ActivateEmailRoutes);
+app.use("/login",LoginRoutes);
 
 
 app.use((req, res, next) => {

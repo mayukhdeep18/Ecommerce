@@ -1,6 +1,6 @@
 'use strict';
 
-const User = require("/models/user");
+const User = require("../../models/user");
 const logger = require("../logger");
 
 
@@ -55,7 +55,7 @@ const dbOperations={
                         }
                         if(numberOfUsersFound===1){
                             var responseObject={
-                                message:"success",
+                                message:"success, you are logged in",
                             };
                             utils.fillSession(request,response,sessionData,responseObject);
                         }
