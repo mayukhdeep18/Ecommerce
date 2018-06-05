@@ -1,0 +1,328 @@
+[2018-06-05T00:00:47.212] [ERROR] debug - error sending mail
+[2018-06-05T00:01:07.432] [DEBUG] debug - routes signup signup
+[2018-06-05T00:01:07.433] [DEBUG] debug - validate email
+[2018-06-05T00:01:07.433] [DEBUG] debug - validate username
+[2018-06-05T00:01:07.433] [DEBUG] debug - validate password
+[2018-06-05T00:01:07.433] [DEBUG] debug - crud signup checkUser
+[2018-06-05T00:01:07.726] [DEBUG] debug - crud result
+[2018-06-05T00:01:07.726] [DEBUG] debug - crud common checkUsername
+[2018-06-05T00:01:08.186] [DEBUG] debug - crud result
+[2018-06-05T00:01:08.187] [DEBUG] debug - crud signup addUser
+[2018-06-05T00:01:08.187] [DEBUG] debug - config encrypt genRandomString
+[2018-06-05T00:01:08.188] [DEBUG] debug - config encrypt sha512
+[2018-06-05T00:01:08.188] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-05T00:01:08.483] [ERROR] debug - { BulkWriteError: E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }
+    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:530:15
+    at handleCallback (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/utils.js:128:55)
+    at resultHandler (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:451:5)
+    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb-core/lib/connection/pool.js:544:18
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)
+    at process._tickCallback (internal/process/next_tick.js:180:9)
+  name: 'BulkWriteError',
+  message: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
+  driver: true,
+  code: 11000,
+  index: 0,
+  errmsg: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
+  getOperation: [Function],
+  toJSON: [Function],
+  toString: [Function],
+  result: 
+   BulkWriteResult {
+     ok: [Getter],
+     nInserted: [Getter],
+     nUpserted: [Getter],
+     nMatched: [Getter],
+     nModified: [Getter],
+     nRemoved: [Getter],
+     getInsertedIds: [Function],
+     getUpsertedIds: [Function],
+     getUpsertedIdAt: [Function],
+     getRawResponse: [Function],
+     hasWriteErrors: [Function],
+     getWriteErrorCount: [Function],
+     getWriteErrorAt: [Function],
+     getWriteErrors: [Function],
+     getLastOp: [Function],
+     getWriteConcernError: [Function],
+     toJSON: [Function],
+     toString: [Function],
+     isOk: [Function] } }
+[2018-06-05T00:04:03.277] [DEBUG] debug - routes signup signup
+[2018-06-05T00:04:03.280] [DEBUG] debug - validate email
+[2018-06-05T00:04:03.281] [DEBUG] debug - validate username
+[2018-06-05T00:04:03.281] [DEBUG] debug - validate password
+[2018-06-05T00:04:03.282] [DEBUG] debug - crud signup checkUser
+[2018-06-05T00:04:03.605] [DEBUG] debug - crud result
+[2018-06-05T00:04:03.606] [DEBUG] debug - crud common checkUsername
+[2018-06-05T00:04:04.014] [DEBUG] debug - crud result
+[2018-06-05T00:04:04.015] [DEBUG] debug - crud signup addUser
+[2018-06-05T00:04:04.015] [DEBUG] debug - config encrypt genRandomString
+[2018-06-05T00:04:04.015] [DEBUG] debug - config encrypt sha512
+[2018-06-05T00:04:04.015] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-05T00:04:04.433] [DEBUG] debug - crud result{ _id: 5b15861cbdcf0741744b8a73,
+  useremail: 'mayukhdeepmaitra@yahoo.co.in',
+  username: 'mayu123',
+  password1: '6962359f9edf088d6607401f8de2a01e0a0b4ffdb5d87b89ecdccf5d5c4388d8bf7431306e3245dd3866918ae0772df77dbfa4f0739b3dbaffc50e33eb1fd1b6',
+  role: 'customer',
+  salt: '4bb8f6f3efdd203a',
+  userid: '23PrL1X0O11G7TZGrDil5SeOIvTcBunT',
+  registrationdate: 2018-06-04T18:34:04.050Z,
+  emailverified: false,
+  __v: 0 }
+[2018-06-05T00:04:04.434] [DEBUG] debug - crud common sendLink
+[2018-06-05T00:04:04.434] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-05T00:04:04.436] [DEBUG] debug - config utils fillSession
+[2018-06-05T00:04:04.437] [DEBUG] debug - config utils fillWebSession
+[2018-06-05T00:04:04.938] [DEBUG] debug - crud result[object Object]
+[2018-06-05T00:04:04.940] [DEBUG] debug - utils create mail verificationlink { type: 'verificationlink',
+  email: 'mayukhdeepmaitra@yahoo.co.in',
+  url: 'http://localhost:3000/#/emailactivate?e=mayukhdeepmaitra@yahoo.co.in&t=WAA8ijiN04Bndn3MTTVJ59B2TaZ3OJJU' }
+[2018-06-05T00:04:04.957] [DEBUG] debug - config utils sendMail
+[2018-06-05T00:04:07.806] [ERROR] debug - { Error: Invalid login: 535 Authentication Failed
+    at SMTPConnection._formatError (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:606:19)
+    at SMTPConnection._actionAUTHComplete (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:1335:34)
+    at SMTPConnection._responseActions.push.str (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:366:26)
+    at SMTPConnection._processResponse (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:762:20)
+    at SMTPConnection._onData (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:558:14)
+    at TLSSocket._socket.on.chunk (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:510:47)
+    at emitOne (events.js:116:13)
+    at TLSSocket.emit (events.js:211:7)
+    at addChunk (_stream_readable.js:263:12)
+    at readableAddChunk (_stream_readable.js:250:11)
+    at TLSSocket.Readable.push (_stream_readable.js:208:10)
+    at TLSWrap.onread (net.js:607:20)
+  code: 'EAUTH',
+  response: '535 Authentication Failed',
+  responseCode: 535,
+  command: 'AUTH PLAIN' }
+[2018-06-05T00:04:07.815] [ERROR] debug - error sending mail
+[2018-06-05T00:04:13.261] [DEBUG] debug - routes signup signup
+[2018-06-05T00:04:13.261] [DEBUG] debug - validate email
+[2018-06-05T00:04:13.261] [DEBUG] debug - validate username
+[2018-06-05T00:04:13.261] [DEBUG] debug - validate password
+[2018-06-05T00:04:13.261] [DEBUG] debug - crud signup checkUser
+[2018-06-05T00:04:13.640] [DEBUG] debug - crud result
+[2018-06-05T00:04:13.640] [DEBUG] debug - crud common checkUsername
+[2018-06-05T00:04:14.049] [DEBUG] debug - crud result
+[2018-06-05T00:04:14.049] [DEBUG] debug - crud signup addUser
+[2018-06-05T00:04:14.050] [DEBUG] debug - config encrypt genRandomString
+[2018-06-05T00:04:14.050] [DEBUG] debug - config encrypt sha512
+[2018-06-05T00:04:14.050] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-05T00:04:14.460] [DEBUG] debug - crud result{ _id: 5b158626bdcf0741744b8a74,
+  useremail: 'mayukhdeepmaitra12@yahoo.co.in',
+  username: 'mayu1234',
+  password1: 'cfea38d49a3f9a907af196d9060ce163ed0dd294715a16aca408f083dfde4305eaa15ee3e68dd9feec1437742b9a815fbb2269a59d6681fcb9ad3529f903d93a',
+  role: 'customer',
+  salt: 'c2f7c5e874afd953',
+  userid: 'VyMYSzexQZ9KlczwPo4Izv7ZurIeXey3',
+  registrationdate: 2018-06-04T18:34:14.050Z,
+  emailverified: false,
+  __v: 0 }
+[2018-06-05T00:04:14.460] [DEBUG] debug - crud common sendLink
+[2018-06-05T00:04:14.460] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-05T00:04:14.461] [DEBUG] debug - config utils fillSession
+[2018-06-05T00:04:14.461] [DEBUG] debug - config utils fillWebSession
+[2018-06-05T00:04:14.783] [DEBUG] debug - crud result[object Object]
+[2018-06-05T00:04:14.784] [DEBUG] debug - utils create mail verificationlink { type: 'verificationlink',
+  email: 'mayukhdeepmaitra12@yahoo.co.in',
+  url: 'http://localhost:3000/#/emailactivate?e=mayukhdeepmaitra12@yahoo.co.in&t=oMJkECp742R7jicZQ7yg9vgRkDP13bhH' }
+[2018-06-05T00:04:14.784] [DEBUG] debug - config utils sendMail
+[2018-06-05T00:04:16.711] [ERROR] debug - { Error: Invalid login: 535 Authentication Failed
+    at SMTPConnection._formatError (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:606:19)
+    at SMTPConnection._actionAUTHComplete (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:1335:34)
+    at SMTPConnection._responseActions.push.str (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:366:26)
+    at SMTPConnection._processResponse (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:762:20)
+    at SMTPConnection._onData (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:558:14)
+    at TLSSocket._socket.on.chunk (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:510:47)
+    at emitOne (events.js:116:13)
+    at TLSSocket.emit (events.js:211:7)
+    at addChunk (_stream_readable.js:263:12)
+    at readableAddChunk (_stream_readable.js:250:11)
+    at TLSSocket.Readable.push (_stream_readable.js:208:10)
+    at TLSWrap.onread (net.js:607:20)
+  code: 'EAUTH',
+  response: '535 Authentication Failed',
+  responseCode: 535,
+  command: 'AUTH PLAIN' }
+[2018-06-05T00:04:16.712] [ERROR] debug - error sending mail
+[2018-06-05T00:04:28.182] [DEBUG] debug - routes signup signup
+[2018-06-05T00:04:28.182] [DEBUG] debug - validate email
+[2018-06-05T00:04:28.182] [DEBUG] debug - validate username
+[2018-06-05T00:04:28.182] [DEBUG] debug - validate password
+[2018-06-05T00:04:28.182] [DEBUG] debug - crud signup checkUser
+[2018-06-05T00:04:28.467] [DEBUG] debug - crud result
+[2018-06-05T00:04:28.468] [DEBUG] debug - crud common checkUsername
+[2018-06-05T00:04:28.772] [DEBUG] debug - crud result
+[2018-06-05T00:04:28.772] [DEBUG] debug - crud signup addUser
+[2018-06-05T00:04:28.773] [DEBUG] debug - config encrypt genRandomString
+[2018-06-05T00:04:28.773] [DEBUG] debug - config encrypt sha512
+[2018-06-05T00:04:28.773] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-05T00:04:29.102] [DEBUG] debug - crud result{ _id: 5b158634bdcf0741744b8a75,
+  useremail: 'mayukhdeepmaitra14@yahoo.co.in',
+  username: 'mayu12',
+  password1: '1776b006666b1e5c216567581e3fdd934ad32557e9f49db179559d60427a37d08823bcea2a3057d4525900ab782ab07da207b51e43b59ed942db44c98c2c4de1',
+  role: 'customer',
+  salt: '76b292a3d4dd2728',
+  userid: 'TzxRqH7zUnixIOFqHUwZ3xxY9HPk596O',
+  registrationdate: 2018-06-04T18:34:28.773Z,
+  emailverified: false,
+  __v: 0 }
+[2018-06-05T00:04:29.102] [DEBUG] debug - crud common sendLink
+[2018-06-05T00:04:29.103] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-05T00:04:29.103] [DEBUG] debug - config utils fillSession
+[2018-06-05T00:04:29.103] [DEBUG] debug - config utils fillWebSession
+[2018-06-05T00:04:29.409] [DEBUG] debug - crud result[object Object]
+[2018-06-05T00:04:29.409] [DEBUG] debug - utils create mail verificationlink { type: 'verificationlink',
+  email: 'mayukhdeepmaitra14@yahoo.co.in',
+  url: 'http://localhost:3000/#/emailactivate?e=mayukhdeepmaitra14@yahoo.co.in&t=lMkdc6daZPrpTrtdymyJXpAQr16isyZB' }
+[2018-06-05T00:04:29.409] [DEBUG] debug - config utils sendMail
+[2018-06-05T00:04:31.767] [ERROR] debug - { Error: Invalid login: 535 Authentication Failed
+    at SMTPConnection._formatError (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:606:19)
+    at SMTPConnection._actionAUTHComplete (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:1335:34)
+    at SMTPConnection._responseActions.push.str (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:366:26)
+    at SMTPConnection._processResponse (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:762:20)
+    at SMTPConnection._onData (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:558:14)
+    at TLSSocket._socket.on.chunk (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:510:47)
+    at emitOne (events.js:116:13)
+    at TLSSocket.emit (events.js:211:7)
+    at addChunk (_stream_readable.js:263:12)
+    at readableAddChunk (_stream_readable.js:250:11)
+    at TLSSocket.Readable.push (_stream_readable.js:208:10)
+    at TLSWrap.onread (net.js:607:20)
+  code: 'EAUTH',
+  response: '535 Authentication Failed',
+  responseCode: 535,
+  command: 'AUTH PLAIN' }
+[2018-06-05T00:04:31.768] [ERROR] debug - error sending mail
+[2018-06-05T00:17:31.068] [DEBUG] debug - routes signup signup
+[2018-06-05T00:17:31.072] [DEBUG] debug - validate email
+[2018-06-05T00:17:31.073] [DEBUG] debug - validate username
+[2018-06-05T00:17:31.073] [DEBUG] debug - validate password
+[2018-06-05T00:17:31.073] [DEBUG] debug - crud signup checkUser
+[2018-06-05T00:17:31.438] [DEBUG] debug - crud result
+[2018-06-05T00:17:31.438] [DEBUG] debug - crud common checkUsername
+[2018-06-05T00:17:31.745] [DEBUG] debug - crud result
+[2018-06-05T00:17:31.745] [DEBUG] debug - crud signup addUser
+[2018-06-05T00:17:31.746] [DEBUG] debug - config encrypt genRandomString
+[2018-06-05T00:17:31.746] [DEBUG] debug - config encrypt sha512
+[2018-06-05T00:17:31.746] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-05T00:17:32.164] [DEBUG] debug - crud result{ _id: 5b158943374f0677dea792c3,
+  useremail: 'mayukhdeepmaitra18@gmail.com',
+  username: 'mayu123',
+  password1: '4c2005f27391b08b798e66b9c714cf3a45226c672bcae0000e730e0e8a2e40099e99ba029ed1f5dd5965095a4e3e4da2dd9624b76d27dc06126597e8955d33f4',
+  role: 'customer',
+  salt: '776bb915b2d3d0ad',
+  userid: 'onaGpBhbMxpxU0m0zCsbohpg8QQUHTLJ',
+  registrationdate: 2018-06-04T18:47:31.785Z,
+  emailverified: false,
+  __v: 0 }
+[2018-06-05T00:17:32.165] [DEBUG] debug - crud common sendLink
+[2018-06-05T00:17:32.165] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-05T00:17:32.167] [DEBUG] debug - config utils fillSession
+[2018-06-05T00:17:32.168] [DEBUG] debug - config utils fillWebSession
+[2018-06-05T00:17:32.566] [DEBUG] debug - crud result[object Object]
+[2018-06-05T00:17:32.566] [DEBUG] debug - utils create mail verificationlink { type: 'verificationlink',
+  email: 'mayukhdeepmaitra18@gmail.com',
+  url: 'http://localhost:3000/#/emailactivate?e=mayukhdeepmaitra18@gmail.com&t=sbw8vlxnr5bXr7us1WNz9b0dIjjUJd8W' }
+[2018-06-05T00:17:32.602] [DEBUG] debug - config utils sendMail
+[2018-06-05T00:17:36.866] [INFO] debug - Message sent: 250 2.0.0 OK 1528138056 d22-v6sm34346438pfl.10 - gsmtp
+[2018-06-05T00:28:55.563] [DEBUG] debug - routes signup signup
+[2018-06-05T00:28:55.565] [DEBUG] debug - validate email
+[2018-06-05T00:28:55.566] [DEBUG] debug - validate username
+[2018-06-05T00:28:55.566] [DEBUG] debug - validate password
+[2018-06-05T00:28:55.566] [DEBUG] debug - crud signup checkUser
+[2018-06-05T00:28:55.903] [DEBUG] debug - crud result
+[2018-06-05T00:28:55.903] [DEBUG] debug - crud common checkUsername
+[2018-06-05T00:28:56.287] [DEBUG] debug - crud result
+[2018-06-05T00:28:56.288] [DEBUG] debug - crud signup addUser
+[2018-06-05T00:28:56.288] [DEBUG] debug - config encrypt genRandomString
+[2018-06-05T00:28:56.288] [DEBUG] debug - config encrypt sha512
+[2018-06-05T00:28:56.288] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-05T00:28:56.914] [DEBUG] debug - crud result{ _id: 5b158bf0ed6ff5a7a28d50b6,
+  useremail: 'escale_testnode@gmail.com',
+  username: 'mayu1234',
+  password1: 'b6f7d2ced7ef3e013d49be0d08a5fe4aa2c91e365ffc9ad6e8cd7231f2f9f16cd0c1f5e60bce0ea98d64c027e9f5c33cd2324be4fbe2b0065332a628f722d35e',
+  role: 'customer',
+  salt: '0c8aa2298223636a',
+  userid: 'w0202ZxohAZwzgF2hyKGU9p2dnVdgpTI',
+  registrationdate: 2018-06-04T18:58:56.427Z,
+  emailverified: false,
+  __v: 0 }
+[2018-06-05T00:28:56.915] [DEBUG] debug - crud common sendLink
+[2018-06-05T00:28:56.915] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-05T00:28:56.920] [DEBUG] debug - config utils fillSession
+[2018-06-05T00:28:56.921] [DEBUG] debug - config utils fillWebSession
+[2018-06-05T00:28:57.300] [DEBUG] debug - crud result[object Object]
+[2018-06-05T00:28:57.300] [DEBUG] debug - utils create mail verificationlink { type: 'verificationlink',
+  email: 'escale_testnode@gmail.com',
+  url: 'http://localhost:3000/#/emailactivate?e=escale_testnode@gmail.com&t=BOKxe4sp149P9f7NxM3FKgkhBgodVNQk' }
+[2018-06-05T00:28:57.342] [DEBUG] debug - config utils sendMail
+[2018-06-05T00:29:01.195] [INFO] debug - Message sent: 250 2.0.0 OK 1528138741 q69-v6sm56273367pfl.16 - gsmtp
+[2018-06-05T00:35:08.034] [DEBUG] debug - routes signup signup
+[2018-06-05T00:35:08.048] [DEBUG] debug - validate email
+[2018-06-05T00:35:08.049] [DEBUG] debug - validate username
+[2018-06-05T00:35:08.049] [DEBUG] debug - validate password
+[2018-06-05T00:35:08.050] [DEBUG] debug - crud signup checkUser
+[2018-06-05T00:35:08.364] [DEBUG] debug - crud result
+[2018-06-05T00:35:08.364] [DEBUG] debug - crud common checkUsername
+[2018-06-05T00:35:08.687] [DEBUG] debug - crud result
+[2018-06-05T00:35:08.690] [DEBUG] debug - crud signup addUser
+[2018-06-05T00:35:08.692] [DEBUG] debug - config encrypt genRandomString
+[2018-06-05T00:35:08.692] [DEBUG] debug - config encrypt sha512
+[2018-06-05T00:35:08.702] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-05T00:35:09.105] [DEBUG] debug - crud result{ _id: 5b158d647b1d40bed5dd86a6,
+  useremail: 'escale_testnode@gmail.com',
+  username: 'mayu1234',
+  password1: '60bf224a91747dc44d331dc2b2dfe54ca4391c27adb706ef749e9bde7d130b557bf4b75a396260709ca04bc50b3e5f9960d853ab6cbec9b75b728bd065d23624',
+  role: 'customer',
+  salt: 'aed0dbc4ece23794',
+  userid: 'vEFiXyd9CxAomhHXHQhXRkthPg2v8abt',
+  registrationdate: 2018-06-04T19:05:08.725Z,
+  emailverified: false,
+  __v: 0 }
+[2018-06-05T00:35:09.106] [DEBUG] debug - crud common sendLink
+[2018-06-05T00:35:09.106] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-05T00:35:09.109] [DEBUG] debug - config utils fillSession
+[2018-06-05T00:35:09.111] [DEBUG] debug - config utils fillWebSession
+[2018-06-05T00:35:09.457] [DEBUG] debug - crud result[object Object]
+[2018-06-05T00:35:09.458] [DEBUG] debug - utils create mail verificationlink { type: 'verificationlink',
+  email: 'escale_testnode@gmail.com',
+  url: 'http://localhost:3000/#/emailactivate?e=escale_testnode@gmail.com&t=bTdk5vlhDpkWw5fDTgMC4ernncrYmZDb' }
+[2018-06-05T00:35:09.551] [DEBUG] debug - config utils sendMail
+[2018-06-05T00:35:21.732] [INFO] debug - Message sent: 250 2.0.0 OK 1528139121 i71-v6sm5922937pgd.22 - gsmtp
+[2018-06-05T00:53:33.599] [DEBUG] debug - routes signup signup
+[2018-06-05T00:53:33.644] [DEBUG] debug - validate email
+[2018-06-05T00:53:33.652] [DEBUG] debug - validate username
+[2018-06-05T00:53:33.659] [DEBUG] debug - validate password
+[2018-06-05T00:53:33.660] [DEBUG] debug - crud signup checkUser
+[2018-06-05T00:53:33.987] [DEBUG] debug - crud result
+[2018-06-05T00:53:33.988] [DEBUG] debug - crud common checkUsername
+[2018-06-05T00:53:34.337] [DEBUG] debug - crud result
+[2018-06-05T00:53:34.337] [DEBUG] debug - crud signup addUser
+[2018-06-05T00:53:34.338] [DEBUG] debug - config encrypt genRandomString
+[2018-06-05T00:53:34.338] [DEBUG] debug - config encrypt sha512
+[2018-06-05T00:53:34.338] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-05T00:53:35.028] [DEBUG] debug - crud result{ _id: 5b1591b60decbde645053f16,
+  useremail: 'escale_testnode@gmail.com',
+  username: 'mayu1234',
+  password1: '896e223c9a437131b287a25b3d5ac5c5ba4712c844d26f669c7735f240eff78733ac17407172a15c87929411e17d2ee1b6070ec97db57fd687eeed293631039a',
+  role: 'customer',
+  salt: '17d9f9469ff90fe3',
+  userid: 'sUkqPb1nhfxgR20hwXxPnJ5Tv3e34yGo',
+  registrationdate: 2018-06-04T19:23:34.576Z,
+  emailverified: false,
+  __v: 0 }
+[2018-06-05T00:53:35.029] [DEBUG] debug - crud common sendLink
+[2018-06-05T00:53:35.029] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-05T00:53:35.031] [DEBUG] debug - config utils fillSession
+[2018-06-05T00:53:35.032] [DEBUG] debug - config utils fillWebSession
+[2018-06-05T00:53:35.362] [DEBUG] debug - crud result[object Object]
+[2018-06-05T00:53:35.362] [DEBUG] debug - utils create mail verificationlink { type: 'verificationlink',
+  email: 'escale_testnode@gmail.com',
+  url: 'http://localhost:4200/#/emailactivate?e=escale_testnode@gmail.com&t=YgISeTsgEQOV5ou3gHfvj0JtQ5FG3RFg' }
+[2018-06-05T00:53:35.411] [DEBUG] debug - config utils sendMail
+[2018-06-05T00:53:40.585] [INFO] debug - Message sent: 250 2.0.0 OK 1528140220 o87-v6sm19588071pfa.106 - gsmtp
+[2018-06-05T14:03:40.000] [DEBUG] debug - routes signup signup
+[2018-06-05T14:03:40.085] [DEBUG] debug - validate email
+[2018-06-05T14:03:40.098] [DEBUG] debug - validate username

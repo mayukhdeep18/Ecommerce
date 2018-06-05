@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+<link rel="stylesheet" type="text/css" href="styles/logi.css">
+
+
+<script
+        src="http://code.jquery.com/jquery-3.2.1.js"
+        integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+        crossorigin="anonymous"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div class="container">
+    <br />
+    <br />
+
+    <br />
+    <br />
+
+    <br />
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-login">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form id="login-form" method="post" role="form"  name="loginForm"  ng-submit="submitForm(loginForm)" novalidate>
+                                <h2><center>LOGIN</center></h2>
+
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <a href="/social/socialFacebook/" target="_self" class="btn btn-lg btn-primary btn-block"><i class="fa fa-facebook-square" aria-hidden="true">  Facebook</i></a>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                        <a href="/social/socialGoogle/" target="_self" class="btn btn-lg btn-danger btn-block"><i class="fa fa-google-plus" aria-hidden="true"></i>  Google</a>
+                                    </div>
+                                </div>
+                                <div class="login-or">
+                                    <hr class="hr-or">
+                                    <span class="span-or">or</span>
+                                </div>
+                                <div class="form-group"  >
+                                    <input type="text" name="username" id="username" tabindex="1" class="form-control" ng-model="login.loginid" name="validloginid"
+                                           pattern="[a-zA-Z0-9_.@!#$%^&*-+=><?/~`'|]{5,50}" placeholder="Email/Username/Mobile" required>
+
+                                    <span  ng-show="loginForm.validloginid.$touched &&
+							     loginForm.validloginid.$error.pattern && !loginForm.validloginid.$error.required">
+							     Invalid email/username/Mobile </span>
+                                    <span  ng-show="loginForm.validloginid.$touched &&
+							     loginForm.validloginid.$error.required">Cannot be left empty </span>
+                                    <span  ng-show="submitted && !loginForm.validloginid.$touched &&
+							     loginForm.validloginid.$error.required">
+							        Cannot be left empty </span>
+                                    <span  ng-show="submitted && !loginForm.validloginid.$touched &&
+							     loginForm.validloginid.$error.pattern">
+							        Invalid email/username </span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" id="password" tabindex="2" class="form-control" ng-model="login.loginpassword" placeholder="Password"
+                                           name="validloginpass" pattern="[a-z0-9A-Z!@#$%^&*()_.]{8,25}" required>
+                                    <span  ng-show="loginForm.validloginpass.$touched &&
+								     loginForm.validloginpass.$error.pattern && !loginForm.validloginpass.$error.required">
+								     password too small or invalid character,use(8-25 char)(a-z,0-9,A-Z,!,@,#,$,%,^,*,(,),_,.) </span>
+                                    <span  ng-show="loginForm.validloginpass.$touched && loginForm.validloginpass.$error.required">
+								        Cannot be left empty </span>
+                                    <span  ng-show="submitted && !loginForm.validloginpass.$touched &&
+								     loginForm.validloginpass.$error.required">Cannot be left empty </span>
+                                    <span  ng-show="submitted && !loginForm.validloginpass.$touched &&
+								     loginForm.validloginpass.$error.pattern">
+								     password too small or invalid character,use(8-25 char)(a-z,0-9,A-Z,!,@,#,$,%,^,*,(,),_,.) </span>
+
+                                </div>
+                                <div class="col-xs-6 form-group pull-left checkbox">
+                                    <input id="checkbox1" type="checkbox" name="remember" ng-model="login.RememberMe" value="false">
+                                    <label for="checkbox1" >Remember Me</label>
+                                </div>
+
+                                <div class="col-xs-6 form-group pull-right">
+                                    <input type="submit" id="login-submit" tabindex="4" class="form-control btn btn-login" ng-click="submitted=true;" value="Login">
+                                </div>
+                                <span>   </span><a ng-href="#forgotpassword">Forgot Password</a>
+                            </form>
+                            {{result}}
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6 tabs">
+                            <a href="" class="active" id="login-form-link"><div class="login">LOGIN</div></a>
+                        </div>
+                        <div class="col-xs-6 tabs">
+                            <a href="#signup" id="register-form-link"><div class="register">REGISTER</div></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js'></script>
+</html>

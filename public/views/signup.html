@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+<link rel="stylesheet" type="text/css" href="styles/logi.css">
+
+
+<script
+        src="http://code.jquery.com/jquery-3.2.1.js"
+        integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+        crossorigin="anonymous"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript" src=".scripts/logi.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<br />
+<br />
+
+<br />
+<br />
+
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-login">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1><center>Register</center></h1>
+
+                            <form name="regForm"  ng-submit="submitForm(regForm)" novalidate>
+
+                                <input type="email" class="form-control" name="validemail" ng-model="signup.useremail" placeholder="Email" ng-keyup="enableRegister(regForm);" required/>
+                                <span  ng-show="regForm.validemail.$touched && regForm.validemail.$invalid &&
+     !regForm.validemail.$error.required">Invalid email </span>
+                                <span  ng-show="regForm.validemail.$touched && regForm.validemail.$error.required">
+        Cannot be left empty </span>
+                                <span  ng-show="submitted && !regForm.validemail.$touched &&
+     regForm.validemail.$error.required">Cannot be left empty </span>
+                                <span  ng-show="submitted && !regForm.validemail.$touched &&
+     regForm.validemail.$invalid && !regForm.validemail.$error.required">
+        Invalid email </span>
+                                <br>
+
+                                <input type="text" class="form-control" name="validusername" ng-model="signup.username" ng-keyup="checkUsername(regForm);"
+                                       placeholder="Username" pattern="[a-zA-Z0-9_.]{5,20}" required/>
+                                <span  ng-show="regForm.validusername.$touched &&
+     regForm.validusername.$error.pattern &&
+      !regForm.validusername.$error.required">
+      Invalid username(Should have only a-z,0-9,.,_ and 5-20 chars,without any spaces) </span>
+                                <span  ng-show="regForm.validusername.$touched &&
+     regForm.validusername.$error.required">Cannot be left empty </span>
+                                <span  ng-show="submitted && !regForm.validusername.$touched &&
+     regForm.validusername.$error.required">
+        Cannot be left empty </span>
+                                <span  ng-show="submitted && !regForm.validusername.$touched &&
+     regForm.validusername.$error.pattern">
+     Invalid username(Should have only a-z,0-9,.,_ and 5-20 chars,without any spaces) </span>
+                                {{UsernameMessage}}
+                                <br />
+
+                                <input type="password"  class="form-control" ng-keyup="checkp(regForm)" ng-model="signup.password1" name="validpass1"
+                                       placeholder="Password" pattern="[a-z0-9A-Z!@#$%^&*()_.]{8,25}" required/>
+                                <span  ng-show="regForm.validpass1.$touched && regForm.validpass1.$error.pattern &&
+        !regForm.validpass1.$error.required">
+        password too small or invalid character,use(8-25 char)(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
+                                <span  ng-show="regForm.validpass1.$touched && regForm.validpass1.$error.required">
+        Cannot be left empty </span>
+                                <span  ng-show="submitted && !regForm.validpass1.$touched &&
+     regForm.validpass1.$error.required">
+        Cannot be left empty </span>
+                                <span  ng-show="submitted && !regForm.validpass1.$touched &&
+     regForm.validpass1.$error.pattern">
+     password too small or invalid character,use(8-25 char)(a-z,0-9,A-Z,!,@,#,$,%,^,&,*,(,),_,.) </span>
+                                <br>
+                                <input type="password" class="form-control" ng-keyup="checkp(regForm)" ng-model="signup.password2" placeholder="Password" />
+                                {{passtext}}
+                                <br />
+                                <input type="submit" id="register-submit" class="form-control btn btn-register" ng-click="submitted=true;" value="Register" ng-disabled="isNotValid">
+
+                            </form>
+                            {{result}}
+
+                            <br>
+                            <div class="login-or">
+                                <hr class="hr-or">
+                                <span class="span-or">or</span>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <a href="/social/socialFacebook/" target="_self" class="btn btn-lg btn-primary btn-block"><i class="fa fa-facebook-square" aria-hidden="true">  Facebook</i></a>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <a href="/social/socialGoogle/" target="_self" class="btn btn-lg btn-danger btn-block"><i class="fa fa-google-plus" aria-hidden="true"></i>  Google</a>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -101,14 +101,13 @@ const FilterProdRoutes = require("./routes/filtering_products");
 const CalcMeanRatingRoutes = require("./routes/calculate_mean_rating");
 const CalcReviewCountRoutes = require("./routes/calculate_review_count");
 const SignupRoutes = require("./routes/signup");
+const CommonRoutes = require("./routes/commonroutes");
+const ActivateEmail = require("./routes/activateEmail");
 
 mongoose.connect(
     "mongodb://zoom:"+
     process.env.ZOOM_PWD +
-    "@ds131697.mlab.com:31697/zoommyprice",
-    {
-        useMongoClient: true
-    }
+    "@ds131697.mlab.com:31697/zoommyprice", {useMongoClient: true}, { autoIndex: false  }
 );
 
 app.use(morgan("dev"));
@@ -190,6 +189,8 @@ app.use("/filtering_products",FilterProdRoutes);
 app.use("/calculate_mean_rating",CalcMeanRatingRoutes);
 app.use("/calculate_review_count",CalcReviewCountRoutes);
 app.use("/signup",SignupRoutes);
+app.use("/commonroutes",CommonRoutes);
+app.use("/activateEmail",ActivateEmail);
 
 
 app.use((req, res, next) => {

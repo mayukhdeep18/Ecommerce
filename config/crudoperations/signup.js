@@ -3,8 +3,10 @@
 
 
 const commonOperations=require("./commonoperations");
+const mongoose = require("mongoose");
 const logger = require("../logger");
-const User = require("../../models/User");
+const User = require("../../models/user");
+const encrypt=require('../encrypt');
 
 const dbOperations={
 
@@ -33,7 +35,8 @@ const dbOperations={
                             "notFound":undefined
                         };
                         commonOperations.checkUsername(obj,function(){
-                            if(obj.notFound==true){
+
+                            if(obj.notFound===true){
                                 that.addUser(request,response);
                             }
                             else{
@@ -46,16 +49,21 @@ const dbOperations={
     },
     /////////////Adding new user
     addUser:function(request,response){
+
+
         logger.debug('crud signup addUser');
         const utils =require("../utils");
 
         var data={};
+       // data._id = new mongoose.Types.ObjectId(),
         data.useremail=request.body.useremail;
         data.username=request.body.username;
         data.password1=request.body.password1;
+
+
         data.role="customer";
 
-        const encrypt=require('../encrypt');
+
         var salt=encrypt.genRandomString(16);
         var encryptedData=encrypt.sha512(data.password1,salt);
 
@@ -66,16 +74,22 @@ const dbOperations={
 
         data.registrationdate=new Date();
         data.emailverified=false;
+
         User.create(data,function(error,result){
+
 
             if(error){
                 logger.error(error);
+
             }
             else{
+
+
                 logger.debug('crud result'+ result);
+
                 commonOperations.sendLink(result.useremail,"emailactivate","emailactivationtoken");
                 var responseObject={
-                    message:"pass",
+                    message:"Registration successful",
                 };
                 utils.fillSession(request,response,result,responseObject);
             }

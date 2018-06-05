@@ -1,7 +1,7 @@
 'use strict';
 
 const config =require("./config");
-const AppSession=require('/models/appsessdbschema');
+const AppSession=require('../models/appsessdbschema');
 const logger = require("./logger");
 
 const utils={
@@ -110,8 +110,10 @@ const utils={
         transporter.sendMail(mailOptions, function(error, info){
             if (error) {
                 logger.error(error);
+                console.log("this is the error",error);
             }
             if (info != undefined) {
+                console.log("true");
                 logger.info('Message sent: ' + info.response);
             } else {
                 logger.error("error sending mail");
@@ -149,6 +151,8 @@ const utils={
 
     createMail: function (userdata, type) {
         logger.debug('utils create mail',type,userdata);
+
+
         const emails = require('./emails');
         var that = this;
         var text = "";

@@ -15,12 +15,14 @@ exports.registerUser = (req, res, next) => {
     req.body.useremail=req.body.useremail.toLowerCase();
     req.body.username=req.body.username.toLowerCase();
     var userObject=req.body;
+
     var isValidUserEmail=validate.email(userObject.useremail);
     var isValidUsername=validate.username(userObject.username);
     var isValidPassword=validate.password(userObject.password1);
-    var isValidRole=validate.string(userObject.role);
-    if(isValidUserEmail===true && isValidUsername===true && isValidPassword===true && isValidRole===true){
-        dbOperations.checkUser(req,res);
+
+   // var isValidRole=validate.string(userObject.role);
+    if(isValidUserEmail===true && isValidUsername===true && isValidPassword===true){
+       dbOperations.checkUser(req,res);
     }
     else{
         res.json({message:"fail"});

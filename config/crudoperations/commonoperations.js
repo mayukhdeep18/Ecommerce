@@ -1,6 +1,6 @@
 'use strict';
 
-const User = require("/models/user");
+const User = require("../../models/user");
 const utils = require("../utils");
 const logger = require("../logger");
 
@@ -16,7 +16,7 @@ const dbOperations = {
             }
             else {
                 logger.debug('crud result'+ result);
-                if (result[0] != undefined) {
+                if (result.length > 0) {
                     object.notFound = false;
                 }
                 else {
@@ -32,7 +32,7 @@ const dbOperations = {
     checkToken: function (request, response) {
         logger.debug('crud common checkToken');
         var that = this;
-        var activationObject = request.body;
+        var activationObject = request;
 
         User.find({
                 "$and": [
@@ -51,6 +51,7 @@ const dbOperations = {
                 else {
                     logger.debug('crud result'+ result);
                     if (result.length < 1) {
+                        //console.log("result",result);
                         response.json({ message: "fail" });
                     }
                     else {
@@ -78,7 +79,7 @@ const dbOperations = {
                 }
                 else {
                     logger.debug('crud result'+ result);
-                    response.json({ message: "success" });
+                    response.json({ message: "success, email has been verified and activated" });
                 }
             });
     },
@@ -244,7 +245,7 @@ const dbOperations = {
             userData.type = "verificationlink";
         }
         Query[TokenType] = RandomToken;
-        var Url = config.reqUrl + "/#/" + Page + "?e=" + UserEmail + "&t=" + RandomToken;
+        var Url = config.reqUrl + "/activateEmail/" + Page + "?e=" + UserEmail + "&t=" + RandomToken;
 
         User.update({
                 "useremail": UserEmail
@@ -258,6 +259,7 @@ const dbOperations = {
                 }
                 else {
                     logger.debug('crud result' + result);
+
                     userData.email = UserEmail;
                     userData.url = Url;
 
