@@ -3,6 +3,7 @@
 const config =require("./config");
 const AppSession=require('../models/appsessdbschema');
 const logger = require("./logger");
+//const twilio = require("twilio");
 
 const utils={
 
@@ -129,16 +130,14 @@ const utils={
 
     sendSms:function(number,body){
         logger.debug('config utils sendSms');
-        const twilio = require("twilio");
-        var accountSid = config.TWILIO_ACCOUNT_SID;
-        var authToken = config.TWILIO_AUTH_TOKEN;
-
-        var client = new twilio.RestClient(accountSid, authToken);
+        const accountSid = 'AC53aff46e6aa0c284b7a6271b0a58a1e4';
+        const authToken = '219e21f85b404556b179a6f17b0030fe';
+        const client = require('twilio')(accountSid, authToken);
 
         client.messages.create({
             body: body,
             to: number,  // Text this number
-            from: config.VALID_TWILIO_NUMBER, // From a valid Twilio number
+            from: '+12345678901', // From a valid Twilio number
         }, function(error, message) {
             if(error){
                 logger.error(error);

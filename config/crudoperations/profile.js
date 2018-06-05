@@ -1,6 +1,6 @@
 'use strict';
 
-const User = require("/models/user");
+const User = require("../../models/user");
 const utils =require("../utils");
 const commonOperations=require("./commonoperations");
 const logger = require("../logger");
@@ -31,12 +31,12 @@ const dbOperations={
                         }
                         else{
                             logger.debug('crud result'+ result);
-                            response.json({message:"success"});
+                            response.json({message:"successfully changed username"});
                         }
                     });
             }
             else{
-                response.json({message:"taken"});
+                response.json({message:"username already taken"});
             }
         });
     },
@@ -100,7 +100,7 @@ const dbOperations={
                     logger.debug('crud result'+ result);
                     utils.sendSms(number,body);
                     //need to be a callback function
-                    response.json({message:"success"});
+                    response.json({message:"successfully sent message"});
                 }
             });
     },
