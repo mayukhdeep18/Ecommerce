@@ -3,6 +3,7 @@
 const User = require("../../models/user");
 const commonOperations=require("./commonoperations");
 const logger = require("../logger");
+var Cryptr = require('cryptr'),cryptr = new Cryptr('myTotalySecretKey');
 
 const dbOperations= {
 
@@ -10,15 +11,16 @@ const dbOperations= {
     checkEmail:function (request,response){
         logger.debug('crud forgotpass checkEmail');
 
-        var ForgotObject =request.body;
-        User.find({"useremail":ForgotObject.Email},function(error,result){
+        var ForgotObject =cryptr.decrypt(request);
+        console.log("decrypted_id",ForgotObject)
+        User.find({"useremail":ForgotObject},function(error,result){
             if(error){
                 logger.error(error);
             }
             else{
                 logger.debug('crud result'+ result);
                 if(result[0]!=undefined){
-                    commonOperations.sendLink(ForgotObject.Email,"forgotpassword","forgotpasswordtoken");
+                    commonOperations.sendLink(request,"forgotpassword","forgotpasswordtoken");
                     //need to be a callback function
                     response.json({message:"sent"});
                 }
@@ -88,7 +90,7 @@ const dbOperations= {
         newPasswordObject.salt=encryptedData.salt;
 
         User.update({
-                "useremail":newPasswordObject.UserEmail
+                "useremail":newPasswordObject.userEmail
             },
             {
                 $set:{

@@ -30,7 +30,7 @@ const dbOperations={
                 else{
                     logger.debug('crud result'+ result);
                     if(result.length<1){
-                        response.json({message:"fail"});
+                        response.json({message:"failed as user not found"});
                     }
                     else{
                         var i=0;
@@ -63,7 +63,7 @@ const dbOperations={
                             response.json({message:"conflict"});
                         }
                         else{
-                            response.json({message:"fail"});
+                            response.json({message:"failed because password incorrect"});
                         }
                     }
                 }

@@ -3,7 +3,7 @@
 const User = require("../../models/user");
 const utils = require("../utils");
 const logger = require("../logger");
-
+var Cryptr = require('cryptr'),cryptr = new Cryptr('myTotalySecretKey');
 const dbOperations = {
 
     ////////Checking if username exists  /////////////////////
@@ -255,7 +255,7 @@ const dbOperations = {
         }
 
         User.update({
-                "useremail": UserEmail
+                "useremail": cryptr.decrypt(UserEmail)
             },
             {
                 $set: Query

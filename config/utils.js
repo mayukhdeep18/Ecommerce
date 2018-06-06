@@ -4,6 +4,7 @@ const config =require("./config");
 const AppSession=require('../models/appsessdbschema');
 const logger = require("./logger");
 //const twilio = require("twilio");
+var Cryptr = require('cryptr'),cryptr = new Cryptr('myTotalySecretKey');
 
 const utils={
 
@@ -97,6 +98,7 @@ const utils={
         const nodeMailer = require("nodemailer");
         var URL="smtps://"+config.SMTPS_EMAIL+":"+config.SMTPS_PASSWORD+"@"+config.SMTPS_URL;
 
+
         var transporter = nodeMailer.createTransport(URL);
         // setup e-mail data with unicode symbols
         var mailOptions = {
@@ -150,6 +152,7 @@ const utils={
 
     createMail: function (userdata, type) {
         logger.debug('utils create mail',type,userdata);
+        var email_id = cryptr.decrypt(userdata.email)
 
 
         const emails = require('./emails');
@@ -158,12 +161,12 @@ const utils={
         switch (type) {
             case "verificationlink":
                 text = "Please verify your email by clicking " + userdata.url;
-                that.sendMail(userdata.email, emails.verification.subject, text, emails.verification.htmlBody);
+                that.sendMail(email_id, emails.verification.subject, text, emails.verification.htmlBody);
                 break;
 
             case "forgotpassword":
                 text = "Set a new password by clicking " + userdata.url;
-                that.sendMail(userdata.email, emails.password.subject, text, emails.password.htmlBody);
+                that.sendMail(email_id, emails.password.subject, text, emails.password.htmlBody);
                 break;
 
             case "signupadmin":

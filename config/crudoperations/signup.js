@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const logger = require("../logger");
 const User = require("../../models/user");
 const encrypt=require('../encrypt');
+var Cryptr = require('cryptr'),cryptr = new Cryptr('myTotalySecretKey');
 
 const dbOperations={
 
@@ -86,8 +87,9 @@ const dbOperations={
 
 
                 logger.debug('crud result'+ result);
+                var crypt_email = cryptr.encrypt(result.useremail);
 
-                commonOperations.sendLink(result.useremail,"emailactivate","emailactivationtoken");
+                commonOperations.sendLink(crypt_email,"emailactivate","emailactivationtoken");
                 var responseObject={
                     message:"Registration successful",
                 };

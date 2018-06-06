@@ -4,19 +4,24 @@
 
 const express = require('express');
 const router = express.Router();
-
+var Cryptr = require('cryptr'),cryptr = new Cryptr('myTotalySecretKey');
 const dbOperations = require("../config/crudoperations/forgotpassword");
 const validate =require("../config/validate");
 const logger = require("../config/logger");
+
 
 //////Send Link
 exports.forgotPassword = (request, response, next) => {
     logger.debug('routes forgotpass sendlink');
     request.body.Email=request.body.Email.toLowerCase();
     var forgotObject=request.body;
+
+
     var isValidUserEmail=validate.email(forgotObject.Email);
     if(isValidUserEmail===true){
-        dbOperations.checkEmail(request,response);
+        var encryptedString = cryptr.encrypt(forgotObject.Email);
+        console.log('encrypted_email',encryptedString);
+        dbOperations.checkEmail(encryptedString,response);
     }
     else{
         response.json({message:"fail"});
@@ -30,14 +35,13 @@ exports.forgotPassword = (request, response, next) => {
 exports.password_reset = (request, response, next) => {
     logger.debug('routes forgotpass passwordReset');
     var passwordObject=request.body;
+    var email_id = cryptr.decrypt(request.query.e);
 
     var activationObject={
-        "userEmail":request.query.e,
+        "userEmail": email_id,
         "token":request.query.t,
         "NewPassword": passwordObject.NewPassword
     }
-    console.log();
-
 
 
     var isValidUserEmail=validate.email(activationObject.userEmail);

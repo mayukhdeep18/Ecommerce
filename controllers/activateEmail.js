@@ -4,6 +4,7 @@ const router = express.Router();
 const dbOperations = require("../config/crudoperations/commonoperations");
 const validate =require("../config/validate");
 const logger = require("../config/logger");
+var Cryptr = require('cryptr'),cryptr = new Cryptr('myTotalySecretKey');
 
 //get all active wishlist  details
 exports.activate_email= (req, res, next) => {
@@ -11,7 +12,7 @@ exports.activate_email= (req, res, next) => {
     logger.debug('routes common activateemail');
 
     var activationObject={
-        "userEmail":req.query.e,
+        "userEmail":cryptr.decrypt(req.query.e),
         "token":req.query.t,
     }
 
