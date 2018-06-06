@@ -106,6 +106,12 @@ const ActivateEmailRoutes = require("./routes/activateEmail");
 const LoginRoutes = require("./routes/login");
 const ProfileRoutes = require("./routes/profile");
 const ForgotPassordRoutes = require("./routes/forgotpassword");
+const SortingFilterRoutes = require("./routes/sorting_filter");
+const SotringFilterFlagRoutes = require("./routes/sorting_filter_flag");
+const CatFilProdRoutes = require("./routes/cat_based_products_with_sorting_filter");
+const SubcatFilProdRoutes = require("./routes/subcat_based_products_with_sorting_filter");
+const SubsubcatFilProdRoutes = require("./routes/subsubcat_based_products_with_sorting_filter");
+const FilSortProdRoutes = require("./routes/filtering_products_with_sorting_filter");
 
 mongoose.connect(
     "mongodb://zoom:"+
@@ -197,6 +203,12 @@ app.use("/activateEmail",ActivateEmailRoutes);
 app.use("/login",LoginRoutes);
 app.use("/profile",ProfileRoutes);
 app.use("/forgotpassword",ForgotPassordRoutes);
+app.use("/sorting_filter",SortingFilterRoutes);
+app.use("/sorting_filter_flag",SotringFilterFlagRoutes);
+app.use("/cat_based_products_with_sorting_filter",CatFilProdRoutes);
+app.use("/subcat_based_products_with_sorting_filter",SubcatFilProdRoutes);
+app.use("/subsubcat_based_products_with_sorting_filter",SubsubcatFilProdRoutes);
+app.use("/filtering_products_with_sorting_filter",FilSortProdRoutes);
 
 
 app.use((req, res, next) => {

@@ -32,7 +32,6 @@ exports.product_get_all = (req, res, next) => {
     var final_arr = [];
 
 
-    //look up filter options on the basis of category id
     Filter_options_product.find()
         .select("FILTER_OPTION_ID PRODUCT_ID _id")
         .exec()
