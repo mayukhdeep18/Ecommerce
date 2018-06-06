@@ -245,7 +245,14 @@ const dbOperations = {
             userData.type = "verificationlink";
         }
         Query[TokenType] = RandomToken;
-        var Url = config.reqUrl + "/activateEmail/" + Page + "?e=" + UserEmail + "&t=" + RandomToken;
+        if(userData.type === "verificationlink")
+        {
+            var Url = config.reqUrl + "/activateEmail/" + Page + "?e=" + UserEmail + "&t=" + RandomToken;
+        }
+        else
+        {
+            var Url = config.reqUrl + "/forgotpassword/" + Page + "?e=" + UserEmail + "&t=" + RandomToken;
+        }
 
         User.update({
                 "useremail": UserEmail

@@ -105,6 +105,7 @@ const CommonRoutes = require("./routes/commonroutes");
 const ActivateEmailRoutes = require("./routes/activateEmail");
 const LoginRoutes = require("./routes/login");
 const ProfileRoutes = require("./routes/profile");
+const ForgotPassordRoutes = require("./routes/forgotpassword");
 
 mongoose.connect(
     "mongodb://zoom:"+
@@ -195,6 +196,7 @@ app.use("/commonroutes",CommonRoutes);
 app.use("/activateEmail",ActivateEmailRoutes);
 app.use("/login",LoginRoutes);
 app.use("/profile",ProfileRoutes);
+app.use("/forgotpassword",ForgotPassordRoutes);
 
 
 app.use((req, res, next) => {

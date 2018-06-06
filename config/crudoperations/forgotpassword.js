@@ -1,6 +1,6 @@
 'use strict';
 
-const User = require("/models/user");
+const User = require("../../models/user");
 const commonOperations=require("./commonoperations");
 const logger = require("../logger");
 
@@ -34,15 +34,17 @@ const dbOperations= {
     passwordReset:function(request,response){
         logger.debug('crud forgotpass passwordReset');
         var that=this;
-        var PasswordObject=request.body;
+        var PasswordObject=request;
+
+        console.log("object",PasswordObject);
 
         User.find({
                 "$and":[
                     {
-                        "useremail":PasswordObject.UserEmail
+                        "useremail":PasswordObject.userEmail
                     },
                     {
-                        "forgotpasswordtoken":PasswordObject.Token
+                        "forgotpasswordtoken":PasswordObject.token
                     }
                 ]
             }
@@ -55,10 +57,10 @@ const dbOperations= {
                     var date=new Date();
 
                     if(result.length<1){
-                        response.json({message:"fail"});
+                        response.json({message:"failed at result"});
                     }
                     else if((Math.abs(date-result[0].passwordtokenstamp))>86400000){
-                        response.json({message:"fail"});
+                        response.json({message:"failed due to timestamp"});
                     }
                     else{
                         if(PasswordObject.NewPassword!=undefined){
@@ -76,7 +78,7 @@ const dbOperations= {
     saveNewPassword:function (request,response){
         logger.debug('crud forgotpass saveNewPassword');
 
-        var newPasswordObject=request.body;
+        var newPasswordObject=request;
 
         const encrypt=require('../encrypt');
         var salt=encrypt.genRandomString(16);
@@ -101,7 +103,7 @@ const dbOperations= {
                 }
                 else{
                     logger.debug('crud result'+ result);
-                    response.json({message:"success"});
+                    response.json({message:"successfully changed password"});
                 }
             });
     },
