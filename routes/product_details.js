@@ -6,7 +6,7 @@ const checkAuth = require('../middleware/check-auth');
 
 router.get("/", ProdController.product_get_all);
 
-router.post("/",checkAuth, ProdController.product_create);
+router.post("/", ProdController.product_create);
 
 router.get("/:prodcategoryId", ProdController.product_details_get_by_id);
 
