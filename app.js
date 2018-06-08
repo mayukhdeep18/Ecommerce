@@ -112,6 +112,7 @@ const CatFilProdRoutes = require("./routes/cat_based_products_with_sorting_filte
 const SubcatFilProdRoutes = require("./routes/subcat_based_products_with_sorting_filter");
 const SubsubcatFilProdRoutes = require("./routes/subsubcat_based_products_with_sorting_filter");
 const FilSortProdRoutes = require("./routes/filtering_products_with_sorting_filter");
+const SearchRoutes = require("./routes/search");
 
 mongoose.connect(
     "mongodb://zoom:"+
@@ -209,6 +210,7 @@ app.use("/cat_based_products_with_sorting_filter",CatFilProdRoutes);
 app.use("/subcat_based_products_with_sorting_filter",SubcatFilProdRoutes);
 app.use("/subsubcat_based_products_with_sorting_filter",SubsubcatFilProdRoutes);
 app.use("/filtering_products_with_sorting_filter",FilSortProdRoutes);
+app.use("/search",SearchRoutes);
 
 
 app.use((req, res, next) => {

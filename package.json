@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "aboutyou-sdk": "^0.1.28",
+    "apac": "^3.0.2",
     "async": "^2.6.1",
     "bcrypt": "^2.0.1",
     "bcrypt-nodejs": "0.0.3",
@@ -24,6 +25,7 @@
     "mongoose-joins": "0.0.1",
     "morgan": "^1.9.0",
     "multer": "^1.3.0",
+    "node-regexp": "^0.1.1",
     "nodemailer": "^4.6.5",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
