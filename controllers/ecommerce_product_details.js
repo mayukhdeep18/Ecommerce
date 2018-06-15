@@ -273,7 +273,8 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
     var sum_rating = 0;
     var counter = 0;
     var counter_1 = 0;
-    var mean_rating;
+    var mean_rating = 0;
+    var min_name;
     for (const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
@@ -285,17 +286,18 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
 
             EcommProduct.find({_id: id})
                 .select('ECOMMERCE_PRODUCT_PRICE PRODUCT_ID')
+                .populate('ECOMMERCE_CATEGORY_ID')
                 .exec()
                 .then(ecom_1 => {
 
-
-
                     var prod_id = ecom_1[0].PRODUCT_ID;
+                    console.log(prod_id);
 
 
 
                     EcommProduct.find({PRODUCT_ID: prod_id, ACTIVE_FLAG: 'Y'})
                         .select('ECOMMERCE_PRODUCT_PRICE')
+                        .populate('ECOMMERCE_CATEGORY_ID')
                         .exec()
                         .then(ecom_2 => {
 
@@ -304,9 +306,15 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
                                 if(item.ECOMMERCE_PRODUCT_PRICE < min || min === 0)
                                 {
                                     min = item.ECOMMERCE_PRODUCT_PRICE;
+                                    min_name = item.ECOMMERCE_CATEGORY_ID.ECOMMERCE_NAME;
+
                                 }
                             }
                             updateOps_1['PRODUCT_PRICE'] = min;
+                            updateOps_1['LEAST_PRICE_ECOMMERCE'] = min_name;
+
+                            console.log(min);
+                            console.log(min_name);
 
                             Rating.find({PRODUCT_ID: prod_id, ACTIVE_FLAG: 'Y'})
                                 .select("RATING_NUMBER PRODUCT_ID _id")
@@ -317,10 +325,22 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
                                         counter_1++;
                                     }
 
+                                    console.log(sum_rating);
+                                    console.log(counter_1);
 
+                                    if(counter_1 === 0)
+                                    {
+                                        updateOps_1['MEAN_RATING'] = 0;
+                                        updateOps_1['RATING_COUNT'] = 0;
+                                    }
+                                    else{
+                                        mean_rating = sum_rating / counter_1;
+                                        updateOps_1['MEAN_RATING'] = mean_rating;
+                                        updateOps_1['RATING_COUNT'] = counter_1;
+                                    }
 
-                                    mean_rating = sum_rating / counter_1;
-                                    updateOps_1['MEAN_RATING'] = mean_rating;
+                                    console.log(mean_rating);
+                                    console.log(counter_1);
 
                                     Review.find({PRODUCT_ID: prod_id, ACTIVE_FLAG: 'Y'})
                                         .select("REVIEW_TITLE PRODUCT_ID _id")
@@ -332,7 +352,7 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
 
 
                                             updateOps_1['REVIEW_COUNT'] = counter;
-
+                                            console.log(counter);
 
 
                                             Product.update({ _id: prod_id }, {$set: updateOps_1})
@@ -346,12 +366,57 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
                                                             message: 'product details updated and stored'
                                                         }
                                                     });
-                                                })
-                                        })
-                                })
+                                                }).catch(err => {
+                                                console.log(err);
+                                                res.status(500).json({
+                                                    status: "success",
+                                                    error: err,
+                                                    data: {
+                                                        message: "An error has occurred as mentioned above"
+                                                    }
+                                                });
+                                            });
+                                        }).catch(err => {
+                                        console.log(err);
+                                        res.status(500).json({
+                                            status: "success",
+                                            error: err,
+                                            data: {
+                                                message: "An error has occurred as mentioned above"
+                                            }
+                                        });
+                                    });
+                                }).catch(err => {
+                                console.log(err);
+                                res.status(500).json({
+                                    status: "success",
+                                    error: err,
+                                    data: {
+                                        message: "An error has occurred as mentioned above"
+                                    }
+                                });
+                            });
 
-                        })
-                })
+                        }).catch(err => {
+                        console.log(err);
+                        res.status(500).json({
+                            status: "success",
+                            error: err,
+                            data: {
+                                message: "An error has occurred as mentioned above"
+                            }
+                        });
+                    });
+                }).catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    status: "success",
+                    error: err,
+                    data: {
+                        message: "An error has occurred as mentioned above"
+                    }
+                });
+            });
         })
         .catch(err => {
             console.log(err);

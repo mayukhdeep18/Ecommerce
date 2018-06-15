@@ -10,8 +10,9 @@ router.post("/", ProdController.product_create);
 
 router.get("/:prodcategoryId", ProdController.product_details_get_by_id);
 
-router.patch("/:prodcategoryId",checkAuth,  ProdController.product_update_by_id);
+router.patch("/:prodcategoryId",  ProdController.product_update_by_id);
 
-router.delete("/:prodcategoryId",checkAuth, ProdController.product_delete_by_id);
+router.delete("/:prodcategoryId", ProdController.product_delete_by_id);
 
 module.exports = router;
+

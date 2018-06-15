@@ -97,7 +97,7 @@ exports.image_upload = (req, res, next) =>  {
  });*/
     const productimage = new Product_images({
         _id: new mongoose.Types.ObjectId(),
-        //PRODUCT_ID: req.body.PRODUCT_ID,
+        PRODUCT_ID: req.body.PRODUCT_ID,
         PRODUCT_IMAGE_REF_1: req.file.path,
         UPDATED_BY: req.body.UPDATED_BY,
         UPDATED_DATE: new Date(),
@@ -114,7 +114,7 @@ exports.image_upload = (req, res, next) =>  {
                     message: "Product image list created successfully",
                     createdProductimage: {
                         _id: result._id,
-                        //PRODUCT_ID: result.PRODUCT_ID,
+                        PRODUCT_ID: result.PRODUCT_ID,
                         PRODUCT_IMAGE_REF_1: result.PRODUCT_IMAGE_REF_1,
                         UPDATED_BY: result.UPDATED_BY,
                         UPDATED_DATE: result.UPDATED_DATE,

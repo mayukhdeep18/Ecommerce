@@ -37,7 +37,7 @@ router.get("/", ImageController.images_get_all);
 
 
 
-router.post("/",checkAuth, upload.single('PRODUCT_IMAGE_REF_1'), ImageController.image_upload);
+router.post("/", upload.single('PRODUCT_IMAGE_REF_1'), ImageController.image_upload);
 
 router.get("/:productimageId", ImageController.image_get_image);
 
