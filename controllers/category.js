@@ -5,19 +5,20 @@ const Category = require("../models/category");
 //get all active categories
 exports.category_get_all = (req, res, next) => {
     Category.find({ACTIVE_FLAG:'Y'})
-        .select('PRODUCT_CATEGORY_NAME PRODUCT_CATEGORY_DESCRIPTION UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id')
+        .select('CATEGORY_ID PRODUCT_CATEGORY_NAME PRODUCT_CATEGORY_DESCRIPTION UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id')
         .exec()
         .then(docs => {
             const response = {
                 //count: docs.length,
                 categories: docs.map(doc => {
                     return {
-                        PRODUCT_CATEGORY_NAME: doc.PRODUCT_CATEGORY_NAME,
-                        PRODUCT_CATEGORY_DESCRIPTION: doc.PRODUCT_CATEGORY_DESCRIPTION,
-                        UPDATED_BY: doc.UPDATED_BY,
-                        UPDATED_DATE: doc.UPDATED_DATE,
-                        ACTIVE_FLAG: doc.ACTIVE_FLAG,
-                        _id: doc._id
+                        category_id: doc.CATEGORY_ID,
+                        category_name: doc.PRODUCT_CATEGORY_NAME,
+                        category_description: doc.PRODUCT_CATEGORY_DESCRIPTION,
+                        updated_by: doc.UPDATED_BY,
+                        updated_date: doc.UPDATED_DATE,
+                        active_flag: doc.ACTIVE_FLAG,
+                        doc_id: doc._id
                     };
                 })
             };
@@ -43,13 +44,17 @@ exports.category_get_all = (req, res, next) => {
         });
 };
 
-
 //create a new category
 exports.category_create_category = (req, res, next) =>{
+
+    var Cat_id = req.body.PRODUCT_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
+    //console.log('Prod_id',Prod_id.toLowerCase());
+
     const category = new Category({
         _id: new mongoose.Types.ObjectId(),
-        PRODUCT_CATEGORY_NAME: req.body.PRODUCT_CATEGORY_NAME,
-        PRODUCT_CATEGORY_DESCRIPTION: req.body.PRODUCT_CATEGORY_DESCRIPTION,
+        CATEGORY_ID: Cat_id.toLowerCase(),
+        PRODUCT_CATEGORY_NAME: req.body.PRODUCT_CATEGORY_NAME.toLowerCase(),
+        PRODUCT_CATEGORY_DESCRIPTION: req.body.PRODUCT_CATEGORY_DESCRIPTION.toLowerCase(),
         UPDATED_BY: req.body.UPDATED_BY,
         UPDATED_DATE: new Date(),
         ACTIVE_FLAG: req.body.ACTIVE_FLAG
@@ -57,21 +62,13 @@ exports.category_create_category = (req, res, next) =>{
     category
         .save()
         .then(result => {
-            console.log(result);
+            //console.log(result);
             res.status(201).json({
                 status:"success",
                 error_msg:"",
                 data: {
-                    message: "Created category successfully",
-                    createdcategory: {
-                        PRODUCT_CATEGORY_NAME: result.PRODUCT_CATEGORY_NAME,
-                        PRODUCT_CATEGORY_DESCRIPTION: result.PRODUCT_CATEGORY_DESCRIPTION,
-                        UPDATED_BY: result.UPDATED_BY,
-                        UPDATED_DATE: result.UPDATED_DATE,
-                        ACTIVE_FLAG: result.ACTIVE_FLAG,
-                        _id: result._id
+                    message: "Created category successfully"
                     }
-                }
             });
         })
         .catch(err => {
@@ -89,17 +86,32 @@ exports.category_create_category = (req, res, next) =>{
 //get category by id
 exports.category_get_category = (req, res, next) =>{
     const id = req.params.categoryId;
-    Category.findById(id)
-        .select('PRODUCT_CATEGORY_NAME PRODUCT_CATEGORY_DESCRIPTION UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id')
+    Category.find({CATEGORY_ID:id})
+        .select('CATEGORY_ID PRODUCT_CATEGORY_NAME PRODUCT_CATEGORY_DESCRIPTION UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id')
         .exec()
         .then(doc => {
-            console.log("From database", doc);
             if (doc) {
+                const response = {
+                    //count: docs.length,
+                    categories: doc.map(doc => {
+                        return {
+                            category_id: doc.CATEGORY_ID,
+                            category_name: doc.PRODUCT_CATEGORY_NAME,
+                            category_description: doc.PRODUCT_CATEGORY_DESCRIPTION,
+                            updated_by: doc.UPDATED_BY,
+                            updated_date: doc.UPDATED_DATE,
+                            active_flag: doc.ACTIVE_FLAG,
+                            doc_id: doc._id
+                        };
+                    })
+                };
+                // if (docs.length >= 0) {
                 res.status(200).json({
                     status:"success",
                     error_msg:"",
                     data: {
-                        category: doc
+                        message: 'Below are the category details',
+                        response
                     }
                 });
             } else {
@@ -127,7 +139,7 @@ exports.category_update_category = (req, res, next) =>{
     for (const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
-    Category.update({ _id: id }, { $set: updateOps })
+    Category.update({ CATEGORY_ID: id }, { $set: updateOps })
         .exec()
         .then(result => {
             res.status(200).json({
@@ -153,7 +165,7 @@ exports.category_update_category = (req, res, next) =>{
 //delete a category by id
 exports.category_delete = (req, res, next) =>{
     const id = req.params.categoryId;
-    Category.remove({ _id: id })
+    Category.remove({ CATEGORY_ID: id })
         .exec()
         .then(result => {
             res.status(200).json({
