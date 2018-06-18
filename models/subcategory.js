@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const subcategorySchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
+    SUB_CATEGORY_ID: {type: String, required: true, unique: true},
     PRODUCT_CATEGORY_ID: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: true },
     PRODUCT_SUB_CATEGORY_NAME: {type: String, required: true, unique: true},
     PRODUCT_SUB_CATEGORY_DESCRIPTION: {type: String, required: true},

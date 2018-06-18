@@ -8,29 +8,42 @@ exports.category_get_all = (req, res, next) => {
         .select('CATEGORY_ID PRODUCT_CATEGORY_NAME PRODUCT_CATEGORY_DESCRIPTION UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id')
         .exec()
         .then(docs => {
-            const response = {
-                //count: docs.length,
-                categories: docs.map(doc => {
-                    return {
-                        category_id: doc.CATEGORY_ID,
-                        category_name: doc.PRODUCT_CATEGORY_NAME,
-                        category_description: doc.PRODUCT_CATEGORY_DESCRIPTION,
-                        updated_by: doc.UPDATED_BY,
-                        updated_date: doc.UPDATED_DATE,
-                        active_flag: doc.ACTIVE_FLAG,
-                        doc_id: doc._id
-                    };
-                })
-            };
-            // if (docs.length >= 0) {
-            res.status(200).json({
-                status:"success",
-                error_msg:"",
-                data: {
-                    message: 'Below are the category details',
-                    response
-                }
-            });
+
+            if(docs.length > 0)
+            {
+                const response = {
+                    //count: docs.length,
+                    categories: docs.map(doc => {
+                        return {
+                            category_id: doc.CATEGORY_ID,
+                            category_name: doc.PRODUCT_CATEGORY_NAME,
+                            category_description: doc.PRODUCT_CATEGORY_DESCRIPTION,
+                            updated_by: doc.UPDATED_BY,
+                            updated_date: doc.UPDATED_DATE,
+                            active_flag: doc.ACTIVE_FLAG,
+                            doc_id: doc._id
+                        };
+                    })
+                };
+                // if (docs.length >= 0) {
+                res.status(200).json({
+                    status:"success",
+                    error_msg:"",
+                    data: {
+                        message: 'Below are the category details',
+                        response
+                    }
+                });
+            }
+            else
+            {
+                res.status(404).json({
+                    status:"failure",
+                    data: {
+                        message: 'No details found for category'
+                    }
+                });
+            }
         })
         .catch(err => {
             console.log(err);
@@ -49,8 +62,9 @@ exports.category_create_category = (req, res, next) =>{
 
     var Cat_id = req.body.PRODUCT_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
     //console.log('Prod_id',Prod_id.toLowerCase());
-
-    const category = new Category({
+    if( Cat_id.length > 0)
+    {
+        const category = new Category({
         _id: new mongoose.Types.ObjectId(),
         CATEGORY_ID: Cat_id.toLowerCase(),
         PRODUCT_CATEGORY_NAME: req.body.PRODUCT_CATEGORY_NAME.toLowerCase(),
@@ -58,8 +72,8 @@ exports.category_create_category = (req, res, next) =>{
         UPDATED_BY: req.body.UPDATED_BY,
         UPDATED_DATE: new Date(),
         ACTIVE_FLAG: req.body.ACTIVE_FLAG
-    });
-    category
+        });
+        category
         .save()
         .then(result => {
             //console.log(result);
@@ -68,7 +82,7 @@ exports.category_create_category = (req, res, next) =>{
                 error_msg:"",
                 data: {
                     message: "Created category successfully"
-                    }
+                }
             });
         })
         .catch(err => {
@@ -77,10 +91,21 @@ exports.category_create_category = (req, res, next) =>{
                 status: "error",
                 error: err,
                 data: {
-                    message: "An error has occurred as mentioned above"
+                    message: "Please check all your fields"
                 }
             });
         });
+    }
+    else
+    {
+        res.status(500).json({
+            status: "error",
+            data: {
+                message: "Please check all your fields"
+            }
+        });
+    }
+
 };
 
 //get category by id
