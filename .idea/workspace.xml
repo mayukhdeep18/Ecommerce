@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22d33094-d95f-4e1e-897e-0a67ac0d8ed3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/controllers/customer.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/customer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/ecommerce_category.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ecommerce_category.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/ecommerce_category.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/ecommerce_category.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/ecommerce_category.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/ecommerce_category.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/filters.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/filters.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/filters.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/filters.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,38 +37,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ecommerce_category.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/ecommerce_category.js">
+      <file leaf-file-name="filters.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/filters.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="15" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+            <state relative-caret-position="165">
+              <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ecommerce_category.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/controllers/ecommerce_category.js">
+      <file leaf-file-name="filters.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/controllers/filters.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="127" column="79" selection-start-line="127" selection-start-column="59" selection-end-line="127" selection-end-column="80" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ecommerce_category.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/ecommerce_category.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="47" column="24" lean-forward="true" selection-start-line="47" selection-start-column="24" selection-end-line="47" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="customer.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/customer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="421">
-              <caret line="236" column="2" selection-start-line="236" selection-start-column="2" selection-end-line="236" selection-end-column="2" />
+            <state relative-caret-position="403">
+              <caret line="211" column="2" lean-forward="true" selection-start-line="211" selection-start-column="2" selection-end-line="211" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -97,7 +77,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/routes/activateEmail.js" />
         <option value="$PROJECT_DIR$/routes/forgotpassword.js" />
         <option value="$PROJECT_DIR$/config/utils.js" />
         <option value="$PROJECT_DIR$/config/crudoperations/commonoperations.js" />
@@ -106,7 +85,6 @@
         <option value="$PROJECT_DIR$/config/crudoperations/forgotpassword.js" />
         <option value="$PROJECT_DIR$/config/crudoperations/signup.js" />
         <option value="$PROJECT_DIR$/controllers/activateEmail.js" />
-        <option value="$PROJECT_DIR$/controllers/filters.js" />
         <option value="$PROJECT_DIR$/controllers/sorting_filter.js" />
         <option value="$PROJECT_DIR$/routes/sorting_filter.js" />
         <option value="$PROJECT_DIR$/controllers/sorting_filter_flag.js" />
@@ -148,6 +126,8 @@
         <option value="$PROJECT_DIR$/controllers/customer.js" />
         <option value="$PROJECT_DIR$/controllers/ecommerce_category.js" />
         <option value="$PROJECT_DIR$/routes/ecommerce_category.js" />
+        <option value="$PROJECT_DIR$/models/filters.js" />
+        <option value="$PROJECT_DIR$/controllers/filters.js" />
       </list>
     </option>
   </component>
@@ -191,7 +171,7 @@
             <path>
               <item name="Zoommyprice" type="b2602c69:ProjectViewProjectNode" />
               <item name="Zoommyprice" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -312,12 +292,12 @@
       <workItem from="1528874177231" duration="674000" />
       <workItem from="1529039869705" duration="7956000" />
       <workItem from="1529050153685" duration="12212000" />
-      <workItem from="1529301444068" duration="18062000" />
+      <workItem from="1529301444068" duration="19610000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="452183000" />
+    <option name="totallyTimeSpent" value="453731000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -334,10 +314,10 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="right" id="Mongo Explorer" order="7" weight="0.32956383" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.23448277" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.23448277" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
       <window_info anchor="right" id="Database" order="6" weight="0.32956383" />
       <window_info id="Learn" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -376,27 +356,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/routes/category_based_product.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/sorting_filter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/sorting_filter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="54" column="15" lean-forward="true" selection-start-line="54" selection-start-column="15" selection-end-line="54" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/sorting_filter_flag.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="810">
@@ -664,13 +623,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="220" selection-start-line="220" selection-end-line="220" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/subsubcategory_flag.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
@@ -713,13 +665,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/customer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="236" column="2" selection-start-line="236" selection-start-column="2" selection-end-line="236" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/ecommerce_category.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="433">
@@ -729,8 +674,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/ecommerce_category.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="127" column="79" selection-start-line="127" selection-start-column="59" selection-end-line="127" selection-end-column="80" />
+        <state relative-caret-position="396">
+          <caret line="73" column="26" lean-forward="true" selection-start-line="73" selection-start-column="26" selection-end-line="73" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/filters.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="220" selection-start-line="220" selection-end-line="220" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/customer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="65" column="74" selection-start-line="65" selection-start-column="4" selection-end-line="65" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/filters.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/filters.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="211" column="2" lean-forward="true" selection-start-line="211" selection-start-column="2" selection-end-line="211" selection-end-column="2" />
         </state>
       </provider>
     </entry>

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const FilterSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
+    FILTER_ID: {type: String, required: true, unique: true},
     FILTER_CATEGORY_NAME: {type: String, required: true},
     UPDATED_BY: {type: String, default: "Zoom_admin"},
     UPDATED_DATE: {type: Date, default: Date()},

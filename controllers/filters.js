@@ -4,33 +4,48 @@ const Filters = require("../models/filters");
 //get all active filter categories
 exports.filter_category_get_all = (req, res, next) => {
     Filters.find({ACTIVE_FLAG:'Y'})
-        .select('FILTER_CATEGORY_NAME UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id')
+        .select('FILTER_ID FILTER_CATEGORY_NAME UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id')
         .exec()
         .then(docs => {
-            const response = {
-                //count: docs.length,
-                seller_categories: docs.map(doc => {
-                    return {
-                        filter_category_id: doc._id,
-                        filter_category_name: doc.FILTER_CATEGORY_NAME,
-                        updated_by_user: doc.UPDATED_BY,
-                        updated_on: doc.UPDATED_DATE,
-                        isActive: doc.ACTIVE_FLAG
-                    };
-                })
-            };
-            // if (docs.length >= 0) {
-            res.status(200).json({
-                status:"success",
-                error_msg:"",
-                data: {
-                    message: 'Below are the filter_category details',
-                    response
-                }
-            });
+            if(docs.length > 0)
+            {
+                const response = {
+                    //count: docs.length,
+                    seller_categories: docs.map(doc => {
+                        return {
+                            doc_id: doc._id,
+                            filter_id: doc.FILTER_ID,
+                            filter_category_name: doc.FILTER_CATEGORY_NAME,
+                            updated_by_user: doc.UPDATED_BY,
+                            updated_on: doc.UPDATED_DATE,
+                            isActive: doc.ACTIVE_FLAG
+                        };
+                    })
+                };
+                // if (docs.length >= 0) {
+                res.status(200).json({
+                    status:"success",
+                    error_msg:"",
+                    data: {
+                        message: 'Below are the filter_type details',
+                        response
+                    }
+                });
+            }
+            else
+            {
+                res.status(404).json({
+                    status:"failure",
+                    error_msg:"",
+                    data: {
+                        message: 'No filter types found'
+                    }
+                });
+            }
+
         })
         .catch(err => {
-            console.log(err);
+
             res.status(500).json({
                 status: "error",
                 error: err,
@@ -44,76 +59,95 @@ exports.filter_category_get_all = (req, res, next) => {
 
 //create a new filter category
 exports.filter_create_category = (req, res, next) =>{
-    const filter = new Filters({
-        _id: new mongoose.Types.ObjectId(),
-        FILTER_CATEGORY_NAME: req.body.FILTER_CATEGORY_NAME,
-        UPDATED_BY: req.body.UPDATED_BY,
-        UPDATED_DATE: new Date(),
-        ACTIVE_FLAG: req.body.ACTIVE_FLAG
-    });
-   filter
-        .save()
-        .then(result => {
-            console.log(result);
-            res.status(201).json({
-                status:"success",
-                error_msg:"",
-                data: {
-                    message: "Created category successfully",
-                    filter_category: {
-                        FILTER_CATEGORY_NAME: result.FILTER_CATEGORY_NAME,
-                        UPDATED_BY: result.UPDATED_BY,
-                        UPDATED_DATE: result.UPDATED_DATE,
-                        ACTIVE_FLAG: result.ACTIVE_FLAG,
-                        _id: result._id
-                    }
-                }
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                status: "error",
-                error: err,
-                data: {
-                    message: "An error has occurred as mentioned above"
-                }
-            });
+
+    var fil_id = req.body.FILTER_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
+
+    if(fil_id.length > 0)
+    {
+        const filter = new Filters({
+            _id: new mongoose.Types.ObjectId(),
+            FILTER_ID: fil_id.toLowerCase(),
+            FILTER_CATEGORY_NAME: req.body.FILTER_CATEGORY_NAME.toLowerCase(),
+            UPDATED_BY: req.body.UPDATED_BY,
+            UPDATED_DATE: new Date(),
+            ACTIVE_FLAG: req.body.ACTIVE_FLAG
         });
+        filter
+            .save()
+            .then(result => {
+
+                res.status(201).json({
+                    status:"success",
+                    error_msg:"",
+                    data: {
+                        message: "Filter type created successfully"
+                    }
+                });
+            })
+            .catch(err => {
+
+                res.status(500).json({
+                    status: "error",
+                    error: err,
+                    data: {
+                        message: "An error has occurred as mentioned above"
+                    }
+                });
+            });
+    }
+
 };
 
 //get filter_category by id
 exports.filter_category_get_by_id = (req, res, next) =>{
     const id = req.params.filter_categoryId;
-    Filters.findById(id)
-        .select('FILTER_CATEGORY_NAME UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id')
+    Filters.find({FILTER_ID: id})
+        .select('FILTER_ID FILTER_CATEGORY_NAME UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id')
         .exec()
-        .then(doc => {
-            console.log("From database", doc);
-            if (doc) {
+        .then(docs => {
+            if(docs.length > 0)
+            {
+                const response = {
+                    //count: docs.length,
+                    seller_categories: docs.map(doc => {
+                        return {
+                            doc_id: doc._id,
+                            filter_id: doc.FILTER_ID,
+                            filter_category_name: doc.FILTER_CATEGORY_NAME,
+                            updated_by_user: doc.UPDATED_BY,
+                            updated_on: doc.UPDATED_DATE,
+                            isActive: doc.ACTIVE_FLAG
+                        };
+                    })
+                };
+                // if (docs.length >= 0) {
                 res.status(200).json({
                     status:"success",
                     error_msg:"",
                     data: {
-                        filter_category_name: doc.FILTER_CATEGORY_NAME,
-                        updated_by_user: doc.UPDATED_BY,
-                        updated_on: doc.UPDATED_DATE,
-                        isActive: doc.ACTIVE_FLAG,
-                        seller_category_id: doc._id
+                        message: 'Below are the filter_type details',
+                        response
                     }
                 });
-            } else {
-                res
-                    .status(404)
-                    .json({ message: "No valid entry found for provided ID" });
             }
+            else
+            {
+                res.status(404).json({
+                    status:"failure",
+                    error_msg:"",
+                    data: {
+                        message: 'No filter types found'
+                    }
+                });
+            }
+
         })
         .catch(err => {
-            console.log(err);
+
             res.status(500).json({
                 status: "error",
                 error: err,
-                data: {
+                data:{
                     message: "An error has occurred as mentioned above"
                 }
             });
@@ -127,7 +161,7 @@ exports.filter_category_update_by_id = (req, res, next) =>{
     for (const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
-    Filters.update({ _id: id }, { $set: updateOps })
+    Filters.update({ FILTER_ID: id }, { $set: updateOps })
         .exec()
         .then(result => {
             res.status(200).json({
@@ -139,7 +173,7 @@ exports.filter_category_update_by_id = (req, res, next) =>{
             });
         })
         .catch(err => {
-            console.log(err);
+
             res.status(500).json({
                 status: "error",
                 error: err,
@@ -153,7 +187,7 @@ exports.filter_category_update_by_id = (req, res, next) =>{
 //delete a filter_category by id
 exports.filter_category_delete_by_id = (req, res, next) =>{
     const id = req.params.filter_categoryId;
-    Filters.remove({ _id: id })
+    Filters.remove({ FILTER_ID: id })
         .exec()
         .then(result => {
             res.status(200).json({
@@ -165,9 +199,14 @@ exports.filter_category_delete_by_id = (req, res, next) =>{
             });
         })
         .catch(err => {
-            console.log(err);
+
             res.status(500).json({
-                error: err
+                status: "failure",
+                error: err,
+                data:
+                    {
+                       message: "encountered error as mentioned above"
+                    }
             });
         });
 };
