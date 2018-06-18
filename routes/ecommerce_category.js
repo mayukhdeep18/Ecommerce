@@ -35,13 +35,13 @@ const upload = multer({
 
 router.get("/", EcommerceCategoryController.ecomm_category_get_all);
 
-
-
-router.post("/",checkAuth, upload.single('ECOMMERCE_LOGO'), EcommerceCategoryController.ecommerce_create_category);
+router.post("/", upload.single('ECOMMERCE_LOGO'), EcommerceCategoryController.ecommerce_create_category);
 
 router.get("/:ecommcategoryId", EcommerceCategoryController.ecommerce_category_get_by_id);
 
-router.patch("/:ecommcategoryId",checkAuth, EcommerceCategoryController.ecommerce_category_update_by_id);
+router.patch("/:ecommcategoryId", EcommerceCategoryController.ecommerce_category_update_by_id);
+
+router.patch("/logo_update/:ecommcategoryId", upload.single('ECOMMERCE_LOGO'), EcommerceCategoryController.ecom_logo_update_by_id);
 
 router.delete("/:ecommcategoryId",checkAuth, EcommerceCategoryController.ecommerce_category_delete_by_id);
 

@@ -208,7 +208,7 @@ exports.customer_update_by_id = (req, res, next) =>  {
         });
 };
 
-
+//update customer profile pic
 exports.customer_update_profile_pic_by_id = (req, res, next) =>  {
     const id = req.params.customerId;
     const updateOps = {};
