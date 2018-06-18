@@ -6,53 +6,71 @@ const SubSubCategory = require("../models/subsubcategory");
 //get all active sub subcategory details
 exports.subsubcategory_get_all = (req, res, next) => {
     SubSubCategory.find({ACTIVE_FLAG:'Y'})
-        .select("PRODUCT_CATEGORY_ID PRODUCT_SUB_CATEGORY_ID PRODUCT_SUB_SUB_CATEGORY_NAME PRODCT_SUB_SUB_CATGRY_DESCRPTN UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
-        .populate('PRODUCT_CATEGORY_ID','PRODUCT_CATEGORY_NAME')
-        .populate('PRODUCT_SUB_CATEGORY_ID', 'PRODUCT_SUB_CATEGORY_NAME')
+        .select("SUB_SUB_CATEGORY_ID CATEGORY_ID SUB_CATEGORY_ID SUB_SUB_CATEGORY_NAME SUB_SUB_CATEGORY_DESCRIPTION UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
+        .populate('CATEGORY_ID')
+        .populate('SUB_CATEGORY_ID')
         .exec()
         .then(docs => {
-            res.status(200).json({
-                status: "success",
-                error: "",
-                data: {
-                    subsubcategorys: docs.map(doc => {
-                        return {
-                            product_sub_sub_category_id: doc._id,
-                            product_category_details: doc.PRODUCT_CATEGORY_ID,
-                            product_sub_category_details: doc.PRODUCT_SUB_CATEGORY_ID,
-                            product_sub_sub_category_name: doc.PRODUCT_SUB_SUB_CATEGORY_NAME,
-                            product_sub_sub_category_description: doc.PRODCT_SUB_SUB_CATGRY_DESCRPTN,
-                            updated_by_user: doc.UPDATED_BY,
-                            updated_on: doc.UPDATED_DATE,
-                            isActive: doc.ACTIVE_FLAG
-                        };
-                    })
-                }
-            });
+            if(docs.length > 0) {
+                res.status(200).json({
+                    status: "success",
+                    error: "",
+                    data: {
+                        sub_sub_category: docs.map(doc => {
+                            return {
+                                doc_id: doc._id,
+                                sub_sub_category_id: doc.SUB_SUB_CATEGORY_ID,
+                                category_name: doc.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
+                                sub_category_name: doc.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME,
+                                sub_sub_category_name: doc.SUB_SUB_CATEGORY_NAME,
+                                sub_sub_category_description: doc.SUB_SUB_CATEGORY_DESCRIPTION,
+                                updated_by_user: doc.UPDATED_BY,
+                                updated_on: doc.UPDATED_DATE,
+                                isActive: doc.ACTIVE_FLAG
+                            };
+                        })
+                    }
+                });
+            }
+            else
+            {
+                res.status(404).json({
+                    status: "error",
+                    data: {
+                        message: "No sub sub categories found"
+                    }
+                });
+            }
         })
         .catch(err => {
-            res.status(500).json({
-                status: "error",
-                error: err,
-                data: {
-                    message: "An error has occurred as mentioned above"
-                }
-            });
+        res.status(500).json({
+            status: "error",
+            error: err,
+            data: {
+                message: "An error has occurred as mentioned above"
+            }
         });
+    });
+
+
 };
 
 
 //create a new sub subcategory
 exports.subsubcategory_create = (req, res, next) => {
 
-    if(Category.findById(req.body.PRODUCT_CATEGORY_ID) && Subcategory.findById(req.body.PRODUCT_SUB_CATEGORY_ID))
+    var Sub_sub_id = req.body.SUB_SUB_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
+
+    if(Category.findById(req.body.CATEGORY_ID) && Subcategory.findById(req.body.SUB_CATEGORY_ID)
+    && Sub_sub_id.length > 0)
             {
                 const subsubcategory = new SubSubCategory({
                     _id: new mongoose.Types.ObjectId(),
-                    PRODUCT_CATEGORY_ID: req.body.PRODUCT_CATEGORY_ID,
-                    PRODUCT_SUB_CATEGORY_ID: req.body.PRODUCT_SUB_CATEGORY_ID,
-                    PRODUCT_SUB_SUB_CATEGORY_NAME: req.body.PRODUCT_SUB_SUB_CATEGORY_NAME,
-                    PRODCT_SUB_SUB_CATGRY_DESCRPTN: req.body.PRODCT_SUB_SUB_CATGRY_DESCRPTN,
+                    SUB_SUB_CATEGORY_ID: Sub_sub_id.toLowerCase(),
+                    CATEGORY_ID: req.body.CATEGORY_ID,
+                    SUB_CATEGORY_ID: req.body.SUB_CATEGORY_ID,
+                    SUB_SUB_CATEGORY_NAME: req.body.SUB_SUB_CATEGORY_NAME.toLowerCase(),
+                    SUB_SUB_CATEGORY_DESCRIPTION: req.body.SUB_SUB_CATEGORY_DESCRIPTION.toLowerCase(),
                     UPDATED_BY: req.body.UPDATED_BY,
                     UPDATED_DATE: new Date(),
                     ACTIVE_FLAG: req.body.ACTIVE_FLAG
@@ -65,17 +83,7 @@ exports.subsubcategory_create = (req, res, next) => {
                             status: "success",
                             error: "",
                             data: {
-                                message: "Sub Subcategory stored",
-                                createdSubSubcategory: {
-                                    _id: result._id,
-                                    PRODUCT_CATEGORY_ID: result.PRODUCT_CATEGORY_ID,
-                                    PRODUCT_SUB_CATEGORY_ID: result.PRODUCT_SUB_CATEGORY_ID,
-                                    PRODUCT_SUB_SUB_CATEGORY_NAME: result.PRODUCT_SUB_SUB_CATEGORY_NAME,
-                                    PRODCT_SUB_SUB_CATGRY_DESCRPTN: result.PRODCT_SUB_SUB_CATGRY_DESCRPTN,
-                                    UPDATED_BY: result.UPDATED_BY,
-                                    UPDATED_DATE: result.UPDATED_DATE,
-                                    ACTIVE_FLAG: result.ACTIVE_FLAG
-                            }
+                                message: "Sub Subcategory stored"
                         }
                     });
                 })
@@ -108,33 +116,44 @@ exports.subsubcategory_create = (req, res, next) => {
 //get sub subcategory details by id
 exports.subsubcategory_get_subsubcategory = (req, res, next) => {
     const id = req.params.subsubcategoryId;
-    SubSubCategory.findById(id)
-        .select("PRODUCT_CATEGORY_ID PRODUCT_SUB_CATEGORY_ID PRODUCT_SUB_SUB_CATEGORY_NAME PRODCT_SUB_SUB_CATGRY_DESCRPTN UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
-        .populate('PRODUCT_CATEGORY_ID','PRODUCT_CATEGORY_NAME')
-        .populate('PRODUCT_SUB_CATEGORY_ID', 'PRODUCT_SUB_CATEGORY_NAME')
+    SubSubCategory.find({SUB_SUB_CATEGORY_ID:id})
+        .select("SUB_SUB_CATEGORY_ID CATEGORY_ID SUB_CATEGORY_ID SUB_SUB_CATEGORY_NAME SUB_SUB_CATEGORY_DESCRIPTION UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
+        .populate('CATEGORY_ID')
+        .populate('SUB_CATEGORY_ID')
         .exec()
-        .then(doc => {
-            console.log("From database", doc);
-            if (doc) {
+        .then(docs => {
+            if(docs.length > 0) {
                 res.status(200).json({
                     status: "success",
                     error: "",
                     data: {
-                        message: doc
+                        sub_sub_category: docs.map(doc => {
+                            return {
+                                doc_id: doc._id,
+                                sub_sub_category_id: doc.SUB_SUB_CATEGORY_ID,
+                                category_name: doc.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
+                                sub_category_name: doc.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME,
+                                sub_sub_category_name: doc.SUB_SUB_CATEGORY_NAME,
+                                sub_sub_category_description: doc.SUB_SUB_CATEGORY_DESCRIPTION,
+                                updated_by_user: doc.UPDATED_BY,
+                                updated_on: doc.UPDATED_DATE,
+                                isActive: doc.ACTIVE_FLAG
+                            };
+                        })
                     }
                 });
-            } else {
-                res
-                    .status(404)
-                    .json({
-                        status: "error",
-                        error: "Id not found",
-                        message: "No valid entry found for provided subcategory ID"
-                    });
+            }
+            else
+            {
+                res.status(404).json({
+                    status: "error",
+                    data: {
+                        message: "No sub sub categories found"
+                    }
+                });
             }
         })
         .catch(err => {
-            console.log(err);
             res.status(500).json({
                 status: "error",
                 error: err,
@@ -153,7 +172,7 @@ exports.subsubcategory_update = (req, res, next) => {
     for (const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
-    SubSubCategory.update({ _id: id }, { $set: updateOps })
+    SubSubCategory.update({ SUB_SUB_CATEGORY_ID: id }, { $set: updateOps })
         .exec()
         .then(result => {
             res.status(200).json({
@@ -179,7 +198,7 @@ exports.subsubcategory_update = (req, res, next) => {
 //delete a sub subcategory by id
 exports.subsubcategory_delete = (req, res, next) => {
     const id = req.params.subsubcategoryId;
-    SubSubCategory.remove({ _id: id })
+    SubSubCategory.remove({ SUB_SUB_CATEGORY_ID: id })
         .exec()
         .then(result => {
             res.status(200).json({

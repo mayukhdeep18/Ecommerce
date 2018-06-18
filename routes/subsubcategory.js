@@ -7,7 +7,7 @@ const checkAuth = require('../middleware/check-auth');
 // Handle incoming GET requests to /subcategory
 router.get("/", SubSubcategoryController.subsubcategory_get_all);
 
-router.post("/",checkAuth, SubSubcategoryController.subsubcategory_create);
+router.post("/", SubSubcategoryController.subsubcategory_create);
 
 router.get("/:subsubcategoryId", SubSubcategoryController.subsubcategory_get_subsubcategory);
 
