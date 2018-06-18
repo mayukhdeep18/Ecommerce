@@ -42,6 +42,8 @@ router.get("/:customerId", CustomerController.customer_get_by_id);
 
 router.patch("/:customerId",/*checkAuth,*/ CustomerController.customer_update_by_id);
 
+router.patch("/profile_pic/:customerId",/*checkAuth,*/upload.single('CUSTOMER_PROFILE_PICTURE_LINK'), CustomerController.customer_update_profile_pic_by_id);
+
 router.delete("/:customerId",/*checkAuth,*/ CustomerController.customer_delete_by_id);
 
 module.exports = router;

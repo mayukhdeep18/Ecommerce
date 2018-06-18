@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const customerSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
+    CUSTOMER_ID: {type: String, required: true, unique: true},
     CUSTOMER_NAME: { type: String, required:true },
     CUSTOMER_DATE_OF_BIRTH: { type: Date, required:true },
     CUSTOMER_GENDER: { type: String, required:true },
@@ -15,8 +16,8 @@ const customerSchema = mongoose.Schema({
     CUSTOMER_ADDRESS_LINE_2: { type: String},
     CUSTOMER_CITY_NAME: { type: String, required:true },
     CUSTOMER_STATE_NAME: { type: String, required:true },
-    CUSTOMER_ZIP: { type: String, required:true },
-    CUSTOMER_PHONE_NUMBER: { type: String, required:true },
+    CUSTOMER_ZIP: { type: Number, required:true },
+    CUSTOMER_PHONE_NUMBER: { type: Number, required:true },
     CUSTOMER_PROFILE_PICTURE_LINK: { type: String},
     UPDATED_BY: {type: String, default: "Zoom_admin"},
     UPDATED_DATE: {type: Date, default: Date()},
