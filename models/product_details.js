@@ -10,7 +10,7 @@ const ProductSchema = mongoose.Schema({
     SELLER_SUB_CATEGORY_ID: { type: mongoose.Schema.Types.ObjectId, ref: 'Seller_Sub_Cateogry'},
     ECOMMERCE_CATEGORY_ID: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ecommerce_category'}],
     ECOMMERCE_PRODUCT_DETAILS_ID: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ecommerce_product_details' }],
-    PRODUCT_IMAGE_ID: { type: mongoose.Schema.Types.ObjectId, ref: 'Product_images'},
+   //PRODUCT_IMAGE_ID: { type: mongoose.Schema.Types.ObjectId, ref: 'Product_images'},
     PRODUCT_NAME: {type: String, required: true},
     PRODUCT_SUB_TITLE: {type: String, required: true},
     PRODUCT_DESCRIPTION: {type: String, required: true},

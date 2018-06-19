@@ -35,14 +35,12 @@ const upload = multer({
 
 router.get("/", ImageController.images_get_all);
 
-
-
 router.post("/", upload.single('PRODUCT_IMAGE_REF_1'), ImageController.image_upload);
 
 router.get("/:productimageId", ImageController.image_get_image);
 
-router.patch("/:productimageId",checkAuth, ImageController.image_update_image);
+router.patch("/:productimageId", upload.single('PRODUCT_IMAGE_REF_1'), ImageController.image_update_image);
 
-router.delete("/:productimageId",checkAuth, ImageController.image_delete);
+router.delete("/:productimageId", ImageController.image_delete);
 
 module.exports = router;
