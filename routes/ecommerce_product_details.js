@@ -6,7 +6,9 @@ const checkAuth = require('../middleware/check-auth');
 
 router.get("/", EcommProdController.ecommproduct_get_all);
 
-router.post("/", EcommProdController.ecommproduct_create);
+router.post("/", EcommProdController.ecommproduct_new_create);
+
+router.post("/product_map/:Ecommerce_id",/*checkAuth,*/  EcommProdController.ecommproduct_map);
 
 router.get("/:ecommcategoryId", EcommProdController.ecommproduct_details_get_by_id);
 
