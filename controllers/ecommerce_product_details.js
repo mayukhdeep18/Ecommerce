@@ -130,7 +130,7 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
                 .then(ecom_1 => {
 
                     var prod_id = ecom_1[0].PRODUCT_ID;
-                    console.log('prod_id',prod_id);
+                    //console.log('prod_id',prod_id);
 
 
 
@@ -152,8 +152,8 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
                             updateOps_1['PRODUCT_PRICE'] = min;
                             updateOps_1['LEAST_PRICE_ECOMMERCE'] = min_name;
 
-                            console.log('min_price',min);
-                            console.log('min price name',min_name.toLocaleLowerCase());
+                           // console.log('min_price',min);
+                           // console.log('min price name',min_name.toLocaleLowerCase());
 
                             Rating.find({PRODUCT_ID: prod_id, ACTIVE_FLAG: 'Y'})
                                 .select("RATING_NUMBER PRODUCT_ID _id")
@@ -164,8 +164,8 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
                                         counter_1++;
                                     }
 
-                                    console.log('sum of all ratings',sum_rating);
-                                    console.log('number of ratings',counter_1);
+                                   // console.log('sum of all ratings',sum_rating);
+                                   // console.log('number of ratings',counter_1);
 
                                     if(counter_1 === 0)
                                     {
@@ -178,8 +178,8 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
                                         updateOps_1['RATING_COUNT'] = counter_1;
                                     }
 
-                                    console.log('mean rating',mean_rating);
-                                    console.log('number of ratings',counter_1);
+                                  //  console.log('mean rating',mean_rating);
+                                   // console.log('number of ratings',counter_1);
 
                                     Review.find({PRODUCT_ID: prod_id, ACTIVE_FLAG: 'Y'})
                                         .select("ECOMMERCE_REVIEW PRODUCT_ID _id")
@@ -192,7 +192,7 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
 
 
                                             updateOps_1['REVIEW_COUNT'] = rev_cont;
-                                            console.log('number of reviews',rev_cont);
+                                            //console.log('number of reviews',rev_cont);
 
 
                                             Product.update({ _id: prod_id }, {$set: updateOps_1})
@@ -451,8 +451,8 @@ exports.ecommproduct_map = (req, res, next) => {
                        updateOps['SUB_SUB_CATEGORY_ID'] = prod_res[0].PRODUCT_SUB_SUB_CATEGORY_ID.toString();
                        updateOps['ACTIVE_FLAG'] = 'Y';
 
-                       console.log('ecom_upd',updateOps );
-                       console.log('ecom_id', Ecom_id);
+                       //console.log('ecom_upd',updateOps );
+                       //console.log('ecom_id', Ecom_id);
 
                         EcommProduct.update({ _id: Ecom_id}, {$set: updateOps})
                             .exec()
@@ -466,8 +466,8 @@ exports.ecommproduct_map = (req, res, next) => {
                                         Rating_upd['PRODUCT_ID'] = prod_res[0]._id.toString();
                                         Rating_upd['ACTIVE_FLAG'] = 'Y';
 
-                                        console.log('rat_upd', Rating_upd);
-                                        console.log('rat_id_upd', rat_upd[0]._id);
+                                        //console.log('rat_upd', Rating_upd);
+                                        //console.log('rat_id_upd', rat_upd[0]._id);
 
                                         Rating.update({_id: rat_upd[0]._id},{$set:Rating_upd})
                                             .exec()
@@ -480,8 +480,8 @@ exports.ecommproduct_map = (req, res, next) => {
                                                         Review_upd['PRODUCT_ID'] = prod_res[0]._id.toString();
                                                         Review_upd['ACTIVE_FLAG'] = 'Y';
 
-                                                        console.log('rev_upd', Review_upd);
-                                                        console.log('rev_id_upd', review_upd[0]._id);
+                                                        //console.log('rev_upd', Review_upd);
+                                                        //console.log('rev_id_upd', review_upd[0]._id);
 
                                                         Review.update({_id: review_upd[0]._id},{$set: Review_upd})
                                                             .exec()

@@ -47,7 +47,7 @@ exports.product_get_all = (req, res, next) => {
                         product_sub_title: prod_item.PRODUCT_SUB_TITLE,
                         product_description: prod_item.PRODUCT_DESCRIPTION,
                         prod_url: prod_item.PRODUCT_URL,
-                        prod_rating: prod_item.MEAN_RATING,
+                        prod_rating: parseFloat(prod_item.MEAN_RATING).toFixed(2),
                         prod_rating_count: prod_item.RATING_COUNT,
                         prod_review_count: prod_item.REVIEW_COUNT,
                         prod_price: prod_item.PRODUCT_PRICE,
@@ -320,7 +320,7 @@ exports.product_details_get_by_id = (req, res, next) => {
                         product_sub_title: prod_item.PRODUCT_SUB_TITLE,
                         product_description: prod_item.PRODUCT_DESCRIPTION,
                         prod_url: prod_item.PRODUCT_URL,
-                        prod_rating: prod_item.MEAN_RATING,
+                        prod_rating: parseFloat(prod_item.MEAN_RATING).toFixed(2),
                         prod_rating_count: prod_item.RATING_COUNT,
                         prod_review_count: prod_item.REVIEW_COUNT,
                         prod_price: prod_item.PRODUCT_PRICE,
@@ -422,7 +422,7 @@ exports.product_details_get_by_id = (req, res, next) => {
                                                     rev_arr.push({
                                                         reviews: JSON.parse(rev_item.ECOMMERCE_REVIEW)
                                                     });
-                                                    console.log('rev_arr',rev_arr);
+                                                    //console.log('rev_arr',rev_arr);
                                                 }
                                             }
 
@@ -445,7 +445,6 @@ exports.product_details_get_by_id = (req, res, next) => {
                                     console.log(err);
                                     res.status(500).json({
                                         status: "error",
-                                        error: err,
                                         data: {
                                             message: "An error has occurred as mentioned above"
                                         }
@@ -456,7 +455,6 @@ exports.product_details_get_by_id = (req, res, next) => {
                             console.log(err);
                             res.status(500).json({
                                 status: "error",
-                                error: err,
                                 data: {
                                     message: "An error has occurred as mentioned above"
                                 }
@@ -467,7 +465,6 @@ exports.product_details_get_by_id = (req, res, next) => {
                     console.log(err);
                     res.status(500).json({
                         status: "error",
-                        error: err,
                         data: {
                             message: "An error has occurred as mentioned above"
                         }
@@ -478,9 +475,8 @@ exports.product_details_get_by_id = (req, res, next) => {
 
             else
             {
-                res.status(500).json({
+                res.status(404).json({
                     status: "error",
-                    error: "",
                     data: {
                         message: "No product details found"
                     }
