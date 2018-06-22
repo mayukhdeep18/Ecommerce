@@ -295,7 +295,7 @@ exports.product_details_get_by_id = (req, res, next) => {
     var rev_arr = [];
     var prod_final_rev_arr = [];
 
-    Product.find({PRODUCT_ID: id})
+    Product.find({PRODUCT_ID:id})
         .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         .populate('PRODUCT_CATEGORY_ID')
         .populate('PRODUCT_SUB_CATEGORY_ID')
@@ -331,11 +331,12 @@ exports.product_details_get_by_id = (req, res, next) => {
 
                 //Fetch images for every product and push in an array
                 Productimages.find({ACTIVE_FLAG:'Y'})
-                    .select("PRODUCT_IMAGE_REF_1 PRODUCT_ID _id")
+                    .select("TEMPORARY_IMAGE_LINK PRODUCT_ID _id")
                     .populate('PRODUCT_ID')
                     .exec()
                     .then(img_doc => {
 
+                        //console.log('img',img_doc);
 
                         for (var prod_img_item of prod_cat_arr) {
 
@@ -347,9 +348,9 @@ exports.product_details_get_by_id = (req, res, next) => {
                                 var inner_id = img_item.PRODUCT_ID._id;
 
                                 //if both the above product id are equal then create an array with the image detail values for the corresponding array
-                                if (outer_id === inner_id) {
+                                if (outer_id.equals(inner_id)) {
                                     img_arr.push({
-                                        image_url: img_item.PRODUCT_IMAGE_REF_1
+                                        image_url: img_item.TEMPORARY_IMAGE_LINK
                                     });
 
                                 }
@@ -412,16 +413,15 @@ exports.product_details_get_by_id = (req, res, next) => {
                                             for (var rev_item of rev_doc) {
                                                 //store the product id from the product table and product id from the review details table in a temp variable
                                                 var outer_id = prod_cat_item.prod_details.prod_details.prod_id;
-                                                console.log('rev_outer',outer_id);
+                                                //console.log('rev_outer',outer_id);
 
                                                 var inner_id = rev_item.PRODUCT_ID._id;
-                                                console.log('rev_inner',outer_id);
+                                                //console.log('rev_inner',outer_id);
                                                 //if both the above product id are equal then create an array with the review detail values for the corresponding array
                                                 if (outer_id.equals(inner_id)) {
                                                     rev_arr.push({
                                                         reviews: JSON.parse(rev_item.ECOMMERCE_REVIEW)
                                                     });
-                                                    //console.log('rev_arr',rev_arr);
                                                 }
                                             }
 
@@ -429,13 +429,12 @@ exports.product_details_get_by_id = (req, res, next) => {
                                             prod_final_rev_arr.push({prod_details: prod_cat_item, review_details: rev_arr})
 
                                             //clear the temporary array to store review details value
-                                            prod_arr = [];
+                                            rev_arr = [];
                                         }
 
                                         //final output
                                         res.status(200).json({
                                             status: "success",
-                                            error: "",
                                             data: {
                                                 product_details: prod_final_rev_arr
                                             }
@@ -445,7 +444,7 @@ exports.product_details_get_by_id = (req, res, next) => {
                                     res.status(500).json({
                                         status: "error",
                                         data: {
-                                            message: "An error has occurred as mentioned above"
+                                            message: "An error has occurred"
                                         }
                                     });
                                 })
@@ -455,7 +454,7 @@ exports.product_details_get_by_id = (req, res, next) => {
                             res.status(500).json({
                                 status: "error",
                                 data: {
-                                    message: "An error has occurred as mentioned above"
+                                    message: "An error has occurred"
                                 }
                             });
                         });
@@ -465,7 +464,7 @@ exports.product_details_get_by_id = (req, res, next) => {
                     res.status(500).json({
                         status: "error",
                         data: {
-                            message: "An error has occurred as mentioned above"
+                            message: "An error has occurred"
                         }
                     });
                 });
@@ -474,7 +473,7 @@ exports.product_details_get_by_id = (req, res, next) => {
 
             else
             {
-                res.status(404).json({
+                res.status(500).json({
                     status: "error",
                     data: {
                         message: "No product details found"
@@ -488,7 +487,6 @@ exports.product_details_get_by_id = (req, res, next) => {
             console.log(err);
             res.status(500).json({
                 status: "error",
-                error: err,
                 data: {
                     message: "An error has occurred as mentioned above"
                 }
