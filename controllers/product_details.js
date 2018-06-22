@@ -137,16 +137,16 @@ exports.product_get_all = (req, res, next) => {
                                             for (var rev_item of rev_doc) {
                                                 //store the product id from the product table and product id from the review details table in a temp variable
                                                 var outer_id = prod_cat_item.prod_details.prod_details.prod_id;
-                                                console.log('rev_outer',outer_id);
+                                                //console.log('rev_outer',outer_id);
 
                                                 var inner_id = rev_item.PRODUCT_ID._id;
-                                                console.log('rev_inner',outer_id);
+                                                //console.log('rev_inner',outer_id);
                                                 //if both the above product id are equal then create an array with the review detail values for the corresponding array
                                                 if (outer_id.equals(inner_id)) {
                                                     rev_arr.push({
                                                        reviews: JSON.parse(rev_item.ECOMMERCE_REVIEW)
                                                     });
-                                                    console.log('rev_arr',rev_arr);
+                                                    //console.log('rev_arr',rev_arr);
                                                 }
                                             }
 

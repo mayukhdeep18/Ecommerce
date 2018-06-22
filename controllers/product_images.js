@@ -56,61 +56,65 @@ exports.images_get_all = (req, res, next) => {
 //upload image by product id
 exports.image_upload = (req, res, next) =>  {
 
-    var Img_id = req.body.PRODUCT_IMAGE_REF_1.replace(/[^a-zA-Z0-9]/g,'-');
+    const id = req.body.PRODUCT_ID
 
-    if(Product.findById(req.body.PRODUCT_ID)&& Img_id.length > 0)
-    {
-        const productimage = new Product_images({
-            _id: new mongoose.Types.ObjectId(),
-            PRODUCT_IMAGE_ID: Img_id.toLowerCase(),
-            PRODUCT_ID: req.body.PRODUCT_ID,
-            PRODUCT_IMAGE_REF_1: req.file.path,
-            UPDATED_BY: req.body.UPDATED_BY,
-            UPDATED_DATE: new Date(),
-            ACTIVE_FLAG: req.body.ACTIVE_FLAG
-        });
-        productimage
-            .save()
-            .then(result => {
-                console.log(result);
-                res.status(201).json({
-                    status: "success",
-                    error: "",
-                    data: {
-                        message: "Product image list created successfully",
-                        createdProductimage: {
-                            _id: result._id,
-                            PRODUCT_ID: result.PRODUCT_ID,
-                            PRODUCT_IMAGE_REF_1: result.PRODUCT_IMAGE_REF_1,
-                            UPDATED_BY: result.UPDATED_BY,
-                            UPDATED_DATE: result.UPDATED_DATE,
-                            ACTIVE_FLAG: result.ACTIVE_FLAG
-                        }
-                    }
+    Product.findById(id)
+        .select('PRODUCT_ID _id')
+        .exec()
+        .then(doc => {
+            var Img_id = "img_" + doc.PRODUCT_ID;
+            console.log("img_id", Img_id);
+
+            if (Product.findById(req.body.PRODUCT_ID) && Img_id.length > 0) {
+                const productimage = new Product_images({
+                    _id: new mongoose.Types.ObjectId(),
+                    PRODUCT_IMAGE_ID: Img_id.toLowerCase(),
+                    PRODUCT_ID: req.body.PRODUCT_ID,
+                    PRODUCT_IMAGE_REF_1: req.file.path,
+                    UPDATED_BY: req.body.UPDATED_BY,
+                    UPDATED_DATE: new Date(),
+                    ACTIVE_FLAG: req.body.ACTIVE_FLAG
                 });
-            })
-            .catch(err => {
-                console.log(err);
+                productimage
+                    .save()
+                    .then(result => {
+                        //console.log(result);
+                        res.status(201).json({
+                            status: "success",
+                            data: {
+                                message: "Product image list created successfully"
+                            }
+                        });
+                    }).catch(err => {
+                    console.log(err);
+                    res.status(500).json({
+                        status: "error",
+                        error: err,
+                        data: {
+                            message: "An error has occurred as mentioned above"
+                        }
+                    });
+                });
+            }
+            else {
                 res.status(500).json({
                     status: "error",
-                    error: err,
+                    error: "",
                     data: {
-                        message: "An error has occurred as mentioned above"
+                        message: "Please check the entered details"
                     }
                 });
-            });
-    }
-    else
-    {
+            }
+        }).catch(err => {
+        console.log(err);
         res.status(500).json({
             status: "error",
-            error: "",
+            error: err,
             data: {
-                message: "Please check the entered details"
+                message: "An error has occurred as mentioned above"
             }
         });
-    }
-
+    });
 };
 
 //get product image details by id

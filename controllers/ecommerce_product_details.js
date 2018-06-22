@@ -117,19 +117,20 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
     var counter_1 = 0;
     var mean_rating = 0;
     var min_name;
+    var rev_cont = 0;
     for (const ops of req.body) {
         updateOps[ops.propName] = ops.value;
     }
 
 
-            EcommProduct.find({_id: id})
+            EcommProduct.find({ECOMMERCE_PRODUCT_ID: id})
                 .select('ECOMMERCE_PRODUCT_PRICE PRODUCT_ID')
                 .populate('ECOMMERCE_CATEGORY_ID')
                 .exec()
                 .then(ecom_1 => {
 
                     var prod_id = ecom_1[0].PRODUCT_ID;
-                    console.log(prod_id);
+                    console.log('prod_id',prod_id);
 
 
 
@@ -151,8 +152,8 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
                             updateOps_1['PRODUCT_PRICE'] = min;
                             updateOps_1['LEAST_PRICE_ECOMMERCE'] = min_name;
 
-                            console.log(min);
-                            console.log(min_name);
+                            console.log('min_price',min);
+                            console.log('min price name',min_name.toLocaleLowerCase());
 
                             Rating.find({PRODUCT_ID: prod_id, ACTIVE_FLAG: 'Y'})
                                 .select("RATING_NUMBER PRODUCT_ID _id")
@@ -163,8 +164,8 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
                                         counter_1++;
                                     }
 
-                                    console.log(sum_rating);
-                                    console.log(counter_1);
+                                    console.log('sum of all ratings',sum_rating);
+                                    console.log('number of ratings',counter_1);
 
                                     if(counter_1 === 0)
                                     {
@@ -177,20 +178,21 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
                                         updateOps_1['RATING_COUNT'] = counter_1;
                                     }
 
-                                    console.log(mean_rating);
-                                    console.log(counter_1);
+                                    console.log('mean rating',mean_rating);
+                                    console.log('number of ratings',counter_1);
 
                                     Review.find({PRODUCT_ID: prod_id, ACTIVE_FLAG: 'Y'})
-                                        .select("REVIEW_TITLE PRODUCT_ID _id")
+                                        .select("ECOMMERCE_REVIEW PRODUCT_ID _id")
                                         .exec()
                                         .then(review_1 => {
                                             for (var item_2 of review_1) {
-                                                counter++;
+                                               var obj = JSON.parse(item_2.ECOMMERCE_REVIEW);
+                                                rev_cont = rev_cont + Object.keys(obj).length;
                                             }
 
 
-                                            updateOps_1['REVIEW_COUNT'] = counter;
-                                            console.log(counter);
+                                            updateOps_1['REVIEW_COUNT'] = rev_cont;
+                                            console.log('number of reviews',rev_cont);
 
 
                                             Product.update({ _id: prod_id }, {$set: updateOps_1})
@@ -207,30 +209,30 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
                                                 }).catch(err => {
                                                 console.log(err);
                                                 res.status(500).json({
-                                                    status: "success",
+                                                    status: "failure",
                                                     error: err,
                                                     data: {
-                                                        message: "An error has occurred as mentioned above"
+                                                        message: "5 An error has occurred as mentioned above"
                                                     }
                                                 });
                                             });
                                         }).catch(err => {
                                         console.log(err);
                                         res.status(500).json({
-                                            status: "success",
+                                            status: "failure",
                                             error: err,
                                             data: {
-                                                message: "An error has occurred as mentioned above"
+                                                message: "4 An error has occurred as mentioned above"
                                             }
                                         });
                                     });
                                 }).catch(err => {
                                 console.log(err);
                                 res.status(500).json({
-                                    status: "success",
+                                    status: "failure",
                                     error: err,
                                     data: {
-                                        message: "An error has occurred as mentioned above"
+                                        message: "3 An error has occurred as mentioned above"
                                     }
                                 });
                             });
@@ -238,20 +240,20 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
                         }).catch(err => {
                         console.log(err);
                         res.status(500).json({
-                            status: "success",
+                            status: "failure",
                             error: err,
                             data: {
-                                message: "An error has occurred as mentioned above"
+                                message: "2 An error has occurred as mentioned above"
                             }
                         });
                     });
                 }).catch(err => {
                 console.log(err);
                 res.status(500).json({
-                    status: "success",
+                    status: "failure",
                     error: err,
                     data: {
-                        message: "An error has occurred as mentioned above"
+                        message: "1 An error has occurred as mentioned above"
                     }
                 });
             });

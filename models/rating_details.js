@@ -5,7 +5,7 @@ const RatingSchema = mongoose.Schema({
     ECOMMERCE_PRODUCT_ID: { type: mongoose.Schema.Types.ObjectId, ref: 'Ecommerce_product_details'},
     CUSTOMER_ID: { type: mongoose.Schema.Types.ObjectId, ref: 'Customer'},
     PRODUCT_ID: { type: mongoose.Schema.Types.ObjectId, ref: 'Product_details' },
-    RATING_NUMBER: {type: String, required: true},
+    RATING_NUMBER: {type: Number, required: true},
     RATING_TITLE: {type: String},
     UPDATED_BY: {type: String, default: "Zoom_admin"},
     UPDATED_DATE: {type: Date, default: Date()},

@@ -223,7 +223,8 @@ app.use((error, req, res, next) => {
     res.status(error.status || 500);
     res.json({
         error: {
-            message: error.message
+            status: "failed",
+            error_message: "An error has occurred"
         }
     });
 });

@@ -12,8 +12,8 @@ const logger = require("../config/logger");
 ////User registration
 exports.registerUser = (req, res, next) => {
     logger.debug('routes signup signup');
-    req.body.useremail=req.body.useremail.toLowerCase();
-    req.body.username=req.body.username.toLowerCase();
+    //req.body.useremail=req.body.useremail.toLowerCase();
+    //req.body.username=req.body.username.toLowerCase();
     var userObject=req.body;
 
     var isValidUserEmail=validate.email(userObject.useremail);
