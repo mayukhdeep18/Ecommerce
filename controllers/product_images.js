@@ -5,7 +5,7 @@ const Product = require("../models/product_details");
 //get all active product image details
 exports.images_get_all = (req, res, next) => {
     Product_images.find({ACTIVE_FLAG:'Y'})
-        .select('PRODUCT_IMAGE_ID PRODUCT_IMAGE_REF_1 ACTIVE_FLAG _id')
+        .select('PRODUCT_IMAGE_ID PRODUCT_IMAGE_REF_1 TEMPORARY_IMAGE_LINK ACTIVE_FLAG _id')
         .populate('PRODUCT_ID')
         .exec()
         .then(docs => {
@@ -22,6 +22,7 @@ exports.images_get_all = (req, res, next) => {
                                 product_image_id: doc.PRODUCT_IMAGE_ID,
                                 product_name: doc.PRODUCT_ID.PRODUCT_NAME,
                                 product_image_link: doc.PRODUCT_IMAGE_REF_1,
+                                temp_link: doc.TEMPORARY_IMAGE_LINK,
                                 updated_by: doc.UPDATED_BY,
                                 updated_date: doc.UPDATED_DATE,
                                 isActive: doc.ACTIVE_FLAG
@@ -34,7 +35,6 @@ exports.images_get_all = (req, res, next) => {
             {
                 res.status(404).json({
                     status: "failure",
-                    error: "",
                     data: {
                         message: "No images have been found"
                     }
@@ -45,9 +45,8 @@ exports.images_get_all = (req, res, next) => {
         .catch(err => {
             res.status(500).json({
                 status: "failure",
-                error: err,
                 data: {
-                    message: "An error has occurred as mentioned above"
+                    message: "An error has occurred"
                 }
             });
         });
@@ -70,7 +69,8 @@ exports.image_upload = (req, res, next) =>  {
                     _id: new mongoose.Types.ObjectId(),
                     PRODUCT_IMAGE_ID: Img_id.toLowerCase(),
                     PRODUCT_ID: req.body.PRODUCT_ID,
-                    PRODUCT_IMAGE_REF_1: req.file.path,
+                   // PRODUCT_IMAGE_REF_1: req.file.path,
+                    TEMPORARY_IMAGE_LINK: req.body.TEMPORARY_IMAGE_LINK,
                     UPDATED_BY: req.body.UPDATED_BY,
                     UPDATED_DATE: new Date(),
                     ACTIVE_FLAG: req.body.ACTIVE_FLAG
@@ -121,7 +121,7 @@ exports.image_upload = (req, res, next) =>  {
 exports.image_get_image = (req, res, next) => {
     const id = req.params.productimageId;
     Product_images.find({PRODUCT_IMAGE_ID:id})
-        .select('PRODUCT_IMAGE_ID PRODUCT_IMAGE_REF_1 ACTIVE_FLAG _id')
+        .select('PRODUCT_IMAGE_ID PRODUCT_IMAGE_REF_1 TEMPORARY_IMAGE_LINK ACTIVE_FLAG _id')
         .populate('PRODUCT_ID')
         .exec()
         .then(docs => {
@@ -138,6 +138,7 @@ exports.image_get_image = (req, res, next) => {
                                 product_image_id: doc.PRODUCT_IMAGE_ID,
                                 product_name: doc.PRODUCT_ID.PRODUCT_NAME,
                                 product_image_link: doc.PRODUCT_IMAGE_REF_1,
+                                temp_link: doc.TEMPORARY_IMAGE_LINK,
                                 updated_by: doc.UPDATED_BY,
                                 updated_date: doc.UPDATED_DATE,
                                 isActive: doc.ACTIVE_FLAG
