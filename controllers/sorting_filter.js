@@ -4,7 +4,7 @@ const Sorting_Filters = require("../models/sorting_filter");
 //get all active filter categories
 exports.filter_category_get_all = (req, res, next) => {
     Sorting_Filters.find({ACTIVE_FLAG:'Y'})
-        .select('SORTING_FILTER_NAME UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id')
+        .select('SORTING_FILTER_ID SORTING_FILTER_NAME UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id')
         .exec()
         .then(docs => {
             const response = {
@@ -12,6 +12,7 @@ exports.filter_category_get_all = (req, res, next) => {
                 seller_categories: docs.map(doc => {
                     return {
                         filter_id: doc._id,
+                        filter_id: doc.SORTING_FILTER_ID,
                         filter_name: doc.SORTING_FILTER_NAME,
                         updated_by_user: doc.UPDATED_BY,
                         updated_on: doc.UPDATED_DATE,
@@ -30,7 +31,7 @@ exports.filter_category_get_all = (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err);
+            //console.log(err);
             res.status(500).json({
                 status: "error",
                 error: err,
@@ -44,8 +45,12 @@ exports.filter_category_get_all = (req, res, next) => {
 
 //create a new filter category
 exports.filter_create_category = (req, res, next) =>{
+
+    var fil_id = req.body.SORTING_FILTER_NAME.replace(/[^a-zA-Z0-9]/g,'-') ;
+
     const filter = new Sorting_Filters({
         _id: new mongoose.Types.ObjectId(),
+        SORTING_FILTER_ID: fil_id.toLowerCase(),
         SORTING_FILTER_NAME: req.body.SORTING_FILTER_NAME,
         UPDATED_BY: req.body.UPDATED_BY,
         UPDATED_DATE: new Date(),
@@ -54,24 +59,17 @@ exports.filter_create_category = (req, res, next) =>{
     filter
         .save()
         .then(result => {
-            console.log(result);
+            //console.log(result);
             res.status(201).json({
                 status:"success",
                 error_msg:"",
                 data: {
-                    message: "Created category successfully",
-                    filter_category: {
-                        SORTING_FILTER_NAME: result.SORTING_FILTER_NAME,
-                        UPDATED_BY: result.UPDATED_BY,
-                        UPDATED_DATE: result.UPDATED_DATE,
-                        ACTIVE_FLAG: result.ACTIVE_FLAG,
-                        _id: result._id
+                    message: "Created category successfully"
                     }
-                }
             });
         })
         .catch(err => {
-            console.log(err);
+            //console.log(err);
             res.status(500).json({
                 status: "error",
                 error: err,
@@ -86,15 +84,16 @@ exports.filter_create_category = (req, res, next) =>{
 exports.filter_category_get_by_id = (req, res, next) =>{
     const id = req.params.filter_categoryId;
     Sorting_Filters.findById(id)
-        .select('SORTING_FILTER_NAME UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id')
+        .select('SORTING_FILTER_ID SORTING_FILTER_NAME UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id')
         .exec()
         .then(doc => {
-            console.log("From database", doc);
+            //console.log("From database", doc);
             if (doc) {
                 res.status(200).json({
                     status:"success",
                     error_msg:"",
                     data: {
+                        filter_id: doc.SORTING_FILTER_ID,
                         filter_name: doc.SORTING_FILTER_NAME,
                         updated_by_user: doc.UPDATED_BY,
                         updated_on: doc.UPDATED_DATE,
@@ -109,7 +108,7 @@ exports.filter_category_get_by_id = (req, res, next) =>{
             }
         })
         .catch(err => {
-            console.log(err);
+            //console.log(err);
             res.status(500).json({
                 status: "error",
                 error: err,
@@ -139,7 +138,7 @@ exports.filter_category_update_by_id = (req, res, next) =>{
             });
         })
         .catch(err => {
-            console.log(err);
+            //console.log(err);
             res.status(500).json({
                 status: "error",
                 error: err,
@@ -165,7 +164,7 @@ exports.filter_category_delete_by_id = (req, res, next) =>{
             });
         })
         .catch(err => {
-            console.log(err);
+            //console.log(err);
             res.status(500).json({
                 error: err
             });

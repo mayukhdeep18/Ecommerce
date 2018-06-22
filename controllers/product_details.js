@@ -20,8 +20,7 @@ exports.product_get_all = (req, res, next) => {
     var rev_arr = [];
     var prod_final_rev_arr = [];
 
-    var fin_obj;
-    var cnt = 0;
+
 
     Product.find({ACTIVE_FLAG:'Y'})
         .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
