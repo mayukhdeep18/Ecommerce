@@ -48,9 +48,6 @@ exports.review_get_all = (req, res, next) => {
         });
 };
 
-
-
-
 //create a new review
 exports.review_create = (req, res, next) => {
     if(Product.findById(req.body.PRODUCT_ID) && Customer.findById(req.body.CUSTOMER_ID) && Ecommerce_product.findById(req.body.ECOMMERCE_PRODUCT_ID))
@@ -169,14 +166,24 @@ exports.review_get_by_id = (req, res, next) => {
         });
 };
 
-
 //update review details by id
 exports.review_update = (req, res, next) => {
     const id = req.params.reviewId;
     const updateOps = {};
+
     for (const ops of req.body) {
-        updateOps[ops.propName] = ops.value;
+
+        if(typeof ops.value === "string" || typeof ops.value === "number")
+        {
+            updateOps[ops.propName] = ops.value;
+        }
+        else{
+            updateOps[ops.propName] = JSON.stringify(ops.value);
+        }
     }
+    console.log("id",id);
+    //console.log("updateOps",updateOps);
+
     Review.update({ _id: id }, { $set: updateOps })
         .exec()
         .then(result => {

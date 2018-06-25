@@ -8,7 +8,7 @@ router.get("/:page", ProdController.product_get_all);
 
 router.post("/", ProdController.product_create);
 
-router.get("/:prodcategoryId", ProdController.product_details_get_by_id);
+router.get("/product/:prodcategoryId", ProdController.product_details_get_by_id);
 
 router.patch("/:prodcategoryId",  ProdController.product_update_by_id);
 

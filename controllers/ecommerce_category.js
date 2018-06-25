@@ -51,8 +51,6 @@ exports.ecomm_category_get_all = (req, res, next) => {
         });
 };
 
-
-
 //create ecommerce category
 exports.ecommerce_create_category = (req, res, next) =>  {
 
