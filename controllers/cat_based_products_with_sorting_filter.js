@@ -1,9 +1,5 @@
-const Filter_category = require("../models/filters_categories");
-const Filter_options = require("../models/filter_options");
-const Filter_options_product = require("../models/filter_options_products");
 const Category = require("../models/category");
 const Product = require("../models/product_details");
-const Ecommerce_prod_details = require("../models/ecommerce_product_details");
 const Subcategory = require("../models/subcategory");
 const Subsubcategory = require("../models/subsubcategory");
 const EcommProduct = require("../models/ecommerce_product_details");
@@ -36,7 +32,7 @@ exports.get_product_by_categoryId = (req, res, next) => {
             .exec()
             .then(cat_res => {
                 // look up ecommerce product details and product details on the basis of category id
-                Product.find({PRODUCT_CATEGORY_ID: cat_res[0].id})
+                Product.find({PRODUCT_CATEGORY_ID: cat_res[0]._id})
                     .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
                     .populate('PRODUCT_CATEGORY_ID')
                     .populate('PRODUCT_SUB_CATEGORY_ID')
@@ -255,7 +251,7 @@ exports.get_product_by_categoryId = (req, res, next) => {
             .exec()
             .then(cat_res => {
                 // look up ecommerce product details and product details on the basis of category id
-                Product.find({PRODUCT_CATEGORY_ID: cat_res[0].id})
+                Product.find({PRODUCT_CATEGORY_ID: cat_res[0]._id})
                     .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
                     .populate('PRODUCT_CATEGORY_ID')
                     .populate('PRODUCT_SUB_CATEGORY_ID')
@@ -474,7 +470,7 @@ exports.get_product_by_categoryId = (req, res, next) => {
             .exec()
             .then(cat_res => {
                 // look up ecommerce product details and product details on the basis of category id
-                Product.find({PRODUCT_CATEGORY_ID: cat_res[0].id})
+                Product.find({PRODUCT_CATEGORY_ID: cat_res[0]._id})
                     .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
                     .populate('PRODUCT_CATEGORY_ID')
                     .populate('PRODUCT_SUB_CATEGORY_ID')
@@ -693,7 +689,7 @@ exports.get_product_by_categoryId = (req, res, next) => {
             .exec()
             .then(cat_res => {
                 // look up ecommerce product details and product details on the basis of category id
-                Product.find({PRODUCT_CATEGORY_ID: cat_res[0].id})
+                Product.find({PRODUCT_CATEGORY_ID: cat_res[0]._id})
                     .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
                     .populate('PRODUCT_CATEGORY_ID')
                     .populate('PRODUCT_SUB_CATEGORY_ID')
@@ -912,7 +908,7 @@ exports.get_product_by_categoryId = (req, res, next) => {
             .exec()
             .then(cat_res => {
                 // look up ecommerce product details and product details on the basis of category id
-                Product.find({PRODUCT_CATEGORY_ID: cat_res[0].id})
+                Product.find({PRODUCT_CATEGORY_ID: cat_res[0]._id})
                     .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
                     .populate('PRODUCT_CATEGORY_ID')
                     .populate('PRODUCT_SUB_CATEGORY_ID')
@@ -1131,7 +1127,7 @@ exports.get_product_by_categoryId = (req, res, next) => {
             .exec()
             .then(cat_res => {
                 // look up ecommerce product details and product details on the basis of category id
-                Product.find({PRODUCT_CATEGORY_ID: cat_res[0].id})
+                Product.find({PRODUCT_CATEGORY_ID: cat_res[0]._id})
                     .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
                     .populate('PRODUCT_CATEGORY_ID')
                     .populate('PRODUCT_SUB_CATEGORY_ID')
@@ -1350,7 +1346,7 @@ exports.get_product_by_categoryId = (req, res, next) => {
             .exec()
             .then(cat_res => {
                 // look up ecommerce product details and product details on the basis of category id
-                Product.find({PRODUCT_CATEGORY_ID: cat_res[0].id})
+                Product.find({PRODUCT_CATEGORY_ID: cat_res[0]._id})
                     .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
                     .populate('PRODUCT_CATEGORY_ID')
                     .populate('PRODUCT_SUB_CATEGORY_ID')

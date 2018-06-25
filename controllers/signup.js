@@ -25,7 +25,12 @@ exports.registerUser = (req, res, next) => {
        dbOperations.checkUser(req,res);
     }
     else{
-        res.json({message:"fail"});
+        res.json(
+            {
+                status: "failed",
+                message:"Please check your details"
+            }
+            );
     }
 };
 //router.post('/registerUser',function(request,response){

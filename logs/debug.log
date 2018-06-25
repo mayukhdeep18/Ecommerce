@@ -211,3 +211,67 @@
 [2018-06-22T11:32:27.749] [DEBUG] debug - config encrypt sha512
 [2018-06-22T11:32:27.749] [DEBUG] debug - config utils fillSession
 [2018-06-22T11:32:27.750] [DEBUG] debug - config utils fillWebSession
+[2018-06-25T12:54:03.468] [DEBUG] debug - routes login login
+[2018-06-25T12:54:03.476] [DEBUG] debug - validate email
+[2018-06-25T12:54:03.477] [DEBUG] debug - validate username
+[2018-06-25T12:54:03.477] [DEBUG] debug - validate mobile
+[2018-06-25T12:54:03.477] [DEBUG] debug - validate password
+[2018-06-25T12:54:03.478] [DEBUG] debug - crud login doLogin
+[2018-06-25T12:54:03.784] [DEBUG] debug - crud result{ _id: 5b2c9084ffe6daa3dd7688e5,
+  useremail: 'escale.testnode@gmail.com',
+  username: 'Escale123',
+  password1: 'c4820b2eb0db386c25f5ea6945fe2ca71ef26d998e06f802ec8b9c2c1309127da3c96f8262b13e87cabf8dca57b7d4a484c3b9bad857a36f11981e487d4f2a3f',
+  role: 'customer',
+  salt: '8aa9e9a989622b4c',
+  userid: 'HQxtrGLKPa4BBOiQyBd5PVdamvubTmxu',
+  registrationdate: 2018-06-22T06:00:36.619Z,
+  emailverified: true,
+  __v: 0,
+  emailactivationtoken: null }
+[2018-06-25T12:54:03.785] [DEBUG] debug - config encrypt sha512
+[2018-06-25T12:54:03.785] [DEBUG] debug - config utils fillSession
+[2018-06-25T12:54:03.789] [DEBUG] debug - config utils fillWebSession
+[2018-06-25T12:58:30.106] [DEBUG] debug - routes signup signup
+[2018-06-25T12:58:30.106] [DEBUG] debug - validate email
+[2018-06-25T12:58:30.106] [DEBUG] debug - validate username
+[2018-06-25T12:58:30.106] [DEBUG] debug - validate password
+[2018-06-25T13:12:37.078] [DEBUG] debug - routes login login
+[2018-06-25T13:12:37.080] [DEBUG] debug - validate email
+[2018-06-25T13:12:37.081] [DEBUG] debug - validate username
+[2018-06-25T13:12:37.081] [DEBUG] debug - validate mobile
+[2018-06-25T13:12:37.082] [DEBUG] debug - validate password
+[2018-06-25T13:12:37.082] [DEBUG] debug - crud login doLogin
+[2018-06-25T13:12:37.493] [DEBUG] debug - crud result{ _id: 5b2c9084ffe6daa3dd7688e5,
+  useremail: 'escale.testnode@gmail.com',
+  username: 'Escale123',
+  password1: 'c4820b2eb0db386c25f5ea6945fe2ca71ef26d998e06f802ec8b9c2c1309127da3c96f8262b13e87cabf8dca57b7d4a484c3b9bad857a36f11981e487d4f2a3f',
+  role: 'customer',
+  salt: '8aa9e9a989622b4c',
+  userid: 'HQxtrGLKPa4BBOiQyBd5PVdamvubTmxu',
+  registrationdate: 2018-06-22T06:00:36.619Z,
+  emailverified: true,
+  __v: 0,
+  emailactivationtoken: null }
+[2018-06-25T13:12:37.494] [DEBUG] debug - config encrypt sha512
+[2018-06-25T13:12:37.494] [DEBUG] debug - config utils fillSession
+[2018-06-25T13:12:37.499] [DEBUG] debug - config utils fillWebSession
+[2018-06-25T13:16:38.979] [DEBUG] debug - routes login login
+[2018-06-25T13:16:38.982] [DEBUG] debug - validate email
+[2018-06-25T13:16:38.982] [DEBUG] debug - validate username
+[2018-06-25T13:16:38.982] [DEBUG] debug - validate mobile
+[2018-06-25T13:16:38.983] [DEBUG] debug - validate password
+[2018-06-25T13:16:38.983] [DEBUG] debug - crud login doLogin
+[2018-06-25T13:16:39.280] [DEBUG] debug - crud result{ _id: 5b2c9084ffe6daa3dd7688e5,
+  useremail: 'escale.testnode@gmail.com',
+  username: 'Escale123',
+  password1: 'c4820b2eb0db386c25f5ea6945fe2ca71ef26d998e06f802ec8b9c2c1309127da3c96f8262b13e87cabf8dca57b7d4a484c3b9bad857a36f11981e487d4f2a3f',
+  role: 'customer',
+  salt: '8aa9e9a989622b4c',
+  userid: 'HQxtrGLKPa4BBOiQyBd5PVdamvubTmxu',
+  registrationdate: 2018-06-22T06:00:36.619Z,
+  emailverified: true,
+  __v: 0,
+  emailactivationtoken: null }
+[2018-06-25T13:16:39.280] [DEBUG] debug - config encrypt sha512
+[2018-06-25T13:16:39.280] [DEBUG] debug - config utils fillSession
+[2018-06-25T13:16:39.283] [DEBUG] debug - config utils fillWebSession

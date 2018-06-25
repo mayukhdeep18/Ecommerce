@@ -30,7 +30,12 @@ const dbOperations={
                 else{
                     logger.debug('crud result'+ result);
                     if(result.length<1){
-                        response.json({message:"failed as user not found"});
+                        response.json(
+                            {
+                                status: "failed",
+                                message:"User not found!"
+                            }
+                            );
                     }
                     else{
                         var i=0;
@@ -55,15 +60,25 @@ const dbOperations={
                         }
                         if(numberOfUsersFound===1){
                             var responseObject={
-                                message:"success, you are logged in",
+                                status: "success",
+                                message:"You are logged in!",
                             };
                             utils.fillSession(request,response,sessionData,responseObject);
                         }
                         else if(numberOfUsersFound>1){
-                            response.json({message:"conflict"});
+                            response.json(
+                                {
+                                    status: "failed",
+                                    message:"Already signed in!"
+                                });
                         }
                         else{
-                            response.json({message:"failed because password incorrect"});
+                            response.json(
+                                {
+                                    status: "failed",
+                                    message:"Incorrect password!"
+                                }
+                                );
                         }
                     }
                 }

@@ -3,7 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="22d33094-d95f-4e1e-897e-0a67ac0d8ed3" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/crudoperations/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/crudoperations/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/validate.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/validate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/cat_based_products_with_sorting_filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/cat_based_products_with_sorting_filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/product_details.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/product_details.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/subcat_based_products_with_sorting_filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/subcat_based_products_with_sorting_filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/subsubcat_based_products_with_sorting_filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/subsubcat_based_products_with_sorting_filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/debug.log" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,20 +37,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="cat_based_products_with_sorting_filter.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/cat_based_products_with_sorting_filter.js">
+      <file leaf-file-name="signup.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controllers/signup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16890">
-              <caret line="1126" column="22" lean-forward="true" selection-start-line="1126" selection-start-column="22" selection-end-line="1126" selection-end-column="22" />
+            <state relative-caret-position="191">
+              <caret line="18" column="37" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="product_details.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/controllers/product_details.js">
+      <file leaf-file-name="login.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controllers/login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="297" column="31" selection-start-line="297" selection-start-column="31" selection-end-line="297" selection-end-column="31" />
+            <state relative-caret-position="258">
+              <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/crudoperations/login.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="259">
+              <caret line="65" column="38" selection-start-line="65" selection-start-column="38" selection-end-line="65" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="utils.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/utils.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="325">
+              <caret line="61" column="9" lean-forward="true" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -68,17 +95,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/config/crudoperations/signup.js" />
-        <option value="$PROJECT_DIR$/controllers/activateEmail.js" />
-        <option value="$PROJECT_DIR$/routes/sorting_filter.js" />
-        <option value="$PROJECT_DIR$/controllers/sorting_filter_flag.js" />
         <option value="$PROJECT_DIR$/routes/sorting_filter_flag.js" />
         <option value="$PROJECT_DIR$/controllers/filtering_products.js" />
         <option value="$PROJECT_DIR$/routes/cat_based_products_with_sorting_filter.js" />
         <option value="$PROJECT_DIR$/routes/subcat_based_products_with_sorting_filter.js" />
-        <option value="$PROJECT_DIR$/controllers/subcat_based_products_with_sorting_filter.js" />
         <option value="$PROJECT_DIR$/routes/subsubcat_based_products_with_sorting_filter.js" />
-        <option value="$PROJECT_DIR$/controllers/subsubcat_based_products_with_sorting_filter.js" />
         <option value="$PROJECT_DIR$/controllers/filtering_products_with_sorting_filter.js" />
         <option value="$PROJECT_DIR$/routes/filtering_products_with_sorting_filter.js" />
         <option value="$PROJECT_DIR$/routes/search.js" />
@@ -108,7 +129,6 @@
         <option value="$PROJECT_DIR$/models/review_details.js" />
         <option value="$PROJECT_DIR$/models/rating_details.js" />
         <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/controllers/signup.js" />
         <option value="$PROJECT_DIR$/models/product_images.js" />
         <option value="$PROJECT_DIR$/controllers/product_images.js" />
         <option value="$PROJECT_DIR$/controllers/ecommerce_product_details.js" />
@@ -117,8 +137,15 @@
         <option value="$PROJECT_DIR$/controllers/subcategory_subsubcategory_hierarchy.js" />
         <option value="$PROJECT_DIR$/models/sorting_filter.js" />
         <option value="$PROJECT_DIR$/controllers/sorting_filter.js" />
-        <option value="$PROJECT_DIR$/controllers/cat_based_products_with_sorting_filter.js" />
         <option value="$PROJECT_DIR$/controllers/product_details.js" />
+        <option value="$PROJECT_DIR$/controllers/cat_based_products_with_sorting_filter.js" />
+        <option value="$PROJECT_DIR$/controllers/subcat_based_products_with_sorting_filter.js" />
+        <option value="$PROJECT_DIR$/controllers/subsubcat_based_products_with_sorting_filter.js" />
+        <option value="$PROJECT_DIR$/controllers/signup.js" />
+        <option value="$PROJECT_DIR$/config/validate.js" />
+        <option value="$PROJECT_DIR$/controllers/login.js" />
+        <option value="$PROJECT_DIR$/config/crudoperations/login.js" />
+        <option value="$PROJECT_DIR$/config/utils.js" />
       </list>
     </option>
   </component>
@@ -151,6 +178,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -167,9 +197,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -287,12 +314,13 @@
       <workItem from="1529388093259" duration="15634000" />
       <workItem from="1529561240300" duration="15551000" />
       <workItem from="1529642190874" duration="10413000" />
-      <workItem from="1529662592385" duration="5747000" />
+      <workItem from="1529662592385" duration="6201000" />
+      <workItem from="1529908320675" duration="3881000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="501603000" />
+    <option name="totallyTimeSpent" value="505938000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -351,42 +379,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/controllers/calculate_mean_rating.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/calculate_review_count.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="25" column="47" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/sub_sub_category_based_product.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" lean-forward="true" selection-end-line="174" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/search.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="24" lean-forward="true" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/search.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11906">
-          <caret line="798" column="124" selection-start-line="798" selection-start-column="124" selection-end-line="798" selection-end-column="124" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recommendationRaccoon/test/testRaccoon.js" />
     <entry file="file://$PROJECT_DIR$/controllers/category_based_product.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -541,13 +533,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/rating_details.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/ecommerce_product_details.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -576,13 +561,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/signup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/product_images.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -608,9 +586,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/collections.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/category.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -629,13 +604,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
           <caret line="32" column="69" lean-forward="true" selection-start-line="32" selection-start-column="69" selection-end-line="32" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/subcategory.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="36" selection-start-column="36" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -660,22 +628,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/product_details.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="30" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/sorting_filter.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/product_details_flag.js">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/sorting_filter.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -684,17 +642,101 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/cat_based_products_with_sorting_filter.js">
+    <entry file="file://$PROJECT_DIR$/controllers/product_details.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16890">
-          <caret line="1126" column="22" lean-forward="true" selection-start-line="1126" selection-start-column="22" selection-end-line="1126" selection-end-column="22" />
+        <state relative-caret-position="135">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/product_details.js">
+    <entry file="file://$PROJECT_DIR$/controllers/cat_based_products_with_sorting_filter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="297" column="31" selection-start-line="297" selection-start-column="31" selection-end-line="297" selection-end-column="31" />
+        <state relative-caret-position="-2806">
+          <caret line="1348" column="67" selection-start-line="1348" selection-start-column="67" selection-end-line="1348" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/rating_details.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/subcategory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="36" selection-start-column="36" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/subcat_based_products_with_sorting_filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/subcat_based_products_with_sorting_filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/product_details.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="30" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/subsubcat_based_products_with_sorting_filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="29" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/subsubcat_based_products_with_sorting_filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="22" lean-forward="true" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/validate.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-196">
+          <caret line="16" column="24" lean-forward="true" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/signup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="18" column="37" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/crudoperations/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="65" column="38" selection-start-line="65" selection-start-column="38" selection-end-line="65" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="61" column="9" lean-forward="true" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
         </state>
       </provider>
     </entry>

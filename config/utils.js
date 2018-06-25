@@ -38,14 +38,14 @@ const utils={
         logger.debug('config utils fillSession');
 
         //data is freezed object so no issue till not adding any new property
-        var userData=result;
-        userData.password1=undefined;
-        userData.salt=undefined;
-        userData.passwordtokenstamp=undefined;
-        userData.emailactivationtoken=undefined;
-        userData.forgotpasswordtoken=undefined;
-        userData.mobileverificationcode=undefined;
-        userData.social=undefined;
+        var Data=result;
+        Data.password1=undefined;
+        Data.salt=undefined;
+        Data.passwordtokenstamp=undefined;
+        Data.emailactivationtoken=undefined;
+        Data.forgotpasswordtoken=undefined;
+        Data.mobileverificationcode=undefined;
+        Data.social=undefined;
 
         if(request.body.appCall===true){
             if(request.body.sessionid!=undefined){
@@ -56,13 +56,13 @@ const utils={
                 });
             }
             var randomString=this.randomStringGenerate(32);
-            responseObject.sessionid=randomString+userData.username;
-            responseObject.userData=userData;
-            this.fillAppSession(userData,responseObject,response);
+            responseObject.sessionid=randomString+Data.username;
+            responseObject.Data=Data;
+            this.fillAppSession(Data,responseObject,response);
         }
         else{
-            this.fillWebSession(request,userData);
-            responseObject.userData=userData;
+            this.fillWebSession(request,Data);
+            responseObject.Data=Data;
             response.send(responseObject);
         }
     },

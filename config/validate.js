@@ -23,8 +23,9 @@ const validate = {
             return false;
         }
         var string = string.trim();
-        var letters = /^[A-Z0-9a-z!@#$%&*+-/=?^_`'{|}~]+$/;
-        if (string.length < 8 || string.match(letters) === null) {
+        //var letters = /^[A-Z0-9a-z!@#$%&*+-/=?^_`'{|}~]+$/;
+        if (string.length < 8 ){
+            //|| string.match(letters) === null) {
             return false;
         }
         else {
