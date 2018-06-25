@@ -26,7 +26,12 @@ exports.activate_email= (req, res, next) => {
         dbOperations.checkToken(activationObject,res);
     }
     else{
-        console.log("coming here");
-        res.json({message:"fail"});
+        //console.log("coming here");
+        res.json(
+            {
+                status: "failed",
+                message:"Verification failed!"
+            }
+            );
     }
 };

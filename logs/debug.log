@@ -275,3 +275,88 @@
 [2018-06-25T13:16:39.280] [DEBUG] debug - config encrypt sha512
 [2018-06-25T13:16:39.280] [DEBUG] debug - config utils fillSession
 [2018-06-25T13:16:39.283] [DEBUG] debug - config utils fillWebSession
+[2018-06-25T13:22:20.071] [DEBUG] debug - routes signup signup
+[2018-06-25T13:22:20.075] [DEBUG] debug - validate email
+[2018-06-25T13:22:20.075] [DEBUG] debug - validate username
+[2018-06-25T13:22:20.076] [DEBUG] debug - validate password
+[2018-06-25T13:22:20.076] [DEBUG] debug - crud signup checkUser
+[2018-06-25T13:22:20.503] [DEBUG] debug - crud result{ _id: 5b2c9084ffe6daa3dd7688e5,
+  useremail: 'escale.testnode@gmail.com',
+  username: 'Escale123',
+  password1: 'c4820b2eb0db386c25f5ea6945fe2ca71ef26d998e06f802ec8b9c2c1309127da3c96f8262b13e87cabf8dca57b7d4a484c3b9bad857a36f11981e487d4f2a3f',
+  role: 'customer',
+  salt: '8aa9e9a989622b4c',
+  userid: 'HQxtrGLKPa4BBOiQyBd5PVdamvubTmxu',
+  registrationdate: 2018-06-22T06:00:36.619Z,
+  emailverified: true,
+  __v: 0,
+  emailactivationtoken: null }
+[2018-06-25T13:28:45.597] [DEBUG] debug - routes signup signup
+[2018-06-25T13:28:45.607] [DEBUG] debug - validate email
+[2018-06-25T13:28:45.607] [DEBUG] debug - validate username
+[2018-06-25T13:28:45.608] [DEBUG] debug - validate password
+[2018-06-25T13:28:45.609] [DEBUG] debug - crud signup checkUser
+[2018-06-25T13:28:46.077] [DEBUG] debug - crud result
+[2018-06-25T13:28:46.078] [DEBUG] debug - crud common checkUsername
+[2018-06-25T13:28:46.385] [DEBUG] debug - crud result
+[2018-06-25T13:28:46.385] [DEBUG] debug - crud signup addUser
+[2018-06-25T13:28:46.385] [DEBUG] debug - config encrypt genRandomString
+[2018-06-25T13:28:46.386] [DEBUG] debug - config encrypt sha512
+[2018-06-25T13:28:46.386] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-25T13:28:47.000] [DEBUG] debug - crud result{ _id: 5b30a0b617f5766c06b6d7a6,
+  useremail: 'escale.testnode@gmail.com',
+  username: 'Escale123',
+  password1: 'ed4b0c0c3e579af98f8a3f9ad9f57f2003c20a84d6182c513671bd21dc337befdb4ad9c8fe9fed8d629cb69ccbea400133757acd1460c4006273d1d3c5d7c2f1',
+  role: 'customer',
+  salt: '05e3105d236e2280',
+  userid: 'gOJpwSkMZePmoVJXhvTVoqTftPV9vfwa',
+  registrationdate: 2018-06-25T07:58:46.584Z,
+  emailverified: false,
+  __v: 0 }
+[2018-06-25T13:28:47.148] [DEBUG] debug - crud common sendLink
+[2018-06-25T13:28:47.149] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-25T13:28:47.151] [DEBUG] debug - config utils fillSession
+[2018-06-25T13:28:47.152] [DEBUG] debug - config utils fillWebSession
+[2018-06-25T13:28:47.465] [DEBUG] debug - crud result[object Object]
+[2018-06-25T13:28:47.466] [DEBUG] debug - utils create mail verificationlink { type: 'verificationlink',
+  email: '198374ddb63e36df97a36a9f680772cdad1fc7cb900e758cf452714b098c8f65',
+  url: 'http://localhost:3000/activateEmail/emailactivate?e=198374ddb63e36df97a36a9f680772cdad1fc7cb900e758cf452714b098c8f65&t=zZ8OPptMiElHId89oo62I6SaOCxViJYC' }
+[2018-06-25T13:28:47.520] [DEBUG] debug - config utils sendMail
+[2018-06-25T13:28:53.958] [INFO] debug - Message sent: 250 2.0.0 OK 1529913533 z28-v6sm28915443pfl.169 - gsmtp
+[2018-06-25T13:29:20.004] [DEBUG] debug - routes common activateemail
+[2018-06-25T13:29:20.006] [DEBUG] debug - validate email
+[2018-06-25T13:29:20.007] [DEBUG] debug - validate string
+[2018-06-25T13:29:20.008] [DEBUG] debug - crud common checkToken
+[2018-06-25T13:29:20.318] [DEBUG] debug - crud result{ _id: 5b30a0b617f5766c06b6d7a6,
+  useremail: 'escale.testnode@gmail.com',
+  username: 'Escale123',
+  password1: 'ed4b0c0c3e579af98f8a3f9ad9f57f2003c20a84d6182c513671bd21dc337befdb4ad9c8fe9fed8d629cb69ccbea400133757acd1460c4006273d1d3c5d7c2f1',
+  role: 'customer',
+  salt: '05e3105d236e2280',
+  userid: 'gOJpwSkMZePmoVJXhvTVoqTftPV9vfwa',
+  registrationdate: 2018-06-25T07:58:46.584Z,
+  emailverified: false,
+  __v: 0,
+  emailactivationtoken: 'zZ8OPptMiElHId89oo62I6SaOCxViJYC' }
+[2018-06-25T13:29:20.319] [DEBUG] debug - crud common activateEmail
+[2018-06-25T13:29:20.617] [DEBUG] debug - crud result[object Object]
+[2018-06-25T13:33:30.272] [DEBUG] debug - routes common activateemail
+[2018-06-25T13:33:30.277] [DEBUG] debug - validate email
+[2018-06-25T13:33:30.278] [DEBUG] debug - validate string
+[2018-06-25T13:33:30.278] [DEBUG] debug - crud common checkToken
+[2018-06-25T13:33:30.559] [DEBUG] debug - crud result
+[2018-06-25T13:33:56.053] [DEBUG] debug - routes common activateemail
+[2018-06-25T13:33:56.056] [DEBUG] debug - validate email
+[2018-06-25T13:33:56.056] [DEBUG] debug - validate string
+[2018-06-25T13:33:56.056] [DEBUG] debug - crud common checkToken
+[2018-06-25T13:33:56.339] [DEBUG] debug - crud result
+[2018-06-25T13:35:34.920] [DEBUG] debug - routes common activateemail
+[2018-06-25T13:35:34.926] [DEBUG] debug - validate email
+[2018-06-25T13:35:34.926] [DEBUG] debug - validate string
+[2018-06-25T13:35:34.927] [DEBUG] debug - crud common checkToken
+[2018-06-25T13:35:36.092] [DEBUG] debug - crud result
+[2018-06-25T13:36:31.023] [DEBUG] debug - routes common activateemail
+[2018-06-25T13:36:31.028] [DEBUG] debug - validate email
+[2018-06-25T13:36:31.029] [DEBUG] debug - validate string
+[2018-06-25T13:36:31.029] [DEBUG] debug - crud common checkToken
+[2018-06-25T13:36:31.318] [DEBUG] debug - crud result

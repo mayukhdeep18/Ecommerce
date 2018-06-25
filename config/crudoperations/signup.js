@@ -27,7 +27,12 @@ const dbOperations={
                 else{
                     logger.debug('crud result'+ result);
                     if(result[0]!=undefined){
-                        response.json({message:"emailTaken"});
+                        response.json(
+                            {
+                                status: "failed",
+                                message:"Email already registered"
+                            }
+                            );
                     }
                     else
                     {
@@ -41,7 +46,12 @@ const dbOperations={
                                 that.addUser(request,response);
                             }
                             else{
-                                response.json({message:"usernameTaken"});
+                                response.json(
+                                    {
+                                        status: "failed",
+                                        message:"Username already taken"
+                                    }
+                                    );
                             }
                         });
                     }
@@ -91,7 +101,8 @@ const dbOperations={
 
                 commonOperations.sendLink(crypt_email,"emailactivate","emailactivationtoken");
                 var responseObject={
-                    message:"Registration successful",
+                    status: "success",
+                    message:"Please activate your email using the verification link sent at your email address!",
                 };
                 utils.fillSession(request,response,result,responseObject);
             }

@@ -52,7 +52,12 @@ const dbOperations = {
                     logger.debug('crud result'+ result);
                     if (result.length < 1) {
                         //console.log("result",result);
-                        response.json({ message: "fail" });
+                        response.json(
+                            {
+                                status: "failed",
+                                message: "link expired"
+                            }
+                            );
                     }
                     else {
                         that.activateEmail(activationObject.userEmail, response);
@@ -79,7 +84,12 @@ const dbOperations = {
                 }
                 else {
                     logger.debug('crud result'+ result);
-                    response.json({ message: "success, email has been verified and activated" });
+                    response.json(
+                        {
+                            status: "success",
+                            message: "Email has been verified and activated!"
+                        }
+                        );
                 }
             });
     },
