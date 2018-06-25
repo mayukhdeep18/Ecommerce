@@ -4,7 +4,7 @@ const ProdController = require("../controllers/product_details");
 const checkAuth = require('../middleware/check-auth');
 
 
-router.get("/", ProdController.product_get_all);
+router.get("/:page", ProdController.product_get_all);
 
 router.post("/", ProdController.product_create);
 

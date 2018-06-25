@@ -349,10 +349,8 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                     .then(rev_result => {
                                         res.status(201).json({
                                             status: "success",
-                                            error: "",
-                                            data: {
-                                                message: "ecommerce details stored"
-                                            }
+                                            message: "Ecommerce details stored"
+
                                         });
                                     })
                                     .catch(err => {
