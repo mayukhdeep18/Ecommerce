@@ -64,15 +64,14 @@ exports.category_create_category = (req, res, next) =>{
 
     if( Cat_id.length > 0)
     {
-        if(Category.find({CATEGORY_ID: Cat_id.toLowerCase()}))
+        if(Category.find({CATEGORY_ID: Cat_id.toLowerCase()})===true)
         {
-            //console.log("cat_id",Cat_id.toLowerCase());
-            res.status(500).json({
-                status: "error",
-                data: {
-                    message: "Category already exists"
-                }
-            });
+                    res.status(500).json({
+                        status: "error",
+                        data: {
+                            message: "Category already exists"
+                        }
+                    });
         }
         else
         {

@@ -54,7 +54,7 @@ const subcategoryRoutes = require("./routes/subcategory");
 const subcatflagRoutes = require("./routes/subcategory_flag");
 const productimageRoutes = require("./routes/product_images");
 const prodimageflagRoutes = require("./routes/product_images_flag");
-//const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/user');
 const subsubcategoryRoutes = require("./routes/subsubcategory");
 const subsubcatflagRoutes = require("./routes/subsubcategory_flag");
 const sellercategoryRoutes = require("./routes/seller_category");
@@ -113,6 +113,7 @@ const SubcatFilProdRoutes = require("./routes/subcat_based_products_with_sorting
 const SubsubcatFilProdRoutes = require("./routes/subsubcat_based_products_with_sorting_filter");
 const FilSortProdRoutes = require("./routes/filtering_products_with_sorting_filter");
 const SearchRoutes = require("./routes/search");
+const adminSignup = require("./routes/admin_signup");
 
 mongoose.connect(
     "mongodb://zoom:"+
@@ -152,7 +153,7 @@ app.use("/subcategory", subcategoryRoutes);
 app.use("/subcategory_flag", subcatflagRoutes);
 app.use("/product_images", productimageRoutes);
 app.use("/product_images_flag",prodimageflagRoutes);
-//app.use("/user", userRoutes);
+app.use("/user", userRoutes);
 app.use("/subsubcategory", subsubcategoryRoutes);
 app.use("/subsubcategory_flag",subsubcatflagRoutes);
 app.use("/seller_category", sellercategoryRoutes);
@@ -211,6 +212,7 @@ app.use("/subcat_based_products_with_sorting_filter",SubcatFilProdRoutes);
 app.use("/subsubcat_based_products_with_sorting_filter",SubsubcatFilProdRoutes);
 app.use("/filtering_products_with_sorting_filter",FilSortProdRoutes);
 app.use("/search",SearchRoutes);
+app.use("/admin_signup",adminSignup);
 
 
 app.use((req, res, next) => {

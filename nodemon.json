@@ -3,8 +3,9 @@
     "Zoom_user": "zoom_admin",
     "ZOOM_PWD": "zoom123",
     "JWT_KEY_ADMIN": "Administrator",
-    "JWT_KEY_USER": "Customer",
+    "JWT_KEY_SUPER_ADMIN": "SuperAdministrator",
     "MAIL_PWD": "Mayukh@123",
-    "CART_PWD": "Cart123"
+   "CART_PWD": "Cart123",
+    "SUPER_ADMIN": "SuperAdministrator"
   }
 }

@@ -10,7 +10,7 @@ const validate =require("../config/validate");
 const logger = require("../config/logger");
 
 ////User registration
-exports.registerUser = (req, res, next) => {
+exports.registerAdminUser = (req, res, next) => {
     logger.debug('routes signup signup');
     //req.body.useremail=req.body.useremail.toLowerCase();
     //req.body.username=req.body.username.toLowerCase();
