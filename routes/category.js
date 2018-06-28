@@ -7,7 +7,7 @@ router.get("/", CategoryController.category_get_all);
 
 //router.get("/:activeFlag", CategoryController.category_get_all_flag);
 
-router.post("/",checkAuth, CategoryController.category_create_category);
+router.post("/", CategoryController.category_create_category);
 
 router.get("/:categoryId", CategoryController.category_get_category);
 

@@ -61,7 +61,7 @@ exports.subcategory_create = (req, res, next) => {
 
     if(Sub_id.length > 0)
     {
-        if(Subcategory.find({SUB_CATEGORY_ID: Sub_id.toLowerCase()}))
+        if(Subcategory.find({SUB_CATEGORY_ID: Sub_id.toLowerCase()}) === true)
         {
             res.status(500).json({
                 status: "error",

@@ -3,7 +3,7 @@ const router = express.Router();
 const checkAdminAuth = require('../middleware/check_admin_auth');
 const UserController = require('../controllers/user');
 
-router.get("/", UserController.user_get_all);
+router.get("/",checkAdminAuth, UserController.user_get_all);
 
 router.get("/:userId",checkAdminAuth, UserController.user_get_by_id);
 

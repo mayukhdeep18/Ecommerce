@@ -55,7 +55,6 @@ exports.subsubcategory_get_all = (req, res, next) => {
 
 };
 
-
 //create a new sub subcategory
 exports.subsubcategory_create = (req, res, next) => {
 
@@ -63,7 +62,7 @@ exports.subsubcategory_create = (req, res, next) => {
 
     if(Sub_sub_id.length > 0)
     {
-        if(SubSubCategory.find({SUB_SUB_CATEGORY_ID: Sub_sub_id.toLowerCase()}))
+        if(SubSubCategory.find({SUB_SUB_CATEGORY_ID: Sub_sub_id.toLowerCase()})===true)
         {
             res.status(500).json({
                 status: "error",
