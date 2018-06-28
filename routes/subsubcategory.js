@@ -11,8 +11,8 @@ router.post("/", SubSubcategoryController.subsubcategory_create);
 
 router.get("/:subsubcategoryId", SubSubcategoryController.subsubcategory_get_subsubcategory);
 
-router.patch("/:subsubcategoryId",checkAuth, SubSubcategoryController.subsubcategory_update);
+router.patch("/:subsubcategoryId", SubSubcategoryController.subsubcategory_update);
 
-router.delete("/:subsubcategoryId",checkAuth, SubSubcategoryController.subsubcategory_delete);
+router.delete("/:subsubcategoryId", SubSubcategoryController.subsubcategory_delete);
 
 module.exports = router;

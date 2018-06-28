@@ -2,6 +2,8 @@
 
 const User = require("../../models/user");
 const logger = require("../logger");
+const jwt = require("jsonwebtoken");
+const nodemon = require("nodemon");
 
 
 const dbOperations={
@@ -33,7 +35,7 @@ const dbOperations={
                         response.json(
                             {
                                 status: "failed",
-                                message:"User not found!"
+                                message:"Auth failed!"
                             }
                             );
                     }
@@ -59,11 +61,48 @@ const dbOperations={
                             }
                         }
                         if(numberOfUsersFound===1){
-                            var responseObject={
-                                status: "success",
-                                message:"You are logged in!",
-                            };
-                            utils.fillSession(request,response,sessionData,responseObject);
+
+                            if(sessionData.role ==="Administrator")
+                            {
+                                const token_val = jwt.sign(
+                                    {
+                                        email: sessionData.useremail,
+                                        userId: sessionData._id,
+                                        role: sessionData.role
+                                    },
+                                    sessionData.role,
+                                    {
+                                        expiresIn: "1h"
+                                    }
+                                );
+                                var responseObject={
+                                    status: "success",
+                                    message:"You are logged in!",
+                                    token_id: token_val
+                                };
+                                utils.fillSession(request,response,sessionData,responseObject);
+                            }
+                            else
+                            {
+                                const token_val = jwt.sign(
+                                    {
+                                        email: sessionData.useremail,
+                                        userId: sessionData._id,
+                                        role: sessionData.role
+                                    },
+                                    sessionData.role,
+                                    {
+                                        expiresIn: "1h"
+                                    }
+                                    );
+                                var responseObject={
+                                    status: "success",
+                                    message:"You are logged in!",
+                                    token_id: token_val
+                                };
+                                utils.fillSession(request,response,sessionData,responseObject);
+                            }
+
                         }
                         else if(numberOfUsersFound>1){
                             response.json(

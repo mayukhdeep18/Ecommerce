@@ -61,47 +61,59 @@ exports.category_get_all = (req, res, next) => {
 exports.category_create_category = (req, res, next) =>{
 
     var Cat_id = req.body.PRODUCT_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
-    //console.log('Prod_id',Prod_id.toLowerCase());
+
     if( Cat_id.length > 0)
     {
-        const category = new Category({
-        _id: new mongoose.Types.ObjectId(),
-        CATEGORY_ID: Cat_id.toLowerCase(),
-        PRODUCT_CATEGORY_NAME: req.body.PRODUCT_CATEGORY_NAME.toLowerCase(),
-        PRODUCT_CATEGORY_DESCRIPTION: req.body.PRODUCT_CATEGORY_DESCRIPTION.toLowerCase(),
-        UPDATED_BY: req.body.UPDATED_BY,
-        UPDATED_DATE: new Date(),
-        ACTIVE_FLAG: req.body.ACTIVE_FLAG
-        });
-        category
-        .save()
-        .then(result => {
-            //console.log(result);
-            res.status(201).json({
-                status:"success",
-                error_msg:"",
-                data: {
-                    message: "Created category successfully"
-                }
-            });
-        })
-        .catch(err => {
-            console.log(err);
+        if(Category.find({CATEGORY_ID: Cat_id.toLowerCase()}))
+        {
+            //console.log("cat_id",Cat_id.toLowerCase());
             res.status(500).json({
                 status: "error",
-                error: err,
                 data: {
-                    message: "Please check all your fields"
+                    message: "Category already exists"
                 }
             });
-        });
+        }
+        else
+        {
+            const category = new Category({
+                _id: new mongoose.Types.ObjectId(),
+                CATEGORY_ID: Cat_id.toLowerCase(),
+                PRODUCT_CATEGORY_NAME: req.body.PRODUCT_CATEGORY_NAME.toLowerCase(),
+                PRODUCT_CATEGORY_DESCRIPTION: req.body.PRODUCT_CATEGORY_DESCRIPTION.toLowerCase(),
+                UPDATED_BY: req.body.UPDATED_BY,
+                UPDATED_DATE: new Date(),
+                ACTIVE_FLAG: req.body.ACTIVE_FLAG
+            });
+            category
+                .save()
+                .then(result => {
+                    //console.log(result);
+                    res.status(201).json({
+                        status:"success",
+                        data: {
+                            message: "Created category successfully"
+                        }
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(500).json({
+                        status: "error",
+                        error: err,
+                        data: {
+                            message: "Internal server error!"
+                        }
+                    });
+                });
+        }
     }
     else
     {
         res.status(500).json({
             status: "error",
             data: {
-                message: "Please check all your fields"
+                message: "Please check all your fields!"
             }
         });
     }

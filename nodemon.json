@@ -2,7 +2,9 @@
   "env": {
     "Zoom_user": "zoom_admin",
     "ZOOM_PWD": "zoom123",
-    "JWT_KEY": "ZOOM_KEY",
-    "MAIL_PWD": "Mayukh@123"
+    "JWT_KEY_ADMIN": "Administrator",
+    "JWT_KEY_USER": "Customer",
+    "MAIL_PWD": "Mayukh@123",
+    "CART_PWD": "Cart123"
   }
 }

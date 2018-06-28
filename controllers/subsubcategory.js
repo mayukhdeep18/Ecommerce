@@ -61,8 +61,20 @@ exports.subsubcategory_create = (req, res, next) => {
 
     var Sub_sub_id = req.body.SUB_SUB_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
 
-    if(Category.findById(req.body.CATEGORY_ID) && Subcategory.findById(req.body.SUB_CATEGORY_ID)
-    && Sub_sub_id.length > 0)
+    if(Sub_sub_id.length > 0)
+    {
+        if(SubSubCategory.find({SUB_SUB_CATEGORY_ID: Sub_sub_id.toLowerCase()}))
+        {
+            res.status(500).json({
+                status: "error",
+                data: {
+                    message: "Sub sub category already exists"
+                }
+            });
+        }
+        else
+        {
+            if(Category.findById(req.body.CATEGORY_ID) && Subcategory.findById(req.body.SUB_CATEGORY_ID))
             {
                 const subsubcategory = new SubSubCategory({
                     _id: new mongoose.Types.ObjectId(),
@@ -81,19 +93,18 @@ exports.subsubcategory_create = (req, res, next) => {
                         console.log(result);
                         res.status(201).json({
                             status: "success",
-                            error: "",
                             data: {
                                 message: "Sub Subcategory stored"
-                        }
-                    });
-                })
+                            }
+                        });
+                    })
                     .catch(err => {
                         console.log(err);
                         res.status(500).json({
                             status: "error",
                             error: err,
                             data: {
-                                message: "An error has occurred as mentioned above"
+                                message: "Internal server error!"
                             }
                         });
                     });
@@ -104,13 +115,23 @@ exports.subsubcategory_create = (req, res, next) => {
                     .status(404)
                     .json({
                         status: "error",
-                        error: "ID doesn't exist",
                         data: {
-                            message: "Category id or subcategory id does not exist"
+                            message: "Category or subcategory does not exist"
                         }
                     });
             }
-        };
+        }
+    }
+    else
+    {
+        res.status(500).json({
+            status: "error",
+            data: {
+                message: "Please check all your fields!"
+            }
+        });
+    }
+};
 
 
 //get sub subcategory details by id

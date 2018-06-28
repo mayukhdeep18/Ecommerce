@@ -16,6 +16,8 @@
     "cryptr": "^3.0.0",
     "encrypt": "0.0.1",
     "express": "~4.16.0",
+    "express-cart": "^1.1.7",
+    "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",

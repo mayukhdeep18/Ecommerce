@@ -1,311 +1,9 @@
-[2018-06-04T18:50:21.795] [DEBUG] debug - routes signup signup
-[2018-06-04T18:50:21.799] [DEBUG] debug - validate email
-[2018-06-04T18:50:21.799] [DEBUG] debug - validate username
-[2018-06-04T18:50:21.799] [DEBUG] debug - validate password
-[2018-06-04T18:50:21.799] [DEBUG] debug - crud signup checkUser
-[2018-06-04T18:50:22.151] [DEBUG] debug - crud result
-[2018-06-04T18:50:22.151] [DEBUG] debug - crud common checkUsername
-[2018-06-04T18:50:22.458] [DEBUG] debug - crud result
-[2018-06-04T18:50:22.458] [DEBUG] debug - crud signup addUser
-[2018-06-04T18:50:22.458] [DEBUG] debug - config encrypt genRandomString
-[2018-06-04T18:50:22.458] [DEBUG] debug - config encrypt sha512
-[2018-06-04T18:50:22.459] [DEBUG] debug - config utils randomStringGenerate
-[2018-06-04T18:50:22.766] [ERROR] debug - { BulkWriteError: E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }
-    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:530:15
-    at handleCallback (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/utils.js:128:55)
-    at resultHandler (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:451:5)
-    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb-core/lib/connection/pool.js:544:18
-    at _combinedTickCallback (internal/process/next_tick.js:131:7)
-    at process._tickCallback (internal/process/next_tick.js:180:9)
-  name: 'BulkWriteError',
-  message: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
-  driver: true,
-  code: 11000,
-  index: 0,
-  errmsg: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
-  getOperation: [Function],
-  toJSON: [Function],
-  toString: [Function],
-  result: 
-   BulkWriteResult {
-     ok: [Getter],
-     nInserted: [Getter],
-     nUpserted: [Getter],
-     nMatched: [Getter],
-     nModified: [Getter],
-     nRemoved: [Getter],
-     getInsertedIds: [Function],
-     getUpsertedIds: [Function],
-     getUpsertedIdAt: [Function],
-     getRawResponse: [Function],
-     hasWriteErrors: [Function],
-     getWriteErrorCount: [Function],
-     getWriteErrorAt: [Function],
-     getWriteErrors: [Function],
-     getLastOp: [Function],
-     getWriteConcernError: [Function],
-     toJSON: [Function],
-     toString: [Function],
-     isOk: [Function] } }
-[2018-06-04T18:52:06.377] [DEBUG] debug - routes signup signup
-[2018-06-04T18:52:06.378] [DEBUG] debug - validate email
-[2018-06-04T18:52:06.379] [DEBUG] debug - validate username
-[2018-06-04T18:52:06.379] [DEBUG] debug - validate password
-[2018-06-04T18:52:06.379] [DEBUG] debug - crud signup checkUser
-[2018-06-04T18:52:06.657] [DEBUG] debug - crud result
-[2018-06-04T18:52:06.657] [DEBUG] debug - crud common checkUsername
-[2018-06-04T18:52:06.919] [DEBUG] debug - crud result
-[2018-06-04T18:52:06.919] [DEBUG] debug - crud signup addUser
-[2018-06-04T18:52:06.920] [DEBUG] debug - config encrypt genRandomString
-[2018-06-04T18:52:06.920] [DEBUG] debug - config encrypt sha512
-[2018-06-04T18:52:06.920] [DEBUG] debug - config utils randomStringGenerate
-[2018-06-04T18:52:07.217] [DEBUG] debug - crud result{ _id: 5b153cfe7889397d1049cce1,
-  useremail: 'atlairmm52@gmail.com',
-  username: 'atl123',
-  password1: '00516d2a381963508e7f5c0e58c73782c83911069c1140feb592b44219f696aaed10f38a11e5817700967d7807aa2065dc49b4d0fbd34cbb9dcce7036509df9c',
-  role: 'customer',
-  salt: '7e453a121cf389ec',
-  userid: 'ye84W4JZPDWjWEKDxb55eXyqfgPomFgi',
-  registrationdate: 2018-06-04T13:22:06.921Z,
-  emailverified: false,
-  social: [],
-  __v: 0 }
-[2018-06-04T18:52:07.218] [DEBUG] debug - crud common sendLink
-[2018-06-04T18:52:07.219] [DEBUG] debug - config utils randomStringGenerate
-[2018-06-04T18:52:07.222] [DEBUG] debug - config utils fillSession
-[2018-06-04T18:52:07.224] [DEBUG] debug - config utils fillWebSession
-[2018-06-04T18:52:07.623] [DEBUG] debug - crud result[object Object]
-[2018-06-04T18:52:07.623] [DEBUG] debug - utils create mail verificationlink { type: 'verificationlink',
-  email: 'atlairmm52@gmail.com',
-  url: 'http://localhost:3000/#/emailactivate?e=atlairmm52@gmail.com&t=uw8e5gutMWLQaTSEUzaasV8jXXmkNtm7' }
-[2018-06-04T18:52:07.638] [DEBUG] debug - config utils sendMail
-[2018-06-04T18:52:09.672] [ERROR] debug - { Error: Invalid login: 535 Authentication Failed
-    at SMTPConnection._formatError (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:606:19)
-    at SMTPConnection._actionAUTHComplete (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:1335:34)
-    at SMTPConnection._responseActions.push.str (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:366:26)
-    at SMTPConnection._processResponse (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:762:20)
-    at SMTPConnection._onData (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:558:14)
-    at TLSSocket._socket.on.chunk (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:510:47)
-    at emitOne (events.js:116:13)
-    at TLSSocket.emit (events.js:211:7)
-    at addChunk (_stream_readable.js:263:12)
-    at readableAddChunk (_stream_readable.js:250:11)
-    at TLSSocket.Readable.push (_stream_readable.js:208:10)
-    at TLSWrap.onread (net.js:607:20)
-  code: 'EAUTH',
-  response: '535 Authentication Failed',
-  responseCode: 535,
-  command: 'AUTH PLAIN' }
-[2018-06-04T18:52:09.674] [ERROR] debug - error sending mail
-[2018-06-04T18:53:50.209] [DEBUG] debug - routes signup signup
-[2018-06-04T18:53:50.215] [DEBUG] debug - validate email
-[2018-06-04T18:53:50.216] [DEBUG] debug - validate username
-[2018-06-04T18:53:50.216] [DEBUG] debug - validate password
-[2018-06-04T18:53:50.216] [DEBUG] debug - crud signup checkUser
-[2018-06-04T18:53:50.535] [DEBUG] debug - crud result
-[2018-06-04T18:53:50.536] [DEBUG] debug - crud common checkUsername
-[2018-06-04T18:53:50.842] [DEBUG] debug - crud result
-[2018-06-04T18:53:50.843] [DEBUG] debug - crud signup addUser
-[2018-06-04T18:53:50.844] [DEBUG] debug - config encrypt genRandomString
-[2018-06-04T18:53:50.844] [DEBUG] debug - config encrypt sha512
-[2018-06-04T18:53:50.844] [DEBUG] debug - config utils randomStringGenerate
-[2018-06-04T18:53:51.286] [ERROR] debug - { BulkWriteError: E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }
-    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:530:15
-    at handleCallback (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/utils.js:128:55)
-    at resultHandler (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:451:5)
-    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb-core/lib/connection/pool.js:544:18
-    at _combinedTickCallback (internal/process/next_tick.js:131:7)
-    at process._tickCallback (internal/process/next_tick.js:180:9)
-  name: 'BulkWriteError',
-  message: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
-  driver: true,
-  code: 11000,
-  index: 0,
-  errmsg: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
-  getOperation: [Function],
-  toJSON: [Function],
-  toString: [Function],
-  result: 
-   BulkWriteResult {
-     ok: [Getter],
-     nInserted: [Getter],
-     nUpserted: [Getter],
-     nMatched: [Getter],
-     nModified: [Getter],
-     nRemoved: [Getter],
-     getInsertedIds: [Function],
-     getUpsertedIds: [Function],
-     getUpsertedIdAt: [Function],
-     getRawResponse: [Function],
-     hasWriteErrors: [Function],
-     getWriteErrorCount: [Function],
-     getWriteErrorAt: [Function],
-     getWriteErrors: [Function],
-     getLastOp: [Function],
-     getWriteConcernError: [Function],
-     toJSON: [Function],
-     toString: [Function],
-     isOk: [Function] } }
-[2018-06-04T18:54:19.588] [DEBUG] debug - routes signup signup
-[2018-06-04T18:54:19.589] [DEBUG] debug - validate email
-[2018-06-04T18:54:19.589] [DEBUG] debug - validate username
-[2018-06-04T18:54:19.589] [DEBUG] debug - validate password
-[2018-06-04T18:54:19.590] [DEBUG] debug - crud signup checkUser
-[2018-06-04T18:54:19.923] [DEBUG] debug - crud result
-[2018-06-04T18:54:19.924] [DEBUG] debug - crud common checkUsername
-[2018-06-04T18:54:20.231] [DEBUG] debug - crud result
-[2018-06-04T18:54:20.231] [DEBUG] debug - crud signup addUser
-[2018-06-04T18:54:20.232] [DEBUG] debug - config encrypt genRandomString
-[2018-06-04T18:54:20.233] [DEBUG] debug - config encrypt sha512
-[2018-06-04T18:54:20.233] [DEBUG] debug - config utils randomStringGenerate
-[2018-06-04T18:54:20.541] [ERROR] debug - { BulkWriteError: E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }
-    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:530:15
-    at handleCallback (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/utils.js:128:55)
-    at resultHandler (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:451:5)
-    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb-core/lib/connection/pool.js:544:18
-    at _combinedTickCallback (internal/process/next_tick.js:131:7)
-    at process._tickCallback (internal/process/next_tick.js:180:9)
-  name: 'BulkWriteError',
-  message: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
-  driver: true,
-  code: 11000,
-  index: 0,
-  errmsg: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
-  getOperation: [Function],
-  toJSON: [Function],
-  toString: [Function],
-  result: 
-   BulkWriteResult {
-     ok: [Getter],
-     nInserted: [Getter],
-     nUpserted: [Getter],
-     nMatched: [Getter],
-     nModified: [Getter],
-     nRemoved: [Getter],
-     getInsertedIds: [Function],
-     getUpsertedIds: [Function],
-     getUpsertedIdAt: [Function],
-     getRawResponse: [Function],
-     hasWriteErrors: [Function],
-     getWriteErrorCount: [Function],
-     getWriteErrorAt: [Function],
-     getWriteErrors: [Function],
-     getLastOp: [Function],
-     getWriteConcernError: [Function],
-     toJSON: [Function],
-     toString: [Function],
-     isOk: [Function] } }
-[2018-06-04T18:58:13.957] [DEBUG] debug - routes signup signup
-[2018-06-04T18:58:13.960] [DEBUG] debug - validate email
-[2018-06-04T18:58:13.961] [DEBUG] debug - validate username
-[2018-06-04T18:58:13.961] [DEBUG] debug - validate password
-[2018-06-04T18:58:13.961] [DEBUG] debug - crud signup checkUser
-[2018-06-04T18:58:14.318] [DEBUG] debug - crud result
-[2018-06-04T18:58:14.319] [DEBUG] debug - crud common checkUsername
-[2018-06-04T18:58:14.585] [DEBUG] debug - crud result
-[2018-06-04T18:58:14.586] [DEBUG] debug - crud signup addUser
-[2018-06-04T18:58:14.586] [DEBUG] debug - config encrypt genRandomString
-[2018-06-04T18:58:14.586] [DEBUG] debug - config encrypt sha512
-[2018-06-04T18:58:14.587] [DEBUG] debug - config utils randomStringGenerate
-[2018-06-04T18:58:14.916] [DEBUG] debug - crud result{ _id: 5b153e6ee66b541b69c980c9,
-  useremail: 'mayukhdeepmaitra18@gmail.com',
-  username: 'mayu123',
-  password1: 'b91c29cabae5df8be522ea6d9174d39f15b2779b911f2e6f3c47153ec267836ec8f210614a7778130bd92f37b0a0b2a3466f8db0042ff8c0251515c833423625',
-  role: 'customer',
-  salt: 'd7132feaa1805e4d',
-  userid: 'c5LCPbGTvvcT8Xei5OzBOe7b5FNDR8aP',
-  registrationdate: 2018-06-04T13:28:14.609Z,
-  emailverified: false,
-  __v: 0 }
-[2018-06-04T18:58:14.917] [DEBUG] debug - crud common sendLink
-[2018-06-04T18:58:14.917] [DEBUG] debug - config utils randomStringGenerate
-[2018-06-04T18:58:14.919] [DEBUG] debug - config utils fillSession
-[2018-06-04T18:58:14.920] [DEBUG] debug - config utils fillWebSession
-[2018-06-04T18:58:15.195] [DEBUG] debug - crud result[object Object]
-[2018-06-04T18:58:15.196] [DEBUG] debug - utils create mail verificationlink { type: 'verificationlink',
-  email: 'mayukhdeepmaitra18@gmail.com',
-  url: 'http://localhost:3000/#/emailactivate?e=mayukhdeepmaitra18@gmail.com&t=tbUQwpyjuqlgzut5Rc1Ys4iRA0YJg334' }
-[2018-06-04T18:58:15.214] [DEBUG] debug - config utils sendMail
-[2018-06-04T18:58:17.698] [ERROR] debug - { Error: Invalid login: 535 Authentication Failed
-    at SMTPConnection._formatError (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:606:19)
-    at SMTPConnection._actionAUTHComplete (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:1335:34)
-    at SMTPConnection._responseActions.push.str (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:366:26)
-    at SMTPConnection._processResponse (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:762:20)
-    at SMTPConnection._onData (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:558:14)
-    at TLSSocket._socket.on.chunk (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:510:47)
-    at emitOne (events.js:116:13)
-    at TLSSocket.emit (events.js:211:7)
-    at addChunk (_stream_readable.js:263:12)
-    at readableAddChunk (_stream_readable.js:250:11)
-    at TLSSocket.Readable.push (_stream_readable.js:208:10)
-    at TLSWrap.onread (net.js:607:20)
-  code: 'EAUTH',
-  response: '535 Authentication Failed',
-  responseCode: 535,
-  command: 'AUTH PLAIN' }
-[2018-06-04T18:58:17.706] [ERROR] debug - error sending mail
-[2018-06-04T18:59:07.816] [DEBUG] debug - routes signup signup
-[2018-06-04T18:59:07.817] [DEBUG] debug - validate email
-[2018-06-04T18:59:07.817] [DEBUG] debug - validate username
-[2018-06-04T18:59:07.818] [DEBUG] debug - validate password
-[2018-06-04T18:59:07.818] [DEBUG] debug - crud signup checkUser
-[2018-06-04T18:59:08.181] [DEBUG] debug - crud result
-[2018-06-04T18:59:08.181] [DEBUG] debug - crud common checkUsername
-[2018-06-04T18:59:08.488] [DEBUG] debug - crud result
-[2018-06-04T18:59:08.488] [DEBUG] debug - crud signup addUser
-[2018-06-04T18:59:08.489] [DEBUG] debug - config encrypt genRandomString
-[2018-06-04T18:59:08.489] [DEBUG] debug - config encrypt sha512
-[2018-06-04T18:59:08.489] [DEBUG] debug - config utils randomStringGenerate
-[2018-06-04T18:59:08.784] [ERROR] debug - { BulkWriteError: E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }
-    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:530:15
-    at handleCallback (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/utils.js:128:55)
-    at resultHandler (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:451:5)
-    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb-core/lib/connection/pool.js:544:18
-    at _combinedTickCallback (internal/process/next_tick.js:131:7)
-    at process._tickCallback (internal/process/next_tick.js:180:9)
-  name: 'BulkWriteError',
-  message: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
-  driver: true,
-  code: 11000,
-  index: 0,
-  errmsg: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
-  getOperation: [Function],
-  toJSON: [Function],
-  toString: [Function],
-  result: 
-   BulkWriteResult {
-     ok: [Getter],
-     nInserted: [Getter],
-     nUpserted: [Getter],
-     nMatched: [Getter],
-     nModified: [Getter],
-     nRemoved: [Getter],
-     getInsertedIds: [Function],
-     getUpsertedIds: [Function],
-     getUpsertedIdAt: [Function],
-     getRawResponse: [Function],
-     hasWriteErrors: [Function],
-     getWriteErrorCount: [Function],
-     getWriteErrorAt: [Function],
-     getWriteErrors: [Function],
-     getLastOp: [Function],
-     getWriteConcernError: [Function],
-     toJSON: [Function],
-     toString: [Function],
-     isOk: [Function] } }
-[2018-06-04T19:02:50.838] [DEBUG] debug - routes signup signup
-[2018-06-04T19:02:50.841] [DEBUG] debug - validate email
-[2018-06-04T19:02:50.842] [DEBUG] debug - validate username
-[2018-06-04T19:02:50.842] [DEBUG] debug - validate password
-[2018-06-04T19:02:50.842] [DEBUG] debug - crud signup checkUser
-[2018-06-04T19:02:51.143] [DEBUG] debug - crud result
-[2018-06-04T19:02:51.143] [DEBUG] debug - crud common checkUsername
-[2018-06-04T19:02:51.415] [DEBUG] debug - crud result
-[2018-06-04T19:02:51.415] [DEBUG] debug - crud signup addUser
-[2018-06-04T19:02:51.416] [DEBUG] debug - config encrypt genRandomString
-[2018-06-04T19:02:51.416] [DEBUG] debug - config encrypt sha512
-[2018-06-04T19:02:51.417] [DEBUG] debug - config utils randomStringGenerate
-[2018-06-04T19:02:51.758] [DEBUG] debug - crud result{ _id: 5b153f83f1e3242ecae32755,
+[2018-06-04T19:12:22.984] [DEBUG] debug - routes signup signup
+[2018-06-04T19:12:22.989] [DEBUG] debug - validate email
+[2018-06-04T19:12:22.990] [DEBUG] debug - validate username
+[2018-06-04T19:12:22.990] [DEBUG] debug - validate password
+[2018-06-04T19:12:22.991] [DEBUG] debug - crud signup checkUser
+[2018-06-04T19:12:23.332] [DEBUG] debug - crud result{ _id: 5b153f83f1e3242ecae32755,
   useremail: 'mayukhdeepmaitra@yahoo.co.in',
   username: 'mayu1234',
   password1: 'f6d2d731c993de950df5fc5a1b3adbe9b03cd40a9bb3dfa214f906354eea0aa7ba964fe55be0b753156c589ef6a66cab74a0fbf94a8f870434aaed7e6badd69b',
@@ -314,47 +12,21 @@
   userid: '114GPvPiZqQqE5mk61iMOXY8e5FOZDUM',
   registrationdate: 2018-06-04T13:32:51.437Z,
   emailverified: false,
-  __v: 0 }
-[2018-06-04T19:02:51.758] [DEBUG] debug - crud common sendLink
-[2018-06-04T19:02:51.759] [DEBUG] debug - config utils randomStringGenerate
-[2018-06-04T19:02:51.761] [DEBUG] debug - config utils fillSession
-[2018-06-04T19:02:51.762] [DEBUG] debug - config utils fillWebSession
-[2018-06-04T19:02:52.040] [DEBUG] debug - crud result[object Object]
-[2018-06-04T19:02:52.040] [DEBUG] debug - utils create mail verificationlink { type: 'verificationlink',
-  email: 'mayukhdeepmaitra@yahoo.co.in',
-  url: 'http://localhost:3000/#/emailactivate?e=mayukhdeepmaitra@yahoo.co.in&t=KbbqM0hgbhxH1Y6Y5DKmBFXQOfyfd8yl' }
-[2018-06-04T19:02:52.053] [DEBUG] debug - config utils sendMail
-[2018-06-04T19:02:53.896] [ERROR] debug - { Error: Invalid login: 535 Authentication Failed
-    at SMTPConnection._formatError (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:606:19)
-    at SMTPConnection._actionAUTHComplete (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:1335:34)
-    at SMTPConnection._responseActions.push.str (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:366:26)
-    at SMTPConnection._processResponse (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:762:20)
-    at SMTPConnection._onData (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:558:14)
-    at TLSSocket._socket.on.chunk (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/nodemailer/lib/smtp-connection/index.js:510:47)
-    at emitOne (events.js:116:13)
-    at TLSSocket.emit (events.js:211:7)
-    at addChunk (_stream_readable.js:263:12)
-    at readableAddChunk (_stream_readable.js:250:11)
-    at TLSSocket.Readable.push (_stream_readable.js:208:10)
-    at TLSWrap.onread (net.js:607:20)
-  code: 'EAUTH',
-  response: '535 Authentication Failed',
-  responseCode: 535,
-  command: 'AUTH PLAIN' }
-[2018-06-04T19:02:53.905] [ERROR] debug - error sending mail
-[2018-06-04T19:04:48.649] [DEBUG] debug - routes signup signup
-[2018-06-04T19:04:48.653] [DEBUG] debug - validate email
-[2018-06-04T19:04:48.654] [DEBUG] debug - validate username
-[2018-06-04T19:04:48.654] [DEBUG] debug - validate password
-[2018-06-04T19:04:48.655] [DEBUG] debug - crud signup checkUser
-[2018-06-04T19:04:48.969] [DEBUG] debug - crud result
-[2018-06-04T19:04:48.969] [DEBUG] debug - crud common checkUsername
-[2018-06-04T19:04:49.275] [DEBUG] debug - crud result
-[2018-06-04T19:04:49.275] [DEBUG] debug - crud signup addUser
-[2018-06-04T19:04:49.276] [DEBUG] debug - config encrypt genRandomString
-[2018-06-04T19:04:49.277] [DEBUG] debug - config encrypt sha512
-[2018-06-04T19:04:49.277] [DEBUG] debug - config utils randomStringGenerate
-[2018-06-04T19:04:49.690] [ERROR] debug - { BulkWriteError: E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }
+  __v: 0,
+  emailactivationtoken: 'KbbqM0hgbhxH1Y6Y5DKmBFXQOfyfd8yl' }
+[2018-06-04T19:12:49.768] [DEBUG] debug - routes signup signup
+[2018-06-04T19:12:49.768] [DEBUG] debug - validate email
+[2018-06-04T19:12:49.769] [DEBUG] debug - validate username
+[2018-06-04T19:12:49.769] [DEBUG] debug - validate password
+[2018-06-04T19:12:49.769] [DEBUG] debug - crud signup checkUser
+[2018-06-04T19:12:50.150] [DEBUG] debug - crud result
+[2018-06-04T19:12:50.151] [DEBUG] debug - crud common checkUsername
+[2018-06-04T19:12:50.453] [DEBUG] debug - crud result
+[2018-06-04T19:12:50.454] [DEBUG] debug - crud signup addUser
+[2018-06-04T19:12:50.455] [DEBUG] debug - config encrypt genRandomString
+[2018-06-04T19:12:50.455] [DEBUG] debug - config encrypt sha512
+[2018-06-04T19:12:50.455] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-04T19:12:50.867] [ERROR] debug - { BulkWriteError: E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }
     at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:530:15
     at handleCallback (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/utils.js:128:55)
     at resultHandler (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:451:5)
@@ -391,3 +63,347 @@
      toJSON: [Function],
      toString: [Function],
      isOk: [Function] } }
+[2018-06-04T19:14:59.234] [DEBUG] debug - routes signup signup
+[2018-06-04T19:14:59.238] [DEBUG] debug - validate email
+[2018-06-04T19:14:59.240] [DEBUG] debug - validate username
+[2018-06-04T19:14:59.241] [DEBUG] debug - validate password
+[2018-06-04T19:14:59.243] [DEBUG] debug - crud signup checkUser
+[2018-06-04T19:14:59.526] [DEBUG] debug - crud result
+[2018-06-04T19:14:59.527] [DEBUG] debug - crud common checkUsername
+[2018-06-04T19:14:59.887] [DEBUG] debug - crud result
+[2018-06-04T19:14:59.888] [DEBUG] debug - crud signup addUser
+[2018-06-04T19:14:59.888] [DEBUG] debug - config encrypt genRandomString
+[2018-06-04T19:14:59.888] [DEBUG] debug - config encrypt sha512
+[2018-06-04T19:14:59.889] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-04T19:15:00.301] [ERROR] debug - { BulkWriteError: E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }
+    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:530:15
+    at handleCallback (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/utils.js:128:55)
+    at resultHandler (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:451:5)
+    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb-core/lib/connection/pool.js:544:18
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)
+    at process._tickCallback (internal/process/next_tick.js:180:9)
+  name: 'BulkWriteError',
+  message: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
+  driver: true,
+  code: 11000,
+  index: 0,
+  errmsg: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
+  getOperation: [Function],
+  toJSON: [Function],
+  toString: [Function],
+  result: 
+   BulkWriteResult {
+     ok: [Getter],
+     nInserted: [Getter],
+     nUpserted: [Getter],
+     nMatched: [Getter],
+     nModified: [Getter],
+     nRemoved: [Getter],
+     getInsertedIds: [Function],
+     getUpsertedIds: [Function],
+     getUpsertedIdAt: [Function],
+     getRawResponse: [Function],
+     hasWriteErrors: [Function],
+     getWriteErrorCount: [Function],
+     getWriteErrorAt: [Function],
+     getWriteErrors: [Function],
+     getLastOp: [Function],
+     getWriteConcernError: [Function],
+     toJSON: [Function],
+     toString: [Function],
+     isOk: [Function] } }
+[2018-06-04T19:17:45.230] [DEBUG] debug - routes signup signup
+[2018-06-04T19:17:45.235] [DEBUG] debug - validate email
+[2018-06-04T19:17:45.235] [DEBUG] debug - validate username
+[2018-06-04T19:17:45.236] [DEBUG] debug - validate password
+[2018-06-04T19:17:45.236] [DEBUG] debug - crud signup checkUser
+[2018-06-04T19:17:45.674] [DEBUG] debug - crud result
+[2018-06-04T19:17:45.675] [DEBUG] debug - crud common checkUsername
+[2018-06-04T19:17:45.980] [DEBUG] debug - crud result
+[2018-06-04T19:17:45.983] [DEBUG] debug - crud signup addUser
+[2018-06-04T19:17:45.983] [DEBUG] debug - config encrypt genRandomString
+[2018-06-04T19:17:45.984] [DEBUG] debug - config encrypt sha512
+[2018-06-04T19:17:45.984] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-04T19:17:46.395] [ERROR] debug - { BulkWriteError: E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }
+    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:530:15
+    at handleCallback (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/utils.js:128:55)
+    at resultHandler (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:451:5)
+    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb-core/lib/connection/pool.js:544:18
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)
+    at process._tickCallback (internal/process/next_tick.js:180:9)
+  name: 'BulkWriteError',
+  message: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
+  driver: true,
+  code: 11000,
+  index: 0,
+  errmsg: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
+  getOperation: [Function],
+  toJSON: [Function],
+  toString: [Function],
+  result: 
+   BulkWriteResult {
+     ok: [Getter],
+     nInserted: [Getter],
+     nUpserted: [Getter],
+     nMatched: [Getter],
+     nModified: [Getter],
+     nRemoved: [Getter],
+     getInsertedIds: [Function],
+     getUpsertedIds: [Function],
+     getUpsertedIdAt: [Function],
+     getRawResponse: [Function],
+     hasWriteErrors: [Function],
+     getWriteErrorCount: [Function],
+     getWriteErrorAt: [Function],
+     getWriteErrors: [Function],
+     getLastOp: [Function],
+     getWriteConcernError: [Function],
+     toJSON: [Function],
+     toString: [Function],
+     isOk: [Function] } }
+[2018-06-04T19:19:37.172] [DEBUG] debug - routes signup signup
+[2018-06-04T19:19:37.174] [DEBUG] debug - validate email
+[2018-06-04T19:19:37.174] [DEBUG] debug - validate username
+[2018-06-04T19:19:37.174] [DEBUG] debug - validate password
+[2018-06-04T19:19:37.175] [DEBUG] debug - crud signup checkUser
+[2018-06-04T19:19:41.664] [DEBUG] debug - crud result
+[2018-06-04T19:19:41.665] [DEBUG] debug - crud common checkUsername
+[2018-06-04T19:19:41.929] [DEBUG] debug - crud result
+[2018-06-04T19:19:50.498] [DEBUG] debug - routes signup signup
+[2018-06-04T19:19:50.499] [DEBUG] debug - validate email
+[2018-06-04T19:19:50.499] [DEBUG] debug - validate username
+[2018-06-04T19:19:50.499] [DEBUG] debug - validate password
+[2018-06-04T19:19:50.499] [DEBUG] debug - crud signup checkUser
+[2018-06-04T19:19:50.764] [DEBUG] debug - crud result
+[2018-06-04T19:19:50.764] [DEBUG] debug - crud common checkUsername
+[2018-06-04T19:19:51.033] [DEBUG] debug - crud result
+[2018-06-04T19:20:01.281] [DEBUG] debug - routes signup signup
+[2018-06-04T19:20:01.281] [DEBUG] debug - validate email
+[2018-06-04T19:20:01.281] [DEBUG] debug - validate username
+[2018-06-04T19:20:01.281] [DEBUG] debug - validate password
+[2018-06-04T19:20:01.282] [DEBUG] debug - crud signup checkUser
+[2018-06-04T19:20:01.660] [DEBUG] debug - crud result
+[2018-06-04T19:20:01.660] [DEBUG] debug - crud common checkUsername
+[2018-06-04T19:20:01.967] [DEBUG] debug - crud result
+[2018-06-04T19:20:51.209] [DEBUG] debug - routes signup signup
+[2018-06-04T19:20:51.214] [DEBUG] debug - validate email
+[2018-06-04T19:20:51.214] [DEBUG] debug - validate username
+[2018-06-04T19:20:51.215] [DEBUG] debug - validate password
+[2018-06-04T19:20:51.215] [DEBUG] debug - crud signup checkUser
+[2018-06-04T19:20:51.564] [DEBUG] debug - crud result
+[2018-06-04T19:20:51.565] [DEBUG] debug - crud common checkUsername
+[2018-06-04T19:20:51.837] [DEBUG] debug - crud result
+[2018-06-04T19:22:59.416] [DEBUG] debug - routes signup signup
+[2018-06-04T19:22:59.419] [DEBUG] debug - validate email
+[2018-06-04T19:22:59.419] [DEBUG] debug - validate username
+[2018-06-04T19:22:59.419] [DEBUG] debug - validate password
+[2018-06-04T19:22:59.420] [DEBUG] debug - crud signup checkUser
+[2018-06-04T19:23:01.267] [DEBUG] debug - crud result
+[2018-06-04T19:23:01.268] [DEBUG] debug - crud common checkUsername
+[2018-06-04T19:23:01.577] [DEBUG] debug - crud result
+[2018-06-04T19:23:55.165] [DEBUG] debug - routes signup signup
+[2018-06-04T19:23:55.169] [DEBUG] debug - validate email
+[2018-06-04T19:23:55.170] [DEBUG] debug - validate username
+[2018-06-04T19:23:55.170] [DEBUG] debug - validate password
+[2018-06-04T19:23:55.171] [DEBUG] debug - crud signup checkUser
+[2018-06-04T19:23:55.543] [DEBUG] debug - crud result
+[2018-06-04T19:23:55.544] [DEBUG] debug - crud common checkUsername
+[2018-06-04T19:23:55.850] [DEBUG] debug - crud result
+[2018-06-04T19:24:30.001] [DEBUG] debug - routes signup signup
+[2018-06-04T19:24:30.007] [DEBUG] debug - validate email
+[2018-06-04T19:24:30.008] [DEBUG] debug - validate username
+[2018-06-04T19:24:30.008] [DEBUG] debug - validate password
+[2018-06-04T19:24:30.008] [DEBUG] debug - crud signup checkUser
+[2018-06-04T19:24:31.802] [DEBUG] debug - crud result
+[2018-06-04T19:24:31.803] [DEBUG] debug - crud common checkUsername
+[2018-06-04T19:24:32.099] [DEBUG] debug - crud result
+[2018-06-04T19:24:32.103] [DEBUG] debug - crud signup addUser
+[2018-06-04T19:24:32.104] [DEBUG] debug - config encrypt genRandomString
+[2018-06-04T19:24:32.104] [DEBUG] debug - config encrypt sha512
+[2018-06-04T19:24:32.104] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-04T19:24:32.614] [ERROR] debug - { BulkWriteError: E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }
+    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:530:15
+    at handleCallback (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/utils.js:128:55)
+    at resultHandler (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:451:5)
+    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb-core/lib/connection/pool.js:544:18
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)
+    at process._tickCallback (internal/process/next_tick.js:180:9)
+  name: 'BulkWriteError',
+  message: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
+  driver: true,
+  code: 11000,
+  index: 0,
+  errmsg: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
+  getOperation: [Function],
+  toJSON: [Function],
+  toString: [Function],
+  result: 
+   BulkWriteResult {
+     ok: [Getter],
+     nInserted: [Getter],
+     nUpserted: [Getter],
+     nMatched: [Getter],
+     nModified: [Getter],
+     nRemoved: [Getter],
+     getInsertedIds: [Function],
+     getUpsertedIds: [Function],
+     getUpsertedIdAt: [Function],
+     getRawResponse: [Function],
+     hasWriteErrors: [Function],
+     getWriteErrorCount: [Function],
+     getWriteErrorAt: [Function],
+     getWriteErrors: [Function],
+     getLastOp: [Function],
+     getWriteConcernError: [Function],
+     toJSON: [Function],
+     toString: [Function],
+     isOk: [Function] } }
+[2018-06-04T19:25:51.437] [DEBUG] debug - routes signup signup
+[2018-06-04T19:25:51.440] [DEBUG] debug - validate email
+[2018-06-04T19:25:51.441] [DEBUG] debug - validate username
+[2018-06-04T19:25:51.441] [DEBUG] debug - validate password
+[2018-06-04T19:25:51.442] [DEBUG] debug - crud signup checkUser
+[2018-06-04T19:25:51.713] [DEBUG] debug - crud result
+[2018-06-04T19:25:51.714] [DEBUG] debug - crud common checkUsername
+[2018-06-04T19:25:51.990] [DEBUG] debug - crud result
+[2018-06-04T19:25:52.365] [DEBUG] debug - crud signup addUser
+[2018-06-04T19:25:52.366] [DEBUG] debug - config encrypt genRandomString
+[2018-06-04T19:25:52.369] [DEBUG] debug - config encrypt sha512
+[2018-06-04T19:25:52.369] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-04T19:25:52.700] [ERROR] debug - { BulkWriteError: E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }
+    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:530:15
+    at handleCallback (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/utils.js:128:55)
+    at resultHandler (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:451:5)
+    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb-core/lib/connection/pool.js:544:18
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)
+    at process._tickCallback (internal/process/next_tick.js:180:9)
+  name: 'BulkWriteError',
+  message: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
+  driver: true,
+  code: 11000,
+  index: 0,
+  errmsg: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
+  getOperation: [Function],
+  toJSON: [Function],
+  toString: [Function],
+  result: 
+   BulkWriteResult {
+     ok: [Getter],
+     nInserted: [Getter],
+     nUpserted: [Getter],
+     nMatched: [Getter],
+     nModified: [Getter],
+     nRemoved: [Getter],
+     getInsertedIds: [Function],
+     getUpsertedIds: [Function],
+     getUpsertedIdAt: [Function],
+     getRawResponse: [Function],
+     hasWriteErrors: [Function],
+     getWriteErrorCount: [Function],
+     getWriteErrorAt: [Function],
+     getWriteErrors: [Function],
+     getLastOp: [Function],
+     getWriteConcernError: [Function],
+     toJSON: [Function],
+     toString: [Function],
+     isOk: [Function] } }
+[2018-06-04T19:30:25.914] [DEBUG] debug - routes signup signup
+[2018-06-04T19:30:25.917] [DEBUG] debug - validate email
+[2018-06-04T19:30:25.917] [DEBUG] debug - validate username
+[2018-06-04T19:30:25.917] [DEBUG] debug - validate password
+[2018-06-04T19:30:25.918] [DEBUG] debug - crud signup checkUser
+[2018-06-04T19:30:26.189] [DEBUG] debug - crud result
+[2018-06-04T19:30:26.190] [DEBUG] debug - crud common checkUsername
+[2018-06-04T19:30:26.455] [DEBUG] debug - crud result
+[2018-06-04T19:30:26.456] [DEBUG] debug - crud signup addUser
+[2018-06-04T19:30:26.457] [DEBUG] debug - config encrypt genRandomString
+[2018-06-04T19:30:26.457] [DEBUG] debug - config encrypt sha512
+[2018-06-04T19:30:26.458] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-04T19:30:26.808] [ERROR] debug - { BulkWriteError: E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }
+    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:530:15
+    at handleCallback (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/utils.js:128:55)
+    at resultHandler (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:451:5)
+    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb-core/lib/connection/pool.js:544:18
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)
+    at process._tickCallback (internal/process/next_tick.js:180:9)
+  name: 'BulkWriteError',
+  message: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
+  driver: true,
+  code: 11000,
+  index: 0,
+  errmsg: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
+  getOperation: [Function],
+  toJSON: [Function],
+  toString: [Function],
+  result: 
+   BulkWriteResult {
+     ok: [Getter],
+     nInserted: [Getter],
+     nUpserted: [Getter],
+     nMatched: [Getter],
+     nModified: [Getter],
+     nRemoved: [Getter],
+     getInsertedIds: [Function],
+     getUpsertedIds: [Function],
+     getUpsertedIdAt: [Function],
+     getRawResponse: [Function],
+     hasWriteErrors: [Function],
+     getWriteErrorCount: [Function],
+     getWriteErrorAt: [Function],
+     getWriteErrors: [Function],
+     getLastOp: [Function],
+     getWriteConcernError: [Function],
+     toJSON: [Function],
+     toString: [Function],
+     isOk: [Function] } }
+[2018-06-04T19:32:18.341] [DEBUG] debug - routes signup signup
+[2018-06-04T19:32:18.345] [DEBUG] debug - validate email
+[2018-06-04T19:32:18.346] [DEBUG] debug - validate username
+[2018-06-04T19:32:18.346] [DEBUG] debug - validate password
+[2018-06-04T19:32:18.347] [DEBUG] debug - crud signup checkUser
+[2018-06-04T19:32:18.737] [DEBUG] debug - crud result
+[2018-06-04T19:32:18.738] [DEBUG] debug - crud common checkUsername
+[2018-06-04T19:32:19.044] [DEBUG] debug - crud result
+[2018-06-04T19:32:19.044] [DEBUG] debug - crud signup addUser
+[2018-06-04T19:32:19.045] [DEBUG] debug - config encrypt genRandomString
+[2018-06-04T19:32:19.046] [DEBUG] debug - config encrypt sha512
+[2018-06-04T19:32:19.046] [DEBUG] debug - config utils randomStringGenerate
+[2018-06-04T19:32:19.458] [ERROR] debug - { BulkWriteError: E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }
+    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:530:15
+    at handleCallback (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/utils.js:128:55)
+    at resultHandler (/Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb/lib/bulk/unordered.js:451:5)
+    at /Users/mayukhmaitra/Documents/Zoommyprice/node_modules/mongodb-core/lib/connection/pool.js:544:18
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)
+    at process._tickCallback (internal/process/next_tick.js:180:9)
+  name: 'BulkWriteError',
+  message: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
+  driver: true,
+  code: 11000,
+  index: 0,
+  errmsg: 'E11000 duplicate key error index: zoommyprice.users.$email_1 dup key: { : null }',
+  getOperation: [Function],
+  toJSON: [Function],
+  toString: [Function],
+  result: 
+   BulkWriteResult {
+     ok: [Getter],
+     nInserted: [Getter],
+     nUpserted: [Getter],
+     nMatched: [Getter],
+     nModified: [Getter],
+     nRemoved: [Getter],
+     getInsertedIds: [Function],
+     getUpsertedIds: [Function],
+     getUpsertedIdAt: [Function],
+     getRawResponse: [Function],
+     hasWriteErrors: [Function],
+     getWriteErrorCount: [Function],
+     getWriteErrorAt: [Function],
+     getWriteErrors: [Function],
+     getLastOp: [Function],
+     getWriteConcernError: [Function],
+     toJSON: [Function],
+     toString: [Function],
+     isOk: [Function] } }
+[2018-06-04T19:34:30.054] [DEBUG] debug - routes signup signup
+[2018-06-04T19:34:30.055] [DEBUG] debug - validate email

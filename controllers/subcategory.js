@@ -52,60 +52,83 @@ exports.subcategory_get_all = (req, res, next) => {
         });
 };
 
-
-
-
 //create a new subcategory
 exports.subcategory_create = (req, res, next) => {
 
     var Sub_id = req.body.PRODUCT_SUB_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
     //console.log('Prod_id',Prod_id.toLowerCase());
 
-    if(
-        Category.findById(req.body.PRODUCT_CATEGORY_ID)&&
-        Sub_id.length > 0
-    )
-    {
-        const subcategory = new Subcategory({
-            _id: new mongoose.Types.ObjectId(),
-            SUB_CATEGORY_ID: Sub_id.toLowerCase(),
-            PRODUCT_CATEGORY_ID: req.body.PRODUCT_CATEGORY_ID,
-            PRODUCT_SUB_CATEGORY_NAME: req.body.PRODUCT_SUB_CATEGORY_NAME.toLowerCase(),
-            PRODUCT_SUB_CATEGORY_DESCRIPTION: req.body.PRODUCT_SUB_CATEGORY_DESCRIPTION.toLowerCase(),
-            UPDATED_BY: req.body.UPDATED_BY,
-            UPDATED_DATE: new Date(),
-            ACTIVE_FLAG: req.body.ACTIVE_FLAG
-        });
-        subcategory
-            .save()
-            .then(result => {
-                //console.log(result);
-                res.status(201).json({
-                    status: "success",
-                    error: "",
-                    data: {
-                        message: "Sub category details stored"
-                    }
-                });
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(500).json({
-                    status: "error",
-                    error: err,
-                    data: {
-                        message: "Please check all your fields"
-                    }
-                });
-            });
 
+    if(Sub_id.length > 0)
+    {
+        if(Subcategory.find({SUB_CATEGORY_ID: Sub_id.toLowerCase()}))
+        {
+            res.status(500).json({
+                status: "error",
+                data: {
+                    message: "Sub category already exists"
+                }
+            });
+        }
+        else
+        {
+            if(
+                Category.findById(req.body.PRODUCT_CATEGORY_ID)
+            )
+            {
+                const subcategory = new Subcategory({
+                    _id: new mongoose.Types.ObjectId(),
+                    SUB_CATEGORY_ID: Sub_id.toLowerCase(),
+                    PRODUCT_CATEGORY_ID: req.body.PRODUCT_CATEGORY_ID,
+                    PRODUCT_SUB_CATEGORY_NAME: req.body.PRODUCT_SUB_CATEGORY_NAME.toLowerCase(),
+                    PRODUCT_SUB_CATEGORY_DESCRIPTION: req.body.PRODUCT_SUB_CATEGORY_DESCRIPTION.toLowerCase(),
+                    UPDATED_BY: req.body.UPDATED_BY,
+                    UPDATED_DATE: new Date(),
+                    ACTIVE_FLAG: req.body.ACTIVE_FLAG
+                });
+                subcategory
+                    .save()
+                    .then(result => {
+                        //console.log(result);
+                        res.status(201).json({
+                            status: "success",
+                            data: {
+                                message: "Sub category details stored"
+                            }
+                        });
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        res.status(500).json({
+                            status: "error",
+                            error: err,
+                            data: {
+                                message: "Internal server error!"
+                            }
+                        });
+                    });
+
+            }
+            else {
+                res
+                    .status(404)
+                    .json({
+                        status: "error",
+                        data: {
+                            message: "Category does not exist!"
+                        }
+                    });
+            }
+        }
     }
     else {
         res
             .status(404)
             .json({
                 status: "error",
-                error: "Category does not exist"
+                data: {
+                    message: "Please check all your fields!"
+                }
             });
     }
 };
