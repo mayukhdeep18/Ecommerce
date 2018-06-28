@@ -31,6 +31,7 @@ const dbOperations={
                 }
                 else{
                     logger.debug('crud result'+ result);
+
                     if(result.length<1){
                         response.json(
                             {

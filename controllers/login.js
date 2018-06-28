@@ -27,7 +27,7 @@ exports.loginUser = (req, res, next) => {
     else{
         res.json(
             {
-                status: "failed",
+                status: "error",
                 message:"Please check your email and password"
             }
             );

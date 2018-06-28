@@ -37,7 +37,7 @@ const dbOperations={
                     else
                     {
                         var obj={
-                            "username":userObject.username,
+                            "username":userObject.username.toLowerCase(),
                             "notFound":undefined
                         };
                         commonOperations.checkUsername(obj,function(){
@@ -67,8 +67,8 @@ const dbOperations={
 
         var data={};
        // data._id = new mongoose.Types.ObjectId(),
-        data.useremail=request.body.useremail;
-        data.username=request.body.username;
+        data.useremail=request.body.useremail.toLowerCase();
+        data.username=request.body.username.toLowerCase();
         data.password1=request.body.password1;
 
 

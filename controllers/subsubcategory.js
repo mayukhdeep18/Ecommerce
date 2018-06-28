@@ -14,7 +14,6 @@ exports.subsubcategory_get_all = (req, res, next) => {
             if(docs.length > 0) {
                 res.status(200).json({
                     status: "success",
-                    error: "",
                     data: {
                         sub_sub_category: docs.map(doc => {
                             return {
@@ -47,7 +46,7 @@ exports.subsubcategory_get_all = (req, res, next) => {
             status: "error",
             error: err,
             data: {
-                message: "An error has occurred as mentioned above"
+                message: "Internal server error!"
             }
         });
     });
@@ -93,7 +92,7 @@ exports.subsubcategory_create = (req, res, next) => {
                         res.status(201).json({
                             status: "success",
                             data: {
-                                message: "Sub Subcategory stored"
+                                message: "Sub Sub category stored"
                             }
                         });
                     })
@@ -145,7 +144,6 @@ exports.subsubcategory_get_subsubcategory = (req, res, next) => {
             if(docs.length > 0) {
                 res.status(200).json({
                     status: "success",
-                    error: "",
                     data: {
                         sub_sub_category: docs.map(doc => {
                             return {
@@ -178,7 +176,7 @@ exports.subsubcategory_get_subsubcategory = (req, res, next) => {
                 status: "error",
                 error: err,
                 data: {
-                    message: "An error has occurred as mentioned above"
+                    message: "Internal server error!"
                 }
             });
         });
@@ -197,7 +195,6 @@ exports.subsubcategory_update = (req, res, next) => {
         .then(result => {
             res.status(200).json({
                 status: "success",
-                error: "",
                 data: {
                     message: 'sub subcategory updated'
                 }
@@ -209,7 +206,7 @@ exports.subsubcategory_update = (req, res, next) => {
                 status: "success",
                 error: err,
                 data: {
-                    message: "An error has occurred as mentioned above"
+                    message: "Internal server error"
                 }
             });
         });
@@ -223,7 +220,6 @@ exports.subsubcategory_delete = (req, res, next) => {
         .then(result => {
             res.status(200).json({
                 status: "success",
-                error: "",
                 data: {
                     message: 'subcategory deleted'
                 }
@@ -236,7 +232,7 @@ exports.subsubcategory_delete = (req, res, next) => {
                 error: err,
                 data:
                     {
-                        message: "An error has occurred as mentioned above"
+                        message: "Internal server error!"
                     }
             });
         });

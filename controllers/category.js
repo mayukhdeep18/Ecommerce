@@ -28,7 +28,6 @@ exports.category_get_all = (req, res, next) => {
                 // if (docs.length >= 0) {
                 res.status(200).json({
                     status:"success",
-                    error_msg:"",
                     data: {
                         message: 'Below are the category details',
                         response
@@ -144,7 +143,6 @@ exports.category_get_category = (req, res, next) =>{
                 // if (docs.length >= 0) {
                 res.status(200).json({
                     status:"success",
-                    error_msg:"",
                     data: {
                         message: 'Below are the category details',
                         response
@@ -153,7 +151,12 @@ exports.category_get_category = (req, res, next) =>{
             } else {
                 res
                     .status(404)
-                    .json({ message: "No valid entry found for provided ID" });
+                    .json({
+                        status: "error",
+                        data: {
+                            message: "No valid entry found for provided ID"
+                        }
+                    });
             }
         })
         .catch(err => {
@@ -180,7 +183,6 @@ exports.category_update_category = (req, res, next) =>{
         .then(result => {
             res.status(200).json({
                 status: "success",
-                error: "",
                 data: {
                     message: "category updated"
                 }
@@ -206,7 +208,6 @@ exports.category_delete = (req, res, next) =>{
         .then(result => {
             res.status(200).json({
                 status: "success",
-                error: "",
                 data: {
                     message: 'category deleted'
                 }
@@ -215,7 +216,11 @@ exports.category_delete = (req, res, next) =>{
         .catch(err => {
             console.log(err);
             res.status(500).json({
-                error: err
+                status: "error",
+                error: err,
+                data : {
+                    message: "Internal server error"
+                }
             });
         });
 };
