@@ -23,7 +23,6 @@ exports.ecommproduct_get_all = (req, res, next) => {
         .then(docs => {
             res.status(200).json({
                 status: "success",
-                error: "",
                 data: {
                     ecommproduct: docs.map(doc => {
                         return {
@@ -56,7 +55,7 @@ exports.ecommproduct_get_all = (req, res, next) => {
                 status: "error",
                 error: err,
                 data: {
-                    message: "An error has occurred as mentioned above"
+                    message: "Internal server error!"
                 }
             });
         });
@@ -74,11 +73,9 @@ exports.ecommproduct_details_get_by_id = (req, res, next) => {
         .populate('SUB_SUB_CATEGORY_ID')
         .exec()
         .then(doc => {
-            console.log("From database", doc);
             if (doc) {
                 res.status(200).json({
                     status: "success",
-                    error: "",
                     data: {
                         message: doc
                     }
@@ -88,8 +85,7 @@ exports.ecommproduct_details_get_by_id = (req, res, next) => {
                     .status(404)
                     .json({
                         status: "error",
-                        error: "Id not found",
-                        message: "No valid entry found for provided subcategory ID"
+                        message: "No valid entry found"
                     });
             }
         })
@@ -99,14 +95,14 @@ exports.ecommproduct_details_get_by_id = (req, res, next) => {
                 status: "error",
                 error: err,
                 data: {
-                    message: "An error has occurred as mentioned above"
+                    message: "Internal server error!"
                 }
             });
         });
 };
 
 
-//update ecommerce product details by id
+//update ecommerce product details by id - TO BE UPDATED
 exports.ecommproduct_update_by_id = (req, res, next) => {
     const id = req.params.ecommcategoryId;
     const updateOps = {};
@@ -269,9 +265,8 @@ exports.ecommproduct_delete_by_id = (req, res, next) => {
         .then(result => {
             res.status(200).json({
                 status: "success",
-                error: "",
                 data: {
-                    message: 'subcategory deleted'
+                    message: 'ecommerce product deleted'
                 }
             });
         })
@@ -282,7 +277,7 @@ exports.ecommproduct_delete_by_id = (req, res, next) => {
                 error: err,
                 data:
                     {
-                        message: "An error has occurred as mentioned above"
+                        message: "Internal server error!"
                     }
             });
         });
@@ -424,10 +419,10 @@ exports.ecommproduct_new_create = (req, res, next) => {
 
                                                                                                     }).catch(err => {
                                                                                                     res.status(500).json({
-                                                                                                        status: "failure",
+                                                                                                        status: "error",
                                                                                                         error: err,
                                                                                                         data: {
-                                                                                                            message: "7. An error has occurred as mentioned above"
+                                                                                                            message: "7. Internal server error!"
                                                                                                         }
                                                                                                     });
                                                                                                 });
@@ -436,7 +431,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                                                                                 status: "failure",
                                                                                                 error: err,
                                                                                                 data: {
-                                                                                                    message: "6. An error has occurred as mentioned above"
+                                                                                                    message: "6. Internal server error!"
                                                                                                 }
                                                                                             });
                                                                                         });
@@ -447,7 +442,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                                                                         status: "failure",
                                                                                         error: err,
                                                                                         data: {
-                                                                                            message: "5. An error has occurred as mentioned above"
+                                                                                            message: "5. Internal server error!"
                                                                                         }
                                                                                     });
                                                                                 });
@@ -457,7 +452,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                                                                 status: "failure",
                                                                                 error: err,
                                                                                 data: {
-                                                                                    message: "4. An error has occurred as mentioned above"
+                                                                                    message: "4. Internal server error!"
                                                                                 }
                                                                             });
                                                                         });
@@ -466,7 +461,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                                                         status: "failure",
                                                                         error: err,
                                                                         data: {
-                                                                            message: "3. An error has occurred as mentioned above"
+                                                                            message: "3. Internal server error!"
                                                                         }
                                                                     });
                                                                 });
@@ -476,7 +471,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                                                 status: "failure",
                                                                 error: err,
                                                                 data: {
-                                                                    message: "2. An error has occurred as mentioned above"
+                                                                    message: "2. Internal server error!"
                                                                 }
                                                             });
                                                         });
@@ -486,7 +481,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                                         status: "failure",
                                                         error: err,
                                                         data: {
-                                                            message: "1. An error has occurred as mentioned above"
+                                                            message: "1. Internal server error!"
                                                         }
                                                     });
                                                 });
@@ -496,7 +491,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                                 status: "error",
                                                 error: err,
                                                 data: {
-                                                    message: "An error has occurred as mentioned above"
+                                                    message: "Internal server error!"
                                                 }
                                             });
                                         });
@@ -507,7 +502,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                             status: "error",
                                             error: err,
                                             data: {
-                                                message: "An error has occurred as mentioned above"
+                                                message: "Internal server error!"
                                             }
                                         });
                                     });
@@ -519,7 +514,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                     status: "error",
                                     error: err,
                                     data: {
-                                        message: "An error has occurred as mentioned above"
+                                        message: "Internal server error!"
                                     }
                                 });
                             });
@@ -531,7 +526,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
                             status: "error",
                             error: err,
                             data: {
-                                message: "An error has occurred as mentioned above"
+                                message: "Internal server error!"
                             }
                         });
                     });
@@ -555,7 +550,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
             status: "error",
             error: err,
             data: {
-                message: "An error has occurred as mentioned above"
+                message: "Internal server error!"
             }
         });
     });
@@ -563,7 +558,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
 };
 
 
-//map ecommerce product and product along with ratings and reviews a new ecommerce product detail
+//map ecommerce product and product along with ratings and reviews a new ecommerce product detail - OLD CODE, NO LONGER NEEDED
 exports.ecommproduct_map = (req, res, next) => {
 
     var Ecom_id = req.params.Ecommerce_id;

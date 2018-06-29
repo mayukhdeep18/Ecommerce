@@ -60,10 +60,11 @@ exports.category_get_all = (req, res, next) => {
 exports.category_create_category = (req, res, next) =>{
 
     var Cat_id = req.body.PRODUCT_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
+    //console.log("check",Category.find({CATEGORY_ID: Cat_id.toLowerCase()}));
 
     if( Cat_id.length > 0)
     {
-        if(Category.find({CATEGORY_ID: Cat_id.toLowerCase()})===true)
+        if(Category.find({CATEGORY_ID: Cat_id.toLowerCase()}))
         {
                     res.status(500).json({
                         status: "error",

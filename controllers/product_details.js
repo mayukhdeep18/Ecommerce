@@ -151,7 +151,7 @@ exports.product_get_all = (req, res, next) => {
                                                 res.status(500).json({
                                                     status: "error",
                                                     data: {
-                                                        message: "An error has occurred"
+                                                        message: "Internal server error!"
                                                     }
                                                 });
                                             })
@@ -161,7 +161,7 @@ exports.product_get_all = (req, res, next) => {
                                         res.status(500).json({
                                             status: "error",
                                             data: {
-                                                message: "An error has occurred"
+                                                message: "Internal server error!"
                                             }
                                         });
                                     });
@@ -182,7 +182,7 @@ exports.product_get_all = (req, res, next) => {
                     res.status(500).json({
                         status: "error",
                         data: {
-                            message: "An error has occurred as mentioned above"
+                            message: "Internal server error!"
                         }
                     });
                 });
@@ -193,7 +193,7 @@ exports.product_get_all = (req, res, next) => {
                 res.status(500).json({
                     status: "error",
                     data: {
-                        message: "An error has occurred as mentioned above"
+                        message: "Internal server error!"
                     }
                 });
             });
@@ -254,7 +254,7 @@ exports.product_create = (req, res, next) => {
                     status: "error",
                     error: err,
                     data: {
-                        message: "Please check all your fields"
+                        message: "Internal server error!"
                     }
                 });
             });
@@ -414,7 +414,7 @@ exports.product_details_get_by_id = (req, res, next) => {
                                         res.status(500).json({
                                             status: "error",
                                             data: {
-                                                message: "An error has occurred"
+                                                message: "Internal server error!"
                                             }
                                         });
                                     })
@@ -424,7 +424,7 @@ exports.product_details_get_by_id = (req, res, next) => {
                                 res.status(500).json({
                                     status: "error",
                                     data: {
-                                        message: "An error has occurred"
+                                        message: "Internal server error!"
                                     }
                                 });
                             });
@@ -445,7 +445,7 @@ exports.product_details_get_by_id = (req, res, next) => {
                     res.status(500).json({
                         status: "error",
                         data: {
-                            message: "An error has occurred as mentioned above"
+                            message: "Internal server error!"
                         }
                     });
                 });
@@ -456,7 +456,7 @@ exports.product_details_get_by_id = (req, res, next) => {
                 res.status(500).json({
                     status: "error",
                     data: {
-                        message: "An error has occurred as mentioned above"
+                        message: "Internal server error!"
                     }
                 });
             });
@@ -493,7 +493,6 @@ exports.product_update_by_id = (req, res, next) => {
         .then(result => {
             res.status(200).json({
                 status: "success",
-                error: "",
                 data: {
                     message: 'product details updated'
                 }
@@ -505,7 +504,7 @@ exports.product_update_by_id = (req, res, next) => {
                 status: "success",
                 error: err,
                 data: {
-                    message: "An error has occurred as mentioned above"
+                    message: "Internal server error!"
                 }
             })
         })
@@ -519,7 +518,6 @@ exports.product_delete_by_id = (req, res, next) => {
         .then(result => {
             res.status(200).json({
                 status: "success",
-                error: "",
                 data: {
                     message: 'product deleted'
                 }
@@ -532,7 +530,7 @@ exports.product_delete_by_id = (req, res, next) => {
                 error: err,
                 data:
                     {
-                        message: "An error has occurred as mentioned above"
+                        message: "Internal server error!"
                     }
             });
         });
