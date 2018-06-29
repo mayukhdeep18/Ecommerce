@@ -3,24 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="22d33094-d95f-4e1e-897e-0a67ac0d8ed3" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/crudoperations/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/crudoperations/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/crudoperations/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/crudoperations/signup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/category.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/category.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/subcategory.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/subcategory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/subsubcategory.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/subsubcategory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.1" beforeDir="false" afterPath="$PROJECT_DIR$/logs/debug.log.1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.10" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.2" beforeDir="false" afterPath="$PROJECT_DIR$/logs/debug.log.2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.3" beforeDir="false" afterPath="$PROJECT_DIR$/logs/debug.log.3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.4" beforeDir="false" afterPath="$PROJECT_DIR$/logs/debug.log.4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.5" beforeDir="false" afterPath="$PROJECT_DIR$/logs/debug.log.5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.6" beforeDir="false" afterPath="$PROJECT_DIR$/logs/debug.log.6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.7" beforeDir="false" afterPath="$PROJECT_DIR$/logs/debug.log.7" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.8" beforeDir="false" afterPath="$PROJECT_DIR$/logs/debug.log.8" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.9" beforeDir="false" afterPath="$PROJECT_DIR$/logs/debug.log.9" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/calculate_mean_rating.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/calculate_mean_rating.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ecommerce_product_details.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ecommerce_product_details.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/product_details.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/product_details.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/product_details.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/product_details.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/rating_details.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/rating_details.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/category.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/category.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -48,47 +35,40 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1563">
-              <caret line="155" lean-forward="true" selection-start-line="155" selection-end-line="155" />
+            <state relative-caret-position="1695">
+              <caret line="155" selection-start-line="155" selection-end-line="155" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="category.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/routes/category.js">
+      <file leaf-file-name="product_details.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controllers/product_details.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="category.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/category.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1266">
-              <caret line="119" lean-forward="true" selection-start-line="119" selection-end-line="119" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="subcategory.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/subcategory.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1980">
-              <caret line="179" column="51" selection-start-line="179" selection-start-column="51" selection-end-line="179" selection-end-column="51" />
+            <state relative-caret-position="345">
+              <caret line="514" selection-start-line="514" selection-end-line="514" />
               <folding>
-                <element signature="e#228#1995#0" />
+                <element signature="e#515#11881#0" />
+                <element signature="e#14303#16299#0" />
+                <element signature="e#16386#27130#0" />
+                <element signature="e#27215#28185#0" />
+                <element signature="e#28270#28929#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="subsubcategory.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/subsubcategory.js">
+      <file leaf-file-name="ecommerce_product_details.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/controllers/ecommerce_product_details.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3450">
-              <caret line="230" column="32" lean-forward="true" selection-start-line="230" selection-start-column="32" selection-end-line="230" selection-end-column="32" />
+            <state relative-caret-position="107">
+              <caret line="407" column="131" selection-start-line="407" selection-start-column="131" selection-end-line="407" selection-end-column="131" />
+              <folding>
+                <element signature="e#587#3095#0" />
+                <element signature="e#3197#4557#0" />
+                <element signature="e#4658#11749#0" />
+                <element signature="e#11850#12512#0" />
+                <element signature="e#17815#25480#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -117,11 +97,9 @@
       <list>
         <option value="$PROJECT_DIR$/controllers/filters.js" />
         <option value="$PROJECT_DIR$/routes/product_images.js" />
-        <option value="$PROJECT_DIR$/models/product_details.js" />
         <option value="$PROJECT_DIR$/models/ecommerce_product_details.js" />
         <option value="$PROJECT_DIR$/routes/ecommerce_product_details.js" />
         <option value="$PROJECT_DIR$/models/review_details.js" />
-        <option value="$PROJECT_DIR$/models/rating_details.js" />
         <option value="$PROJECT_DIR$/models/product_images.js" />
         <option value="$PROJECT_DIR$/controllers/product_images.js" />
         <option value="$PROJECT_DIR$/routes/cat_subcat_subsubcat_hierarchy.js" />
@@ -134,12 +112,10 @@
         <option value="$PROJECT_DIR$/config/utils.js" />
         <option value="$PROJECT_DIR$/controllers/activateEmail.js" />
         <option value="$PROJECT_DIR$/config/crudoperations/commonoperations.js" />
-        <option value="$PROJECT_DIR$/controllers/ecommerce_product_details.js" />
         <option value="$PROJECT_DIR$/controllers/cat_based_products_with_sorting_filter.js" />
         <option value="$PROJECT_DIR$/controllers/review_details.js" />
         <option value="$PROJECT_DIR$/controllers/ecommerce_category.js" />
         <option value="$PROJECT_DIR$/routes/product_details.js" />
-        <option value="$PROJECT_DIR$/controllers/product_details.js" />
         <option value="$PROJECT_DIR$/controllers/subcat_based_products_with_sorting_filter.js" />
         <option value="$PROJECT_DIR$/expressCart/views/layouts/layout.hbs" />
         <option value="$PROJECT_DIR$/expressCart/config/settings.json" />
@@ -166,6 +142,10 @@
         <option value="$PROJECT_DIR$/controllers/subcategory.js" />
         <option value="$PROJECT_DIR$/controllers/subsubcategory.js" />
         <option value="$PROJECT_DIR$/routes/category.js" />
+        <option value="$PROJECT_DIR$/models/product_details.js" />
+        <option value="$PROJECT_DIR$/controllers/product_details.js" />
+        <option value="$PROJECT_DIR$/models/rating_details.js" />
+        <option value="$PROJECT_DIR$/controllers/ecommerce_product_details.js" />
       </list>
     </option>
   </component>
@@ -198,9 +178,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -217,6 +194,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -341,12 +321,13 @@
       <workItem from="1530085257845" duration="331000" />
       <workItem from="1530086571927" duration="810000" />
       <workItem from="1530094191370" duration="8562000" />
-      <workItem from="1530171437094" duration="17056000" />
+      <workItem from="1530171437094" duration="18046000" />
+      <workItem from="1530253342041" duration="9817000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="558179000" />
+    <option name="totallyTimeSpent" value="568986000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -363,10 +344,10 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="right" id="Mongo Explorer" order="7" weight="0.32956383" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3034483" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3034483" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
       <window_info anchor="right" id="Database" order="6" weight="0.32956383" />
       <window_info id="Learn" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -405,20 +386,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/routes/subcat_based_products_with_sorting_filter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/subsubcat_based_products_with_sorting_filter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="29" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/subsubcat_based_products_with_sorting_filter.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -447,27 +414,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/ecommerce_product_details.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="292" column="54" selection-start-line="292" selection-start-column="54" selection-end-line="292" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/cat_based_products_with_sorting_filter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="192" column="97" selection-start-line="192" selection-start-column="97" selection-end-line="192" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/review_details.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="45" lean-forward="true" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/review_details.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
@@ -486,13 +432,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/product_details.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
@@ -532,13 +471,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/product_details.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="19" column="39" lean-forward="true" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -597,12 +529,6 @@
           <caret line="16" column="24" lean-forward="true" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/subcategory_flag.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/subsubcategory_flag.js">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/subsubcategory.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -695,10 +621,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
+    <entry file="file://$PROJECT_DIR$/controllers/subcategory.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1563">
-          <caret line="155" lean-forward="true" selection-start-line="155" selection-end-line="155" />
+        <state relative-caret-position="1980">
+          <caret line="179" column="51" selection-start-line="179" selection-start-column="51" selection-end-line="179" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/subsubcategory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2741">
+          <caret line="230" column="32" lean-forward="true" selection-start-line="230" selection-start-column="32" selection-end-line="230" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -709,27 +642,94 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/subcategory.js">
+    <entry file="file://$PROJECT_DIR$/controllers/category_based_product.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1980">
-          <caret line="179" column="51" selection-start-line="179" selection-start-column="51" selection-end-line="179" selection-end-column="51" />
-          <folding>
-            <element signature="e#228#1995#0" />
-          </folding>
+        <state relative-caret-position="-194">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/subsubcategory.js">
+    <entry file="file://$PROJECT_DIR$/controllers/filtering_products.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3450">
-          <caret line="230" column="32" lean-forward="true" selection-start-line="230" selection-start-column="32" selection-end-line="230" selection-end-column="32" />
+        <state relative-caret-position="2400">
+          <caret line="160" selection-start-line="160" selection-end-line="160" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/cat_based_products_with_sorting_filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2614">
+          <caret line="192" column="97" selection-start-line="192" selection-start-column="97" selection-end-line="192" selection-end-column="97" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/category.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+        <state relative-caret-position="90">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1695">
+          <caret line="155" selection-start-line="155" selection-end-line="155" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/product_details.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="34" lean-forward="true" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/review_details.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="63" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/rating_details.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="53" lean-forward="true" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/ecommerce_product_details.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/product_details.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="514" selection-start-line="514" selection-end-line="514" />
+          <folding>
+            <element signature="e#515#11881#0" />
+            <element signature="e#14303#16299#0" />
+            <element signature="e#16386#27130#0" />
+            <element signature="e#27215#28185#0" />
+            <element signature="e#28270#28929#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/ecommerce_product_details.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="407" column="131" selection-start-line="407" selection-start-column="131" selection-end-line="407" selection-end-column="131" />
+          <folding>
+            <element signature="e#587#3095#0" />
+            <element signature="e#3197#4557#0" />
+            <element signature="e#4658#11749#0" />
+            <element signature="e#11850#12512#0" />
+            <element signature="e#17815#25480#0" />
+          </folding>
         </state>
       </provider>
     </entry>
