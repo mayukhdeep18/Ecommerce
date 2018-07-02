@@ -55,69 +55,59 @@ exports.filters_options_conn_get_all = (req, res, next) => {
 //create a new filter option connection
 exports.filters_options_conn_create = (req, res, next) => {
 
-    if(Filters.findById(req.body.FILTER_ID) && Category.findById(req.body.CATEGORY_ID)&&
-        Subcategory.findById(req.body.SUB_CATEGORY_ID)&&
-        Subsubcategory.findById(req.body.SUB_SUB_CATEGORY_ID))
-    {
-        const filteroption = new Filter_options({
-            _id: new mongoose.Types.ObjectId(),
-            FILTER_ID: req.body.FILTER_ID,
-            CATEGORY_ID: req.CATEGORY_ID,
-            SUB_CATEGORY_ID: req.body.SUB_CATEGORY_ID,
-            SUB_SUB_CATEGORY_ID: req.body.SUB_SUB_CATEGORY_ID,
-            URL_SLUG: req.body.URL_SLUG,
-            DISPLAY_TEXT: req.body.DISPLAY_TEXT,
-            UPDATED_BY: req.body.UPDATED_BY,
-            UPDATED_DATE: new Date(),
-            ACTIVE_FLAG: req.body.ACTIVE_FLAG
-        });
-        filteroption
-            .save()
-            .then(result => {
-                console.log(result);
-                res.status(201).json({
-                    status: "success",
-                    error: "",
-                    data: {
-                        message: "filter category connection stored",
-                        createdcategory: {
-                            _id: result._id,
-                            FILTER_ID: result.FILTER_ID,
-                            CATEGORY_ID: result.CATEGORY_ID,
-                            SUB_CATEGORY_ID: result.body.SUB_CATEGORY_ID,
-                            SUB_SUB_CATEGORY_ID: result.body.SUB_SUB_CATEGORY_ID,
-                            URL_SLUG: result.URL_SLUG,
-                            DISPLAY_TEXT: result.DISPLAY_TEXT,
-                            UPDATED_BY: result.UPDATED_BY,
-                            UPDATED_DATE: result.UPDATED_DATE,
-                            ACTIVE_FLAG: result.ACTIVE_FLAG
-                        }
-                    }
-                });
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(500).json({
-                    status: "error",
-                    error: err,
-                    data: {
-                        message: "An error has occurred as mentioned above"
-                    }
-                });
-            });
+    var fil_id = req.body.FILTER_ID;
+    var sub_categ_id = "";
+    var sub_sub_categ_id = "";
+    console.log("fil_id",fil_id);
+    console.log("val",req.body.DISPLAY_TEXT);
 
-    }
-    else {
-        res
-            .status(404)
-            .json({
-                status: "error",
-                error: "ID doesn't exist",
-                data: {
-                    message: "filter id does not exist"
+    Filters.find({FILTER_ID:fil_id})
+        .select('CATEGORY_ID SUB_CATEGORY_ID SUB_SUB_CATEGORY_ID')
+        .exec()
+        .then(res => {
+            var arr = [];
+            if(res.SUB_CATEGORY_ID !=null)
+            {
+                sub_categ_id = res.SUB_CATEGORY_ID;
+            }
+            if(res.SUB_SUB_CATEGORY_ID!=null)
+            {
+                sub_sub_categ_id = res.SUB_SUB_CATEGORY_ID;
+            }
+            for(var item of req.body.DISPLAY_TEXT)
+            {
+                arr.push({
+                    _id: new mongoose.Types.ObjectId(),
+                    FILTER_ID: fil_id,
+                    CATEGORY_ID: res.CATEGORY_ID,
+                    SUB_CATEGORY_ID: res.SUB_CATEGORY_ID,
+                    SUB_SUB_CATEGORY_ID: res.SUB_SUB_CATEGORY_ID,
+                    DISPLAY_TEXT: item,
+                    UPDATED_BY: req.body.UPDATED_BY,
+                    UPDATED_DATE: new Date(),
+                    ACTIVE_FLAG: req.body.ACTIVE_FLAG
+                })
+            }
+            Filter_options.insertMany(arr, function(error, inserted) {
+                if(error) {
+                    res.status(500).json({
+                        status: "error",
+                        data: {
+                            message: "An error has occurred as mentioned above"
+                        }
+                    });
                 }
-            });
-    }
+                else {
+                    res.status(201).json({
+                        status: "success",
+                        data: {
+                            message: "filter values added successfully"
+                        }
+                    });
+                }
+
+            }); // end of insert
+        })
 };
 
 
@@ -160,7 +150,7 @@ exports.filters_options_conn_get_by_id = (req, res, next) => {
             }
         })
         .catch(err => {
-            console.log(err);
+            //console.log(err);
             res.status(500).json({
                 status: "error",
                 error: err,

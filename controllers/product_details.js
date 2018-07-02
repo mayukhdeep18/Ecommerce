@@ -26,7 +26,7 @@ exports.product_get_all = (req, res, next) => {
             .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT PRODUCT_IMAGE_LINKS UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
             .populate('PRODUCT_CATEGORY_ID')
             .populate('PRODUCT_SUB_CATEGORY_ID')
-            .populate('PRODUCT_SUB_SUB_CATEGORY_ID')
+            .populate('PRODUCT_SUB_SUB_CATEGORY_ID',null)
             .populate('ECOMMERCE_CATEGORY_ID')
             .populate('ECOMMERCE_PRODUCT_DETAILS_ID')
             .skip((perPage * page) - perPage)
@@ -40,8 +40,14 @@ exports.product_get_all = (req, res, next) => {
                     .then(count => {
                         if(docs.length > 0)
                         {
+
                             for( var prod_item of docs)
                             {
+                                var product_sub_sub_category_name="";
+                                if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.PRODUCT_SUB_SUB_CATEGORY_NAME!=null)
+                                {
+                                    product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.PRODUCT_SUB_SUB_CATEGORY_NAME;
+                                }
                                 //create an array with the basic product details
                                 prod_cat_arr.push({prod_id: prod_item._id,
                                     product_id: prod_item.PRODUCT_ID,
@@ -165,12 +171,10 @@ exports.product_get_all = (req, res, next) => {
                                             }
                                         });
                                     });
-
-
                         }
                         else
                         {
-                            res.status(500).json({
+                            res.status(404).json({
                                 status: "error",
                                 data: {
                                     message: "No product details found"
@@ -289,7 +293,7 @@ exports.product_details_get_by_id = (req, res, next) => {
             .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT PRODUCT_IMAGE_LINKS UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
             .populate('PRODUCT_CATEGORY_ID')
             .populate('PRODUCT_SUB_CATEGORY_ID')
-            .populate('PRODUCT_SUB_SUB_CATEGORY_ID')
+            .populate('PRODUCT_SUB_SUB_CATEGORY_ID',null)
             .populate('ECOMMERCE_CATEGORY_ID')
             .populate('ECOMMERCE_PRODUCT_DETAILS_ID')
             .skip((perPage * page) - perPage)
@@ -303,8 +307,14 @@ exports.product_details_get_by_id = (req, res, next) => {
                     .then(count => {
                         if(docs.length > 0)
                         {
+
                             for( var prod_item of docs)
                             {
+                                var product_sub_sub_category_name="";
+                                if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.PRODUCT_SUB_SUB_CATEGORY_NAME!=null)
+                                {
+                                    product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.PRODUCT_SUB_SUB_CATEGORY_NAME;
+                                }
                                 //create an array with the basic product details
                                 prod_cat_arr.push({prod_id: prod_item._id,
                                     product_id: prod_item.PRODUCT_ID,
@@ -428,12 +438,10 @@ exports.product_details_get_by_id = (req, res, next) => {
                                     }
                                 });
                             });
-
-
                         }
                         else
                         {
-                            res.status(500).json({
+                            res.status(404).json({
                                 status: "error",
                                 data: {
                                     message: "No product details found"
