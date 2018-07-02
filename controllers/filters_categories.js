@@ -335,49 +335,81 @@ exports.filters_categories_conn_create = (req, res, next) => {
 //get filter category connection details by id
 exports.filters_categories_conn_get_by_id = (req, res, next) => {
     const id = req.params.filtercategoryId;
-    Filters_categories.findById(id)
+    Filters_categories.find({_id: id})
         .select("UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         .populate('FILTER_ID')
+        .populate('SUB_SUB_CATEGORY_ID',null)
+        .populate('SUB_CATEGORY_ID',null)
         .populate('CATEGORY_ID')
-        .populate('SUB_CATEGORY_ID')
-        .populate('SUB_SUB_CATEGORY_ID')
         .exec()
         .then(doc => {
-            console.log("From database", doc);
-            if (doc) {
+            if(doc.length > 0)
+            {
+                var sub_id ="";
+                var sub_category_id = "";
+                var sub_category_name = "";
+                var sub_sub_cat_doc_id = "";
+                var sub_sub_category_id = "";
+                var sub_sub_category_name = "";
+
+                const response = {
+                    filter_category_details: doc.map(docs => {
+                        if(docs.SUB_CATEGORY_ID != null){
+                            sub_id =  docs.SUB_CATEGORY_ID._id;
+                            sub_category_id = docs.SUB_CATEGORY_ID.SUB_CATEGORY_ID,
+                                sub_category_name =  docs.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME
+
+                        }
+                        if(docs.SUB_SUB_CATEGORY_ID != null) {
+                            sub_sub_cat_doc_id = docs.SUB_SUB_CATEGORY_ID._id;
+                            sub_sub_category_id = docs.SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_ID;
+                            sub_sub_category_name = docs.SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
+                        }
+                        return {
+                            filter_doc_id: docs.FILTER_ID._id,
+                            filter_id: docs.FILTER_ID.FILTER_ID,
+                            filter_type: docs.FILTER_ID.FILTER_CATEGORY_NAME,
+                            cat_doc_id: docs.CATEGORY_ID._id,
+                            category_id: docs.CATEGORY_ID.CATEGORY_ID,
+                            category_name: docs.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
+                            sub_id : sub_id,
+                            sub_category_id:  sub_category_id,
+                            sub_category_name:  sub_category_name,
+                            sub_sub_cat_doc_id: sub_sub_cat_doc_id,
+                            sub_sub_category_id:sub_sub_category_id,
+                            sub_sub_category_nm: sub_sub_category_name
+                        };
+                    })
+                };
+
                 res.status(200).json({
                     status:"success",
                     error_msg:"",
                     data: {
-                        filter_category_conn_id: doc._id,
-                        filter_id: doc.FILTER_ID._id,
-                        filter_category_name: doc.FILTER_ID.FILTER_CATEGORY_NAME,
-                        category_id: doc.CATEGORY_ID._id,
-                        category_name: doc.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
-                        product_sub_category_id: doc.SUB_CATEGORY_ID._id,
-                        product_sub_category_name: doc.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME,
-                        product_sub_sub_category_id: doc.SUB_SUB_CATEGORY_ID._id,
-                        product_sub_sub_category_name: doc.SUB_SUB_CATEGORY_ID.PRODUCT_SUB_SUB_CATEGORY_NAME,
-                        updated_by_user: doc.UPDATED_BY,
-                        updated_on: doc.UPDATED_DATE,
-                        isActive: doc.ACTIVE_FLAG
+                        response
                     }
                 });
-            } else {
-                res
-                    .status(404)
-                    .json({ message: "No valid entry found for provided ID" });
             }
+            else
+            {
+                res.status(404).json({
+                    status: "error",
+                    data: {
+                        message: "No filter category connections found"
+                    }
+                });
+            }
+
         })
         .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                status: "error",
-                error: err,
-                data: {
-                    message: "An error has occurred as mentioned above"
-                }
-            });
+            console.log(err),
+                res.status(500).json({
+                    status: "error",
+                    error: err,
+                    data: {
+                        message: "An error has occurred as mentioned above"
+                    }
+                });
         });
 };
 
@@ -446,50 +478,63 @@ exports.filters_categories_conn_get_all = (req, res, next) => {
         .populate('CATEGORY_ID')
         .exec()
         .then(doc => {
-           /* var sub_id ="";
-            var sub_category_id = "";
-            var sub_category_name = "";
-            var sub_sub_cat_doc_id = "";
-            var sub_sub_category_id = "";
-            var sub_sub_category_name = "";
+            if(doc.length > 0)
+            {
+                var sub_id ="";
+                var sub_category_id = "";
+                var sub_category_name = "";
+                var sub_sub_cat_doc_id = "";
+                var sub_sub_category_id = "";
+                var sub_sub_category_name = "";
 
-           const response = {
-                filter_category_details: doc.map(docs => {
-                    if(docs.SUB_CATEGORY_ID != null){
-                        sub_id =  docs.SUB_CATEGORY_ID._id;
-                        sub_category_id = docs.SUB_CATEGORY_ID.SUB_CATEGORY_ID,
-                            sub_category_name =  docs.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME
+                const response = {
+                    filter_category_details: doc.map(docs => {
+                        if(docs.SUB_CATEGORY_ID != null){
+                            sub_id =  docs.SUB_CATEGORY_ID._id;
+                            sub_category_id = docs.SUB_CATEGORY_ID.SUB_CATEGORY_ID,
+                                sub_category_name =  docs.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME
 
+                        }
+                        if(docs.SUB_SUB_CATEGORY_ID != null) {
+                            sub_sub_cat_doc_id = docs.SUB_SUB_CATEGORY_ID._id;
+                            sub_sub_category_id = docs.SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_ID;
+                            sub_sub_category_name = docs.SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
+                        }
+                        return {
+                            filter_doc_id: docs.FILTER_ID._id,
+                            filter_id: docs.FILTER_ID.FILTER_ID,
+                            filter_type: docs.FILTER_ID.FILTER_CATEGORY_NAME,
+                            cat_doc_id: docs.CATEGORY_ID._id,
+                            category_id: docs.CATEGORY_ID.CATEGORY_ID,
+                            category_name: docs.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
+                            sub_id : sub_id,
+                            sub_category_id:  sub_category_id,
+                            sub_category_name:  sub_category_name,
+                            sub_sub_cat_doc_id: sub_sub_cat_doc_id,
+                            sub_sub_category_id:sub_sub_category_id,
+                            sub_sub_category_nm: sub_sub_category_name
+                        };
+                    })
+                };
+
+                res.status(200).json({
+                    status:"success",
+                    error_msg:"",
+                    data: {
+                        response
                     }
-                    if(docs.SUB_SUB_CATEGORY_ID != null) {
-                        sub_sub_cat_doc_id = docs.SUB_SUB_CATEGORY_ID._id;
-                        sub_sub_category_id = docs.SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_ID;
-                        sub_sub_category_name = docs.SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
+                });
+            }
+            else
+            {
+                res.status(404).json({
+                    status: "error",
+                    data: {
+                        message: "No filter category connections found"
                     }
-                    return {
-                        filter_doc_id: docs.FILTER_ID._id,
-                        filter_id: docs.FILTER_ID.FILTER_ID,
-                        filter_type: docs.FILTER_ID.FILTER_CATEGORY_NAME,
-                        cat_doc_id: docs.CATEGORY_ID._id,
-                        category_id: docs.CATEGORY_ID.CATEGORY_ID,
-                        category_name: docs.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
-                        sub_id : sub_id,
-                        sub_category_id:  sub_category_id,
-                        sub_category_name:  sub_category_name,
-                        sub_sub_cat_doc_id: sub_sub_cat_doc_id,
-                        sub_sub_category_id:sub_sub_category_id,
-                        sub_sub_category_nm: sub_sub_category_name
-                    };
-                })
-            };*/
-            // if (docs.length >= 0) {
-            res.status(200).json({
-                status:"success",
-                error_msg:"",
-                data: {
-                   doc
-                }
-            });
+                });
+            }
+
         })
         .catch(err => {
             console.log(err),

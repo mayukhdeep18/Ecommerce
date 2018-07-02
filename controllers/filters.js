@@ -10,7 +10,6 @@ exports.filter_category_get_all = (req, res, next) => {
             if(docs.length > 0)
             {
                 const response = {
-                    //count: docs.length,
                     seller_categories: docs.map(doc => {
                         return {
                             doc_id: doc._id,
@@ -25,9 +24,7 @@ exports.filter_category_get_all = (req, res, next) => {
                 // if (docs.length >= 0) {
                 res.status(200).json({
                     status:"success",
-                    error_msg:"",
                     data: {
-                        message: 'Below are the filter_type details',
                         response
                     }
                 });
@@ -35,8 +32,7 @@ exports.filter_category_get_all = (req, res, next) => {
             else
             {
                 res.status(404).json({
-                    status:"failure",
-                    error_msg:"",
+                    status:"error",
                     data: {
                         message: 'No filter types found'
                     }
@@ -50,14 +46,14 @@ exports.filter_category_get_all = (req, res, next) => {
                 status: "error",
                 error: err,
                 data:{
-                    message: "An error has occurred as mentioned above"
+                    message: "Internal server error!"
                 }
             });
         });
 };
 
 
-//create a new filter category
+//create a new filter category --NOT USED ANYMORE, DONE DIRECTLY WHILE LINKING CATEGORIES
 exports.filter_create_category = (req, res, next) =>{
 
     var fil_id = req.body.FILTER_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
@@ -123,9 +119,7 @@ exports.filter_category_get_by_id = (req, res, next) =>{
                 // if (docs.length >= 0) {
                 res.status(200).json({
                     status:"success",
-                    error_msg:"",
                     data: {
-                        message: 'Below are the filter_type details',
                         response
                     }
                 });
@@ -134,7 +128,6 @@ exports.filter_category_get_by_id = (req, res, next) =>{
             {
                 res.status(404).json({
                     status:"failure",
-                    error_msg:"",
                     data: {
                         message: 'No filter types found'
                     }
@@ -148,7 +141,7 @@ exports.filter_category_get_by_id = (req, res, next) =>{
                 status: "error",
                 error: err,
                 data:{
-                    message: "An error has occurred as mentioned above"
+                    message: "Internal server error!"
                 }
             });
         });
@@ -166,7 +159,6 @@ exports.filter_category_update_by_id = (req, res, next) =>{
         .then(result => {
             res.status(200).json({
                 status: "success",
-                error: "",
                 data: {
                     message: "filter_category updated"
                 }
@@ -178,7 +170,7 @@ exports.filter_category_update_by_id = (req, res, next) =>{
                 status: "error",
                 error: err,
                 data: {
-                    message: "An error has occurred as mentioned above"
+                    message: "Internal server error!"
                 }
             });
         });
@@ -192,7 +184,6 @@ exports.filter_category_delete_by_id = (req, res, next) =>{
         .then(result => {
             res.status(200).json({
                 status: "success",
-                error: "",
                 data: {
                     message: 'filter_category deleted'
                 }
@@ -201,11 +192,11 @@ exports.filter_category_delete_by_id = (req, res, next) =>{
         .catch(err => {
 
             res.status(500).json({
-                status: "failure",
+                status: "error",
                 error: err,
                 data:
                     {
-                       message: "encountered error as mentioned above"
+                       message: "Internal server error!"
                     }
             });
         });
