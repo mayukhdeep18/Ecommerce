@@ -4,7 +4,7 @@ const Category = require("../models/category");
 
 //get all active categories
 exports.category_get_all = (req, res, next) => {
-    Category.find({ACTIVE_FLAG:'Y'})
+    Category.find()
         .select('CATEGORY_ID PRODUCT_CATEGORY_NAME PRODUCT_CATEGORY_DESCRIPTION UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id')
         .exec()
         .then(docs => {

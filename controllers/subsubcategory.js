@@ -5,7 +5,7 @@ const SubSubCategory = require("../models/subsubcategory");
 
 //get all active sub subcategory details
 exports.subsubcategory_get_all = (req, res, next) => {
-    SubSubCategory.find({ACTIVE_FLAG:'Y'})
+    SubSubCategory.find()
         .select("SUB_SUB_CATEGORY_ID CATEGORY_ID SUB_CATEGORY_ID SUB_SUB_CATEGORY_NAME SUB_SUB_CATEGORY_DESCRIPTION UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         .populate('CATEGORY_ID')
         .populate('SUB_CATEGORY_ID')
@@ -150,7 +150,6 @@ exports.subsubcategory_create = (req, res, next) => {
     }
 };
 
-
 //get sub subcategory details by id
 exports.subsubcategory_get_subsubcategory = (req, res, next) => {
     const id = req.params.subsubcategoryId;
@@ -205,7 +204,6 @@ exports.subsubcategory_get_subsubcategory = (req, res, next) => {
             });
         });
 };
-
 
 //update sub subcategory details by id
 exports.subsubcategory_update = (req, res, next) => {

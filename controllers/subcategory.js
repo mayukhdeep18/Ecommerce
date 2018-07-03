@@ -4,7 +4,7 @@ const Category = require("../models/category");
 
 //get all active subcategory details
 exports.subcategory_get_all = (req, res, next) => {
-    Subcategory.find({ACTIVE_FLAG:'Y'})
+    Subcategory.find()
         .select("SUB_CATEGORY_ID PRODUCT_CATEGORY_ID PRODUCT_SUB_CATEGORY_NAME PRODUCT_SUB_CATEGORY_DESCRIPTION UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         .populate('PRODUCT_CATEGORY_ID')
         .exec()
