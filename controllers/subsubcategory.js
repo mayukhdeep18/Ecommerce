@@ -211,8 +211,8 @@ exports.subsubcategory_update = (req, res, next) => {
     var Sub_sub_id = req.body.SUB_SUB_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
     const updateOps = {};
 
-    updateOps['CATEGORY_ID'] = req.body.CATEGORY_ID;
-    updateOps['SUB_CATEGORY_ID'] = req.body.SUB_CATEGORY_ID;
+    //updateOps['CATEGORY_ID'] = req.body.CATEGORY_ID;
+    //updateOps['SUB_CATEGORY_ID'] = req.body.SUB_CATEGORY_ID;
     updateOps['SUB_SUB_CATEGORY_NAME'] = req.body.SUB_SUB_CATEGORY_NAME;
     updateOps['SUB_SUB_CATEGORY_DESCRIPTION']= req.body.SUB_SUB_CATEGORY_DESCRIPTION;
     updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;

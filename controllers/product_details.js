@@ -219,57 +219,91 @@ exports.product_create = (req, res, next) => {
     //Create product Id on basis of product name
     var Prod_id = req.body.PRODUCT_NAME.replace(/[^a-zA-Z0-9]/g,'-');
 
-    if(
-        Category.findById(req.body.PRODUCT_CATEGORY_ID)&&
-        Subcategory.findById(req.body.PRODUCT_SUB_CATEGORY_ID)&&
-        Subsubcategory.findById(req.body.PRODUCT_SUB_SUB_CATEGORY_ID)&&
-        Prod_id.length > 0
-    )
+    if(Prod_id.length > 0)
     {
-        const product = new Product({
-            _id: new mongoose.Types.ObjectId(),
-            PRODUCT_ID: Prod_id.toLowerCase(),
-            PRODUCT_CATEGORY_ID: req.body.PRODUCT_CATEGORY_ID,
-            PRODUCT_SUB_CATEGORY_ID: req.body.PRODUCT_SUB_CATEGORY_ID,
-            PRODUCT_SUB_SUB_CATEGORY_ID: req.body.PRODUCT_SUB_SUB_CATEGORY_ID,
-            PRODUCT_NAME: req.body.PRODUCT_NAME,
-            PRODUCT_SUB_TITLE: req.body.PRODUCT_SUB_TITLE,
-            PRODUCT_DESCRIPTION: req.body.PRODUCT_DESCRIPTION,
-            PRODUCT_SPECIFICATIONS: JSON.stringify(req.body.PRODUCT_SPECIFICATIONS),
-            PRODUCT_URL: Prod_id.toLowerCase(),
-            PRODUCT_IMAGE_LINKS: JSON.stringify(req.body.PRODUCT_IMAGE_LINKS),
-            UPDATED_DATE: new Date(),
-            ACTIVE_FLAG: req.body.ACTIVE_FLAG
-        });
-        product
-            .save()
-            .then(result => {
-                res.status(201).json({
-                    status: "success",
-                    product_id: result._id,
-                    data: {
-                        message: "Product details stored"
+        Product.find({PRODUCT_ID: Prod_id.toLowerCase()})
+            .select('_id')
+            .exec()
+            .then(doc=>{
+                if(doc.length > 0)
+                {
+                    res.status(500)
+                        .json({
+                            status: "error",
+                            error: "Product already exists!"
+                        });
+                }
+                else
+                {
+                    if(
+                        Category.findById(req.body.PRODUCT_CATEGORY_ID)&&
+                        Subcategory.findById(req.body.PRODUCT_SUB_CATEGORY_ID)
+                    )
+                    {
+                        const product = new Product({
+                            _id: new mongoose.Types.ObjectId(),
+                            PRODUCT_ID: Prod_id.toLowerCase(),
+                            PRODUCT_CATEGORY_ID: req.body.PRODUCT_CATEGORY_ID,
+                            PRODUCT_SUB_CATEGORY_ID: req.body.PRODUCT_SUB_CATEGORY_ID,
+                            PRODUCT_SUB_SUB_CATEGORY_ID: req.body.PRODUCT_SUB_SUB_CATEGORY_ID,
+                            PRODUCT_NAME: req.body.PRODUCT_NAME,
+                            PRODUCT_SUB_TITLE: req.body.PRODUCT_SUB_TITLE,
+                            PRODUCT_DESCRIPTION: req.body.PRODUCT_DESCRIPTION,
+                            PRODUCT_SPECIFICATIONS: JSON.stringify(req.body.PRODUCT_SPECIFICATIONS),
+                            PRODUCT_URL: Prod_id.toLowerCase(),
+                            PRODUCT_IMAGE_LINKS: JSON.stringify(req.body.PRODUCT_IMAGE_LINKS),
+                            UPDATED_DATE: new Date(),
+                            ACTIVE_FLAG: req.body.ACTIVE_FLAG
+                        });
+                        product
+                            .save()
+                            .then(result => {
+                                res.status(201).json({
+                                    status: "success",
+                                    product_id: result._id,
+                                    data: {
+                                        message: "Product details stored"
+                                    }
+                                });
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                res.status(500).json({
+                                    status: "error",
+                                    error: err,
+                                    data: {
+                                        message: "Internal server error!"
+                                    }
+                                });
+                            });
                     }
-                });
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(500).json({
-                    status: "error",
-                    error: err,
-                    data: {
-                        message: "Internal server error!"
+                    else {
+                        res
+                            .status(404)
+                            .json({
+                                status: "error",
+                                error: "Category, SubCategory or SubSubCategory does not exist"
+                            });
                     }
-                });
+                }
+            }).catch(err => {
+            console.log(err);
+            res.status(500).json({
+                status: "error",
+                error: err,
+                data: {
+                    message: "Internal server error!"
+                }
             });
-
+        });
     }
-    else {
+    else
+    {
         res
             .status(404)
             .json({
                 status: "error",
-                error: "Category, SubCategory or SubSubCateg does not exist"
+                error: "Please check all your details!"
             });
     }
 };
@@ -485,16 +519,16 @@ exports.product_update_by_id = (req, res, next) => {
     const id = req.params.prodcategoryId;
     const updateOps = {};
 
-    for (const ops of req.body) {
-
-        if(typeof ops.value === "string" || typeof ops.value === "number")
-        {
-            updateOps[ops.propName] = ops.value;
-        }
-        else{
-            updateOps[ops.propName] = JSON.stringify(ops.value);
-        }
-    }
+    updateOps['PRODUCT_CATEGORY_ID'] = req.body.PRODUCT_CATEGORY_ID;
+    updateOps['PRODUCT_NAME'] = req.body.PRODUCT_NAME;
+    updateOps['PRODUCT_SUB_TITLE']= req.body.PRODUCT_SUB_TITLE;
+    updateOps['PRODUCT_DESCRIPTION'] = req.body.PRODUCT_DESCRIPTION;
+    updateOps['PRODUCT_SPECIFICATIONS'] = JSON.stringify(req.body.PRODUCT_SPECIFICATIONS);
+    updateOps['PRODUCT_URL'] = Prod_id.toLowerCase();
+    updateOps['PRODUCT_IMAGE_LINKS'] = JSON.stringify(req.body.PRODUCT_IMAGE_LINKS);
+    updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
+    updateOps['UPDATED_DATE'] = new Date();
+    updateOps['SUB_CATEGORY_ID'] = Sub_id.toLowerCase();
 
     Product.update({ PRODUCT_ID: id }, { $set: updateOps })
         .exec()

@@ -46,6 +46,7 @@ exports.subcategory_get_all = (req, res, next) => {
 
         })
         .catch(err => {
+            console.log(err)
             res.status(500).json({
                 status: "error",
                 error: err,
@@ -209,7 +210,7 @@ exports.subcategory_update = (req, res, next) => {
     var Sub_id = req.body.PRODUCT_SUB_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
     const updateOps = {};
 
-    updateOps['PRODUCT_CATEGORY_ID'] = req.body.PRODUCT_CATEGORY_ID;
+   //updateOps['PRODUCT_CATEGORY_ID'] = req.body.PRODUCT_CATEGORY_ID;
     updateOps['PRODUCT_SUB_CATEGORY_NAME'] = req.body.PRODUCT_CATEGORY_NAME;
     updateOps['PRODUCT_SUB_CATEGORY_DESCRIPTION']= req.body.PRODUCT_CATEGORY_DESCRIPTION;
     updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
