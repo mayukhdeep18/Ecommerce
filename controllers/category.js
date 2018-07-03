@@ -64,7 +64,7 @@ exports.category_create_category = (req, res, next) =>{
     if(Cat_id.length >0)
     {
         Category.find({CATEGORY_ID: Cat_id.toLowerCase()})
-        .select(_id)
+        .select('_id')
         .exec()
         .then(res => {
             if (res.length > 0) {

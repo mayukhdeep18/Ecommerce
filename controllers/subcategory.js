@@ -58,9 +58,9 @@ exports.subcategory_create = (req, res, next) => {
     var Sub_id = req.body.PRODUCT_SUB_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
     //console.log('Prod_id',Prod_id.toLowerCase());
 
-
     if(Sub_id.length > 0)
     {
+
         if(Subcategory.find({SUB_CATEGORY_ID: Sub_id.toLowerCase()}))
         {
             res.status(500).json({

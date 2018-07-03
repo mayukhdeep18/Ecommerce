@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22d33094-d95f-4e1e-897e-0a67ac0d8ed3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/category.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/category.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/filter_options.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/filter_options.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/subcategory.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/subcategory.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,24 +37,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="category.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="category.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/category.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1920">
-              <caret line="227" column="52" selection-start-line="227" selection-start-column="52" selection-end-line="227" selection-end-column="52" />
+            <state relative-caret-position="240">
+              <caret line="66" column="21" selection-start-line="66" selection-start-column="21" selection-end-line="66" selection-end-column="21" />
               <folding>
                 <element signature="e#205#1976#0" />
                 <element signature="e#4082#5909#0" />
+                <element signature="e#5998#6733#0" />
+                <element signature="e#6807#7392#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="filter_options.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/filter_options.js">
+      <file leaf-file-name="subcategory.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/controllers/subcategory.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="26" column="57" selection-start-line="26" selection-start-column="57" selection-end-line="26" selection-end-column="57" />
+            <state relative-caret-position="210">
+              <caret line="61" column="4" selection-start-line="61" selection-start-column="4" selection-end-line="61" selection-end-column="4" />
+              <folding>
+                <element signature="e#228#1995#0" />
+                <element signature="e#4741#6500#0" />
+                <element signature="e#6588#7317#0" />
+                <element signature="e#7400#8027#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -121,7 +127,6 @@
         <option value="$PROJECT_DIR$/models/rating_details.js" />
         <option value="$PROJECT_DIR$/routes/category.js" />
         <option value="$PROJECT_DIR$/controllers/subsubcategory.js" />
-        <option value="$PROJECT_DIR$/controllers/subcategory.js" />
         <option value="$PROJECT_DIR$/models/filters_categories.js" />
         <option value="$PROJECT_DIR$/models/product_details.js" />
         <option value="$PROJECT_DIR$/controllers/filters_categories.js" />
@@ -134,6 +139,7 @@
         <option value="$PROJECT_DIR$/controllers/filter_options.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/controllers/category.js" />
+        <option value="$PROJECT_DIR$/controllers/subcategory.js" />
       </list>
     </option>
   </component>
@@ -313,12 +319,12 @@
       <workItem from="1530253342041" duration="13846000" />
       <workItem from="1530343779941" duration="12983000" />
       <workItem from="1530511718050" duration="16538000" />
-      <workItem from="1530598630482" duration="3365000" />
+      <workItem from="1530598630482" duration="3663000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="605901000" />
+    <option name="totallyTimeSpent" value="606199000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -577,13 +583,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/subcategory.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="55" selection-start-line="55" selection-end-line="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/subsubcategory.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -708,11 +707,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/category.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1920">
-          <caret line="227" column="52" selection-start-line="227" selection-start-column="52" selection-end-line="227" selection-end-column="52" />
+        <state relative-caret-position="240">
+          <caret line="66" column="21" selection-start-line="66" selection-start-column="21" selection-end-line="66" selection-end-column="21" />
           <folding>
             <element signature="e#205#1976#0" />
             <element signature="e#4082#5909#0" />
+            <element signature="e#5998#6733#0" />
+            <element signature="e#6807#7392#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/subcategory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="61" column="4" selection-start-line="61" selection-start-column="4" selection-end-line="61" selection-end-column="4" />
+          <folding>
+            <element signature="e#228#1995#0" />
+            <element signature="e#4741#6500#0" />
+            <element signature="e#6588#7317#0" />
+            <element signature="e#7400#8027#0" />
           </folding>
         </state>
       </provider>
