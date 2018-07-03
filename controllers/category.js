@@ -66,8 +66,9 @@ exports.category_create_category = (req, res, next) =>{
         Category.find({CATEGORY_ID: Cat_id.toLowerCase()})
         .select('_id')
         .exec()
-        .then(res => {
-            if (res.length > 0) {
+        .then(doc => {
+            if (doc.length > 0)
+            {
                 res.status(500).json({
                     status: "error",
                     data: {
@@ -108,7 +109,16 @@ exports.category_create_category = (req, res, next) =>{
 
 
             }
-        })
+        }).catch(err => {
+            console.log(err);
+            res.status(500).json({
+                status: "error",
+                error: err,
+                data: {
+                    message: "Internal server error!"
+                }
+            });
+        });
     }
     else {
         res.status(500).json({
