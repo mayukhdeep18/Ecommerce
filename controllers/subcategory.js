@@ -33,7 +33,7 @@ exports.subcategory_get_all = (req, res, next) => {
             else
             {
                 res.status(404).json({
-                    status: "failure",
+                    status: "error",
                     data: {
                         message: "No sub category found"
                     }
@@ -46,7 +46,7 @@ exports.subcategory_get_all = (req, res, next) => {
                 status: "error",
                 error: err,
                 data: {
-                    message: "An error has occurred as mentioned above"
+                    message: "Internal server error!"
                 }
             });
         });
@@ -194,14 +194,20 @@ exports.subcategory_get_subcategory = (req, res, next) => {
         });
 };
 
-
 //update subcategory details by id
 exports.subcategory_update = (req, res, next) => {
     const id = req.params.subcategoryId;
+    var Sub_id = req.body.PRODUCT_SUB_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
     const updateOps = {};
-    for (const ops of req.body) {
-        updateOps[ops.propName] = ops.value;
-    }
+
+    updateOps['PRODUCT_CATEGORY_ID'] = req.body.PRODUCT_CATEGORY_ID;
+    updateOps['PRODUCT_SUB_CATEGORY_NAME'] = req.body.PRODUCT_CATEGORY_NAME;
+    updateOps['PRODUCT_SUB_CATEGORY_DESCRIPTION']= req.body.PRODUCT_CATEGORY_DESCRIPTION;
+    updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
+    updateOps['UPDATED_DATE'] = new Date();
+    updateOps['SUB_CATEGORY_ID'] = Sub_id.toLowerCase();
+
+
     Subcategory.update({ SUB_CATEGORY_ID: id }, { $set: updateOps })
         .exec()
         .then(result => {
@@ -218,12 +224,11 @@ exports.subcategory_update = (req, res, next) => {
                 status: "error",
                 error: err,
                 data: {
-                    message: "Internal server error"
+                    message: "Internal server error!"
                 }
             });
         });
 };
-
 
 //delete a sub category by id
 exports.subcategory_delete = (req, res, next) => {
