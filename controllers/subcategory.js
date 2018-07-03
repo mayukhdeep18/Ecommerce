@@ -11,23 +11,27 @@ exports.subcategory_get_all = (req, res, next) => {
         .then(docs => {
             if(docs.length > 0)
             {
+                const response = {
+                    //count: docs.length,
+                    categories: docs.map(doc => {
+                        return {
+                            doc_id: doc._id,
+                            sub_category_id: doc.SUB_CATEGORY_ID,
+                            category_name: doc.PRODUCT_CATEGORY_ID.PRODUCT_CATEGORY_NAME,
+                            sub_category_name: doc.PRODUCT_SUB_CATEGORY_NAME,
+                            sub_category_description: doc.PRODUCT_SUB_CATEGORY_DESCRIPTION,
+                            updated_by: doc.UPDATED_BY,
+                            updated_date: doc.UPDATED_DATE,
+                            active_flag: doc.ACTIVE_FLAG
+                        };
+                    })
+                };
                 res.status(200).json({
                     status: "success",
                     error: "",
                     data: {
-                        subcategory: docs.map(doc => {
-                            return {
-                                doc_id: doc._id,
-                                sub_category_id: doc.SUB_CATEGORY_ID,
-                                category_name: doc.PRODUCT_CATEGORY_ID.PRODUCT_CATEGORY_NAME,
-                                sub_category_name: doc.PRODUCT_SUB_CATEGORY_NAME,
-                                sub_category_description: doc.PRODUCT_SUB_CATEGORY_DESCRIPTION,
-                                updated_by: doc.UPDATED_BY,
-                                updated_date: doc.UPDATED_DATE,
-                                active_flag: doc.ACTIVE_FLAG
-                            };
-                        })
-                    }
+                        response
+                        }
                 });
             }
             else
@@ -154,21 +158,26 @@ exports.subcategory_get_subcategory = (req, res, next) => {
         .then(docs => {
             if(docs.length > 0)
             {
+                const response = {
+                    //count: docs.length,
+                    categories: docs.map(doc => {
+                        return {
+                            doc_id: doc._id,
+                            sub_category_id: doc.SUB_CATEGORY_ID,
+                            category_name: doc.PRODUCT_CATEGORY_ID.PRODUCT_CATEGORY_NAME,
+                            sub_category_name: doc.PRODUCT_SUB_CATEGORY_NAME,
+                            sub_category_description: doc.PRODUCT_SUB_CATEGORY_DESCRIPTION,
+                            updated_by: doc.UPDATED_BY,
+                            updated_date: doc.UPDATED_DATE,
+                            active_flag: doc.ACTIVE_FLAG
+                        };
+                    })
+                };
                 res.status(200).json({
                     status: "success",
+                    error: "",
                     data: {
-                        subcategory: docs.map(doc => {
-                            return {
-                                doc_id: doc._id,
-                                sub_category_id: doc.SUB_CATEGORY_ID,
-                                category_name: doc.PRODUCT_CATEGORY_ID.PRODUCT_CATEGORY_NAME,
-                                sub_category_name: doc.PRODUCT_SUB_CATEGORY_NAME,
-                                sub_category_description: doc.PRODUCT_SUB_CATEGORY_DESCRIPTION,
-                                updated_by: doc.UPDATED_BY,
-                                updated_date: doc.UPDATED_DATE,
-                                active_flag: doc.ACTIVE_FLAG
-                            };
-                        })
+                        response
                     }
                 });
             }
