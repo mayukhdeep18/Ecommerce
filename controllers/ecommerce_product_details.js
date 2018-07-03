@@ -288,204 +288,235 @@ exports.ecommproduct_delete_by_id = (req, res, next) => {
 exports.ecommproduct_new_create = (req, res, next) => {
 
     var Ecom_name = req.body.ECOMMERCE_NAME.toLowerCase();
-    console.log('ecom_name', Ecom_name);
 
-    EcommCategory.find({ECOMMERCE_NAME: Ecom_name})
-        .select('ECOMMERCE_ID _id')
+    EcommProduct.find({ECOMMERCE_PRODUCT_ID: req.body.ECOMMERCE_PRODUCT_ID})
+        .select('_id')
         .exec()
-        .then(docs => {
-            console.log('docs',docs);
-
-            var Ecomm_id = docs[0]._id;
-
-            console.log('Ecomm_length',Ecomm_id);
-
-            if(Ecomm_id != null)
+        .then(ecom_res=>{
+            if(ecom_res.length >0)
             {
-                const ecommproduct = new EcommProduct({
-                    _id: new mongoose.Types.ObjectId(),
-                    ECOMMERCE_CATEGORY_ID: Ecomm_id,
-                    ECOMMERCE_NAME: req.body.ECOMMERCE_NAME,
-                    ECOMMERCE_PRODUCT_ID: req.body.ECOMMERCE_PRODUCT_ID,
-                    ECOMMERCE_PRODUCT_NAME: req.body.ECOMMERCE_PRODUCT_NAME.toLowerCase(),
-                    ECOMMERCE_PRODUCT_PRICE: parseFloat(req.body.ECOMMERCE_PRODUCT_PRICE),
-                    ECOMMERCE_PRODCT_SHPMNT_DURATN: req.body.ECOMMERCE_PRODCT_SHPMNT_DURATN,
-                    PRODUCT_URL: req.body.PRODUCT_URL,
-                    UPDATED_BY: req.body.UPDATED_BY,
-                    UPDATED_DATE: new Date(),
-                    ACTIVE_FLAG: req.body.ACTIVE_FLAG
-                });
-                ecommproduct
-                    .save()
-                    .then(result => {
 
-                        const rating = new Rating({
-                            _id: new mongoose.Types.ObjectId(),
-                            ECOMMERCE_PRODUCT_ID: result._id,
-                            RATING_NUMBER: req.body.RATING_NUMBER,
-                            UPDATED_BY: req.body.UPDATED_BY,
-                            UPDATED_DATE: new Date(),
-                            ACTIVE_FLAG: req.body.ACTIVE_FLAG
-                        });
-                        rating
-                            .save()
-                            .then(rat_result => {
+            }
+            else
+            {
+                EcommCategory.find({ECOMMERCE_NAME: Ecom_name})
+                    .select('ECOMMERCE_ID _id')
+                    .exec()
+                    .then(docs => {
 
-                                const review = new Review({
-                                    _id: new mongoose.Types.ObjectId(),
-                                    ECOMMERCE_PRODUCT_ID: result._id,
-                                    ECOMMERCE_REVIEW: JSON.stringify(req.body.ECOMMERCE_REVIEW),
-                                    UPDATED_BY: req.body.UPDATED_BY,
-                                    UPDATED_DATE: new Date(),
-                                    ACTIVE_FLAG: req.body.ACTIVE_FLAG
-                                });
-                                review
-                                    .save()
-                                    .then(rev_result => {
+                        var Ecomm_id = docs[0]._id;
 
-                                        var Ecom_id = result._id;
-                                        var Prod_id = req.body.PRODUCT_ID;
+                        console.log('Ecomm_length',Ecomm_id);
 
-                                        const updateOps = {};
-                                        const Rating_upd = {};
-                                        const Review_upd = {};
-                                        const Prod_upd = {};
+                        if(Ecomm_id != null)
+                        {
+                            const ecommproduct = new EcommProduct({
+                                _id: new mongoose.Types.ObjectId(),
+                                ECOMMERCE_CATEGORY_ID: Ecomm_id,
+                                ECOMMERCE_NAME: req.body.ECOMMERCE_NAME,
+                                ECOMMERCE_PRODUCT_ID: req.body.ECOMMERCE_PRODUCT_ID,
+                                ECOMMERCE_PRODUCT_NAME: req.body.ECOMMERCE_PRODUCT_NAME.toLowerCase(),
+                                ECOMMERCE_PRODUCT_PRICE: parseFloat(req.body.ECOMMERCE_PRODUCT_PRICE),
+                                ECOMMERCE_PRODCT_SHPMNT_DURATN: req.body.ECOMMERCE_PRODCT_SHPMNT_DURATN,
+                                PRODUCT_URL: req.body.PRODUCT_URL,
+                                UPDATED_BY: req.body.UPDATED_BY,
+                                UPDATED_DATE: new Date(),
+                                ACTIVE_FLAG: req.body.ACTIVE_FLAG
+                            });
+                            ecommproduct
+                                .save()
+                                .then(result => {
 
-                                        EcommProduct.findById({_id: result._id})
-                                            .select('ECOMMERCE_CATEGORY_ID ACTIVE_FLAG _id')
-                                            .exec()
-                                            .then(ecom_res => {
+                                    const rating = new Rating({
+                                        _id: new mongoose.Types.ObjectId(),
+                                        ECOMMERCE_PRODUCT_ID: result._id,
+                                        RATING_NUMBER: req.body.RATING_NUMBER,
+                                        UPDATED_BY: req.body.UPDATED_BY,
+                                        UPDATED_DATE: new Date(),
+                                        ACTIVE_FLAG: req.body.ACTIVE_FLAG
+                                    });
+                                    rating
+                                        .save()
+                                        .then(rat_result => {
 
-                                                Product.findById({_id:Prod_id})
-                                                    .select('PRODUCT_ID PRODUCT_CATEGORY_ID PRODUCT_SUB_CATEGORY_ID PRODUCT_SUB_SUB_CATEGORY_ID _id')
-                                                    .exec()
-                                                    .then(prod_res => {
+                                            const review = new Review({
+                                                _id: new mongoose.Types.ObjectId(),
+                                                ECOMMERCE_PRODUCT_ID: result._id,
+                                                ECOMMERCE_REVIEW: JSON.stringify(req.body.ECOMMERCE_REVIEW),
+                                                UPDATED_BY: req.body.UPDATED_BY,
+                                                UPDATED_DATE: new Date(),
+                                                ACTIVE_FLAG: req.body.ACTIVE_FLAG
+                                            });
+                                            review
+                                                .save()
+                                                .then(rev_result => {
 
-                                                        Prod_upd['ECOMMERCE_CATEGORY_ID'] = ecom_res.ECOMMERCE_CATEGORY_ID.toString();
-                                                        Prod_upd['ECOMMERCE_PRODUCT_DETAILS_ID'] = ecom_res._id.toString();
+                                                    var Ecom_id = result._id;
+                                                    var Prod_id = req.body.PRODUCT_ID;
 
-                                                        Product.update({ _id: Prod_id }, {$set: Prod_upd})
-                                                            .exec()
-                                                            .then(prod_update => {
+                                                    const updateOps = {};
+                                                    const Rating_upd = {};
+                                                    const Review_upd = {};
+                                                    const Prod_upd = {};
 
-                                                                updateOps['PRODUCT_ID'] = prod_res._id.toString();
-                                                                updateOps['CATEGORY_ID'] = prod_res.PRODUCT_CATEGORY_ID.toString();
-                                                                updateOps['SUB_CATEGORY_ID'] = prod_res.PRODUCT_SUB_CATEGORY_ID.toString();
-                                                                updateOps['SUB_SUB_CATEGORY_ID'] = prod_res.PRODUCT_SUB_SUB_CATEGORY_ID.toString();
-                                                                updateOps['ACTIVE_FLAG'] = 'Y';
+                                                    EcommProduct.findById({_id: result._id})
+                                                        .select('ECOMMERCE_CATEGORY_ID ACTIVE_FLAG _id')
+                                                        .exec()
+                                                        .then(ecom_res => {
 
-                                                                //console.log('ecom_upd',updateOps );
-                                                                //console.log('ecom_id', Ecom_id);
+                                                            Product.findById({_id:Prod_id})
+                                                                .select('PRODUCT_ID PRODUCT_CATEGORY_ID PRODUCT_SUB_CATEGORY_ID PRODUCT_SUB_SUB_CATEGORY_ID _id')
+                                                                .exec()
+                                                                .then(prod_res => {
 
-                                                                EcommProduct.update({ _id: Ecom_id}, {$set: updateOps})
-                                                                    .exec()
-                                                                    .then( ecom_upd => {
+                                                                    Prod_upd['ECOMMERCE_CATEGORY_ID'] = ecom_res.ECOMMERCE_CATEGORY_ID.toString();
+                                                                    Prod_upd['ECOMMERCE_PRODUCT_DETAILS_ID'] = ecom_res._id.toString();
 
-                                                                        Rating.find({ECOMMERCE_PRODUCT_ID: Ecom_id})
-                                                                            .select('ECOMMERCE_PRODUCT_ID PRODUCT_ID ACTIVE_FLAG _id')
-                                                                            .exec()
-                                                                            .then(rat_upd => {
+                                                                    Product.update({ _id: Prod_id }, {$set: Prod_upd})
+                                                                        .exec()
+                                                                        .then(prod_update => {
 
-                                                                                Rating_upd['PRODUCT_ID'] = prod_res._id.toString();
-                                                                                Rating_upd['ACTIVE_FLAG'] = 'Y';
+                                                                            updateOps['PRODUCT_ID'] = prod_res._id.toString();
+                                                                            updateOps['CATEGORY_ID'] = prod_res.PRODUCT_CATEGORY_ID.toString();
+                                                                            updateOps['SUB_CATEGORY_ID'] = prod_res.PRODUCT_SUB_CATEGORY_ID.toString();
+                                                                            updateOps['SUB_SUB_CATEGORY_ID'] = prod_res.PRODUCT_SUB_SUB_CATEGORY_ID.toString();
+                                                                            updateOps['ACTIVE_FLAG'] = 'Y';
 
-                                                                                //console.log('rat_upd', Rating_upd);
-                                                                                //console.log('rat_id_upd', rat_upd[0]._id);
+                                                                            //console.log('ecom_upd',updateOps );
+                                                                            //console.log('ecom_id', Ecom_id);
 
-                                                                                Rating.update({_id: rat_upd[0]._id},{$set:Rating_upd})
-                                                                                    .exec()
-                                                                                    .then(rating_upd => {
+                                                                            EcommProduct.update({ _id: Ecom_id}, {$set: updateOps})
+                                                                                .exec()
+                                                                                .then( ecom_upd => {
 
-                                                                                        Review.find({ECOMMERCE_PRODUCT_ID: Ecom_id})
-                                                                                            .select('ECOMMERCE_PRODUCT_ID PRODUCT_ID ACTIVE_FLAG _id')
-                                                                                            .exec()
-                                                                                            .then(review_upd => {
-                                                                                                Review_upd['PRODUCT_ID'] = prod_res._id.toString();
-                                                                                                Review_upd['ACTIVE_FLAG'] = 'Y';
+                                                                                    Rating.find({ECOMMERCE_PRODUCT_ID: Ecom_id})
+                                                                                        .select('ECOMMERCE_PRODUCT_ID PRODUCT_ID ACTIVE_FLAG _id')
+                                                                                        .exec()
+                                                                                        .then(rat_upd => {
 
-                                                                                                //console.log('rev_upd', Review_upd);
-                                                                                                //console.log('rev_id_upd', review_upd[0]._id);
+                                                                                            Rating_upd['PRODUCT_ID'] = prod_res._id.toString();
+                                                                                            Rating_upd['ACTIVE_FLAG'] = 'Y';
 
-                                                                                                Review.update({_id: review_upd[0]._id},{$set: Review_upd})
-                                                                                                    .exec()
-                                                                                                    .then(rev_upd => {
+                                                                                            //console.log('rat_upd', Rating_upd);
+                                                                                            //console.log('rat_id_upd', rat_upd[0]._id);
 
-                                                                                                        res.status(201).json({
-                                                                                                            status: "success",
+                                                                                            Rating.update({_id: rat_upd[0]._id},{$set:Rating_upd})
+                                                                                                .exec()
+                                                                                                .then(rating_upd => {
+
+                                                                                                    Review.find({ECOMMERCE_PRODUCT_ID: Ecom_id})
+                                                                                                        .select('ECOMMERCE_PRODUCT_ID PRODUCT_ID ACTIVE_FLAG _id')
+                                                                                                        .exec()
+                                                                                                        .then(review_upd => {
+                                                                                                            Review_upd['PRODUCT_ID'] = prod_res._id.toString();
+                                                                                                            Review_upd['ACTIVE_FLAG'] = 'Y';
+
+                                                                                                            //console.log('rev_upd', Review_upd);
+                                                                                                            //console.log('rev_id_upd', review_upd[0]._id);
+
+                                                                                                            Review.update({_id: review_upd[0]._id},{$set: Review_upd})
+                                                                                                                .exec()
+                                                                                                                .then(rev_upd => {
+
+                                                                                                                    res.status(201).json({
+                                                                                                                        status: "success",
+                                                                                                                        data: {
+                                                                                                                            message: "ecommerce details added and product mapping done"
+                                                                                                                        }
+                                                                                                                    });
+
+                                                                                                                }).catch(err => {
+                                                                                                                res.status(500).json({
+                                                                                                                    status: "error",
+                                                                                                                    error: err,
+                                                                                                                    data: {
+                                                                                                                        message: "7. Internal server error!"
+                                                                                                                    }
+                                                                                                                });
+                                                                                                            });
+                                                                                                        }).catch(err => {
+                                                                                                        res.status(500).json({
+                                                                                                            status: "failure",
+                                                                                                            error: err,
                                                                                                             data: {
-                                                                                                                message: "ecommerce details added and product mapping done"
+                                                                                                                message: "6. Internal server error!"
                                                                                                             }
                                                                                                         });
-
-                                                                                                    }).catch(err => {
-                                                                                                    res.status(500).json({
-                                                                                                        status: "error",
-                                                                                                        error: err,
-                                                                                                        data: {
-                                                                                                            message: "7. Internal server error!"
-                                                                                                        }
                                                                                                     });
-                                                                                                });
-                                                                                            }).catch(err => {
-                                                                                            res.status(500).json({
-                                                                                                status: "failure",
-                                                                                                error: err,
-                                                                                                data: {
-                                                                                                    message: "6. Internal server error!"
-                                                                                                }
-                                                                                            });
-                                                                                        });
 
-                                                                                    }).catch(err => {
-                                                                                    console.log(err);
-                                                                                    res.status(500).json({
-                                                                                        status: "failure",
-                                                                                        error: err,
-                                                                                        data: {
-                                                                                            message: "5. Internal server error!"
-                                                                                        }
+                                                                                                }).catch(err => {
+                                                                                                console.log(err);
+                                                                                                res.status(500).json({
+                                                                                                    status: "failure",
+                                                                                                    error: err,
+                                                                                                    data: {
+                                                                                                        message: "5. Internal server error!"
+                                                                                                    }
+                                                                                                });
+                                                                                            });
+                                                                                        }).catch(err => {
+                                                                                        console.log(err);
+                                                                                        res.status(500).json({
+                                                                                            status: "failure",
+                                                                                            error: err,
+                                                                                            data: {
+                                                                                                message: "4. Internal server error!"
+                                                                                            }
+                                                                                        });
                                                                                     });
+                                                                                }).catch(err => {
+                                                                                res.status(500).json({
+                                                                                    status: "failure",
+                                                                                    error: err,
+                                                                                    data: {
+                                                                                        message: "3. Internal server error!"
+                                                                                    }
                                                                                 });
-                                                                            }).catch(err => {
-                                                                            console.log(err);
-                                                                            res.status(500).json({
-                                                                                status: "failure",
-                                                                                error: err,
-                                                                                data: {
-                                                                                    message: "4. Internal server error!"
-                                                                                }
                                                                             });
+                                                                        }).catch(err => {
+                                                                        console.log(err);
+                                                                        res.status(500).json({
+                                                                            status: "failure",
+                                                                            error: err,
+                                                                            data: {
+                                                                                message: "2. Internal server error!"
+                                                                            }
                                                                         });
-                                                                    }).catch(err => {
-                                                                    res.status(500).json({
-                                                                        status: "failure",
-                                                                        error: err,
-                                                                        data: {
-                                                                            message: "3. Internal server error!"
-                                                                        }
                                                                     });
+                                                                }).catch(err => {
+                                                                console.log(err);
+                                                                res.status(500).json({
+                                                                    status: "failure",
+                                                                    error: err,
+                                                                    data: {
+                                                                        message: "1. Internal server error!"
+                                                                    }
                                                                 });
-                                                            }).catch(err => {
-                                                            console.log(err);
-                                                            res.status(500).json({
-                                                                status: "failure",
-                                                                error: err,
-                                                                data: {
-                                                                    message: "2. Internal server error!"
-                                                                }
                                                             });
+                                                        }).catch(err => {
+                                                        console.log(err);
+                                                        res.status(500).json({
+                                                            status: "error",
+                                                            error: err,
+                                                            data: {
+                                                                message: "Internal server error!"
+                                                            }
                                                         });
-                                                    }).catch(err => {
+                                                    });
+                                                })
+                                                .catch(err => {
                                                     console.log(err);
                                                     res.status(500).json({
-                                                        status: "failure",
+                                                        status: "error",
                                                         error: err,
                                                         data: {
-                                                            message: "1. Internal server error!"
+                                                            message: "Internal server error!"
                                                         }
                                                     });
                                                 });
-                                            }).catch(err => {
+
+                                        })
+                                        .catch(err => {
                                             console.log(err);
                                             res.status(500).json({
                                                 status: "error",
@@ -495,55 +526,42 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                                 }
                                             });
                                         });
-                                    })
-                                    .catch(err => {
-                                        console.log(err);
-                                        res.status(500).json({
-                                            status: "error",
-                                            error: err,
-                                            data: {
-                                                message: "Internal server error!"
-                                            }
-                                        });
-                                    });
 
-                            })
-                            .catch(err => {
-                                console.log(err);
-                                res.status(500).json({
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                    res.status(500).json({
+                                        status: "error",
+                                        error: err,
+                                        data: {
+                                            message: "Internal server error!"
+                                        }
+                                    });
+                                });
+
+                        }
+                        else {
+                            res
+                                .status(404)
+                                .json({
                                     status: "error",
-                                    error: err,
                                     data: {
-                                        message: "Internal server error!"
+                                        message: "Ecommerce Category does not exist. Please enter a valid ecommerce name"
                                     }
                                 });
-                            });
+                        }
 
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        res.status(500).json({
-                            status: "error",
-                            error: err,
-                            data: {
-                                message: "Internal server error!"
-                            }
-                        });
-                    });
-
-            }
-            else {
-                res
-                    .status(404)
-                    .json({
+                    }).catch(err => {
+                    console.log(err);
+                    res.status(500).json({
                         status: "error",
-                        error: "Ecommerce doesn't exist",
+                        error: err,
                         data: {
-                            message: "Ecommerce Category does not exist. Please enter a valid ecommerce name"
+                            message: "Internal server error!"
                         }
                     });
+                });
             }
-
         }).catch(err => {
         console.log(err);
         res.status(500).json({
@@ -554,7 +572,6 @@ exports.ecommproduct_new_create = (req, res, next) => {
             }
         });
     });
-
 };
 
 

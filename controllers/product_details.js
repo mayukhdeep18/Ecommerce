@@ -43,17 +43,18 @@ exports.product_get_all = (req, res, next) => {
 
                             for( var prod_item of docs)
                             {
+
                                 var product_sub_sub_category_name="";
-                                if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.PRODUCT_SUB_SUB_CATEGORY_NAME!=null)
+                                if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME!=null)
                                 {
-                                    product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.PRODUCT_SUB_SUB_CATEGORY_NAME;
+                                    product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                 }
                                 //create an array with the basic product details
                                 prod_cat_arr.push({prod_id: prod_item._id,
                                     product_id: prod_item.PRODUCT_ID,
                                     prod_category_name: prod_item.PRODUCT_CATEGORY_ID.PRODUCT_CATEGORY_NAME,
                                     product_sub_category_name: prod_item.PRODUCT_SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME,
-                                    product_sub_sub_category_name: prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.PRODUCT_SUB_SUB_CATEGORY_NAME,
+                                    product_sub_sub_category_name: product_sub_sub_category_name,
                                     prod_name: prod_item.PRODUCT_NAME,
                                     prod_spec: JSON.parse(prod_item.PRODUCT_SPECIFICATIONS),
                                     product_sub_title: prod_item.PRODUCT_SUB_TITLE,
@@ -345,16 +346,16 @@ exports.product_details_get_by_id = (req, res, next) => {
                             for( var prod_item of docs)
                             {
                                 var product_sub_sub_category_name="";
-                                if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.PRODUCT_SUB_SUB_CATEGORY_NAME!=null)
+                                if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME!=null)
                                 {
-                                    product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.PRODUCT_SUB_SUB_CATEGORY_NAME;
+                                    product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                 }
                                 //create an array with the basic product details
                                 prod_cat_arr.push({prod_id: prod_item._id,
                                     product_id: prod_item.PRODUCT_ID,
                                     prod_category_name: prod_item.PRODUCT_CATEGORY_ID.PRODUCT_CATEGORY_NAME,
                                     product_sub_category_name: prod_item.PRODUCT_SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME,
-                                    product_sub_sub_category_name: prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.PRODUCT_SUB_SUB_CATEGORY_NAME,
+                                    product_sub_sub_category_name: product_sub_sub_category_name,
                                     prod_name: prod_item.PRODUCT_NAME,
                                     prod_spec: JSON.parse(prod_item.PRODUCT_SPECIFICATIONS),
                                     product_sub_title: prod_item.PRODUCT_SUB_TITLE,
@@ -519,6 +520,9 @@ exports.product_update_by_id = (req, res, next) => {
     const id = req.params.prodcategoryId;
     const updateOps = {};
     var Prod_id = req.body.PRODUCT_NAME.replace(/[^a-zA-Z0-9]/g,'-');
+    updateOps['PRODUCT_CATEGORY_ID'] = req.body.PRODUCT_CATEGORY_ID;
+    updateOps['PRODUCT_SUB_CATEGORY_ID'] = req.body.PRODUCT_SUB_CATEGORY_ID;
+    updateOps['PRODUCT_SUB_SUB_CATEGORY_ID'] = req.body.PRODUCT_SUB_SUB_CATEGORY_ID;
     updateOps['PRODUCT_NAME'] = req.body.PRODUCT_NAME;
     updateOps['PRODUCT_SUB_TITLE']= req.body.PRODUCT_SUB_TITLE;
     updateOps['PRODUCT_DESCRIPTION'] = req.body.PRODUCT_DESCRIPTION;
