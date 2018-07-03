@@ -29,7 +29,6 @@ exports.category_get_all = (req, res, next) => {
                 res.status(200).json({
                     status:"success",
                     data: {
-                        message: 'Below are the category details',
                         response
                     }
                 });
@@ -37,7 +36,7 @@ exports.category_get_all = (req, res, next) => {
             else
             {
                 res.status(404).json({
-                    status:"failure",
+                    status:"error",
                     data: {
                         message: 'No details found for category'
                     }
@@ -50,7 +49,7 @@ exports.category_get_all = (req, res, next) => {
                 status: "error",
                 error: err,
                 data:{
-                    message: "An error has occurred as mentioned above"
+                    message: "Internal server error"
                 }
             });
         });
@@ -62,53 +61,56 @@ exports.category_create_category = (req, res, next) =>{
     var Cat_id = req.body.PRODUCT_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
     //console.log("check",Category.find({CATEGORY_ID: Cat_id.toLowerCase()}));
 
-    if( Cat_id.length > 0)
+    if(Cat_id.length >0)
     {
-        if(Category.find({CATEGORY_ID: Cat_id.toLowerCase()}))
-        {
-                    res.status(500).json({
-                        status: "error",
-                        data: {
-                            message: "Category already exists"
-                        }
-                    });
-        }
-        else
-        {
-            const category = new Category({
-                _id: new mongoose.Types.ObjectId(),
-                CATEGORY_ID: Cat_id.toLowerCase(),
-                PRODUCT_CATEGORY_NAME: req.body.PRODUCT_CATEGORY_NAME.toLowerCase(),
-                PRODUCT_CATEGORY_DESCRIPTION: req.body.PRODUCT_CATEGORY_DESCRIPTION.toLowerCase(),
-                UPDATED_BY: req.body.UPDATED_BY,
-                UPDATED_DATE: new Date(),
-                ACTIVE_FLAG: req.body.ACTIVE_FLAG
-            });
-            category
-                .save()
-                .then(result => {
-                    //console.log(result);
-                    res.status(201).json({
-                        status:"success",
-                        data: {
-                            message: "Created category successfully"
-                        }
-                    });
-                })
-                .catch(err => {
-                    console.log(err);
-                    res.status(500).json({
-                        status: "error",
-                        error: err,
-                        data: {
-                            message: "Internal server error!"
-                        }
-                    });
+        Category.find({CATEGORY_ID: Cat_id.toLowerCase()})
+        .select(_id)
+        .exec()
+        .then(res => {
+            if (res.length > 0) {
+                res.status(500).json({
+                    status: "error",
+                    data: {
+                        message: "Category already exists!"
+                    }
                 });
-        }
+            }
+            else {
+                const category = new Category({
+                    _id: new mongoose.Types.ObjectId(),
+                    CATEGORY_ID: Cat_id.toLowerCase(),
+                    PRODUCT_CATEGORY_NAME: req.body.PRODUCT_CATEGORY_NAME.toLowerCase(),
+                    PRODUCT_CATEGORY_DESCRIPTION: req.body.PRODUCT_CATEGORY_DESCRIPTION.toLowerCase(),
+                    UPDATED_BY: req.body.UPDATED_BY,
+                    UPDATED_DATE: new Date(),
+                    ACTIVE_FLAG: req.body.ACTIVE_FLAG
+                });
+                category
+                    .save()
+                    .then(result => {
+                        res.status(201).json({
+                            status: "success",
+                            data: {
+                                message: "Created category successfully"
+                            }
+                        });
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        res.status(500).json({
+                            status: "error",
+                            error: err,
+                            data: {
+                                message: "Internal server error!"
+                            }
+                        });
+                    });
+
+
+            }
+        })
     }
-    else
-    {
+    else {
         res.status(500).json({
             status: "error",
             data: {
@@ -116,7 +118,6 @@ exports.category_create_category = (req, res, next) =>{
             }
         });
     }
-
 };
 
 //get category by id
@@ -145,7 +146,6 @@ exports.category_get_category = (req, res, next) =>{
                 res.status(200).json({
                     status:"success",
                     data: {
-                        message: 'Below are the category details',
                         response
                     }
                 });
@@ -155,7 +155,7 @@ exports.category_get_category = (req, res, next) =>{
                     .json({
                         status: "error",
                         data: {
-                            message: "No valid entry found for provided ID"
+                            message: "No valid entry found for provided category"
                         }
                     });
             }
@@ -166,7 +166,7 @@ exports.category_get_category = (req, res, next) =>{
                 status: "error",
                 error: err,
                 data: {
-                    message: "An error has occurred as mentioned above"
+                    message: "Internal server error!"
                 }
             });
         });
@@ -175,10 +175,15 @@ exports.category_get_category = (req, res, next) =>{
 //update category details by id
 exports.category_update_category = (req, res, next) =>{
     const id = req.params.categoryId;
+    var Cat_id = req.body.PRODUCT_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
     const updateOps = {};
-    for (const ops of req.body) {
-        updateOps[ops.propName] = ops.value;
-    }
+
+    updateOps['PRODUCT_CATEGORY_NAME'] = req.body.PRODUCT_CATEGORY_NAME;
+    updateOps['PRODUCT_CATEGORY_DESCRIPTION']= req.body.PRODUCT_CATEGORY_DESCRIPTION;
+    updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
+    updateOps['UPDATED_DATE'] = new Date();
+    updateOps['CATEGORY_ID'] = Cat_id.toLowerCase();
+
     Category.update({ CATEGORY_ID: id }, { $set: updateOps })
         .exec()
         .then(result => {
@@ -195,7 +200,7 @@ exports.category_update_category = (req, res, next) =>{
                 status: "error",
                 error: err,
                 data: {
-                    message: "An error has occurred as mentioned above"
+                    message: "Internal server error!"
                 }
             });
         });
@@ -220,7 +225,7 @@ exports.category_delete = (req, res, next) =>{
                 status: "error",
                 error: err,
                 data : {
-                    message: "Internal server error"
+                    message: "Internal server error!"
                 }
             });
         });

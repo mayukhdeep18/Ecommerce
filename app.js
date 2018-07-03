@@ -116,9 +116,9 @@ const SearchRoutes = require("./routes/search");
 const adminSignup = require("./routes/admin_signup");
 
 mongoose.connect(
-    "mongodb://zoom:"+
+    "mongodb://zoom_user:"+
     process.env.ZOOM_PWD +
-    "@ds131697.mlab.com:31697/zoommyprice", {useMongoClient: true}, { autoIndex: false  }
+    "@ds125821.mlab.com:25821/zoomzoom", {useMongoClient: true}, { autoIndex: false  }
 );
 
 app.use(morgan("dev"));
