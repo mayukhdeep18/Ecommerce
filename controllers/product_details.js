@@ -22,7 +22,7 @@ exports.product_get_all = (req, res, next) => {
 
     if( page > 0 && page < 20)
     {
-        Product.find({ACTIVE_FLAG:'Y'})
+        Product.find()
             .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT PRODUCT_IMAGE_LINKS UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
             .populate('PRODUCT_CATEGORY_ID')
             .populate('PRODUCT_SUB_CATEGORY_ID')
@@ -518,8 +518,7 @@ exports.product_details_get_by_id = (req, res, next) => {
 exports.product_update_by_id = (req, res, next) => {
     const id = req.params.prodcategoryId;
     const updateOps = {};
-
-    updateOps['PRODUCT_CATEGORY_ID'] = req.body.PRODUCT_CATEGORY_ID;
+    var Prod_id = req.body.PRODUCT_NAME.replace(/[^a-zA-Z0-9]/g,'-');
     updateOps['PRODUCT_NAME'] = req.body.PRODUCT_NAME;
     updateOps['PRODUCT_SUB_TITLE']= req.body.PRODUCT_SUB_TITLE;
     updateOps['PRODUCT_DESCRIPTION'] = req.body.PRODUCT_DESCRIPTION;
@@ -528,7 +527,7 @@ exports.product_update_by_id = (req, res, next) => {
     updateOps['PRODUCT_IMAGE_LINKS'] = JSON.stringify(req.body.PRODUCT_IMAGE_LINKS);
     updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
     updateOps['UPDATED_DATE'] = new Date();
-    updateOps['SUB_CATEGORY_ID'] = Sub_id.toLowerCase();
+    updateOps['PRODUCT_ID'] = Prod_id.toLowerCase();
 
     Product.update({ PRODUCT_ID: id }, { $set: updateOps })
         .exec()

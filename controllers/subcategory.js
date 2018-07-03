@@ -211,12 +211,11 @@ exports.subcategory_update = (req, res, next) => {
     const updateOps = {};
 
    //updateOps['PRODUCT_CATEGORY_ID'] = req.body.PRODUCT_CATEGORY_ID;
-    updateOps['PRODUCT_SUB_CATEGORY_NAME'] = req.body.PRODUCT_CATEGORY_NAME;
-    updateOps['PRODUCT_SUB_CATEGORY_DESCRIPTION']= req.body.PRODUCT_CATEGORY_DESCRIPTION;
+    updateOps['PRODUCT_SUB_CATEGORY_NAME'] = req.body.PRODUCT_SUB_CATEGORY_NAME;
+    updateOps['PRODUCT_SUB_CATEGORY_DESCRIPTION']= req.body.PRODUCT_SUB_CATEGORY_DESCRIPTION;
     updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
     updateOps['UPDATED_DATE'] = new Date();
     updateOps['SUB_CATEGORY_ID'] = Sub_id.toLowerCase();
-
 
     Subcategory.update({ SUB_CATEGORY_ID: id }, { $set: updateOps })
         .exec()
