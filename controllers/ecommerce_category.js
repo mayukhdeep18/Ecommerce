@@ -85,7 +85,7 @@ exports.ecommerce_create_category = (req, res, next) =>  {
                     ecommerce_category
                         .save()
                         .then(result => {
-                            console.log(result);
+
                             res.status(201).json({
                                 status: "success",
                                 data: {

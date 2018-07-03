@@ -114,10 +114,6 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
     var mean_rating = 0;
     var min_name;
     var rev_cont = 0;
-    for (const ops of req.body) {
-        updateOps[ops.propName] = ops.value;
-    }
-
 
             EcommProduct.find({ECOMMERCE_PRODUCT_ID: id})
                 .select('ECOMMERCE_PRODUCT_PRICE PRODUCT_ID')
@@ -127,8 +123,6 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
 
                     var prod_id = ecom_1[0].PRODUCT_ID;
                     //console.log('prod_id',prod_id);
-
-
 
                     EcommProduct.find({PRODUCT_ID: prod_id, ACTIVE_FLAG: 'Y'})
                         .select('ECOMMERCE_PRODUCT_PRICE')
@@ -197,7 +191,6 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
 
                                                     res.status(200).json({
                                                         status: "success",
-                                                        error: "",
                                                         data: {
                                                             message: 'product details updated and stored'
                                                         }
@@ -205,10 +198,10 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
                                                 }).catch(err => {
                                                 console.log(err);
                                                 res.status(500).json({
-                                                    status: "failure",
+                                                    status: "error",
                                                     error: err,
                                                     data: {
-                                                        message: "5 An error has occurred as mentioned above"
+                                                        message: "5 Internal server error"
                                                     }
                                                 });
                                             });
@@ -218,7 +211,7 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
                                             status: "failure",
                                             error: err,
                                             data: {
-                                                message: "4 An error has occurred as mentioned above"
+                                                message: "4 Internal server error"
                                             }
                                         });
                                     });
@@ -228,7 +221,7 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
                                     status: "failure",
                                     error: err,
                                     data: {
-                                        message: "3 An error has occurred as mentioned above"
+                                        message: "3 Internal server error"
                                     }
                                 });
                             });
@@ -239,7 +232,7 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
                             status: "failure",
                             error: err,
                             data: {
-                                message: "2 An error has occurred as mentioned above"
+                                message: "2 Internal server error"
                             }
                         });
                     });
@@ -249,7 +242,7 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
                     status: "failure",
                     error: err,
                     data: {
-                        message: "1 An error has occurred as mentioned above"
+                        message: "1 Internal server error"
                     }
                 });
             });
@@ -287,7 +280,7 @@ exports.ecommproduct_delete_by_id = (req, res, next) => {
 //create a new ecommerce product detail
 exports.ecommproduct_new_create = (req, res, next) => {
 
-    var Ecom_name = req.body.ECOMMERCE_NAME.toLowerCase();
+    var Ecom_name = req.body.ECOMMERCE_NAME.replace(/[^a-zA-Z0-9]/g,'-');
 
     EcommProduct.find({ECOMMERCE_PRODUCT_ID: req.body.ECOMMERCE_PRODUCT_ID})
         .select('_id')
@@ -295,18 +288,21 @@ exports.ecommproduct_new_create = (req, res, next) => {
         .then(ecom_res=>{
             if(ecom_res.length >0)
             {
-
+                res.status(500).json({
+                    status: "error",
+                    data: {
+                        message: "Ecommerce product already exists!"
+                    }
+                });
             }
             else
             {
-                EcommCategory.find({ECOMMERCE_NAME: Ecom_name})
+                EcommCategory.find({ECOMMERCE_ID: Ecom_name.toLowerCase()})
                     .select('ECOMMERCE_ID _id')
                     .exec()
                     .then(docs => {
 
                         var Ecomm_id = docs[0]._id;
-
-                        console.log('Ecomm_length',Ecomm_id);
 
                         if(Ecomm_id != null)
                         {
@@ -379,7 +375,10 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                                                             updateOps['PRODUCT_ID'] = prod_res._id.toString();
                                                                             updateOps['CATEGORY_ID'] = prod_res.PRODUCT_CATEGORY_ID.toString();
                                                                             updateOps['SUB_CATEGORY_ID'] = prod_res.PRODUCT_SUB_CATEGORY_ID.toString();
-                                                                            updateOps['SUB_SUB_CATEGORY_ID'] = prod_res.PRODUCT_SUB_SUB_CATEGORY_ID.toString();
+                                                                            if(prod_res.PRODUCT_SUB_SUB_CATEGORY_ID.toString()!=null)
+                                                                            {
+                                                                                updateOps['SUB_SUB_CATEGORY_ID'] = prod_res.PRODUCT_SUB_SUB_CATEGORY_ID.toString();
+                                                                            }
                                                                             updateOps['ACTIVE_FLAG'] = 'Y';
 
                                                                             //console.log('ecom_upd',updateOps );
@@ -421,6 +420,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                                                                                                     res.status(201).json({
                                                                                                                         status: "success",
                                                                                                                         data: {
+                                                                                                                            ECOMMERCE_PRODUCT_ID: result.ECOMMERCE_PRODUCT_ID,
                                                                                                                             message: "ecommerce details added and product mapping done"
                                                                                                                         }
                                                                                                                     });
