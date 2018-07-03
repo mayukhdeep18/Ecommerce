@@ -45,15 +45,20 @@ exports.product_get_all = (req, res, next) => {
                             {
 
                                 var product_sub_sub_category_name="";
+                                var product_sub_sub_category_id = "";
                                 if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME!=null)
                                 {
                                     product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
+                                    product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
                                 }
                                 //create an array with the basic product details
                                 prod_cat_arr.push({prod_id: prod_item._id,
                                     product_id: prod_item.PRODUCT_ID,
+                                    prod_category_id: prod_item.PRODUCT_CATEGORY_ID._id,
                                     prod_category_name: prod_item.PRODUCT_CATEGORY_ID.PRODUCT_CATEGORY_NAME,
+                                    prod_sub_category_id: prod_item.PRODUCT_SUB_CATEGORY_ID._id,
                                     product_sub_category_name: prod_item.PRODUCT_SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME,
+                                    product_sub_sub_category_id: product_sub_sub_category_id,
                                     product_sub_sub_category_name: product_sub_sub_category_name,
                                     prod_name: prod_item.PRODUCT_NAME,
                                     prod_spec: JSON.parse(prod_item.PRODUCT_SPECIFICATIONS),
@@ -345,16 +350,22 @@ exports.product_details_get_by_id = (req, res, next) => {
 
                             for( var prod_item of docs)
                             {
+
                                 var product_sub_sub_category_name="";
+                                var product_sub_sub_category_id = "";
                                 if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME!=null)
                                 {
                                     product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
+                                    product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
                                 }
                                 //create an array with the basic product details
                                 prod_cat_arr.push({prod_id: prod_item._id,
                                     product_id: prod_item.PRODUCT_ID,
+                                    prod_category_id: prod_item.PRODUCT_CATEGORY_ID._id,
                                     prod_category_name: prod_item.PRODUCT_CATEGORY_ID.PRODUCT_CATEGORY_NAME,
+                                    prod_sub_category_id: prod_item.PRODUCT_SUB_CATEGORY_ID._id,
                                     product_sub_category_name: prod_item.PRODUCT_SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME,
+                                    product_sub_sub_category_id: product_sub_sub_category_id,
                                     product_sub_sub_category_name: product_sub_sub_category_name,
                                     prod_name: prod_item.PRODUCT_NAME,
                                     prod_spec: JSON.parse(prod_item.PRODUCT_SPECIFICATIONS),

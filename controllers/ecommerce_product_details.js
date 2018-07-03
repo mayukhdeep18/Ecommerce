@@ -436,7 +436,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                                                                                             });
                                                                                                         }).catch(err => {
                                                                                                         res.status(500).json({
-                                                                                                            status: "failure",
+                                                                                                            status: "error",
                                                                                                             error: err,
                                                                                                             data: {
                                                                                                                 message: "6. Internal server error!"
@@ -447,7 +447,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                                                                                 }).catch(err => {
                                                                                                 console.log(err);
                                                                                                 res.status(500).json({
-                                                                                                    status: "failure",
+                                                                                                    status: "error",
                                                                                                     error: err,
                                                                                                     data: {
                                                                                                         message: "5. Internal server error!"
@@ -457,7 +457,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                                                                         }).catch(err => {
                                                                                         console.log(err);
                                                                                         res.status(500).json({
-                                                                                            status: "failure",
+                                                                                            status: "error",
                                                                                             error: err,
                                                                                             data: {
                                                                                                 message: "4. Internal server error!"
@@ -466,7 +466,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                                                                     });
                                                                                 }).catch(err => {
                                                                                 res.status(500).json({
-                                                                                    status: "failure",
+                                                                                    status: "error",
                                                                                     error: err,
                                                                                     data: {
                                                                                         message: "3. Internal server error!"
@@ -476,7 +476,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                                                         }).catch(err => {
                                                                         console.log(err);
                                                                         res.status(500).json({
-                                                                            status: "failure",
+                                                                            status: "error",
                                                                             error: err,
                                                                             data: {
                                                                                 message: "2. Internal server error!"
@@ -486,7 +486,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                                                 }).catch(err => {
                                                                 console.log(err);
                                                                 res.status(500).json({
-                                                                    status: "failure",
+                                                                    status: "error",
                                                                     error: err,
                                                                     data: {
                                                                         message: "1. Internal server error!"
