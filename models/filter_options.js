@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const FilterOptionsSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    FILTER_ID: { type: String, required: true },
+    FILTER_ID: { type: mongoose.Schema.Types.ObjectId,ref:'Filters', required: true },
     CATEGORY_ID: {type: mongoose.Schema.Types.ObjectId, ref:'Category'},
     SUB_CATEGORY_ID: {type: mongoose.Schema.Types.ObjectId, ref: 'Sub_Category'},
     SUB_SUB_CATEGORY_ID: {type: mongoose.Schema.Types.ObjectId, ref: 'Sub_Sub_Category' },

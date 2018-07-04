@@ -10,7 +10,7 @@ const Subsubcategory = require("../models/subsubcategory");
 exports.filters_options_conn_get_all = (req, res, next) => {
     Filter_options.find()
         .select("FILTER_ID DISPLAY_TEXT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
-        //.populate('FILTER_ID')
+        .populate('FILTER_ID')
         .populate('CATEGORY_ID')
         .populate('SUB_CATEGORY_ID',null)
         .populate('SUB_SUB_CATEGORY_ID',null)
@@ -19,13 +19,12 @@ exports.filters_options_conn_get_all = (req, res, next) => {
             console.log(docs.length);
             if(docs.length > 0)
             {
-                var sub_category_id = "";
-                var sub_category_name = "";
-                var sub_sub_category_id = "";
-                var sub_sub_category_name = "";
-
                 const response = {
                     filter_value_details: docs.map(doc => {
+                        var sub_category_id = "";
+                        var sub_category_name = "";
+                        var sub_sub_category_id = "";
+                        var sub_sub_category_name = "";
                         if(doc.SUB_CATEGORY_ID != null){
                             sub_category_id =  doc.SUB_CATEGORY_ID._id;
                             sub_category_name =  doc.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME;
@@ -37,7 +36,8 @@ exports.filters_options_conn_get_all = (req, res, next) => {
                         }
                         return {
                             filter_value_id: doc._id,
-                            filter_id: doc.FILTER_ID,
+                            filter_id: doc.FILTER_ID._id,
+                            filter_type: doc.FILTER_ID.FILTER_CATEGORY_NAME,
                             category_id: doc.CATEGORY_ID._id,
                             category_name: doc.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
                             product_sub_category_id: sub_category_id,
@@ -87,14 +87,19 @@ exports.filters_options_conn_get_all = (req, res, next) => {
 exports.filters_options_conn_create = (req, res, next) => {
 
     var fil_id = req.body.FILTER_ID;
+    var arr = [];
     var sub_categ_id ;
     var sub_sub_categ_id ;
+    for(var new_item of req.body.DISPLAY_TEXT)
+    {
+        arr.push(new_item.toLowerCase());
+    }
 
-    Filter_options.find({DISPLAY_TEXT:{$in: req.body.DISPLAY_TEXT}})
+    Filter_options.find({DISPLAY_TEXT:{$in: arr}})
         .select('FILTER_ID _id')
         .exec()
         .then(doc =>{
-
+            console.log(doc);
             if(doc.length > 0)
             {
                 res.status(500).json({
@@ -112,11 +117,11 @@ exports.filters_options_conn_create = (req, res, next) => {
                     .then(results => {
 
                         var arr = [];
-                        if(results.SUB_CATEGORY_ID !=null)
+                        if(results[0].SUB_CATEGORY_ID !=null)
                         {
                             sub_categ_id = results[0].SUB_CATEGORY_ID;
                         }
-                        if(results.SUB_SUB_CATEGORY_ID!=null)
+                        if(results[0].SUB_SUB_CATEGORY_ID!=null)
                         {
                             sub_sub_categ_id = results[0].SUB_SUB_CATEGORY_ID;
                         }
@@ -128,7 +133,7 @@ exports.filters_options_conn_create = (req, res, next) => {
                                 CATEGORY_ID: results[0].CATEGORY_ID,
                                 SUB_CATEGORY_ID: sub_categ_id,
                                 SUB_SUB_CATEGORY_ID: sub_sub_categ_id,
-                                DISPLAY_TEXT: item,
+                                DISPLAY_TEXT: item.toLowerCase(),
                                 UPDATED_BY: req.body.UPDATED_BY,
                                 UPDATED_DATE: new Date(),
                                 ACTIVE_FLAG: req.body.ACTIVE_FLAG
@@ -180,7 +185,7 @@ exports.filters_options_conn_get_by_id = (req, res, next) => {
     const id = req.params.filtercategoryId;
     Filter_options.findById(id)
         .select("FILTER_ID DISPLAY_TEXT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
-        //.populate('FILTER_ID')
+        .populate('FILTER_ID')
         .populate('CATEGORY_ID')
         .populate('SUB_CATEGORY_ID',null)
         .populate('SUB_SUB_CATEGORY_ID',null)
@@ -207,7 +212,8 @@ exports.filters_options_conn_get_by_id = (req, res, next) => {
                     status:"success",
                     data: {
                         filter_value_id: doc._id,
-                        filter_id: doc.FILTER_ID,
+                        filter_id: doc.FILTER_ID._id,
+                        filter_type: doc.FILTER_ID.FILTER_CATEGORY_NAME,
                         category_id: doc.CATEGORY_ID._id,
                         category_name: doc.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
                         product_sub_category_id: sub_category_id,
@@ -253,18 +259,19 @@ exports.filters_options_conn_update = (req, res, next) => {
     var sub_sub_categ_id ;
 
         updateOps['FILTER_ID'] = req.body.FILTER_ID;
-        updateOps['DISPLAY_TEXT'] = req.body.DISPLAY_TEXT;
+        updateOps['DISPLAY_TEXT'] = req.body.DISPLAY_TEXT.toLowerCase();
+        updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
 
     Filter_categories.find({FILTER_ID:req.body.FILTER_ID})
         .select('CATEGORY_ID SUB_CATEGORY_ID SUB_SUB_CATEGORY_ID')
         .exec()
         .then(results => {
-console.log(results);
-            if(results.SUB_CATEGORY_ID !=null)
+
+            if(results[0].SUB_CATEGORY_ID !=null)
             {
                 sub_categ_id = results[0].SUB_CATEGORY_ID;
             }
-            if(results.SUB_SUB_CATEGORY_ID!=null)
+            if(results[0].SUB_SUB_CATEGORY_ID!=null)
             {
                 sub_sub_categ_id = results[0].SUB_SUB_CATEGORY_ID;
             }
