@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22d33094-d95f-4e1e-897e-0a67ac0d8ed3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/ecommerce_product_details.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ecommerce_product_details.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/product_details.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/product_details.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,13 +40,13 @@
       <file leaf-file-name="ecommerce_product_details.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/ecommerce_product_details.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="122">
-              <caret line="283" lean-forward="true" selection-start-line="283" selection-end-line="283" />
+            <state relative-caret-position="423">
+              <caret line="233" column="61" selection-start-line="233" selection-start-column="61" selection-end-line="233" selection-end-column="61" />
               <folding>
-                <element signature="e#587#3050#0" />
                 <element signature="e#3152#4341#0" />
-                <element signature="e#4458#11297#0" />
                 <element signature="e#11398#12021#0" />
+                <element signature="e#12119#33549#0" />
+                <element signature="e#33727#41392#0" />
               </folding>
             </state>
           </provider>
@@ -55,8 +55,11 @@
       <file leaf-file-name="product_details.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controllers/product_details.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3098">
-              <caret line="243" column="145" selection-start-line="243" selection-start-column="145" selection-end-line="243" selection-end-column="145" />
+            <state relative-caret-position="271">
+              <caret line="278" column="31" selection-start-line="278" selection-start-column="31" selection-end-line="278" selection-end-column="31" />
+              <folding>
+                <element signature="e#515#12567#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -324,12 +327,12 @@
       <workItem from="1530343779941" duration="12983000" />
       <workItem from="1530511718050" duration="16538000" />
       <workItem from="1530598630482" duration="21269000" />
-      <workItem from="1530688486218" duration="1734000" />
+      <workItem from="1530688486218" duration="4369000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="625539000" />
+    <option name="totallyTimeSpent" value="628174000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -365,6 +368,37 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32965517" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32965517" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.24959612" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
+      <window_info id="Learn" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info id="Image Layers" order="7" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Database" order="6" weight="0.32956383" />
+      <window_info anchor="right" id="Palette&#9;" order="9" />
+      <window_info anchor="right" id="Mongo Explorer" order="7" weight="0.32956383" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3034483" />
+      <window_info anchor="right" id="Maven Projects" order="8" weight="0.32956383" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -400,10 +434,10 @@
         <state relative-caret-position="1575">
           <caret line="105" column="56" selection-start-line="105" selection-start-column="56" selection-end-line="105" selection-end-column="56" />
           <folding>
-            <element signature="e#587#3050#0" />
             <element signature="e#3152#4341#0" />
-            <element signature="e#4458#11297#0" />
             <element signature="e#11398#12021#0" />
+            <element signature="e#12119#33549#0" />
+            <element signature="e#33727#41392#0" />
           </folding>
         </state>
       </provider>
@@ -703,30 +737,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/ecommerce_product_details.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/ecommerce_category.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="55">
           <caret line="87" column="27" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/ecommerce_product_details.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="283" lean-forward="true" selection-start-line="283" selection-end-line="283" />
-          <folding>
-            <element signature="e#587#3050#0" />
-            <element signature="e#3152#4341#0" />
-            <element signature="e#4458#11297#0" />
-            <element signature="e#11398#12021#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -737,10 +751,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/models/ecommerce_product_details.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/ecommerce_product_details.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="233" column="61" selection-start-line="233" selection-start-column="61" selection-end-line="233" selection-end-column="61" />
+          <folding>
+            <element signature="e#3152#4341#0" />
+            <element signature="e#11398#12021#0" />
+            <element signature="e#12119#33549#0" />
+            <element signature="e#33727#41392#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/product_details.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3098">
-          <caret line="243" column="145" selection-start-line="243" selection-start-column="145" selection-end-line="243" selection-end-column="145" />
+        <state relative-caret-position="271">
+          <caret line="278" column="31" selection-start-line="278" selection-start-column="31" selection-end-line="278" selection-end-column="31" />
+          <folding>
+            <element signature="e#515#12567#0" />
+          </folding>
         </state>
       </provider>
     </entry>

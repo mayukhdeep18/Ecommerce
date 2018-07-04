@@ -241,8 +241,6 @@ exports.product_create = (req, res, next) => {
                 }
                 else
                 {
-                    if((Category.findById(req.body.PRODUCT_CATEGORY_ID)===true)&& (Subcategory.findById(req.body.PRODUCT_SUB_CATEGORY_ID))===true)
-                    {
                         const product = new Product({
                             _id: new mongoose.Types.ObjectId(),
                             PRODUCT_ID: Prod_id.toLowerCase(),
@@ -278,16 +276,8 @@ exports.product_create = (req, res, next) => {
                                         message: "Internal server error!"
                                     }
                                 });
-                            });
-                    }
-                    else {
-                        res
-                            .status(404)
-                            .json({
-                                status: "error",
-                                error: "Category, SubCategory or SubSubCategory does not exist"
-                            });
-                    }
+                           });
+
                 }
             }).catch(err => {
             console.log(err);

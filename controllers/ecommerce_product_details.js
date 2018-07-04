@@ -12,53 +12,95 @@ const Review = require("../models/review_details");
 
 //get all active ecommerce product details
 exports.ecommproduct_get_all = (req, res, next) => {
-    EcommProduct.find({ACTIVE_FLAG:'Y'})
-        .select("ECOMMERCE_CATEGORY_ID ECOMMERCE_PRODUCT_NAME ECOMMERCE_PRODUCT_PRICE PRODUCT_URL ECOMMERCE_PRODUCT_ID UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
-        .populate('ECOMMERCE_CATEGORY_ID')
-        .populate('PRODUCT_ID')
-        .populate('CATEGORY_ID')
-        .populate('SUB_CATEGORY_ID')
-        .populate('SUB_SUB_CATEGORY_ID')
-        .exec()
-        .then(docs => {
-            res.status(200).json({
-                status: "success",
-                data: {
-                    ecommproduct: docs.map(doc => {
-                        return {
-                            ecommerce_product_details_id: doc._id,
-                            ecommerce_category_id: doc.ECOMMERCE_CATEGORY_ID._id,
-                            ecommerce_category_details: doc.ECOMMERCE_CATEGORY_ID.ECOMMERCE_NAME,
-                            product_category_id: doc.CATEGORY_ID._id,
-                            product_category_name: doc.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
-                            product_sub_category_id: doc.SUB_CATEGORY_ID._id,
-                            product_sub_category_name: doc.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME,
-                            product_sub_sub_category_id: doc.SUB_SUB_CATEGORY_ID._id,
-                            product_sub_sub_category_name: doc.SUB_SUB_CATEGORY_ID.PRODUCT_SUB_SUB_CATEGORY_NAME,
-                            ecommerce_product_name: doc.ECOMMERCE_PRODUCT_NAME,
-                            ecommerce_product_price: doc.ECOMMERCE_PRODUCT_PRICE,
-                            ecommerce_prodct_shpmnt_duratn: doc.ECOMMERCE_PRODCT_SHPMNT_DURATN,
-                            product_url: doc.PRODUCT_URL,
-                            ecommerce_product_id: doc.ECOMMERCE_PRODUCT_ID,
-                            product_id: doc.PRODUCT_ID._id,
-                            product_specifications:JSON.parse(doc.PRODUCT_ID.PRODUCT_SPECIFICATIONS),
-                            updated_by_user: doc.UPDATED_BY,
-                            updated_on: doc.UPDATED_DATE,
-                            isActive: doc.ACTIVE_FLAG
-                        };
+    var perPage = 9;
+    var page = req.params.page || 1;
+    if( page > 0 && page < 20)
+    {
+        EcommProduct.find({ACTIVE_FLAG:'Y'})
+            .select("ECOMMERCE_CATEGORY_ID ECOMMERCE_PRODUCT_NAME ECOMMERCE_PRODUCT_PRICE PRODUCT_URL ECOMMERCE_PRODUCT_ID UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
+            .populate('ECOMMERCE_CATEGORY_ID')
+            .populate('PRODUCT_ID')
+            .populate('CATEGORY_ID')
+            .populate('SUB_CATEGORY_ID')
+            .populate('SUB_SUB_CATEGORY_ID',null)
+            .skip((perPage * page) - perPage)
+            .limit(perPage)
+            .sort({UPDATED_DATE: -1, MEAN_RATING: -1, PRODUCT_PRICE: 1})
+            .exec()
+            .then(docs => {
+
+                EcommProduct.count()
+                    .exec()
+                    .then(count => {
+                        if(docs.length > 0)
+                        {
+                            var product_sub_sub_category_name="";
+                            var product_sub_sub_category_id = "";
+                            if(docs.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
+                            {
+                                product_sub_sub_category_name = docs.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
+                                product_sub_sub_category_id = docs.PRODUCT_SUB_SUB_CATEGORY_ID._id;
+                            }
+
+                            res.status(200).json({
+                                status: "success",
+                                data: {
+                                    ecommproduct: docs.map(doc => {
+                                        return {
+                                            ecommerce_product_details_id: doc._id,
+                                            ecommerce_category_id: doc.ECOMMERCE_CATEGORY_ID._id,
+                                            ecommerce_category_details: doc.ECOMMERCE_CATEGORY_ID.ECOMMERCE_NAME,
+                                            product_category_id: doc.CATEGORY_ID._id,
+                                            product_category_name: doc.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
+                                            product_sub_category_id: doc.SUB_CATEGORY_ID._id,
+                                            product_sub_category_name: doc.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME,
+                                            product_sub_sub_category_id: product_sub_sub_category_id,
+                                            product_sub_sub_category_name: product_sub_sub_category_name,
+                                            ecommerce_product_name: doc.ECOMMERCE_PRODUCT_NAME,
+                                            ecommerce_product_price: doc.ECOMMERCE_PRODUCT_PRICE,
+                                            ecommerce_prodct_shpmnt_duratn: doc.ECOMMERCE_PRODCT_SHPMNT_DURATN,
+                                            product_url: doc.PRODUCT_URL,
+                                            ecommerce_product_id: doc.ECOMMERCE_PRODUCT_ID,
+                                            product_id: doc.PRODUCT_ID._id,
+                                            product_specifications:JSON.parse(doc.PRODUCT_ID.PRODUCT_SPECIFICATIONS),
+                                            updated_by_user: doc.UPDATED_BY,
+                                            updated_on: doc.UPDATED_DATE,
+                                            isActive: doc.ACTIVE_FLAG,
+                                            pages: Math.ceil(count / perPage)
+                                        };
+                                    })
+                                }
+                            });
+                        }
+                        else {
+                            res.status(404).json({
+                                status: "error",
+                                data: {
+                                    message: "No ecommerce products available"
+                                }
+                            });
+                        }
+
                     })
-                }
+            })
+            .catch(err => {
+                res.status(500).json({
+                    status: "error",
+                    error: err,
+                    data: {
+                        message: "Internal server error!"
+                    }
+                });
             });
-        })
-        .catch(err => {
-            res.status(500).json({
-                status: "error",
-                error: err,
-                data: {
-                    message: "Internal server error!"
-                }
-            });
+    }
+    else {
+        res.status(500).json({
+            status: "error",
+            data: {
+                message: "Invalid page number"
+            }
         });
+    }
 };
 
 //get ecommerce product details by id
@@ -375,7 +417,7 @@ exports.ecommproduct_new_create = (req, res, next) => {
                                                                             updateOps['PRODUCT_ID'] = prod_res._id.toString();
                                                                             updateOps['CATEGORY_ID'] = prod_res.PRODUCT_CATEGORY_ID.toString();
                                                                             updateOps['SUB_CATEGORY_ID'] = prod_res.PRODUCT_SUB_CATEGORY_ID.toString();
-                                                                            if(prod_res.PRODUCT_SUB_SUB_CATEGORY_ID.toString()!=null)
+                                                                            if(prod_res.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
                                                                             {
                                                                                 updateOps['SUB_SUB_CATEGORY_ID'] = prod_res.PRODUCT_SUB_SUB_CATEGORY_ID.toString();
                                                                             }
