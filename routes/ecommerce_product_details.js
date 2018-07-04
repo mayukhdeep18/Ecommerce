@@ -4,7 +4,7 @@ const EcommProdController = require("../controllers/ecommerce_product_details");
 const checkAuth = require('../middleware/check-auth');
 
 
-router.get("/", EcommProdController.ecommproduct_get_all);
+router.get("/:page", EcommProdController.ecommproduct_get_all);
 
 router.post("/", EcommProdController.ecommproduct_new_create);
 

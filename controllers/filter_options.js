@@ -70,10 +70,11 @@ exports.filters_options_conn_create = (req, res, next) => {
     var sub_categ_id = "";
     var sub_sub_categ_id = "";
 
-    Filter_options.find({FILTER_ID:fil_id})
+    Filter_options.find({DISPLAY_TEXT:{$in: req.body.DISPLAY_TEXT}})
         .select('FILTER_ID _id')
         .exec()
         .then(doc =>{
+
             if(doc.length > 0)
             {
                 res.status(500).json({
@@ -88,51 +89,50 @@ exports.filters_options_conn_create = (req, res, next) => {
                 Filters.find({FILTER_ID:fil_id})
                     .select('CATEGORY_ID SUB_CATEGORY_ID SUB_SUB_CATEGORY_ID')
                     .exec()
-                    .then(res => {
+                    .then(results => {
                         var arr = [];
-                        if(res.SUB_CATEGORY_ID !=null)
+                        if(results.SUB_CATEGORY_ID !=null)
                         {
-                            sub_categ_id = res.SUB_CATEGORY_ID;
+                            sub_categ_id = results.SUB_CATEGORY_ID;
                         }
-                        if(res.SUB_SUB_CATEGORY_ID!=null)
+                        if(results.SUB_SUB_CATEGORY_ID!=null)
                         {
-                            sub_sub_categ_id = res.SUB_SUB_CATEGORY_ID;
+                            sub_sub_categ_id = results.SUB_SUB_CATEGORY_ID;
                         }
                         for(var item of req.body.DISPLAY_TEXT)
                         {
                             arr.push({
                                 _id: new mongoose.Types.ObjectId(),
                                 FILTER_ID: fil_id,
-                                CATEGORY_ID: res.CATEGORY_ID,
-                                SUB_CATEGORY_ID: res.SUB_CATEGORY_ID,
-                                SUB_SUB_CATEGORY_ID: res.SUB_SUB_CATEGORY_ID,
+                                CATEGORY_ID: results.CATEGORY_ID,
+                                SUB_CATEGORY_ID: results.SUB_CATEGORY_ID,
+                                SUB_SUB_CATEGORY_ID: results.SUB_SUB_CATEGORY_ID,
                                 DISPLAY_TEXT: item,
                                 UPDATED_BY: req.body.UPDATED_BY,
                                 UPDATED_DATE: new Date(),
                                 ACTIVE_FLAG: req.body.ACTIVE_FLAG
                             })
                         }
-                        Filter_options.insertMany(arr, function(error, inserted) {
-                            if(error) {
-                                res.status(500).json({
-                                    status: "error",
-                                    data: {
-                                        message: "Internal server error!"
-                                    }
-                                });
-                            }
-                            else {
-                                res.status(201).json({
+
+
+                        Filter_options.insertMany(arr)
+                            .then(response => {
+                                res.status(200).json({
                                     status: "success",
                                     data: {
                                         message: "filter values added successfully"
                                     }
                                 });
-                            }
-
-                        }); // end of insert
+                            }).catch(err=>{
+                                res.status(500).json({
+                                status: "error",
+                                error: err,
+                                data: {
+                                    message: "Internal server error!"
+                                }
+                            });
+                            });
                     }).catch(err => {
-                    //console.log(err);
                     res.status(500).json({
                         status: "error",
                         error: err,
@@ -143,7 +143,6 @@ exports.filters_options_conn_create = (req, res, next) => {
                 });
             }
         }).catch(err => {
-        //console.log(err);
         res.status(500).json({
             status: "error",
             error: err,
