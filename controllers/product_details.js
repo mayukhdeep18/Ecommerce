@@ -46,7 +46,7 @@ exports.product_get_all = (req, res, next) => {
 
                                 var product_sub_sub_category_name="";
                                 var product_sub_sub_category_id = "";
-                                if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME!=null)
+                                if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
                                 {
                                     product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                     product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
@@ -241,10 +241,7 @@ exports.product_create = (req, res, next) => {
                 }
                 else
                 {
-                    if(
-                        Category.findById(req.body.PRODUCT_CATEGORY_ID)&&
-                        Subcategory.findById(req.body.PRODUCT_SUB_CATEGORY_ID)
-                    )
+                    if((Category.findById(req.body.PRODUCT_CATEGORY_ID)===true)&& (Subcategory.findById(req.body.PRODUCT_SUB_CATEGORY_ID))===true)
                     {
                         const product = new Product({
                             _id: new mongoose.Types.ObjectId(),
@@ -353,7 +350,7 @@ exports.product_details_get_by_id = (req, res, next) => {
 
                                 var product_sub_sub_category_name="";
                                 var product_sub_sub_category_id = "";
-                                if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME!=null)
+                                if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID!=null)
                                 {
                                     product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                     product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
