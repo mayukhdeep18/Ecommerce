@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Filters = require("../models/filters");
+const Filter_categories = require("../models/filters_categories");
 const Filter_options = require("../models/filter_options");
 const Category = require("../models/category");
 const Subcategory = require("../models/subcategory");
@@ -7,42 +8,61 @@ const Subsubcategory = require("../models/subsubcategory");
 
 //get all active filter options connection details
 exports.filters_options_conn_get_all = (req, res, next) => {
-    Filter_options.find({ACTIVE_FLAG:'Y'})
+    Filter_options.find()
         .select("FILTER_ID DISPLAY_TEXT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         //.populate('FILTER_ID')
         .populate('CATEGORY_ID')
-        .populate('SUB_CATEGORY_ID')
-        .populate('SUB_SUB_CATEGORY_ID')
+        .populate('SUB_CATEGORY_ID',null)
+        .populate('SUB_SUB_CATEGORY_ID',null)
         .exec()
         .then(docs => {
+            console.log(docs.length);
             if(docs.length > 0)
             {
+                var sub_category_id = "";
+                var sub_category_name = "";
+                var sub_sub_category_id = "";
+                var sub_sub_category_name = "";
+
+                const response = {
+                    filter_value_details: docs.map(doc => {
+                        if(doc.SUB_CATEGORY_ID != null){
+                            sub_category_id =  doc.SUB_CATEGORY_ID._id;
+                            sub_category_name =  doc.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME;
+
+                        }
+                        if(doc.SUB_SUB_CATEGORY_ID != null) {
+                            sub_sub_category_id = doc.SUB_SUB_CATEGORY_ID._id;
+                            sub_sub_category_name = doc.SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
+                        }
+                        return {
+                            filter_value_id: doc._id,
+                            filter_id: doc.FILTER_ID,
+                            category_id: doc.CATEGORY_ID._id,
+                            category_name: doc.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
+                            product_sub_category_id: sub_category_id,
+                            product_sub_category_name: sub_category_name,
+                            product_sub_sub_category_id: sub_sub_category_id,
+                            product_sub_sub_category_name: sub_sub_category_name,
+                            display_text: doc.DISPLAY_TEXT,
+                            updated_by_user: doc.UPDATED_BY,
+                            updated_on: doc.UPDATED_DATE,
+                            isActive: doc.ACTIVE_FLAG
+                        };
+                    })
+                };
+
                 res.status(200).json({
-                    status: "success",
-                    error: "",
+                    status:"success",
                     data: {
-                        filter_options: docs.map(doc => {
-                            return {
-                                filter_option_conn_id: doc._id,
-                                filter_id: doc.FILTER_ID,
-                                category_name: doc.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
-                                product_sub_category_id: doc.SUB_CATEGORY_ID._id,
-                                product_sub_category_name: doc.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME,
-                                product_sub_sub_category_id: doc.SUB_SUB_CATEGORY_ID._id,
-                                product_sub_sub_category_name: doc.SUB_SUB_CATEGORY_ID.PRODUCT_SUB_SUB_CATEGORY_NAME,
-                                display_text: doc.DISPLAY_TEXT,
-                                updated_by_user: doc.UPDATED_BY,
-                                updated_on: doc.UPDATED_DATE,
-                                isActive: doc.ACTIVE_FLAG
-                            };
-                        })
+                        response
                     }
                 });
             }
             else
             {
-                res.status(200).json({
-                    status: "success",
+                res.status(404).json({
+                    status: "error",
                     data: {
                         message: "No filter values exist!"
                     }
@@ -51,6 +71,7 @@ exports.filters_options_conn_get_all = (req, res, next) => {
 
         })
         .catch(err => {
+            console.log(err);
             res.status(500).json({
                 status: "error",
                 error: err,
@@ -62,13 +83,12 @@ exports.filters_options_conn_get_all = (req, res, next) => {
 };
 
 
-
 //create a new filter option connection
 exports.filters_options_conn_create = (req, res, next) => {
 
     var fil_id = req.body.FILTER_ID;
-    var sub_categ_id = "";
-    var sub_sub_categ_id = "";
+    var sub_categ_id ;
+    var sub_sub_categ_id ;
 
     Filter_options.find({DISPLAY_TEXT:{$in: req.body.DISPLAY_TEXT}})
         .select('FILTER_ID _id')
@@ -86,27 +106,28 @@ exports.filters_options_conn_create = (req, res, next) => {
             }
             else
             {
-                Filters.find({FILTER_ID:fil_id})
+                Filter_categories.find({FILTER_ID:fil_id})
                     .select('CATEGORY_ID SUB_CATEGORY_ID SUB_SUB_CATEGORY_ID')
                     .exec()
                     .then(results => {
+
                         var arr = [];
                         if(results.SUB_CATEGORY_ID !=null)
                         {
-                            sub_categ_id = results.SUB_CATEGORY_ID;
+                            sub_categ_id = results[0].SUB_CATEGORY_ID;
                         }
                         if(results.SUB_SUB_CATEGORY_ID!=null)
                         {
-                            sub_sub_categ_id = results.SUB_SUB_CATEGORY_ID;
+                            sub_sub_categ_id = results[0].SUB_SUB_CATEGORY_ID;
                         }
                         for(var item of req.body.DISPLAY_TEXT)
                         {
                             arr.push({
                                 _id: new mongoose.Types.ObjectId(),
                                 FILTER_ID: fil_id,
-                                CATEGORY_ID: results.CATEGORY_ID,
-                                SUB_CATEGORY_ID: results.SUB_CATEGORY_ID,
-                                SUB_SUB_CATEGORY_ID: results.SUB_SUB_CATEGORY_ID,
+                                CATEGORY_ID: results[0].CATEGORY_ID,
+                                SUB_CATEGORY_ID: sub_categ_id,
+                                SUB_SUB_CATEGORY_ID: sub_sub_categ_id,
                                 DISPLAY_TEXT: item,
                                 UPDATED_BY: req.body.UPDATED_BY,
                                 UPDATED_DATE: new Date(),
@@ -158,47 +179,66 @@ exports.filters_options_conn_create = (req, res, next) => {
 exports.filters_options_conn_get_by_id = (req, res, next) => {
     const id = req.params.filtercategoryId;
     Filter_options.findById(id)
-        .select("URL_SLUG DISPLAY_TEXT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
-        .populate('FILTER_ID')
+        .select("FILTER_ID DISPLAY_TEXT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
+        //.populate('FILTER_ID')
         .populate('CATEGORY_ID')
-        .populate('SUB_CATEGORY_ID')
-        .populate('SUB_SUB_CATEGORY_ID')
+        .populate('SUB_CATEGORY_ID',null)
+        .populate('SUB_SUB_CATEGORY_ID',null)
         .exec()
         .then(doc => {
-            console.log("From database", doc);
-            if (doc) {
+
+            if(doc!=null)
+            {
+                var sub_category_id = "";
+                var sub_category_name = "";
+                var sub_sub_category_id = "";
+                var sub_sub_category_name = "";
+
+                if(doc.SUB_CATEGORY_ID != null){
+                    sub_category_id =  doc.SUB_CATEGORY_ID._id;
+                    sub_category_name =  doc.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME;
+
+                }
+                if(doc.SUB_SUB_CATEGORY_ID != null) {
+                    sub_sub_category_id = doc.SUB_SUB_CATEGORY_ID._id;
+                    sub_sub_category_name = doc.SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
+                }
                 res.status(200).json({
                     status:"success",
-                    error_msg:"",
                     data: {
-                        filter_option_conn_id: doc._id,
-                        filter_id: doc.FILTER_ID._id,
-                        filter_category_name: doc.FILTER_ID.FILTER_CATEGORY_NAME,
+                        filter_value_id: doc._id,
+                        filter_id: doc.FILTER_ID,
+                        category_id: doc.CATEGORY_ID._id,
                         category_name: doc.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
-                        product_sub_category_id: doc.SUB_CATEGORY_ID._id,
-                        product_sub_category_name: doc.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME,
-                        product_sub_sub_category_id: doc.SUB_SUB_CATEGORY_ID._id,
-                        product_sub_sub_category_name: doc.SUB_SUB_CATEGORY_ID.PRODUCT_SUB_SUB_CATEGORY_NAME,
-                        url_slug: doc.URL_SLUG,
+                        product_sub_category_id: sub_category_id,
+                        product_sub_category_name: sub_category_name,
+                        product_sub_sub_category_id: sub_sub_category_id,
+                        product_sub_sub_category_name: sub_sub_category_name,
                         display_text: doc.DISPLAY_TEXT,
                         updated_by_user: doc.UPDATED_BY,
                         updated_on: doc.UPDATED_DATE,
                         isActive: doc.ACTIVE_FLAG
                     }
                 });
-            } else {
-                res
-                    .status(404)
-                    .json({ message: "No valid entry found for provided ID" });
             }
+            else
+            {
+                res.status(404).json({
+                    status: "error",
+                    data: {
+                        message: "No filter values exist!"
+                    }
+                });
+            }
+
         })
         .catch(err => {
-            //console.log(err);
+            console.log(err);
             res.status(500).json({
                 status: "error",
                 error: err,
                 data: {
-                    message: "An error has occurred as mentioned above"
+                    message: "Internal server error!"
                 }
             });
         });
@@ -209,24 +249,54 @@ exports.filters_options_conn_get_by_id = (req, res, next) => {
 exports.filters_options_conn_update = (req, res, next) => {
     const id = req.params.filtercategoryId;
     const updateOps = {};
-    for (const ops of req.body) {
-        updateOps[ops.propName] = ops.value;
-    }
-    Filter_options.update({ _id: id }, { $set: updateOps })
+    var sub_categ_id ;
+    var sub_sub_categ_id ;
+
+        updateOps['FILTER_ID'] = req.body.FILTER_ID;
+        updateOps['DISPLAY_TEXT'] = req.body.DISPLAY_TEXT;
+
+    Filter_categories.find({FILTER_ID:req.body.FILTER_ID})
+        .select('CATEGORY_ID SUB_CATEGORY_ID SUB_SUB_CATEGORY_ID')
         .exec()
-        .then(result => {
-            res.status(200).json({
-                status: "success",
-                error: "",
-                data: {
-                    message: 'filter option connection updated'
-                }
+        .then(results => {
+console.log(results);
+            if(results.SUB_CATEGORY_ID !=null)
+            {
+                sub_categ_id = results[0].SUB_CATEGORY_ID;
+            }
+            if(results.SUB_SUB_CATEGORY_ID!=null)
+            {
+                sub_sub_categ_id = results[0].SUB_SUB_CATEGORY_ID;
+            }
+            updateOps['CATEGORY_ID'] = results[0].CATEGORY_ID;
+            updateOps['SUB_CATEGORY_ID'] = sub_categ_id;
+            updateOps['SUB_SUB_CATEGORY_ID'] = sub_sub_categ_id;
+
+            Filter_options.update({ _id: id }, { $set: updateOps })
+                .exec()
+                .then(result => {
+                    res.status(200).json({
+                        status: "success",
+                        data: {
+                            message: 'filter option connection updated'
+                        }
+                    });
+                }).catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    status: "error",
+                    error: err,
+                    data: {
+                        message: "An error has occurred as mentioned above"
+                    }
+                });
             });
+
         })
         .catch(err => {
             console.log(err);
             res.status(500).json({
-                status: "success",
+                status: "error",
                 error: err,
                 data: {
                     message: "An error has occurred as mentioned above"
