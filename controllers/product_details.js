@@ -98,6 +98,7 @@ exports.product_get_all = (req, res, next) => {
                                                     //if both the above product id are equal then create an array with the ecommerce detail values for the corresponding array
                                                     if (outer_id.equals(inner_id)) {
                                                         prod_arr.push({
+                                                            ecomm_doc_id: ecom_item._id,
                                                             ecomm_aff_id: ecom_item.ECOMMERCE_PRODUCT_ID,
                                                             ecomm_price: ecom_item.ECOMMERCE_PRODUCT_PRICE,
                                                             ecomm_url: ecom_item.PRODUCT_URL,
@@ -393,6 +394,7 @@ exports.product_details_get_by_id = (req, res, next) => {
                                             //if both the above product id are equal then create an array with the ecommerce detail values for the corresponding array
                                             if (outer_id.equals(inner_id)) {
                                                 prod_arr.push({
+                                                    ecomm_doc_id: ecom_item._id,
                                                     ecomm_aff_id: ecom_item.ECOMMERCE_PRODUCT_ID,
                                                     ecomm_price: ecom_item.ECOMMERCE_PRODUCT_PRICE,
                                                     ecomm_url: ecom_item.PRODUCT_URL,
