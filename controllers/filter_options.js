@@ -8,6 +8,7 @@ const Subsubcategory = require("../models/subsubcategory");
 
 //get all active filter options connection details
 exports.filters_options_conn_get_all = (req, res, next) => {
+
     Filter_options.find()
         .select("FILTER_ID DISPLAY_TEXT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         .populate('FILTER_ID')
@@ -16,7 +17,7 @@ exports.filters_options_conn_get_all = (req, res, next) => {
         .populate('SUB_SUB_CATEGORY_ID',null)
         .exec()
         .then(docs => {
-            console.log(docs.length);
+
             if(docs.length > 0)
             {
                 const response = {
@@ -82,7 +83,6 @@ exports.filters_options_conn_get_all = (req, res, next) => {
         });
 };
 
-
 //create a new filter option connection
 exports.filters_options_conn_create = (req, res, next) => {
 
@@ -99,7 +99,7 @@ exports.filters_options_conn_create = (req, res, next) => {
         .select('FILTER_ID _id')
         .exec()
         .then(doc =>{
-            console.log(doc);
+
             if(doc.length > 0)
             {
                 res.status(500).json({
@@ -179,7 +179,6 @@ exports.filters_options_conn_create = (req, res, next) => {
     });
 };
 
-
 //get filter option connection details by id
 exports.filters_options_conn_get_by_id = (req, res, next) => {
     const id = req.params.filtercategoryId;
@@ -250,7 +249,6 @@ exports.filters_options_conn_get_by_id = (req, res, next) => {
         });
 };
 
-
 //update filter option connection details by id
 exports.filters_options_conn_update = (req, res, next) => {
     const id = req.params.filtercategoryId;
@@ -311,7 +309,6 @@ exports.filters_options_conn_update = (req, res, next) => {
             });
         });
 };
-
 
 //delete a filter option connection by id
 exports.filters_options_conn_delete = (req, res, next) => {

@@ -6,6 +6,7 @@
       <change beforePath="$PROJECT_DIR$/controllers/filter_options.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/filter_options.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/filters_categories.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/filters_categories.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/filter_options.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/filter_options.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/filter_options_products.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/filter_options_products.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,23 +34,8 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
+            <state relative-caret-position="2790">
               <caret line="228" column="50" selection-start-line="228" selection-start-column="50" selection-end-line="228" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ecommerce_product_details.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/ecommerce_product_details.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="44" column="62" selection-start-line="44" selection-start-column="62" selection-end-line="44" selection-end-column="62" />
-              <folding>
-                <element signature="e#3152#4341#0" />
-                <element signature="e#11398#12021#0" />
-                <element signature="e#12119#33549#0" />
-                <element signature="e#33727#41392#0" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -57,38 +43,49 @@
       <file leaf-file-name="filter_options.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/filter_options.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
-              <caret line="117" lean-forward="true" selection-start-line="117" selection-end-line="117" />
+            <state relative-caret-position="150">
+              <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
               <folding>
-                <element signature="e#417#2482#0" />
-                <element signature="e#7320#9284#0" />
-                <element signature="e#9400#11024#0" />
-                <element signature="e#10282#10960#0" />
+                <element signature="e#484#3399#0" />
+                <element signature="e#3501#6972#0" />
+                <element signature="e#7082#9625#0" />
+                <element signature="e#9735#11692#0" />
+                <element signature="e#11796#12474#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="filters_categories.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/controllers/filters_categories.js">
+      <file leaf-file-name="filter_options_products.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/filter_options_products.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="475" column="125" selection-start-line="475" selection-start-column="125" selection-end-line="475" selection-end-column="125" />
-              <folding>
-                <element signature="e#442#15420#0" />
-                <element signature="e#15534#18726#0" />
-                <element signature="e#19663#20302#0" />
-                <element signature="e#20419#23520#0" />
-              </folding>
+            <state relative-caret-position="90">
+              <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="filter_options_products.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/controllers/filter_options_products.js">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file leaf-file-name="filters_categories.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/filters_categories.js">
+        <entry file="file://$PROJECT_DIR$/controllers/filters_categories.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="64" selection-start-line="10" selection-start-column="64" selection-end-line="10" selection-end-column="64" />
+            <state relative-caret-position="120">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+              <folding>
+                <element signature="e#502#15480#0" />
+                <element signature="e#15594#18450#0" />
+                <element signature="e#18564#37790#0" />
+                <element signature="e#19049#24654#0" />
+                <element signature="e#24838#31685#0" />
+                <element signature="e#30814#36639#0" />
+                <element signature="e#36653#36823#0" />
+                <element signature="e#36937#37576#0" />
+                <element signature="e#37686#40913#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -116,7 +113,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/controllers/cat_subcat_subsubcat_hierarchy.js" />
         <option value="$PROJECT_DIR$/controllers/subcategory_subsubcategory_hierarchy.js" />
         <option value="$PROJECT_DIR$/models/sorting_filter.js" />
         <option value="$PROJECT_DIR$/controllers/sorting_filter.js" />
@@ -165,8 +161,9 @@
         <option value="$PROJECT_DIR$/controllers/ecommerce_product_details.js" />
         <option value="$PROJECT_DIR$/controllers/product_details.js" />
         <option value="$PROJECT_DIR$/models/filter_options.js" />
-        <option value="$PROJECT_DIR$/controllers/filter_options.js" />
         <option value="$PROJECT_DIR$/controllers/filters_categories.js" />
+        <option value="$PROJECT_DIR$/controllers/filter_options.js" />
+        <option value="$PROJECT_DIR$/models/filter_options_products.js" />
       </list>
     </option>
   </component>
@@ -199,8 +196,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -211,13 +208,13 @@
             <path>
               <item name="Zoommyprice" type="b2602c69:ProjectViewProjectNode" />
               <item name="Zoommyprice" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -347,12 +344,13 @@
       <workItem from="1530343779941" duration="12983000" />
       <workItem from="1530511718050" duration="16538000" />
       <workItem from="1530598630482" duration="21269000" />
-      <workItem from="1530688486218" duration="27757000" />
+      <workItem from="1530688486218" duration="27899000" />
+      <workItem from="1530771602723" duration="6712000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="651562000" />
+    <option name="totallyTimeSpent" value="658416000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -390,32 +388,32 @@
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32965517" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3034483" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.24959612" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
-      <window_info id="Learn" order="2" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.24959612" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TODO" order="6" />
       <window_info id="Image Layers" order="7" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Database" order="6" weight="0.32956383" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32965517" />
+      <window_info id="Learn" order="2" />
       <window_info anchor="right" id="Palette&#9;" order="9" />
       <window_info anchor="right" id="Mongo Explorer" order="7" weight="0.32956383" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info id="Capture Tool" order="5" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3034483" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" id="Database" order="6" weight="0.32956383" />
       <window_info anchor="right" id="Maven Projects" order="8" weight="0.32956383" />
       <window_info id="Favorites" order="6" side_tool="true" />
     </layout-to-restore>
@@ -442,7 +440,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/expressCart/config/settings.json" />
     <entry file="file://$PROJECT_DIR$/expressCart/views/layouts/layout.hbs" />
     <entry file="file://$PROJECT_DIR$/expressCart/routes/admin.js" />
     <entry file="file://$PROJECT_DIR$/node_modules/jsonwebtoken/sign.js">
@@ -638,9 +635,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2400">
           <caret line="198" column="55" selection-start-line="198" selection-start-column="55" selection-end-line="198" selection-end-column="55" />
-          <folding>
-            <element signature="e#1958#3058#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -676,11 +670,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="356">
           <caret line="242" lean-forward="true" selection-start-line="242" selection-end-line="242" />
-          <folding>
-            <element signature="e#295#2168#0" />
-            <element signature="e#2254#5682#0" />
-            <element signature="e#5785#7756#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -707,7 +696,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
+        <state relative-caret-position="2790">
           <caret line="228" column="50" selection-start-line="228" selection-start-column="50" selection-end-line="228" selection-end-column="50" />
         </state>
       </provider>
@@ -726,9 +715,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/filter_options_products.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/filters_categories.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -740,22 +726,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="225" column="69" selection-start-line="225" selection-start-column="4" selection-end-line="225" selection-end-column="69" />
-          <folding>
-            <element signature="e#515#12546#0" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/ecommerce_product_details.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
+        <state relative-caret-position="660">
           <caret line="44" column="62" selection-start-line="44" selection-start-column="62" selection-end-line="44" selection-end-column="62" />
-          <folding>
-            <element signature="e#3152#4341#0" />
-            <element signature="e#11398#12021#0" />
-            <element signature="e#12119#33549#0" />
-            <element signature="e#33727#41392#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -775,36 +752,52 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models/filter_options.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/filter_options.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="117" lean-forward="true" selection-start-line="117" selection-end-line="117" />
-          <folding>
-            <element signature="e#417#2482#0" />
-            <element signature="e#7320#9284#0" />
-            <element signature="e#9400#11024#0" />
-            <element signature="e#10282#10960#0" />
-          </folding>
+        <state relative-caret-position="60">
+          <caret line="4" column="86" lean-forward="true" selection-start-line="4" selection-start-column="86" selection-end-line="4" selection-end-column="86" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/filters_categories.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="475" column="125" selection-start-line="475" selection-start-column="125" selection-end-line="475" selection-end-column="125" />
+        <state relative-caret-position="120">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
           <folding>
-            <element signature="e#442#15420#0" />
-            <element signature="e#15534#18726#0" />
-            <element signature="e#19663#20302#0" />
-            <element signature="e#20419#23520#0" />
+            <element signature="e#502#15480#0" />
+            <element signature="e#15594#18450#0" />
+            <element signature="e#18564#37790#0" />
+            <element signature="e#19049#24654#0" />
+            <element signature="e#24838#31685#0" />
+            <element signature="e#30814#36639#0" />
+            <element signature="e#36653#36823#0" />
+            <element signature="e#36937#37576#0" />
+            <element signature="e#37686#40913#0" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/filter_options.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
+          <folding>
+            <element signature="e#484#3399#0" />
+            <element signature="e#3501#6972#0" />
+            <element signature="e#7082#9625#0" />
+            <element signature="e#9735#11692#0" />
+            <element signature="e#11796#12474#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/filter_options_products.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/filter_options_products.js">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">
