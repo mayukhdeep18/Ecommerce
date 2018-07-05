@@ -49,6 +49,8 @@ exports.filter_opt_prod_conn_get_all = (req, res, next) => {
 //create a new filter option product connection
 exports.filter_opt_prod_conn_create = (req, res, next) => {
 
+    if(req.body.PRODUCT_ID != null)
+    {
         const filteroptprod = new Filter_opt_prod({
             _id: new mongoose.Types.ObjectId(),
             PRODUCT_ID: req.body.PRODUCT_ID,
@@ -78,6 +80,17 @@ exports.filter_opt_prod_conn_create = (req, res, next) => {
                     }
                 });
             });
+    }
+    else
+    {
+        res.status(500).json({
+            status: "error",
+            data: {
+                message: "Please add product first!"
+            }
+        });
+    }
+
 };
 
 

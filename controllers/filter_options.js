@@ -354,6 +354,7 @@ exports.filters_options_get_by_fil = (req, res, next) => {
             {
                 const response = {
                     filter_value_details: docs.map(doc => {
+
                         var sub_category_id = "";
                         var sub_category_name = "";
                         var sub_sub_category_id = "";
