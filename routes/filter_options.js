@@ -10,6 +10,8 @@ router.post("/",/*checkAuth,*/ FilterOptionController.filters_options_conn_creat
 
 router.get("/:filtercategoryId", FilterOptionController.filters_options_conn_get_by_id);
 
+router.get("/filtype/:filtertypeid", FilterOptionController.filters_options_get_by_fil);
+
 router.patch("/:filtercategoryId",/*checkAuth,*/  FilterOptionController.filters_options_conn_update);
 
 router.delete("/:filtercategoryId",/*checkAuth,*/ FilterOptionController.filters_options_conn_delete);

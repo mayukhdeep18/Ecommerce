@@ -77,7 +77,7 @@ exports.product_get_all = (req, res, next) => {
                             }
                             //look up ecommerce details
                                     EcommProduct.find({ACTIVE_FLAG:'Y'})
-                                        .select("ECOMMERCE_PRODUCT_PRICE PRODUCT_URL _id")
+                                        .select("ECOMMERCE_PRODUCT_ID ECOMMERCE_PRODUCT_PRICE PRODUCT_URL _id")
                                         .populate('ECOMMERCE_CATEGORY_ID')
                                         .populate('PRODUCT_ID')
                                         .exec()
@@ -98,6 +98,7 @@ exports.product_get_all = (req, res, next) => {
                                                     //if both the above product id are equal then create an array with the ecommerce detail values for the corresponding array
                                                     if (outer_id.equals(inner_id)) {
                                                         prod_arr.push({
+                                                            ecomm_aff_id: ecom_item.ECOMMERCE_PRODUCT_ID,
                                                             ecomm_price: ecom_item.ECOMMERCE_PRODUCT_PRICE,
                                                             ecomm_url: ecom_item.PRODUCT_URL,
                                                             ecom_name: ecom_item.ECOMMERCE_CATEGORY_ID.ECOMMERCE_NAME,
@@ -338,8 +339,8 @@ exports.product_details_get_by_id = (req, res, next) => {
                             for( var prod_item of docs)
                             {
 
-                                var product_sub_sub_category_name="";
-                                var product_sub_sub_category_id = "";
+                                var product_sub_sub_category_name;
+                                var product_sub_sub_category_id;
                                 if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID!=null)
                                 {
                                     product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
@@ -371,7 +372,7 @@ exports.product_details_get_by_id = (req, res, next) => {
                             }
                             //look up ecommerce details
                             EcommProduct.find({ACTIVE_FLAG:'Y'})
-                                .select("ECOMMERCE_PRODUCT_PRICE PRODUCT_URL _id")
+                                .select("ECOMMERCE_PRODUCT_ID ECOMMERCE_PRODUCT_PRICE PRODUCT_URL _id")
                                 .populate('ECOMMERCE_CATEGORY_ID')
                                 .populate('PRODUCT_ID')
                                 .exec()
@@ -392,6 +393,7 @@ exports.product_details_get_by_id = (req, res, next) => {
                                             //if both the above product id are equal then create an array with the ecommerce detail values for the corresponding array
                                             if (outer_id.equals(inner_id)) {
                                                 prod_arr.push({
+                                                    ecomm_aff_id: ecom_item.ECOMMERCE_PRODUCT_ID,
                                                     ecomm_price: ecom_item.ECOMMERCE_PRODUCT_PRICE,
                                                     ecomm_url: ecom_item.PRODUCT_URL,
                                                     ecom_name: ecom_item.ECOMMERCE_CATEGORY_ID.ECOMMERCE_NAME,
@@ -544,7 +546,7 @@ exports.product_update_by_id = (req, res, next) => {
         .catch(err => {
             console.log(err);
             res.status(500).json({
-                status: "success",
+                status: "error",
                 error: err,
                 data: {
                     message: "Internal server error!"

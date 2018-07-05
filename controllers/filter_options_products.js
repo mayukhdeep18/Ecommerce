@@ -5,24 +5,26 @@ const Filter_opt_prod = require("../models/filter_options_products");
 
 //get all active filter option product connection details
 exports.filter_opt_prod_conn_get_all = (req, res, next) => {
-    Filter_opt_prod.find({ACTIVE_FLAG:'Y'})
+    Filter_opt_prod.find()
         .select("UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
-        .populate()
-        .populate('FILTER_OPTION_ID')
         .populate('PRODUCT_ID')
+        .populate('FILTER_ID')
+        .populate('FILTER_OPTION_ID')
         .exec()
         .then(docs => {
             res.status(200).json({
                 status: "success",
-                error: "",
                 data: {
                     filter_opt_prod: docs.map(doc => {
                         return {
                             filter_opt_prod_conn_id: doc._id,
-                            filter_id: doc.FILTER_OPTION_ID._id,
-                            filter_option_name: doc.FILTER_OPTION_ID.DISPLAY_TEXT,
-                            product_id: doc.PRODUCT_ID._id,
+                            prod_id: doc.PRODUCT_ID._id,
+                            product_id: doc.PRODUCT_ID.PRODUCT_ID,
                             product_name: doc.PRODUCT_ID.PRODUCT_NAME,
+                            filter_id: doc.FILTER_ID._id,
+                            filter_type: doc.FILTER_ID.FILTER_CATEGORY_NAME,
+                            filter_val_id: doc.FILTER_OPTION_ID._id,
+                            filter_val_name: doc.FILTER_OPTION_ID.DISPLAY_TEXT,
                             updated_by_user: doc.UPDATED_BY,
                             updated_on: doc.UPDATED_DATE,
                             isActive: doc.ACTIVE_FLAG
@@ -32,6 +34,7 @@ exports.filter_opt_prod_conn_get_all = (req, res, next) => {
             });
         })
         .catch(err => {
+            console.log(err);
             res.status(500).json({
                 status: "error",
                 error: err,
@@ -58,7 +61,6 @@ exports.filter_opt_prod_conn_create = (req, res, next) => {
         filteroptprod
             .save()
             .then(result => {
-                console.log(result);
                 res.status(201).json({
                     status: "success",
                     data: {
@@ -84,34 +86,29 @@ exports.filter_opt_prod_conn_get_by_id = (req, res, next) => {
     const id = req.params.filtercategoryId;
     Filter_opt_prod.findById(id)
         .select("UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
-        .populate('FILTER_OPTION_ID')
         .populate('PRODUCT_ID')
+        .populate('FILTER_ID')
+        .populate('FILTER_OPTION_ID')
         .exec()
         .then(doc => {
-            console.log("From database", doc);
-            if (doc) {
-                res.status(200).json({
-                    status:"success",
-                    error_msg:"",
-                    data: {
-                        filter_opt_prod_conn_id: doc._id,
-                        filter_id: doc.FILTER_OPTION_ID._id,
-                        filter_option_name: doc.FILTER_OPTION_ID.DISPLAY_TEXT,
-                        product_id: doc.PRODUCT_ID._id,
-                        product_name: doc.PRODUCT_ID.PRODUCT_NAME,
-                        updated_by_user: doc.UPDATED_BY,
-                        updated_on: doc.UPDATED_DATE,
-                        isActive: doc.ACTIVE_FLAG
-                    }
-                });
-            } else {
-                res
-                    .status(404)
-                    .json({ message: "No valid entry found for provided ID" });
-            }
+            res.status(200).json({
+                status: "success",
+                data: {
+                            filter_opt_prod_conn_id: doc._id,
+                            prod_id: doc.PRODUCT_ID._id,
+                            product_id: doc.PRODUCT_ID.PRODUCT_ID,
+                            product_name: doc.PRODUCT_ID.PRODUCT_NAME,
+                            filter_id: doc.FILTER_ID._id,
+                            filter_type: doc.FILTER_ID.FILTER_CATEGORY_NAME,
+                            filter_val_id: doc.FILTER_OPTION_ID._id,
+                            filter_val_name: doc.FILTER_OPTION_ID.DISPLAY_TEXT,
+                            updated_by_user: doc.UPDATED_BY,
+                            updated_on: doc.UPDATED_DATE,
+                            isActive: doc.ACTIVE_FLAG
+                }
+            });
         })
         .catch(err => {
-            console.log(err);
             res.status(500).json({
                 status: "error",
                 error: err,
@@ -127,27 +124,29 @@ exports.filter_opt_prod_conn_get_by_id = (req, res, next) => {
 exports.filter_opt_prod_conn_update = (req, res, next) => {
     const id = req.params.filtercategoryId;
     const updateOps = {};
-    for (const ops of req.body) {
-        updateOps[ops.propName] = ops.value;
-    }
+        updateOps['PRODUCT_ID']= req.body.PRODUCT_ID;
+        updateOps['FILTER_ID'] = req.body.FILTER_ID;
+            updateOps['FILTER_OPTION_ID'] = req.body.FILTER_OPTION_ID;
+            updateOps['UPDATED_DATE']= new Date();
+            updateOps['ACTIVE_FLAG']= req.body.ACTIVE_FLAG;
+
     Filter_opt_prod.update({ _id: id }, { $set: updateOps })
         .exec()
         .then(result => {
             res.status(200).json({
                 status: "success",
-                error: "",
                 data: {
-                    message: 'filter category connection updated'
+                    message: 'filter values and product connection updated'
                 }
             });
         })
         .catch(err => {
             console.log(err);
             res.status(500).json({
-                status: "success",
+                status: "error",
                 error: err,
                 data: {
-                    message: "An error has occurred as mentioned above"
+                    message: "Internal server error!"
                 }
             });
         });

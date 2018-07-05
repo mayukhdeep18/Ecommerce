@@ -336,3 +336,81 @@ exports.filters_options_conn_delete = (req, res, next) => {
             });
         });
 };
+
+
+//get all filter values by filter type
+exports.filters_options_get_by_fil = (req, res, next) => {
+
+    Filter_options.find({FILTER_ID: req.params.filtertypeid})
+        .select("FILTER_ID DISPLAY_TEXT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
+        .populate('FILTER_ID')
+        .populate('CATEGORY_ID')
+        .populate('SUB_CATEGORY_ID',null)
+        .populate('SUB_SUB_CATEGORY_ID',null)
+        .exec()
+        .then(docs => {
+
+            if(docs.length > 0)
+            {
+                const response = {
+                    filter_value_details: docs.map(doc => {
+                        var sub_category_id = "";
+                        var sub_category_name = "";
+                        var sub_sub_category_id = "";
+                        var sub_sub_category_name = "";
+                        if(doc.SUB_CATEGORY_ID != null){
+                            sub_category_id =  doc.SUB_CATEGORY_ID._id;
+                            sub_category_name =  doc.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME;
+
+                        }
+                        if(doc.SUB_SUB_CATEGORY_ID != null) {
+                            sub_sub_category_id = doc.SUB_SUB_CATEGORY_ID._id;
+                            sub_sub_category_name = doc.SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
+                        }
+                        return {
+                            filter_value_id: doc._id,
+                            filter_id: doc.FILTER_ID._id,
+                            filter_type: doc.FILTER_ID.FILTER_CATEGORY_NAME,
+                            category_id: doc.CATEGORY_ID._id,
+                            category_name: doc.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
+                            product_sub_category_id: sub_category_id,
+                            product_sub_category_name: sub_category_name,
+                            product_sub_sub_category_id: sub_sub_category_id,
+                            product_sub_sub_category_name: sub_sub_category_name,
+                            display_text: doc.DISPLAY_TEXT,
+                            updated_by_user: doc.UPDATED_BY,
+                            updated_on: doc.UPDATED_DATE,
+                            isActive: doc.ACTIVE_FLAG
+                        };
+                    })
+                };
+
+                res.status(200).json({
+                    status:"success",
+                    data: {
+                        response
+                    }
+                });
+            }
+            else
+            {
+                res.status(404).json({
+                    status: "error",
+                    data: {
+                        message: "No filter values exist!"
+                    }
+                });
+            }
+
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                status: "error",
+                error: err,
+                data: {
+                    message: "Internal server error!"
+                }
+            });
+        });
+};
