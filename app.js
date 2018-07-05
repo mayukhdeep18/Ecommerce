@@ -114,6 +114,8 @@ const SubsubcatFilProdRoutes = require("./routes/subsubcat_based_products_with_s
 const FilSortProdRoutes = require("./routes/filtering_products_with_sorting_filter");
 const SearchRoutes = require("./routes/search");
 const adminSignup = require("./routes/admin_signup");
+const TrendRoutes = require("./routes/trending_products");
+const HotDealsRoutes = require("./routes/hot_deals");
 
 mongoose.connect(
     "mongodb://zoom_user:"+
@@ -213,6 +215,8 @@ app.use("/subsubcat_based_products_with_sorting_filter",SubsubcatFilProdRoutes);
 app.use("/filtering_products_with_sorting_filter",FilSortProdRoutes);
 app.use("/search",SearchRoutes);
 app.use("/admin_signup",adminSignup);
+app.use("/trending_products",TrendRoutes);
+app.use("/hot_deals",HotDealsRoutes);
 
 
 app.use((req, res, next) => {
