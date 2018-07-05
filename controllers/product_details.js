@@ -44,8 +44,8 @@ exports.product_get_all = (req, res, next) => {
                             for( var prod_item of docs)
                             {
 
-                                var product_sub_sub_category_name="";
-                                var product_sub_sub_category_id = "";
+                                var product_sub_sub_category_name;
+                                var product_sub_sub_category_id;
                                 if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
                                 {
                                     product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;

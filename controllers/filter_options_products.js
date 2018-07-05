@@ -7,6 +7,7 @@ const Filter_opt_prod = require("../models/filter_options_products");
 exports.filter_opt_prod_conn_get_all = (req, res, next) => {
     Filter_opt_prod.find({ACTIVE_FLAG:'Y'})
         .select("UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
+        .populate()
         .populate('FILTER_OPTION_ID')
         .populate('PRODUCT_ID')
         .exec()
@@ -42,16 +43,14 @@ exports.filter_opt_prod_conn_get_all = (req, res, next) => {
 };
 
 
-
 //create a new filter option product connection
 exports.filter_opt_prod_conn_create = (req, res, next) => {
 
-    if(Filter_option.findById(req.body.FILTER_OPTION_ID) && product.findById(req.body.PRODUCT_ID))
-    {
         const filteroptprod = new Filter_opt_prod({
             _id: new mongoose.Types.ObjectId(),
-            FILTER_OPTION_ID: req.body.FILTER_OPTION_ID,
             PRODUCT_ID: req.body.PRODUCT_ID,
+            FILTER_ID: req.body.FILTER_ID,
+            FILTER_OPTION_ID: req.body.FILTER_OPTION_ID,
             UPDATED_BY: req.body.UPDATED_BY,
             UPDATED_DATE: new Date(),
             ACTIVE_FLAG: req.body.ACTIVE_FLAG
@@ -62,17 +61,8 @@ exports.filter_opt_prod_conn_create = (req, res, next) => {
                 console.log(result);
                 res.status(201).json({
                     status: "success",
-                    error: "",
                     data: {
-                        message: "filter option product connection stored",
-                        createdcategory: {
-                            _id: result._id,
-                            FILTER_OPTION_ID: result.FILTER_OPTION_ID,
-                            PRODUCT_ID: result.PRODUCT_ID,
-                            UPDATED_BY: result.UPDATED_BY,
-                            UPDATED_DATE: result.UPDATED_DATE,
-                            ACTIVE_FLAG: result.ACTIVE_FLAG
-                        }
+                        message: "filter option product connection stored"
                     }
                 });
             })
@@ -86,19 +76,6 @@ exports.filter_opt_prod_conn_create = (req, res, next) => {
                     }
                 });
             });
-
-    }
-    else {
-        res
-            .status(404)
-            .json({
-                status: "error",
-                error: "ID doesn't exist",
-                data: {
-                    message: "product id or filter id does not exist"
-                }
-            });
-    }
 };
 
 
