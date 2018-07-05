@@ -192,3 +192,46 @@ exports.filter_opt_prod_conn_delete = (req, res, next) => {
             });
         });
 };
+
+
+//get all active filter option product connection details by product id
+exports.filter_opt_prod_get_by_prod = (req, res, next) => {
+    Filter_opt_prod.find({PRODUCT_ID: req.params.prodId})
+        .select("UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
+        .populate('PRODUCT_ID')
+        .populate('FILTER_ID')
+        .populate('FILTER_OPTION_ID')
+        .exec()
+        .then(docs => {
+            res.status(200).json({
+                status: "success",
+                data: {
+                    filter_opt_prod: docs.map(doc => {
+                        return {
+                            filter_opt_prod_conn_id: doc._id,
+                            prod_id: doc.PRODUCT_ID._id,
+                            product_id: doc.PRODUCT_ID.PRODUCT_ID,
+                            product_name: doc.PRODUCT_ID.PRODUCT_NAME,
+                            filter_id: doc.FILTER_ID._id,
+                            filter_type: doc.FILTER_ID.FILTER_CATEGORY_NAME,
+                            filter_val_id: doc.FILTER_OPTION_ID._id,
+                            filter_val_name: doc.FILTER_OPTION_ID.DISPLAY_TEXT,
+                            updated_by_user: doc.UPDATED_BY,
+                            updated_on: doc.UPDATED_DATE,
+                            isActive: doc.ACTIVE_FLAG
+                        };
+                    })
+                }
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                status: "error",
+                error: err,
+                data: {
+                    message: "An error has occurred as mentioned above"
+                }
+            });
+        });
+};

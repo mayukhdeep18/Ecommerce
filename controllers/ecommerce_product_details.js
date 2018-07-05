@@ -37,44 +37,41 @@ exports.ecommproduct_get_all = (req, res, next) => {
                         {
                             for(var item of doc)
                             {
-                                var product_sub_sub_category_name="";
-                                var product_sub_sub_category_id = "";
-                                if(doc.SUB_SUB_CATEGORY_ID !=null)
-                                {console.log("came here");
-                                    product_sub_sub_category_name = doc.SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
-                                    product_sub_sub_category_id = doc.SUB_SUB_CATEGORY_ID._id;
+                                var product_sub_sub_category_name;
+                                var product_sub_sub_category_id ;
+                                if(item.SUB_SUB_CATEGORY_ID !=null)
+                                {
+                                    product_sub_sub_category_name = item.SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
+                                    product_sub_sub_category_id = item.SUB_SUB_CATEGORY_ID._id;
                                 }
                                 ecom_arr.push({
-                                    ecommerce_product_details_id: doc._id,
-                                    ecommerce_category_id: doc.ECOMMERCE_CATEGORY_ID._id,
-                                    ecommerce_category_details: doc.ECOMMERCE_CATEGORY_ID.ECOMMERCE_NAME,
-                                    product_category_id: doc.CATEGORY_ID._id,
-                                    product_category_name: doc.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
-                                    product_sub_category_id: doc.SUB_CATEGORY_ID._id,
-                                    product_sub_category_name: doc.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME,
+                                    ecommerce_product_details_id: item._id,
+                                    ecommerce_category_id: item.ECOMMERCE_CATEGORY_ID._id,
+                                    ecommerce_category_details: item.ECOMMERCE_CATEGORY_ID.ECOMMERCE_NAME,
+                                    product_category_id: item.CATEGORY_ID._id,
+                                    product_category_name: item.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
+                                    product_sub_category_id: item.SUB_CATEGORY_ID._id,
+                                    product_sub_category_name: item.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME,
                                     product_sub_sub_category_id: product_sub_sub_category_id,
                                     product_sub_sub_category_name: product_sub_sub_category_name,
-                                    ecommerce_product_name: doc.ECOMMERCE_PRODUCT_NAME,
-                                    ecommerce_product_price: doc.ECOMMERCE_PRODUCT_PRICE,
-                                    ecommerce_prodct_shpmnt_duratn: doc.ECOMMERCE_PRODCT_SHPMNT_DURATN,
-                                    product_url: doc.PRODUCT_URL,
-                                    ecommerce_product_id: doc.ECOMMERCE_PRODUCT_ID,
-                                    product_id: doc.PRODUCT_ID._id,
-                                    product_specifications:JSON.parse(doc.PRODUCT_ID.PRODUCT_SPECIFICATIONS),
-                                    updated_by_user: doc.UPDATED_BY,
-                                    updated_on: doc.UPDATED_DATE,
-                                    isActive: doc.ACTIVE_FLAG,
+                                    ecommerce_product_name: item.ECOMMERCE_PRODUCT_NAME,
+                                    ecommerce_product_price: item.ECOMMERCE_PRODUCT_PRICE,
+                                    ecommerce_prodct_shpmnt_duratn: item.ECOMMERCE_PRODCT_SHPMNT_DURATN,
+                                    product_url: item.PRODUCT_URL,
+                                    ecommerce_product_id: item.ECOMMERCE_PRODUCT_ID,
+                                    product_id: item.PRODUCT_ID._id,
+                                    product_specifications:JSON.parse(item.PRODUCT_ID.PRODUCT_SPECIFICATIONS),
+                                    updated_by_user: item.UPDATED_BY,
+                                    updated_on: item.UPDATED_DATE,
+                                    isActive: item.ACTIVE_FLAG,
                                 })
                             }
 
                             res.status(200).json({
                                 status: "success",
                                 data: {
-                                    ecommproduct: docs.map(doc => {
-                                        return {
-                                            pages: Math.ceil(count / perPage)
-                                        };
-                                    })
+                                    ecom_arr,
+                                    pages: Math.ceil(count / perPage)
                                 }
                             });
                         }
@@ -112,41 +109,79 @@ exports.ecommproduct_get_all = (req, res, next) => {
 //get ecommerce product details by id
 exports.ecommproduct_details_get_by_id = (req, res, next) => {
     const id = req.params.ecommcategoryId;
-    EcommProduct.findById(id)
-        .select("ECOMMERCE_CATEGORY_ID ECOMMERCE_PRODUCT_NAME ECOMMERCE_PRODUCT_PRICE PRODUCT_URL ECOMMERCE_PRODUCT_ID UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
-        .populate('ECOMMERCE_NAME _id')
-        .populate('PRODUCT_ID')
-        .populate('CATEGORY_ID')
-        .populate('SUB_CATEGORY_ID')
-        .populate('SUB_SUB_CATEGORY_ID')
-        .exec()
-        .then(doc => {
-            if (doc) {
-                res.status(200).json({
-                    status: "success",
+
+    var ecom_arr = [];
+
+        EcommProduct.findById(id)
+            .select("ECOMMERCE_CATEGORY_ID ECOMMERCE_PRODUCT_NAME ECOMMERCE_PRODUCT_PRICE PRODUCT_URL ECOMMERCE_PRODUCT_ID UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
+            .populate('ECOMMERCE_CATEGORY_ID')
+            .populate('PRODUCT_ID')
+            .populate('CATEGORY_ID')
+            .populate('SUB_CATEGORY_ID')
+            .populate('SUB_SUB_CATEGORY_ID',null)
+            .exec()
+            .then(item => {
+
+                        if(item != null)
+                        {
+                                var product_sub_sub_category_name;
+                                var product_sub_sub_category_id ;
+                                if(item.SUB_SUB_CATEGORY_ID !=null)
+                                {
+                                    product_sub_sub_category_name = item.SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
+                                    product_sub_sub_category_id = item.SUB_SUB_CATEGORY_ID._id;
+                                }
+                                ecom_arr.push({
+                                    ecommerce_product_details_id: item._id,
+                                    ecommerce_category_id: item.ECOMMERCE_CATEGORY_ID._id,
+                                    ecommerce_category_details: item.ECOMMERCE_CATEGORY_ID.ECOMMERCE_NAME,
+                                    product_category_id: item.CATEGORY_ID._id,
+                                    product_category_name: item.CATEGORY_ID.PRODUCT_CATEGORY_NAME,
+                                    product_sub_category_id: item.SUB_CATEGORY_ID._id,
+                                    product_sub_category_name: item.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME,
+                                    product_sub_sub_category_id: product_sub_sub_category_id,
+                                    product_sub_sub_category_name: product_sub_sub_category_name,
+                                    ecommerce_product_name: item.ECOMMERCE_PRODUCT_NAME,
+                                    ecommerce_product_price: item.ECOMMERCE_PRODUCT_PRICE,
+                                    ecommerce_prodct_shpmnt_duratn: item.ECOMMERCE_PRODCT_SHPMNT_DURATN,
+                                    product_url: item.PRODUCT_URL,
+                                    ecommerce_product_id: item.ECOMMERCE_PRODUCT_ID,
+                                    product_id: item.PRODUCT_ID._id,
+                                    product_specifications:JSON.parse(item.PRODUCT_ID.PRODUCT_SPECIFICATIONS),
+                                    updated_by_user: item.UPDATED_BY,
+                                    updated_on: item.UPDATED_DATE,
+                                    isActive: item.ACTIVE_FLAG,
+                                })
+
+
+                            res.status(200).json({
+                                status: "success",
+                                data: {
+                                    ecom_arr
+                                }
+                            });
+                        }
+                        else {
+                            res.status(404).json({
+                                status: "error",
+                                data: {
+                                    message: "No ecommerce products available"
+                                }
+                            });
+                        }
+
+
+            })
+            .catch(err => {
+                res.status(500).json({
+                    status: "error",
+                    error: err,
                     data: {
-                        message: doc
+                        message: "Internal server error!"
                     }
                 });
-            } else {
-                res
-                    .status(404)
-                    .json({
-                        status: "error",
-                        message: "No valid entry found"
-                    });
-            }
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                status: "error",
-                error: err,
-                data: {
-                    message: "Internal server error!"
-                }
             });
-        });
+
 };
 
 
@@ -612,6 +647,58 @@ exports.ecommproduct_new_create = (req, res, next) => {
             }
         }).catch(err => {
         console.log(err);
+        res.status(500).json({
+            status: "error",
+            error: err,
+            data: {
+                message: "Internal server error!"
+            }
+        });
+    });
+};
+
+
+//update ecommerce table details only
+exports.ecommproduct_update_ecom_only = (req, res, next) => {
+    const id = req.params.ecommcategoryId;
+    var Ecom_name = req.body.ECOMMERCE_NAME.replace(/[^a-zA-Z0-9]/g,'-');
+    const updateOps = {};
+
+    EcommCategory.find({ECOMMERCE_ID: Ecom_name.toLowerCase()})
+        .select('ECOMMERCE_ID _id')
+        .exec()
+        .then(docs => {
+
+            var Ecomm_id = docs[0]._id;
+
+            if (Ecomm_id != null) {
+
+                updateOps['ECOMMERCE_NAME'] = req.body.ECOMMERCE_NAME;
+                updateOps['ECOMMERCE_PRODUCT_ID'] = req.body.ECOMMERCE_PRODUCT_ID;
+                updateOps['ECOMMERCE_PRODUCT_PRICE'] = parseFloat(req.body.ECOMMERCE_PRODUCT_PRICE);
+                updateOps['PRODUCT_URL'] = req.body.PRODUCT_URL;
+
+                EcommProduct.update({_id: id},{$set: updateOps})
+                    .exec()
+                    .then(result => {
+                        res.status(201).json({
+                            status: "success",
+                            ECOMMERCE_PRODUCT_ID: req.body.ECOMMERCE_PRODUCT_ID,
+                            data: {
+                                message: "Ecommerce Product details udpated!"
+                            }
+                        });
+                    })
+            }
+            else {
+                    res.status(404).json({
+                            status: "error",
+                            data: {
+                                message: "Ecommerce Category does not exist. Please enter a valid ecommerce name"
+                            }
+                        });
+                }
+        }).catch(err => {
         res.status(500).json({
             status: "error",
             error: err,

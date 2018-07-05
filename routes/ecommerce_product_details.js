@@ -10,9 +10,11 @@ router.post("/", EcommProdController.ecommproduct_new_create);
 
 router.post("/product_map/:Ecommerce_id",/*checkAuth,*/  EcommProdController.ecommproduct_map);
 
-router.get("/:ecommcategoryId", EcommProdController.ecommproduct_details_get_by_id);
+router.get("/ecomprod/:ecommcategoryId", EcommProdController.ecommproduct_details_get_by_id);
 
 router.patch("/:ecommcategoryId",/*checkAuth,*/  EcommProdController.ecommproduct_update_by_id);
+
+router.patch("/ecomupd/:ecommcategoryId",/*checkAuth,*/  EcommProdController.ecommproduct_update_ecom_only);
 
 router.delete("/:ecommcategoryId",checkAuth, EcommProdController.ecommproduct_delete_by_id);
 

@@ -355,10 +355,10 @@ exports.filters_options_get_by_fil = (req, res, next) => {
                 const response = {
                     filter_value_details: docs.map(doc => {
 
-                        var sub_category_id = "";
-                        var sub_category_name = "";
-                        var sub_sub_category_id = "";
-                        var sub_sub_category_name = "";
+                        var sub_category_id;
+                        var sub_category_name ;
+                        var sub_sub_category_id ;
+                        var sub_sub_category_name ;
                         if(doc.SUB_CATEGORY_ID != null){
                             sub_category_id =  doc.SUB_CATEGORY_ID._id;
                             sub_category_name =  doc.SUB_CATEGORY_ID.PRODUCT_SUB_CATEGORY_NAME;
