@@ -3,9 +3,9 @@ const Category = require("../models/category");
 const Subcategory = require("../models/subcategory");
 const Subsubcategory = require("../models/subsubcategory");
 const EcommProduct = require("../models/ecommerce_product_details");
-const Productimages = require("../models/product_images");
 const Product = require("../models/product_details");
 const Review = require("../models/review_details");
+const Trending = require("../models/trending_products");
 
 
 //get all active product details

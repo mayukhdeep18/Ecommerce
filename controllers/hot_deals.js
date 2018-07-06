@@ -69,7 +69,7 @@ exports.hot_product_search = (req, res, next) => {
 
 };
 
-//add in trending table
+//add in hot table
 exports.hot_create = (req, res, next) => {
 
     if(req.body.PRODUCT_ID != null)
@@ -116,7 +116,7 @@ exports.hot_create = (req, res, next) => {
 //get all hot products
 exports.get_all_hot = (req, res, next) => {
     HotDeals.find()
-        .select('ACTIVE_FLAG _id')
+        .select('UPDATED_DATE UPDATED_BY ACTIVE_FLAG _id')
         .populate('PRODUCT_ID')
         .exec()
         .then(docs => {

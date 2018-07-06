@@ -116,7 +116,7 @@ exports.trending_create = (req, res, next) => {
 //get all trending products
 exports.get_all_trending = (req, res, next) => {
     Trending.find()
-        .select('ACTIVE_FLAG _id')
+        .select('UPDATED_DATE UPDATED_BY ACTIVE_FLAG _id')
         .populate('PRODUCT_ID')
         .exec()
         .then(docs => {
