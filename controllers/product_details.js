@@ -6,6 +6,9 @@ const EcommProduct = require("../models/ecommerce_product_details");
 const Product = require("../models/product_details");
 const Review = require("../models/review_details");
 const Trending = require("../models/trending_products");
+const Hot = require("../models/hot_deals");
+const Rating = require("../models/rating_details");
+const FilterValues = require("../models/filter_options_products");
 
 
 //get all active product details
@@ -560,17 +563,100 @@ exports.product_update_by_id = (req, res, next) => {
 //delete product details by id
 exports.product_delete_by_id = (req, res, next) => {
     const id = req.params.prodcategoryId;
-    Product.remove({ PRODUCT_ID: id })
+    Product.remove({ _id: id })
         .exec()
         .then(result => {
-            res.status(200).json({
-                status: "success",
-                data: {
-                    message: 'product deleted'
-                }
+            Trending.remove({PRODUCT_ID: id})
+                .exec()
+                .then(res1 => {
+                    Hot.remove({PRODUCT_ID: id})
+                        .exec()
+                        .then(res2=>{
+                            Rating.remove({PRODUCT_ID: id})
+                                .exec()
+                                .then(res3 => {
+                                    Review.remove({PRODUCT_ID: id})
+                                        .exec()
+                                        .then(res4 => {
+                                            FilterValues.remove({PRODUCT_ID: id})
+                                                .exec()
+                                                .then(res5 => {
+                                                    EcommProduct.remove({PRODUCT_ID: id})
+                                                        .exec()
+                                                        .then(res6 => {
+                                                            res.status(200).json({
+                                                                status: "success",
+                                                                data: {
+                                                                    message: "product and its dependencies deleted"
+                                                                }
+                                                            });
+                                                        }).catch(err => {
+                                                        console.log(err);
+                                                        res.status(500).json({
+                                                            status: "error",
+                                                            error: err,
+                                                            data:
+                                                                {
+                                                                    message: "Internal server error!"
+                                                                }
+                                                        });
+                                                    });
+                                                }).catch(err => {
+                                                console.log(err);
+                                                res.status(500).json({
+                                                    status: "error",
+                                                    error: err,
+                                                    data:
+                                                        {
+                                                            message: "Internal server error!"
+                                                        }
+                                                });
+                                            });
+                                        }).catch(err => {
+                                        console.log(err);
+                                        res.status(500).json({
+                                            status: "error",
+                                            error: err,
+                                            data:
+                                                {
+                                                    message: "Internal server error!"
+                                                }
+                                        });
+                                    });
+                                }).catch(err => {
+                                console.log(err);
+                                res.status(500).json({
+                                    status: "error",
+                                    error: err,
+                                    data:
+                                        {
+                                            message: "Internal server error!"
+                                        }
+                                });
+                            });
+                        }).catch(err => {
+                        console.log(err);
+                        res.status(500).json({
+                            status: "error",
+                            error: err,
+                            data:
+                                {
+                                    message: "Internal server error!"
+                                }
+                        });
+                    });
+                }).catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    status: "error",
+                    error: err,
+                    data:
+                        {
+                            message: "Internal server error!"
+                        }
+                });
             });
-        })
-        .catch(err => {
+        }).catch(err => {
             console.log(err);
             res.status(500).json({
                 status: "error",

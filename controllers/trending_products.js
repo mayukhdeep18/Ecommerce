@@ -71,46 +71,60 @@ exports.trending_product_search = (req, res, next) => {
 
 //add in trending table
 exports.trending_create = (req, res, next) => {
+    Trending.find({PRODUCT_ID:req.body.PRODUCT_ID})
+        .select('PRODUCT_ID ACTIVE_FLAG _id')
+        .exec()
+        .then(doc => {
+            if(doc!=null)
+            {
+                res.status(500).json({
+                    status: "error",
+                    data: {
+                        message: "Product already exists in trending!"
+                    }
 
-    if(req.body.PRODUCT_ID != null)
-    {
-                    const trending = new Trending({
-                        _id: new mongoose.Types.ObjectId(),
-                        PRODUCT_ID: req.body.PRODUCT_ID ,
-                        UPDATED_DATE: new Date(),
-                        ACTIVE_FLAG: req.body.ACTIVE_FLAG
                     });
-                    trending
-                        .save()
-                        .then(result => {
-                            res.status(201).json({
-                                status: "success",
-                                product_id: result._id,
-                                data: {
-                                    message: "Product details stored"
-                                }
-                            });
-                        })
-                        .catch(err => {
-                            console.log(err);
-                            res.status(500).json({
-                                status: "error",
-                                error: err,
-                                data: {
-                                    message: "Internal server error!"
-                                }
-                            });
+            }
+            else
+            {
+                const trending = new Trending({
+                    _id: new mongoose.Types.ObjectId(),
+                    PRODUCT_ID: req.body.PRODUCT_ID ,
+                    UPDATED_DATE: new Date(),
+                    ACTIVE_FLAG: req.body.ACTIVE_FLAG
+                });
+                trending
+                    .save()
+                    .then(result => {
+                        res.status(201).json({
+                            status: "success",
+                            product_id: result._id,
+                            data: {
+                                message: "Product details stored"
+                            }
                         });
-    }
-    else
-    {
-        res
-            .status(404)
-            .json({
-                status: "error",
-                error: "Please check all your details!"
-            });
-    }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        res.status(500).json({
+                            status: "error",
+                            error: err,
+                            data: {
+                                message: "Internal server error!"
+                            }
+                        });
+                    });
+            }
+        }).catch(err => {
+        console.log(err);
+        res.status(500).json({
+            status: "error",
+            error: err,
+            data: {
+                message: "Internal server error!"
+            }
+        });
+    });
 };
 
 //get all trending products
