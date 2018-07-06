@@ -408,7 +408,7 @@ exports.trending_update_by_id = (req, res, next) =>{
     const updateOps = {};
    updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
    updateOps['UPDATED_DATE'] = new Date();
-    Trending.update({ _id: id }, { $set: updateOps })
+    Trending.update({ PRODUCT_ID: id }, { $set: updateOps },{multi: true})
         .exec()
         .then(result => {
             res.status(200).json({
@@ -433,7 +433,7 @@ exports.trending_update_by_id = (req, res, next) =>{
 //delete a trending product by id
 exports.trending_delete = (req, res, next) =>{
     const id = req.params.trendId;
-    Trending.remove({ _id: id })
+    Trending.remove({ PRODUCT_ID: id })
         .exec()
         .then(result => {
             res.status(200).json({

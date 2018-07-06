@@ -524,6 +524,7 @@ exports.product_details_get_by_id = (req, res, next) => {
 exports.product_update_by_id = (req, res, next) => {
     const id = req.params.prodcategoryId;
     const updateOps = {};
+    const updateRest = {};
     var Prod_id = req.body.PRODUCT_NAME.replace(/[^a-zA-Z0-9]/g,'-');
     updateOps['PRODUCT_CATEGORY_ID'] = req.body.PRODUCT_CATEGORY_ID;
     updateOps['PRODUCT_SUB_CATEGORY_ID'] = req.body.PRODUCT_SUB_CATEGORY_ID;
@@ -537,27 +538,129 @@ exports.product_update_by_id = (req, res, next) => {
     updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
     updateOps['UPDATED_DATE'] = new Date();
     updateOps['PRODUCT_ID'] = Prod_id.toLowerCase();
-
-    Product.update({ PRODUCT_ID: id }, { $set: updateOps })
-        .exec()
-        .then(result => {
-            res.status(200).json({
-                status: "success",
-                data: {
-                    message: 'product details updated'
-                }
-                });
-            })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
+    updateRest['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
+    updateRest['UPDATED_DATE'] = new Date();
+Product.find({PRODUCT_ID: id})
+    .select('PRODUCT_ID _id')
+    .exec()
+    .then(doc => {
+        if (doc != null)
+        {
+            Product.update({ _id: id }, { $set: updateOps })
+                .exec()
+                .then(result => {
+                    Trending.update({ PRODUCT_ID: id }, { $set: updateRest },{multi: true})
+                        .exec()
+                        .then(res1 => {
+                            Hot.update({ PRODUCT_ID: id }, { $set: updateRest },{multi: true})
+                                .exec()
+                                .then(res2=>{
+                                    Rating.update({ PRODUCT_ID: id }, { $set: updateRest },{multi: true})
+                                        .exec()
+                                        .then(res3 => {
+                                            Review.update({ PRODUCT_ID: id }, { $set: updateRest },{multi: true})
+                                                .exec()
+                                                .then(res4 => {
+                                                    FilterValues.update({ PRODUCT_ID: id }, { $set: updateRest },{multi: true})
+                                                        .exec()
+                                                        .then(res5 => {
+                                                            EcommProduct.update({ PRODUCT_ID: id }, { $set: updateRest },{multi: true})
+                                                                .exec()
+                                                                .then(res6 => {
+                                                                    res.status(200).json({
+                                                                        status: "success",
+                                                                        data: {
+                                                                            message: "product and its dependencies updated"
+                                                                        }
+                                                                    });
+                                                                }).catch(err => {
+                                                                console.log(err);
+                                                                res.status(500).json({
+                                                                    status: "error",
+                                                                    error: err,
+                                                                    data:
+                                                                        {
+                                                                            message: "Internal server error!"
+                                                                        }
+                                                                });
+                                                            });
+                                                        }).catch(err => {
+                                                        console.log(err);
+                                                        res.status(500).json({
+                                                            status: "error",
+                                                            error: err,
+                                                            data:
+                                                                {
+                                                                    message: "Internal server error!"
+                                                                }
+                                                        });
+                                                    });
+                                                }).catch(err => {
+                                                console.log(err);
+                                                res.status(500).json({
+                                                    status: "error",
+                                                    error: err,
+                                                    data:
+                                                        {
+                                                            message: "Internal server error!"
+                                                        }
+                                                });
+                                            });
+                                        }).catch(err => {
+                                        console.log(err);
+                                        res.status(500).json({
+                                            status: "error",
+                                            error: err,
+                                            data:
+                                                {
+                                                    message: "Internal server error!"
+                                                }
+                                        });
+                                    });
+                                }).catch(err => {
+                                console.log(err);
+                                res.status(500).json({
+                                    status: "error",
+                                    error: err,
+                                    data:
+                                        {
+                                            message: "Internal server error!"
+                                        }
+                                });
+                            });
+                        }).catch(err => {
+                        console.log(err);
+                        res.status(500).json({
+                            status: "error",
+                            error: err,
+                            data:
+                                {
+                                    message: "Internal server error!"
+                                }
+                        });
+                    });
+                }).catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    status: "error",
+                    error: err,
+                    data: {
+                        message: "Internal server error!"
+                    }
+                })
+            });
+        }
+        else
+        {
+            res.status(404).json({
                 status: "error",
-                error: err,
                 data: {
-                    message: "Internal server error!"
+                    message: 'product details not found'
                 }
-            })
-        })
+            });
+        }
+    })
+
 };
 
 //delete product details by id
