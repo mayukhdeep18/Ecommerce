@@ -393,6 +393,7 @@ exports.hot_update_by_id = (req, res, next) =>{
     const id = req.params.trendId;
     const updateOps = {};
     updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
+    updateOps['UPDATED_DATE'] = new Date();
     HotDeals.update({ _id: id }, { $set: updateOps })
         .exec()
         .then(result => {

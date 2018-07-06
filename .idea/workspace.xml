@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22d33094-d95f-4e1e-897e-0a67ac0d8ed3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/hot_deals.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/hot_deals.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/product_details.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/product_details.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/trending_products.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/trending_products.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,30 +37,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="trending_products.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="trending_products.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controllers/trending_products.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-25">
-              <caret line="118" column="41" selection-start-line="118" selection-start-column="41" selection-end-line="118" selection-end-column="41" />
+            <state relative-caret-position="70">
+              <caret line="395" column="42" selection-start-line="395" selection-start-column="42" selection-end-line="395" selection-end-column="42" />
               <folding>
                 <element signature="e#714#2614#0" />
                 <element signature="e#2687#4122#0" />
+                <element signature="e#4200#6579#0" />
                 <element signature="e#6658#18258#0" />
-                <element signature="e#18338#19019#0" />
                 <element signature="e#19101#19683#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="hot_deals.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="hot_deals.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/hot_deals.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="118" column="24" selection-start-line="118" selection-start-column="24" selection-end-line="118" selection-end-column="24" />
+            <state relative-caret-position="323">
+              <caret line="391" column="46" selection-start-line="391" selection-start-column="46" selection-end-line="391" selection-end-column="46" />
               <folding>
                 <element signature="e#701#2601#0" />
                 <element signature="e#2669#3770#0" />
+                <element signature="e#3838#6211#0" />
                 <element signature="e#6290#17890#0" />
                 <element signature="e#17960#18645#0" />
                 <element signature="e#18717#19302#0" />
@@ -159,8 +158,8 @@
         <option value="$PROJECT_DIR$/models/filter_options_products.js" />
         <option value="$PROJECT_DIR$/models/trending_products.js" />
         <option value="$PROJECT_DIR$/controllers/product_details.js" />
-        <option value="$PROJECT_DIR$/controllers/trending_products.js" />
         <option value="$PROJECT_DIR$/controllers/hot_deals.js" />
+        <option value="$PROJECT_DIR$/controllers/trending_products.js" />
       </list>
     </option>
   </component>
@@ -343,12 +342,12 @@
       <workItem from="1530598630482" duration="21269000" />
       <workItem from="1530688486218" duration="27899000" />
       <workItem from="1530771602723" duration="25160000" />
-      <workItem from="1530858742140" duration="6041000" />
+      <workItem from="1530858742140" duration="6245000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="682905000" />
+    <option name="totallyTimeSpent" value="683109000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -365,10 +364,10 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="right" id="Mongo Explorer" order="7" weight="0.32956383" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3034483" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3034483" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
       <window_info anchor="right" id="Database" order="6" weight="0.32956383" />
       <window_info id="Learn" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -786,30 +785,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/trending_products.js">
+    <entry file="file://$PROJECT_DIR$/controllers/hot_deals.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-25">
-          <caret line="118" column="41" selection-start-line="118" selection-start-column="41" selection-end-line="118" selection-end-column="41" />
+        <state relative-caret-position="323">
+          <caret line="391" column="46" selection-start-line="391" selection-start-column="46" selection-end-line="391" selection-end-column="46" />
           <folding>
-            <element signature="e#714#2614#0" />
-            <element signature="e#2687#4122#0" />
-            <element signature="e#6658#18258#0" />
-            <element signature="e#18338#19019#0" />
-            <element signature="e#19101#19683#0" />
+            <element signature="e#701#2601#0" />
+            <element signature="e#2669#3770#0" />
+            <element signature="e#3838#6211#0" />
+            <element signature="e#6290#17890#0" />
+            <element signature="e#17960#18645#0" />
+            <element signature="e#18717#19302#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/hot_deals.js">
+    <entry file="file://$PROJECT_DIR$/controllers/trending_products.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="118" column="24" selection-start-line="118" selection-start-column="24" selection-end-line="118" selection-end-column="24" />
+        <state relative-caret-position="70">
+          <caret line="395" column="42" selection-start-line="395" selection-start-column="42" selection-end-line="395" selection-end-column="42" />
           <folding>
-            <element signature="e#701#2601#0" />
-            <element signature="e#2669#3770#0" />
-            <element signature="e#6290#17890#0" />
-            <element signature="e#17960#18645#0" />
-            <element signature="e#18717#19302#0" />
+            <element signature="e#714#2614#0" />
+            <element signature="e#2687#4122#0" />
+            <element signature="e#4200#6579#0" />
+            <element signature="e#6658#18258#0" />
+            <element signature="e#19101#19683#0" />
           </folding>
         </state>
       </provider>
