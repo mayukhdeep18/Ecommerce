@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22d33094-d95f-4e1e-897e-0a67ac0d8ed3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/controllers/category.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/category.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/ecommerce_category.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ecommerce_category.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/ecommerce_product_details.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ecommerce_product_details.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/filter_options.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/filter_options.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/filter_options_products.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/filter_options_products.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/filters_categories.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/filters_categories.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/subcategory.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/subcategory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/subsubcategory.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/subsubcategory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/trending_products.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/trending_products.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/cat_based_products_with_sorting_filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/cat_based_products_with_sorting_filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/subcat_based_products_with_sorting_filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/subcat_based_products_with_sorting_filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/subsubcat_based_products_with_sorting_filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/subsubcat_based_products_with_sorting_filter.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -47,10 +42,9 @@
       <file leaf-file-name="product_details.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/product_details.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="149">
+              <caret line="204" column="13" selection-start-line="204" selection-start-column="13" selection-end-line="204" selection-end-column="13" />
               <folding>
-                <element signature="e#515#12754#0" />
                 <element signature="e#12832#15964#0" />
                 <element signature="e#16051#27666#0" />
                 <element signature="e#27751#29268#0" />
@@ -60,32 +54,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="subcategory.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/subcategory.js">
+      <file leaf-file-name="subcat_based_products_with_sorting_filter.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controllers/subcat_based_products_with_sorting_filter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="39">
-              <caret line="897" column="3" selection-start-line="897" selection-start-column="3" selection-end-line="897" selection-end-column="3" />
+            <state relative-caret-position="240">
+              <caret line="1219" column="20" lean-forward="true" selection-start-line="1219" selection-start-column="20" selection-end-line="1219" selection-end-column="20" />
               <folding>
-                <element signature="e#228#2071#0" />
-                <element signature="e#2150#5485#0" />
-                <element signature="e#5578#7448#0" />
-                <element signature="e#7544#56170#0" />
+                <element signature="e#882#15241#0" />
+                <element signature="e#15293#29652#0" />
+                <element signature="e#29705#44065#0" />
+                <element signature="e#44118#58478#0" />
+                <element signature="e#58532#72890#0" />
+                <element signature="e#72944#87302#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="category.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/controllers/category.js">
+      <file leaf-file-name="subsubcat_based_products_with_sorting_filter.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/controllers/subsubcat_based_products_with_sorting_filter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="924" column="45" selection-start-line="924" selection-start-column="45" selection-end-line="924" selection-end-column="45" />
+            <state relative-caret-position="368">
+              <caret line="1408" lean-forward="true" selection-start-line="1408" selection-end-line="1408" />
               <folding>
-                <element signature="e#205#1871#0" />
-                <element signature="e#1952#4322#0" />
-                <element signature="e#4397#6145#0" />
-                <element signature="e#6896#64342#0" />
-                <element signature="e#7329#7915#0" />
+                <element signature="e#888#15262#0" />
+                <element signature="e#15314#29688#0" />
+                <element signature="e#29741#44115#0" />
+                <element signature="e#44168#58543#0" />
+                <element signature="e#58597#72970#0" />
+                <element signature="e#73024#87398#0" />
+                <element signature="e#87412#101786#0" />
               </folding>
             </state>
           </provider>
@@ -114,10 +112,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/controllers/cat_based_products_with_sorting_filter.js" />
-        <option value="$PROJECT_DIR$/controllers/review_details.js" />
         <option value="$PROJECT_DIR$/routes/product_details.js" />
-        <option value="$PROJECT_DIR$/controllers/subcat_based_products_with_sorting_filter.js" />
         <option value="$PROJECT_DIR$/expressCart/views/layouts/layout.hbs" />
         <option value="$PROJECT_DIR$/expressCart/config/settings.json" />
         <option value="$PROJECT_DIR$/expressCart/routes/admin.js" />
@@ -165,6 +160,9 @@
         <option value="$PROJECT_DIR$/controllers/subcategory.js" />
         <option value="$PROJECT_DIR$/controllers/subsubcategory.js" />
         <option value="$PROJECT_DIR$/controllers/category.js" />
+        <option value="$PROJECT_DIR$/controllers/cat_based_products_with_sorting_filter.js" />
+        <option value="$PROJECT_DIR$/controllers/subcat_based_products_with_sorting_filter.js" />
+        <option value="$PROJECT_DIR$/controllers/subsubcat_based_products_with_sorting_filter.js" />
       </list>
     </option>
   </component>
@@ -347,12 +345,12 @@
       <workItem from="1530598630482" duration="21269000" />
       <workItem from="1530688486218" duration="27899000" />
       <workItem from="1530771602723" duration="25160000" />
-      <workItem from="1530858742140" duration="42011000" />
+      <workItem from="1530858742140" duration="45990000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="718875000" />
+    <option name="totallyTimeSpent" value="722854000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -442,20 +440,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/routes/profile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/signup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/profile.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1175">
@@ -474,13 +458,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2400">
           <caret line="160" selection-start-line="160" selection-end-line="160" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/cat_based_products_with_sorting_filter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2614">
-          <caret line="192" column="97" selection-start-line="192" selection-start-column="97" selection-end-line="192" selection-end-column="97" />
         </state>
       </provider>
     </entry>
@@ -804,20 +781,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/product_details.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="e#515#12754#0" />
-            <element signature="e#12832#15964#0" />
-            <element signature="e#16051#27666#0" />
-            <element signature="e#27751#29268#0" />
-            <element signature="e#29353#29967#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/subsubcategory.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1221">
@@ -848,6 +811,66 @@
             <element signature="e#4397#6145#0" />
             <element signature="e#6896#64342#0" />
             <element signature="e#7329#7915#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/product_details.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="204" column="13" selection-start-line="204" selection-start-column="13" selection-end-line="204" selection-end-column="13" />
+          <folding>
+            <element signature="e#12832#15964#0" />
+            <element signature="e#16051#27666#0" />
+            <element signature="e#27751#29268#0" />
+            <element signature="e#29353#29967#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/cat_based_products_with_sorting_filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="1210" column="4" selection-start-line="1210" selection-start-column="4" selection-end-line="1210" selection-end-column="4" />
+          <folding>
+            <element signature="e#876#15220#0" />
+            <element signature="e#15272#29616#0" />
+            <element signature="e#29669#44013#0" />
+            <element signature="e#44066#58411#0" />
+            <element signature="e#58465#72808#0" />
+            <element signature="e#72862#87206#0" />
+            <element signature="e#87220#101564#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/subcat_based_products_with_sorting_filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="1219" column="20" lean-forward="true" selection-start-line="1219" selection-start-column="20" selection-end-line="1219" selection-end-column="20" />
+          <folding>
+            <element signature="e#882#15241#0" />
+            <element signature="e#15293#29652#0" />
+            <element signature="e#29705#44065#0" />
+            <element signature="e#44118#58478#0" />
+            <element signature="e#58532#72890#0" />
+            <element signature="e#72944#87302#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/subsubcat_based_products_with_sorting_filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="1408" lean-forward="true" selection-start-line="1408" selection-end-line="1408" />
+          <folding>
+            <element signature="e#888#15262#0" />
+            <element signature="e#15314#29688#0" />
+            <element signature="e#29741#44115#0" />
+            <element signature="e#44168#58543#0" />
+            <element signature="e#58597#72970#0" />
+            <element signature="e#73024#87398#0" />
+            <element signature="e#87412#101786#0" />
           </folding>
         </state>
       </provider>
