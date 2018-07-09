@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Filters = require("../models/filters");
 const Filter_categories = require("../models/filters_categories");
 const Filter_options = require("../models/filter_options");
+const Filter_prod_conn = require("../models/filter_options_products");
 const Category = require("../models/category");
 const Subcategory = require("../models/subcategory");
 const Subsubcategory = require("../models/subsubcategory");
@@ -253,12 +254,16 @@ exports.filters_options_conn_get_by_id = (req, res, next) => {
 exports.filters_options_conn_update = (req, res, next) => {
     const id = req.params.filtercategoryId;
     const updateOps = {};
+    const updateRes = {};
     var sub_categ_id ;
     var sub_sub_categ_id ;
 
         updateOps['FILTER_ID'] = req.body.FILTER_ID;
         updateOps['DISPLAY_TEXT'] = req.body.DISPLAY_TEXT.toLowerCase();
+        updateOps['UPDATED_DATE'] = new Date();
         updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
+        updateRes['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
+        updateRes['UPDATED_DATE'] = new Date();
 
     Filter_categories.find({FILTER_ID:req.body.FILTER_ID})
         .select('CATEGORY_ID SUB_CATEGORY_ID SUB_SUB_CATEGORY_ID')
@@ -280,11 +285,24 @@ exports.filters_options_conn_update = (req, res, next) => {
             Filter_options.update({ _id: id }, { $set: updateOps })
                 .exec()
                 .then(result => {
-                    res.status(200).json({
-                        status: "success",
-                        data: {
-                            message: 'filter option connection updated'
-                        }
+                    Filter_prod_conn.update({FILTER_ID: id},{$set: updateRes},{multi: true})
+                        .exec()
+                        .then(res1 => {
+                            res.status(200).json({
+                                status: "success",
+                                data: {
+                                    message: 'filter option connection updated'
+                                }
+                            });
+                        }).catch(err => {
+                        console.log(err);
+                        res.status(500).json({
+                            status: "error",
+                            error: err,
+                            data: {
+                                message: "An error has occurred as mentioned above"
+                            }
+                        });
                     });
                 }).catch(err => {
                 console.log(err);
@@ -310,18 +328,31 @@ exports.filters_options_conn_update = (req, res, next) => {
         });
 };
 
-//delete a filter option connection by id
+//delete a filter value and dependencies by id
 exports.filters_options_conn_delete = (req, res, next) => {
     const id = req.params.filtercategoryId;
     Filter_options.remove({ _id: id })
         .exec()
         .then(result => {
-            res.status(200).json({
-                status: "success",
-                error: "",
-                data: {
-                    message: 'filter option connection deleted'
-                }
+            Filter_prod_conn.remove({FILTER_OPTION_ID: _id})
+                .exec()
+                .then(res1 => {
+                    res.status(200).json({
+                        status: "success",
+                        data: {
+                            message: 'filter value and its dependencies deleted successfully!'
+                        }
+                    });
+                }).catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    status: "error",
+                    error: err,
+                    data:
+                        {
+                            message: "An error has occurred as mentioned above"
+                        }
+                });
             });
         })
         .catch(err => {

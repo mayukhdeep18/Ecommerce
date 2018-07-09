@@ -5,11 +5,13 @@ const Subcategory = require("../models/subcategory");
 const Subsubcategory = require("../models/subsubcategory");
 const Filters_categories = require("../models/filters_categories");
 const Filter_options = require("../models/filter_options");
+const Filter_prod_con = require("../models/filter_options_products");
 
 
 //create a new category and establish category filter connection
 exports.filters_categories_conn_create = (req, res, next) => {
     const fil_type = req.body.FILTER_CATEGORY_NAME.toLowerCase();
+    var fil_id = req.body.FILTER_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
     const cat_id = req.body.CATEGORY_ID;
     const sub_cat_id = req.body.SUB_CATEGORY_ID;
     const sub_sub_cat_id = req.body.SUB_SUB_CATEGORY_ID;
@@ -33,7 +35,7 @@ exports.filters_categories_conn_create = (req, res, next) => {
                 {
                     const filter = new Filters({
                         _id: new mongoose.Types.ObjectId(),
-                        FILTER_ID: fil_type.toLowerCase(),
+                        FILTER_ID: fil_id.toLowerCase(),
                         FILTER_CATEGORY_NAME: req.body.FILTER_CATEGORY_NAME.toLowerCase(),
                         UPDATED_BY: req.body.UPDATED_BY,
                         UPDATED_DATE: new Date(),
@@ -125,7 +127,7 @@ exports.filters_categories_conn_create = (req, res, next) => {
                 {
                     const filter = new Filters({
                         _id: new mongoose.Types.ObjectId(),
-                        FILTER_ID: fil_type.toLowerCase(),
+                        FILTER_ID: fil_id.toLowerCase(),
                         FILTER_CATEGORY_NAME: req.body.FILTER_CATEGORY_NAME.toLowerCase(),
                         UPDATED_BY: req.body.UPDATED_BY,
                         UPDATED_DATE: new Date(),
@@ -233,7 +235,7 @@ exports.filters_categories_conn_create = (req, res, next) => {
                 {
                     const filter = new Filters({
                         _id: new mongoose.Types.ObjectId(),
-                        FILTER_ID: fil_type.toLowerCase(),
+                        FILTER_ID: fil_id.toLowerCase(),
                         FILTER_CATEGORY_NAME: req.body.FILTER_CATEGORY_NAME.toLowerCase(),
                         UPDATED_BY: req.body.UPDATED_BY,
                         UPDATED_DATE: new Date(),
@@ -415,6 +417,7 @@ exports.filters_categories_conn_update = (req, res, next) => {
     const updateOps = {};
     const updateOps1 = {};
     const updateOps2 = {};
+    const updateRes = {};
     const fil_arr = [];
     const fil_type = req.body.FILTER_CATEGORY_NAME.toLowerCase();
     var fil_id = req.body.FILTER_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
@@ -450,6 +453,8 @@ exports.filters_categories_conn_update = (req, res, next) => {
                             updateOps['FILTER_CATEGORY_NAME'] = fil_type.toLowerCase();
                             updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
                             updateOps['UPDATED_DATE'] = new Date();
+                            updateRes['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
+                            updateRes['UPDATED_DATE'] = new Date();
 
                             Filters.update({ _id: docs.FILTER_ID._id }, { $set: updateOps })
                                 .exec()
@@ -475,13 +480,16 @@ exports.filters_categories_conn_update = (req, res, next) => {
                                             Filter_options.update({ FILTER_ID: docs.FILTER_ID._id}, { $set: updateOps2 },{multi: true})
                                                 .exec()
                                                 .then(result_2 => {
-
-                                                    res.status(201).json({
-                                                        status: "success",
-                                                        data: {
-                                                            message: "filter, filter category connection and filter values updated"
-                                                        }
-                                                    });
+                                                    Filter_prod_con.update({FILTER_ID: docs.FILTER_ID._id},{$set: updateRes}, {multi: true})
+                                                        .exec()
+                                                        .then(result3 => {
+                                                            res.status(201).json({
+                                                                status: "success",
+                                                                data: {
+                                                                    message: "filter, filter category connection and dependencies updated"
+                                                                }
+                                                            });
+                                                        })
                                                 }).catch(err => {
                                                 res.status(500).json({
                                                     status: "error",
@@ -559,6 +567,9 @@ exports.filters_categories_conn_update = (req, res, next) => {
                                     updateOps['FILTER_CATEGORY_NAME'] = fil_type.toLowerCase();
                                     updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
                                     updateOps['UPDATED_DATE'] = new Date();
+                                    updateRes['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
+                                    updateRes['UPDATED_DATE'] = new Date();
+
                                     Filters.update({_id: docs.FILTER_ID._id}, {$set: updateOps})
                                         .exec()
                                         .then(result => {
@@ -582,12 +593,23 @@ exports.filters_categories_conn_update = (req, res, next) => {
                                                             Filter_options.update({FILTER_ID: docs.FILTER_ID._id}, {$set: updateOps1}, {multi: true})
                                                                 .exec()
                                                                 .then(result_2 => {
-
-                                                                    res.status(201).json({
-                                                                        status: "success",
-                                                                        data: {
-                                                                            message: "filter, filter sub category connection and filter values updated"
-                                                                        }
+                                                                    Filter_prod_con.update({FILTER_ID: docs.FILTER_ID._id}, {$set: updateRes}, {multi: true})
+                                                                        .exec()
+                                                                        .then(result3 => {
+                                                                            res.status(201).json({
+                                                                                status: "success",
+                                                                                data: {
+                                                                                    message: "filter, filter sub category connection and dependencies updated"
+                                                                                }
+                                                                            });
+                                                                        }).catch(err => {
+                                                                        res.status(500).json({
+                                                                            status: "error",
+                                                                            error: err,
+                                                                            data: {
+                                                                                message: "Internal server error!"
+                                                                            }
+                                                                        });
                                                                     });
                                                                 }).catch(err => {
                                                                 res.status(500).json({
@@ -674,6 +696,9 @@ exports.filters_categories_conn_update = (req, res, next) => {
                             updateOps['FILTER_CATEGORY_NAME'] = fil_type.toLowerCase();
                             updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
                             updateOps['UPDATED_DATE'] = new Date();
+                            updateRes['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
+                            updateRes['UPDATED_DATE'] = new Date();
+
                             Filters.update({ _id: docs.FILTER_ID._id }, { $set: updateOps })
                                 .exec()
                                 .then(result => {
@@ -697,11 +722,23 @@ exports.filters_categories_conn_update = (req, res, next) => {
                                                     Filter_options.update({ FILTER_ID: docs.FILTER_ID._id }, { $set: updateOps1 },{multi: true})
                                                         .exec()
                                                         .then(result_2 => {
-                                                            res.status(201).json({
-                                                                status: "success",
-                                                                data: {
-                                                                    message: "filter, filter sub sub category connection and filter values updated"
-                                                                }
+                                                            Filter_prod_con.update({ FILTER_ID: docs.FILTER_ID._id }, { $set: updateRes },{multi: true})
+                                                                .exec()
+                                                                .then(result3 => {
+                                                                    res.status(201).json({
+                                                                        status: "success",
+                                                                        data: {
+                                                                            message: "filter, filter sub sub category connection and dependencies updated"
+                                                                        }
+                                                                    });
+                                                                }).catch(err => {
+                                                                res.status(500).json({
+                                                                    status: "error",
+                                                                    error: err,
+                                                                    data: {
+                                                                        message: "Internal server error!"
+                                                                    }
+                                                                });
                                                             });
                                                         }).catch(err => {
                                                         res.status(500).json({
@@ -768,27 +805,76 @@ exports.filters_categories_conn_update = (req, res, next) => {
 //delete a filter category connection by id
 exports.filters_categories_conn_delete = (req, res, next) => {
     const id = req.params.filtercategoryId;
-    Filters_categories.remove({ _id: id })
+    Filters_categories.findById(id)
+        .select('FILTER_ID ACTIVE_FLAG _id')
         .exec()
-        .then(result => {
-            res.status(200).json({
-                status: "success",
-                data: {
-                    message: 'filter category connection deleted'
-                }
-            });
+        .then(res1 =>{
+            var fil_id = res1.FILTER_ID;
+            Filters_categories.remove({ _id: id })
+                .exec()
+                .then(result => {
+                    Filter_options.remove({FILTER_ID: fil_id})
+                        .exec()
+                        .then(res2 => {
+                            Filter_prod_con.remove({FILTER_ID: fil_id})
+                                .exec()
+                                .then(res3 => {
+                                    Filters.remove({_id: fil_id})
+                                        .exec()
+                                        .then(res4 => {
+                                            res.status(200).json({
+                                                status: "success",
+                                                data: {
+                                                    message: 'filter category connection deleted'
+                                                }
+                                            });
+                                        }).catch(err => {
+                                        console.log(err);
+                                        res.status(500).json({
+                                            status: "error",
+                                            error: err,
+                                            data:
+                                                {
+                                                    message: "Internal server error!"
+                                                }
+                                        });
+                                    });
+                                }).catch(err => {
+                                console.log(err);
+                                res.status(500).json({
+                                    status: "error",
+                                    error: err,
+                                    data:
+                                        {
+                                            message: "Internal server error!"
+                                        }
+                                });
+                            });
+                        }).catch(err => {
+                        console.log(err);
+                        res.status(500).json({
+                            status: "error",
+                            error: err,
+                            data:
+                                {
+                                    message: "Internal server error!"
+                                }
+                        });
+                    });
+
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(500).json({
+                        status: "error",
+                        error: err,
+                        data:
+                            {
+                                message: "Internal server error!"
+                            }
+                    });
+                });
         })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                status: "error",
-                error: err,
-                data:
-                    {
-                        message: "Internal server error!"
-                    }
-            });
-        });
 };
 
 //get all filter category connection details

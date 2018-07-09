@@ -1,6 +1,17 @@
 const mongoose = require("mongoose");
 const Subcategory = require("../models/subcategory");
 const Category = require("../models/category");
+const SubSubCategory = require("../models/subsubcategory");
+const Product = require("../models/product_details");
+const EcommProd = require("../models/ecommerce_product_details");
+const Filters = require("../models/filters");
+const Filcat = require("../models/filters_categories");
+const Filval = require("../models/filter_options");
+const Filprod = require("../models/filter_options_products");
+const Rating = require("../models/rating_details");
+const Review = require("../models/review_details");
+const HotDeals = require("../models/hot_deals");
+const TrendDeals = require("../models/trending_products");
 
 //get all active subcategory details
 exports.subcategory_get_all = (req, res, next) => {
@@ -204,63 +215,1349 @@ exports.subcategory_get_subcategory = (req, res, next) => {
         });
 };
 
-//update subcategory details by id
+
+//update sub subcategory details by id
 exports.subcategory_update = (req, res, next) => {
     const id = req.params.subcategoryId;
-    var Sub_id = req.body.PRODUCT_SUB_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
+    var Sub_sub_id = req.body.SUB_SUB_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
     const updateOps = {};
+    const updateRes = {};
 
-   //updateOps['PRODUCT_CATEGORY_ID'] = req.body.PRODUCT_CATEGORY_ID;
-    updateOps['PRODUCT_SUB_CATEGORY_NAME'] = req.body.PRODUCT_SUB_CATEGORY_NAME;
-    updateOps['PRODUCT_SUB_CATEGORY_DESCRIPTION']= req.body.PRODUCT_SUB_CATEGORY_DESCRIPTION;
+    //updateOps['CATEGORY_ID'] = req.body.CATEGORY_ID;
+    //updateOps['SUB_CATEGORY_ID'] = req.body.SUB_CATEGORY_ID;
+    updateOps['PRODUCT_SUB_CATEGORY_NAME'] = req.body.SUB_SUB_CATEGORY_NAME;
+    updateOps['PRODUCT_SUB_CATEGORY_DESCRIPTION']= req.body.SUB_SUB_CATEGORY_DESCRIPTION;
     updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
     updateOps['UPDATED_DATE'] = new Date();
-    updateOps['SUB_CATEGORY_ID'] = Sub_id.toLowerCase();
+    updateOps['SUB_CATEGORY_ID'] = Sub_sub_id.toLowerCase();
+    updateRes['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
+    updateRes['UPDATED_DATE'] = new Date();
 
-    Subcategory.update({ SUB_CATEGORY_ID: id }, { $set: updateOps })
+    var prod_arr = {};
+    var fil_arr = {};
+    Product.find({PRODUCT_SUB_CATEGORY_ID: id})
+        .select('PRODUCT_ID ACTIVE_FLAG _id')
         .exec()
-        .then(result => {
-            res.status(200).json({
-                status: "success",
-                data: {
-                    message: 'subcategory updated'
+        .then(res1 => {
+            if(res1.length > 0)
+            {
+                for(var item of res1)
+                {
+                    prod_arr.push(item._id);
                 }
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                status: "error",
-                error: err,
-                data: {
+                Filcat.find({SUB_CATEGORY_ID: id})
+                    .select('FILTER_ID _id')
+                    .exec()
+                    .then(res2 => {
+                        if(res2.length > 0)
+                        {
+                            for(var item2 of res2)
+                            {
+                                fil_arr.push(item2.FILTER_ID);
+                            }
+                            Product.update({PRODUCT_SUB_CATEGORY_ID: id},{$set: updateRes})
+                                .exec()
+                                .then(res3 => {
+                                    EcommProd.update({SUB_CATEGORY_ID: id},{$set: updateRes})
+                                        .exec()
+                                        .then(res4 => {
+                                            Filcat.update({SUB_CATEGORY_ID: id},{$set: updateRes})
+                                                .exec()
+                                                .then(res5 => {
+                                                    Filters.update({_id: {$in: fil_arr}},{$set: updateRes})
+                                                        .exec()
+                                                        .then(res6 => {
+                                                            Filval.update({FILTER_ID: {$in: fil_arr}},{$set: updateRes})
+                                                                .exec()
+                                                                .then(res7 => {
+                                                                    Filprod.update({FILTER_ID: {$in: fil_arr}},{$set: updateRes})
+                                                                        .exec()
+                                                                        .then(res8 => {
+                                                                            Rating.update({PRODUCT_ID: {$in: {prod_arr}}},{$set: updateRes})
+                                                                                .exec()
+                                                                                .then(res7 => {
+                                                                                    Review.update({PRODUCT_ID: {$in: prod_arr}},{$set: updateRes})
+                                                                                        .exec()
+                                                                                        .then(res8 => {
+                                                                                            HotDeals.update({PRODUCT_ID: {$in: prod_arr}},{$set: updateRes})
+                                                                                                .exec()
+                                                                                                .then(res9 => {
+                                                                                                    TrendDeals.update({PRODUCT_ID: {$in: prod_arr}},{$set: updateRes})
+                                                                                                        .exec()
+                                                                                                        .then(res10 => {
+                                                                                                            SubSubCategory.update({ SUB_CATEGORY_ID: id }, { $set: updateRes })
+                                                                                                                .exec()
+                                                                                                                .then(result => {
+                                                                                                                    Subcategory.update({_id: id},{$set: updateOps})
+                                                                                                                        .exec()
+                                                                                                                        .then(res11 => {
+                                                                                                                            res.status(200).json({
+                                                                                                                                status: "success",
+                                                                                                                                data: {
+                                                                                                                                    message: 'sub subcategory updated'
+                                                                                                                                }
+                                                                                                                            });
+                                                                                                                        }).catch(err => {
+                                                                                                                        console.log(err);
+                                                                                                                        res.status(500).json({
+                                                                                                                            status: "error",
+                                                                                                                            error: err,
+                                                                                                                            data: {
+                                                                                                                                message: "Internal server error"
+                                                                                                                            }
+                                                                                                                        });
+                                                                                                                    });
+                                                                                                                })
+                                                                                                                .catch(err => {
+                                                                                                                    console.log(err);
+                                                                                                                    res.status(500).json({
+                                                                                                                        status: "error",
+                                                                                                                        error: err,
+                                                                                                                        data: {
+                                                                                                                            message: "Internal server error"
+                                                                                                                        }
+                                                                                                                    });
+                                                                                                                });
+                                                                                                        }).catch(err => {
+                                                                                                        console.log(err);
+                                                                                                        res.status(500).json({
+                                                                                                            status: "error",
+                                                                                                            error: err,
+                                                                                                            data:
+                                                                                                                {
+                                                                                                                    message: "Internal server error!"
+                                                                                                                }
+                                                                                                        });
+                                                                                                    });
+                                                                                                }).catch(err => {
+                                                                                                console.log(err);
+                                                                                                res.status(500).json({
+                                                                                                    status: "error",
+                                                                                                    error: err,
+                                                                                                    data:
+                                                                                                        {
+                                                                                                            message: "Internal server error!"
+                                                                                                        }
+                                                                                                });
+                                                                                            });
+                                                                                        }).catch(err => {
+                                                                                        console.log(err);
+                                                                                        res.status(500).json({
+                                                                                            status: "error",
+                                                                                            error: err,
+                                                                                            data:
+                                                                                                {
+                                                                                                    message: "Internal server error!"
+                                                                                                }
+                                                                                        });
+                                                                                    });
+                                                                                }).catch(err => {
+                                                                                console.log(err);
+                                                                                res.status(500).json({
+                                                                                    status: "error",
+                                                                                    error: err,
+                                                                                    data:
+                                                                                        {
+                                                                                            message: "Internal server error!"
+                                                                                        }
+                                                                                });
+                                                                            });
+                                                                        }).catch(err => {
+                                                                        console.log(err);
+                                                                        res.status(500).json({
+                                                                            status: "error",
+                                                                            error: err,
+                                                                            data:
+                                                                                {
+                                                                                    message: "Internal server error!"
+                                                                                }
+                                                                        });
+                                                                    });
+                                                                }).catch(err => {
+                                                                console.log(err);
+                                                                res.status(500).json({
+                                                                    status: "error",
+                                                                    error: err,
+                                                                    data:
+                                                                        {
+                                                                            message: "Internal server error!"
+                                                                        }
+                                                                });
+                                                            });
+                                                        }).catch(err => {
+                                                        console.log(err);
+                                                        res.status(500).json({
+                                                            status: "error",
+                                                            error: err,
+                                                            data:
+                                                                {
+                                                                    message: "Internal server error!"
+                                                                }
+                                                        });
+                                                    });
+                                                }).catch(err => {
+                                                console.log(err);
+                                                res.status(500).json({
+                                                    status: "error",
+                                                    error: err,
+                                                    data:
+                                                        {
+                                                            message: "Internal server error!"
+                                                        }
+                                                });
+                                            });
+                                        }).catch(err => {
+                                        console.log(err);
+                                        res.status(500).json({
+                                            status: "error",
+                                            error: err,
+                                            data:
+                                                {
+                                                    message: "Internal server error!"
+                                                }
+                                        });
+                                    });
+
+                                }).catch(err => {
+                                console.log(err);
+                                res.status(500).json({
+                                    status: "error",
+                                    error: err,
+                                    data:
+                                        {
+                                            message: "Internal server error!"
+                                        }
+                                });
+                            });
+                        }
+                        else {
+                            Product.update({PRODUCT_SUB_CATEGORY_ID: id},{$set: updateRes})
+                                .exec()
+                                .then(res3 => {
+                                    EcommProd.update({SUB_CATEGORY_ID: id},{$set: updateRes})
+                                        .exec()
+                                        .then(res4 => {
+                                            Rating.update({PRODUCT_ID: {$in: {prod_arr}}},{$set: updateRes})
+                                                .exec()
+                                                .then(res7 => {
+                                                    Review.update({PRODUCT_ID: {$in: prod_arr}},{$set: updateRes})
+                                                        .exec()
+                                                        .then(res8 => {
+                                                            HotDeals.update({PRODUCT_ID: {$in: prod_arr}},{$set: updateRes})
+                                                                .exec()
+                                                                .then(res9 => {
+                                                                    TrendDeals.update({PRODUCT_ID: {$in: prod_arr}},{$set: updateRes})
+                                                                        .exec()
+                                                                        .then(res10 => {
+                                                                            SubSubCategory.update({ SUB_CATEGORY_ID: id }, { $set: updateRes })
+                                                                                .exec()
+                                                                                .then(result => {
+                                                                                    Subcategory.update({_id: id},{$set: updateOps})
+                                                                                        .exec()
+                                                                                        .then(res11 => {
+                                                                                            res.status(200).json({
+                                                                                                status: "success",
+                                                                                                data: {
+                                                                                                    message: 'sub subcategory updated'
+                                                                                                }
+                                                                                            });
+                                                                                        }).catch(err => {
+                                                                                        console.log(err);
+                                                                                        res.status(500).json({
+                                                                                            status: "error",
+                                                                                            error: err,
+                                                                                            data: {
+                                                                                                message: "Internal server error"
+                                                                                            }
+                                                                                        });
+                                                                                    });
+                                                                                })
+                                                                                .catch(err => {
+                                                                                    console.log(err);
+                                                                                    res.status(500).json({
+                                                                                        status: "error",
+                                                                                        error: err,
+                                                                                        data: {
+                                                                                            message: "Internal server error"
+                                                                                        }
+                                                                                    });
+                                                                                });
+                                                                        }).catch(err => {
+                                                                        console.log(err);
+                                                                        res.status(500).json({
+                                                                            status: "error",
+                                                                            error: err,
+                                                                            data:
+                                                                                {
+                                                                                    message: "Internal server error!"
+                                                                                }
+                                                                        });
+                                                                    });
+                                                                }).catch(err => {
+                                                                console.log(err);
+                                                                res.status(500).json({
+                                                                    status: "error",
+                                                                    error: err,
+                                                                    data:
+                                                                        {
+                                                                            message: "Internal server error!"
+                                                                        }
+                                                                });
+                                                            });
+                                                        }).catch(err => {
+                                                        console.log(err);
+                                                        res.status(500).json({
+                                                            status: "error",
+                                                            error: err,
+                                                            data:
+                                                                {
+                                                                    message: "Internal server error!"
+                                                                }
+                                                        });
+                                                    });
+                                                }).catch(err => {
+                                                console.log(err);
+                                                res.status(500).json({
+                                                    status: "error",
+                                                    error: err,
+                                                    data:
+                                                        {
+                                                            message: "Internal server error!"
+                                                        }
+                                                });
+                                            });
+                                        }).catch(err => {
+                                        console.log(err);
+                                        res.status(500).json({
+                                            status: "error",
+                                            error: err,
+                                            data:
+                                                {
+                                                    message: "Internal server error!"
+                                                }
+                                        });
+                                    });
+                                }).catch(err => {
+                                console.log(err);
+                                res.status(500).json({
+                                    status: "error",
+                                    error: err,
+                                    data:
+                                        {
+                                            message: "Internal server error!"
+                                        }
+                                });
+                            });
+                        }
+                    }).catch(err => {
+                    console.log(err);
+                    res.status(500).json({
+                        status: "error",
+                        error: err,
+                        data:
+                            {
+                                message: "Internal server error!"
+                            }
+                    });
+                });
+            }
+            else
+            {
+                Filcat.find({SUB_CATEGORY_ID: id})
+                    .select('FILTER_ID _id')
+                    .exec()
+                    .then(res2 => {
+                        if(res2.length > 0)
+                        {
+                            for(var item2 of res2)
+                            {
+                                fil_arr.push(item2.FILTER_ID);
+                            }
+                            Product.update({PRODUCT_SUB_CATEGORY_ID: id},{$set: updateRes})
+                                .exec()
+                                .then(res3 => {
+                                    EcommProd.update({SUB_CATEGORY_ID: id},{$set: updateRes})
+                                        .exec()
+                                        .then(res4 => {
+                                            Filcat.update({SUB_CATEGORY_ID: id},{$set: updateRes})
+                                                .exec()
+                                                .then(res5 => {
+                                                    Filters.update({_id: {$in: fil_arr}},{$set: updateRes})
+                                                        .exec()
+                                                        .then(res6 => {
+                                                            Filval.update({FILTER_ID: {$in: fil_arr}},{$set: updateRes})
+                                                                .exec()
+                                                                .then(res7 => {
+                                                                    Filprod.update({FILTER_ID: {$in: fil_arr}},{$set: updateRes})
+                                                                        .exec()
+                                                                        .then(res8 => {
+                                                                            Rating.update({PRODUCT_ID: {$in: prod_arr}},{$set: updateRes})
+                                                                                .exec()
+                                                                                .then(res7 => {
+                                                                                    Review.update({PRODUCT_ID: {$in: prod_arr}},{$set: updateRes})
+                                                                                        .exec()
+                                                                                        .then(res8 => {
+                                                                                            HotDeals.update({PRODUCT_ID: {$in: prod_arr}},{$set: updateRes})
+                                                                                                .exec()
+                                                                                                .then(res9 => {
+                                                                                                    TrendDeals.update({PRODUCT_ID: {$in: prod_arr}},{$set: updateRes})
+                                                                                                        .exec()
+                                                                                                        .then(res10 => {
+                                                                                                            SubSubCategory.update({ SUB_CATEGORY_ID: id }, { $set: updateRes })
+                                                                                                                .exec()
+                                                                                                                .then(result => {
+                                                                                                                    Subcategory.update({_id: id},{$set: updateOps})
+                                                                                                                        .exec()
+                                                                                                                        .then(res11 => {
+                                                                                                                            res.status(200).json({
+                                                                                                                                status: "success",
+                                                                                                                                data: {
+                                                                                                                                    message: 'subcategory updated'
+                                                                                                                                }
+                                                                                                                            });
+                                                                                                                        })
+                                                                                                                        .catch(err => {
+                                                                                                                            console.log(err);
+                                                                                                                            res.status(500).json({
+                                                                                                                                status: "error",
+                                                                                                                                error: err,
+                                                                                                                                data: {
+                                                                                                                                    message: "Internal server error"
+                                                                                                                                }
+                                                                                                                            });
+                                                                                                                        });
+                                                                                                                        }).catch(err => {
+                                                                                                                console.log(err);
+                                                                                                                res.status(500).json({
+                                                                                                                    status: "error",
+                                                                                                                    error: err,
+                                                                                                                    data: {
+                                                                                                                        message: "Internal server error"
+                                                                                                                    }
+                                                                                                                });
+                                                                                                            });
+
+                                                                                                        }).catch(err => {
+                                                                                                        console.log(err);
+                                                                                                        res.status(500).json({
+                                                                                                            status: "error",
+                                                                                                            error: err,
+                                                                                                            data:
+                                                                                                                {
+                                                                                                                    message: "Internal server error!"
+                                                                                                                }
+                                                                                                        });
+                                                                                                    });
+                                                                                                }).catch(err => {
+                                                                                                console.log(err);
+                                                                                                res.status(500).json({
+                                                                                                    status: "error",
+                                                                                                    error: err,
+                                                                                                    data:
+                                                                                                        {
+                                                                                                            message: "Internal server error!"
+                                                                                                        }
+                                                                                                });
+                                                                                            });
+                                                                                        }).catch(err => {
+                                                                                        console.log(err);
+                                                                                        res.status(500).json({
+                                                                                            status: "error",
+                                                                                            error: err,
+                                                                                            data:
+                                                                                                {
+                                                                                                    message: "Internal server error!"
+                                                                                                }
+                                                                                        });
+                                                                                    });
+                                                                                }).catch(err => {
+                                                                                console.log(err);
+                                                                                res.status(500).json({
+                                                                                    status: "error",
+                                                                                    error: err,
+                                                                                    data:
+                                                                                        {
+                                                                                            message: "Internal server error!"
+                                                                                        }
+                                                                                });
+                                                                            });
+                                                                        }).catch(err => {
+                                                                        console.log(err);
+                                                                        res.status(500).json({
+                                                                            status: "error",
+                                                                            error: err,
+                                                                            data:
+                                                                                {
+                                                                                    message: "Internal server error!"
+                                                                                }
+                                                                        });
+                                                                    });
+                                                                }).catch(err => {
+                                                                console.log(err);
+                                                                res.status(500).json({
+                                                                    status: "error",
+                                                                    error: err,
+                                                                    data:
+                                                                        {
+                                                                            message: "Internal server error!"
+                                                                        }
+                                                                });
+                                                            });
+                                                        }).catch(err => {
+                                                        console.log(err);
+                                                        res.status(500).json({
+                                                            status: "error",
+                                                            error: err,
+                                                            data:
+                                                                {
+                                                                    message: "Internal server error!"
+                                                                }
+                                                        });
+                                                    });
+                                                }).catch(err => {
+                                                console.log(err);
+                                                res.status(500).json({
+                                                    status: "error",
+                                                    error: err,
+                                                    data:
+                                                        {
+                                                            message: "Internal server error!"
+                                                        }
+                                                });
+                                            });
+                                        }).catch(err => {
+                                        console.log(err);
+                                        res.status(500).json({
+                                            status: "error",
+                                            error: err,
+                                            data:
+                                                {
+                                                    message: "Internal server error!"
+                                                }
+                                        });
+                                    });
+
+                                }).catch(err => {
+                                console.log(err);
+                                res.status(500).json({
+                                    status: "error",
+                                    error: err,
+                                    data:
+                                        {
+                                            message: "Internal server error!"
+                                        }
+                                });
+                            });
+                        }
+                        else {
+                            Product.update({PRODUCT_SUB_CATEGORY_ID: id},{$set: updateRes})
+                                .exec()
+                                .then(res3 => {
+                                    EcommProd.update({SUB_CATEGORY_ID: id},{$set: updateRes})
+                                        .exec()
+                                        .then(res4 => {
+                                            Rating.update({PRODUCT_ID: {$in: prod_arr}},{$set: updateRes})
+                                                .exec()
+                                                .then(res7 => {
+                                                    Review.update({PRODUCT_ID: {$in: prod_arr}},{$set: updateRes})
+                                                        .exec()
+                                                        .then(res8 => {
+                                                            HotDeals.update({PRODUCT_ID: {$in: prod_arr}},{$set: updateRes})
+                                                                .exec()
+                                                                .then(res9 => {
+                                                                    TrendDeals.update({PRODUCT_ID: {$in: prod_arr}},{$set: updateRes})
+                                                                        .exec()
+                                                                        .then(res10 => {
+                                                                            SubSubCategory.update({ SUB_CATEGORY_ID: id }, { $set: updateRes })
+                                                                                .exec()
+                                                                                .then(result => {
+                                                                                    Subcategory.update({_id: id},{$set: updateOps})
+                                                                                        .exec()
+                                                                                        .then(res11 => {
+                                                                                            res.status(200).json({
+                                                                                                status: "success",
+                                                                                                data: {
+                                                                                                    message: 'sub subcategory updated'
+                                                                                                }
+                                                                                            });
+                                                                                        })
+                                                                                        .catch(err => {
+                                                                                            console.log(err);
+                                                                                            res.status(500).json({
+                                                                                                status: "error",
+                                                                                                error: err,
+                                                                                                data: {
+                                                                                                    message: "Internal server error"
+                                                                                                }
+                                                                                            });
+                                                                                        });
+                                                                                        }).catch(err => {
+                                                                                console.log(err);
+                                                                                res.status(500).json({
+                                                                                    status: "error",
+                                                                                    error: err,
+                                                                                    data: {
+                                                                                        message: "Internal server error"
+                                                                                    }
+                                                                                });
+                                                                            });
+                                                                        }).catch(err => {
+                                                                        console.log(err);
+                                                                        res.status(500).json({
+                                                                            status: "error",
+                                                                            error: err,
+                                                                            data:
+                                                                                {
+                                                                                    message: "Internal server error!"
+                                                                                }
+                                                                        });
+                                                                    });
+                                                                }).catch(err => {
+                                                                console.log(err);
+                                                                res.status(500).json({
+                                                                    status: "error",
+                                                                    error: err,
+                                                                    data:
+                                                                        {
+                                                                            message: "Internal server error!"
+                                                                        }
+                                                                });
+                                                            });
+                                                        }).catch(err => {
+                                                        console.log(err);
+                                                        res.status(500).json({
+                                                            status: "error",
+                                                            error: err,
+                                                            data:
+                                                                {
+                                                                    message: "Internal server error!"
+                                                                }
+                                                        });
+                                                    });
+                                                }).catch(err => {
+                                                console.log(err);
+                                                res.status(500).json({
+                                                    status: "error",
+                                                    error: err,
+                                                    data:
+                                                        {
+                                                            message: "Internal server error!"
+                                                        }
+                                                });
+                                            });
+                                        }).catch(err => {
+                                        console.log(err);
+                                        res.status(500).json({
+                                            status: "error",
+                                            error: err,
+                                            data:
+                                                {
+                                                    message: "Internal server error!"
+                                                }
+                                        });
+                                    });
+                                }).catch(err => {
+                                console.log(err);
+                                res.status(500).json({
+                                    status: "error",
+                                    error: err,
+                                    data:
+                                        {
+                                            message: "Internal server error!"
+                                        }
+                                });
+                            });
+                        }
+                    }).catch(err => {
+                    console.log(err);
+                    res.status(500).json({
+                        status: "error",
+                        error: err,
+                        data:
+                            {
+                                message: "Internal server error!"
+                            }
+                    });
+                });
+            }
+        }).catch(err => {
+        console.log(err);
+        res.status(500).json({
+            status: "error",
+            error: err,
+            data:
+                {
                     message: "Internal server error!"
                 }
-            });
         });
+    });
 };
 
-//delete a sub category by id
+//delete a sub subcategory by id
 exports.subcategory_delete = (req, res, next) => {
     const id = req.params.subcategoryId;
-    Subcategory.remove({ SUB_CATEGORY_ID: id })
+    var prod_arr = {};
+    var fil_arr = {};
+    Product.find({PRODUCT_SUB_CATEGORY_ID: id})
+        .select('PRODUCT_ID ACTIVE_FLAG _id')
         .exec()
-        .then(result => {
-            res.status(200).json({
-                status: "success",
-                data: {
-                    message: "subcategory deleted!"
+        .then(res1 => {
+            if(res1.length > 0)
+            {
+                for(var item of res1)
+                {
+                    prod_arr.push(item._id);
                 }
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                status: "error",
-                error: err,
-                data:
-                    {
-                        message: "Internal server error!"
-                    }
-            });
+                Filcat.find({SUB_CATEGORY_ID: id})
+                    .select('FILTER_ID _id')
+                    .exec()
+                    .then(res2 => {
+                        if(res2.length > 0)
+                        {
+                            for(var item2 of res2)
+                            {
+                                fil_arr.push(item2.FILTER_ID);
+                            }
+                            Product.remove({PRODUCT_SUB_CATEGORY_ID: id})
+                                .exec()
+                                .then(res3 => {
+                                    EcommProd.remove({SUB_CATEGORY_ID: id})
+                                        .exec()
+                                        .then(res4 => {
+                                            Filcat.remove({SUB_CATEGORY_ID: id})
+                                                .exec()
+                                                .then(res5 => {
+                                                    Filters.remove({_id: {$in: fil_arr}})
+                                                        .exec()
+                                                        .then(res6 => {
+                                                            Filval.remove({FILTER_ID: {$in: fil_arr}})
+                                                                .exec()
+                                                                .then(res7 => {
+                                                                    Filprod.remove({FILTER_ID: {$in: fil_arr}})
+                                                                        .exec()
+                                                                        .then(res8 => {
+                                                                            Rating.remove({PRODUCT_ID: {$in: {prod_arr}}})
+                                                                                .exec()
+                                                                                .then(res7 => {
+                                                                                    Review.remove({PRODUCT_ID: {$in: prod_arr}})
+                                                                                        .exec()
+                                                                                        .then(res8 => {
+                                                                                            HotDeals.remove({PRODUCT_ID: {$in: prod_arr}})
+                                                                                                .exec()
+                                                                                                .then(res9 => {
+                                                                                                    TrendDeals.remove({PRODUCT_ID: {$in: prod_arr}})
+                                                                                                        .exec()
+                                                                                                        .then(res10 => {
+                                                                                                            SubSubCategory.remove({ SUB_CATEGORY_ID: id })
+                                                                                                                .exec()
+                                                                                                                .then(result => {
+                                                                                                                    Subcategory.remove({_id: id})
+                                                                                                                        .exec()
+                                                                                                                        .then(res11 => {
+                                                                                                                            res.status(200).json({
+                                                                                                                                status: "success",
+                                                                                                                                data: {
+                                                                                                                                    message: 'subcategory and all dependencies deleted'
+                                                                                                                                }
+                                                                                                                            });
+                                                                                                                        })
+                                                                                                                        .catch(err => {
+                                                                                                                            console.log(err);
+                                                                                                                            res.status(500).json({
+                                                                                                                                status: "error",
+                                                                                                                                error: err,
+                                                                                                                                data:
+                                                                                                                                    {
+                                                                                                                                        message: "Internal server error!"
+                                                                                                                                    }
+                                                                                                                            });
+                                                                                                                        });
+                                                                                                                        }).catch(err => {
+                                                                                                                console.log(err);
+                                                                                                                res.status(500).json({
+                                                                                                                    status: "error",
+                                                                                                                    error: err,
+                                                                                                                    data:
+                                                                                                                        {
+                                                                                                                            message: "Internal server error!"
+                                                                                                                        }
+                                                                                                                });
+                                                                                                            });
+                                                                                                        }).catch(err => {
+                                                                                                        console.log(err);
+                                                                                                        res.status(500).json({
+                                                                                                            status: "error",
+                                                                                                            error: err,
+                                                                                                            data:
+                                                                                                                {
+                                                                                                                    message: "Internal server error!"
+                                                                                                                }
+                                                                                                        });
+                                                                                                    });
+                                                                                                }).catch(err => {
+                                                                                                console.log(err);
+                                                                                                res.status(500).json({
+                                                                                                    status: "error",
+                                                                                                    error: err,
+                                                                                                    data:
+                                                                                                        {
+                                                                                                            message: "Internal server error!"
+                                                                                                        }
+                                                                                                });
+                                                                                            });
+                                                                                        }).catch(err => {
+                                                                                        console.log(err);
+                                                                                        res.status(500).json({
+                                                                                            status: "error",
+                                                                                            error: err,
+                                                                                            data:
+                                                                                                {
+                                                                                                    message: "Internal server error!"
+                                                                                                }
+                                                                                        });
+                                                                                    });
+                                                                                }).catch(err => {
+                                                                                console.log(err);
+                                                                                res.status(500).json({
+                                                                                    status: "error",
+                                                                                    error: err,
+                                                                                    data:
+                                                                                        {
+                                                                                            message: "Internal server error!"
+                                                                                        }
+                                                                                });
+                                                                            });
+                                                                        }).catch(err => {
+                                                                        console.log(err);
+                                                                        res.status(500).json({
+                                                                            status: "error",
+                                                                            error: err,
+                                                                            data:
+                                                                                {
+                                                                                    message: "Internal server error!"
+                                                                                }
+                                                                        });
+                                                                    });
+                                                                }).catch(err => {
+                                                                console.log(err);
+                                                                res.status(500).json({
+                                                                    status: "error",
+                                                                    error: err,
+                                                                    data:
+                                                                        {
+                                                                            message: "Internal server error!"
+                                                                        }
+                                                                });
+                                                            });
+                                                        }).catch(err => {
+                                                        console.log(err);
+                                                        res.status(500).json({
+                                                            status: "error",
+                                                            error: err,
+                                                            data:
+                                                                {
+                                                                    message: "Internal server error!"
+                                                                }
+                                                        });
+                                                    });
+                                                }).catch(err => {
+                                                console.log(err);
+                                                res.status(500).json({
+                                                    status: "error",
+                                                    error: err,
+                                                    data:
+                                                        {
+                                                            message: "Internal server error!"
+                                                        }
+                                                });
+                                            });
+                                        }).catch(err => {
+                                        console.log(err);
+                                        res.status(500).json({
+                                            status: "error",
+                                            error: err,
+                                            data:
+                                                {
+                                                    message: "Internal server error!"
+                                                }
+                                        });
+                                    });
+
+                                }).catch(err => {
+                                console.log(err);
+                                res.status(500).json({
+                                    status: "error",
+                                    error: err,
+                                    data:
+                                        {
+                                            message: "Internal server error!"
+                                        }
+                                });
+                            });
+                        }
+                        else {
+                            Product.remove({PRODUCT_SUB_CATEGORY_ID: id})
+                                .exec()
+                                .then(res3 => {
+                                    EcommProd.remove({SUB_CATEGORY_ID: id})
+                                        .exec()
+                                        .then(res4 => {
+                                            Rating.remove({PRODUCT_ID: {$in: {prod_arr}}})
+                                                .exec()
+                                                .then(res7 => {
+                                                    Review.remove({PRODUCT_ID: {$in: prod_arr}})
+                                                        .exec()
+                                                        .then(res8 => {
+                                                            HotDeals.remove({PRODUCT_ID: {$in: prod_arr}})
+                                                                .exec()
+                                                                .then(res9 => {
+                                                                    TrendDeals.remove({PRODUCT_ID: {$in: prod_arr}})
+                                                                        .exec()
+                                                                        .then(res10 => {
+                                                                            SubSubCategory.remove({SUB_CATEGORY_ID: id})
+                                                                                .exec()
+                                                                                .then(result => {
+                                                                                    Subcategory.remove({_id: id})
+                                                                                        .exec()
+                                                                                        .then(res11 => {
+                                                                                            res.status(200).json({
+                                                                                                status: "success",
+                                                                                                data: {
+                                                                                                    message: 'subcategory and all dependencies deleted'
+                                                                                                }
+                                                                                            });
+                                                                                        })
+                                                                                        .catch(err => {
+                                                                                            console.log(err);
+                                                                                            res.status(500).json({
+                                                                                                status: "error",
+                                                                                                error: err,
+                                                                                                data:
+                                                                                                    {
+                                                                                                        message: "Internal server error!"
+                                                                                                    }
+                                                                                            });
+                                                                                        });
+                                                                                        }).catch(err => {
+                                                                                console.log(err);
+                                                                                res.status(500).json({
+                                                                                    status: "error",
+                                                                                    error: err,
+                                                                                    data:
+                                                                                        {
+                                                                                            message: "Internal server error!"
+                                                                                        }
+                                                                                });
+                                                                            });
+                                                                        }).catch(err => {
+                                                                        console.log(err);
+                                                                        res.status(500).json({
+                                                                            status: "error",
+                                                                            error: err,
+                                                                            data:
+                                                                                {
+                                                                                    message: "Internal server error!"
+                                                                                }
+                                                                        });
+                                                                    });
+                                                                }).catch(err => {
+                                                                console.log(err);
+                                                                res.status(500).json({
+                                                                    status: "error",
+                                                                    error: err,
+                                                                    data:
+                                                                        {
+                                                                            message: "Internal server error!"
+                                                                        }
+                                                                });
+                                                            });
+                                                        }).catch(err => {
+                                                        console.log(err);
+                                                        res.status(500).json({
+                                                            status: "error",
+                                                            error: err,
+                                                            data:
+                                                                {
+                                                                    message: "Internal server error!"
+                                                                }
+                                                        });
+                                                    });
+                                                }).catch(err => {
+                                                console.log(err);
+                                                res.status(500).json({
+                                                    status: "error",
+                                                    error: err,
+                                                    data:
+                                                        {
+                                                            message: "Internal server error!"
+                                                        }
+                                                });
+                                            });
+                                        }).catch(err => {
+                                        console.log(err);
+                                        res.status(500).json({
+                                            status: "error",
+                                            error: err,
+                                            data:
+                                                {
+                                                    message: "Internal server error!"
+                                                }
+                                        });
+                                    });
+                                }).catch(err => {
+                                console.log(err);
+                                res.status(500).json({
+                                    status: "error",
+                                    error: err,
+                                    data:
+                                        {
+                                            message: "Internal server error!"
+                                        }
+                                });
+                            });
+                        }
+                    }).catch(err => {
+                    console.log(err);
+                    res.status(500).json({
+                        status: "error",
+                        error: err,
+                        data:
+                            {
+                                message: "Internal server error!"
+                            }
+                    });
+                });
+            }
+            else
+            {
+                Filcat.find({SUB_CATEGORY_ID: id})
+                    .select('FILTER_ID _id')
+                    .exec()
+                    .then(res2 => {
+                        if(res2.length > 0) {
+                            for (var item2 of res2) {
+                                fil_arr.push(item2.FILTER_ID);
+                            }
+                            Product.remove({PRODUCT_SUB_CATEGORY_ID: id})
+                                .exec()
+                                .then(res3 => {
+                                    EcommProd.remove({SUB_CATEGORY_ID: id})
+                                        .exec()
+                                        .then(res4 => {
+                                            Filcat.remove({SUB_CATEGORY_ID: id})
+                                                .exec()
+                                                .then(res5 => {
+                                                    Filters.remove({_id: {$in: fil_arr}})
+                                                        .exec()
+                                                        .then(res6 => {
+                                                            Filval.remove({FILTER_ID: {$in: fil_arr}})
+                                                                .exec()
+                                                                .then(res7 => {
+                                                                    Filprod.remove({FILTER_ID: {$in: fil_arr}})
+                                                                        .exec()
+                                                                        .then(res8 => {
+                                                                            Rating.remove({PRODUCT_ID: {$in: {prod_arr}}})
+                                                                                .exec()
+                                                                                .then(res7 => {
+                                                                                    Review.remove({PRODUCT_ID: {$in: prod_arr}})
+                                                                                        .exec()
+                                                                                        .then(res8 => {
+                                                                                            HotDeals.remove({PRODUCT_ID: {$in: prod_arr}})
+                                                                                                .exec()
+                                                                                                .then(res9 => {
+                                                                                                    TrendDeals.remove({PRODUCT_ID: {$in: prod_arr}})
+                                                                                                        .exec()
+                                                                                                        .then(res10 => {
+                                                                                                            SubSubCategory.remove({SUB_CATEGORY_ID: id})
+                                                                                                                .exec()
+                                                                                                                .then(result => {
+                                                                                                                    Subcategory.remove({_id: id})
+                                                                                                                        .exec()
+                                                                                                                        .then(res11 => {
+                                                                                                                            res.status(200).json({
+                                                                                                                                status: "success",
+                                                                                                                                data: {
+                                                                                                                                    message: 'subcategory and all dependencies deleted'
+                                                                                                                                }
+                                                                                                                            });
+                                                                                                                        })
+                                                                                                                        .catch(err => {
+                                                                                                                            console.log(err);
+                                                                                                                            res.status(500).json({
+                                                                                                                                status: "error",
+                                                                                                                                error: err,
+                                                                                                                                data:
+                                                                                                                                    {
+                                                                                                                                        message: "Internal server error!"
+                                                                                                                                    }
+                                                                                                                            });
+                                                                                                                        });
+                                                                                                                }).catch(err => {
+                                                                                                                console.log(err);
+                                                                                                                res.status(500).json({
+                                                                                                                    status: "error",
+                                                                                                                    error: err,
+                                                                                                                    data:
+                                                                                                                        {
+                                                                                                                            message: "Internal server error!"
+                                                                                                                        }
+                                                                                                                });
+
+                                                                                                            }).catch(err => {
+                                                                                                                console.log(err);
+                                                                                                                res.status(500).json({
+                                                                                                                    status: "error",
+                                                                                                                    error: err,
+                                                                                                                    data:
+                                                                                                                        {
+                                                                                                                            message: "Internal server error!"
+                                                                                                                        }
+                                                                                                                });
+                                                                                                            });
+                                                                                                        }).catch(err => {
+                                                                                                        console.log(err);
+                                                                                                        res.status(500).json({
+                                                                                                            status: "error",
+                                                                                                            error: err,
+                                                                                                            data:
+                                                                                                                {
+                                                                                                                    message: "Internal server error!"
+                                                                                                                }
+                                                                                                        });
+                                                                                                    });
+                                                                                                }).catch(err => {
+                                                                                                console.log(err);
+                                                                                                res.status(500).json({
+                                                                                                    status: "error",
+                                                                                                    error: err,
+                                                                                                    data:
+                                                                                                        {
+                                                                                                            message: "Internal server error!"
+                                                                                                        }
+                                                                                                });
+                                                                                            });
+                                                                                        }).catch(err => {
+                                                                                        console.log(err);
+                                                                                        res.status(500).json({
+                                                                                            status: "error",
+                                                                                            error: err,
+                                                                                            data:
+                                                                                                {
+                                                                                                    message: "Internal server error!"
+                                                                                                }
+                                                                                        });
+                                                                                    });
+                                                                                }).catch(err => {
+                                                                                console.log(err);
+                                                                                res.status(500).json({
+                                                                                    status: "error",
+                                                                                    error: err,
+                                                                                    data:
+                                                                                        {
+                                                                                            message: "Internal server error!"
+                                                                                        }
+                                                                                });
+                                                                            });
+                                                                        }).catch(err => {
+                                                                        console.log(err);
+                                                                        res.status(500).json({
+                                                                            status: "error",
+                                                                            error: err,
+                                                                            data:
+                                                                                {
+                                                                                    message: "Internal server error!"
+                                                                                }
+                                                                        });
+                                                                    });
+                                                                }).catch(err => {
+                                                                console.log(err);
+                                                                res.status(500).json({
+                                                                    status: "error",
+                                                                    error: err,
+                                                                    data:
+                                                                        {
+                                                                            message: "Internal server error!"
+                                                                        }
+                                                                });
+                                                            });
+                                                        }).catch(err => {
+                                                        console.log(err);
+                                                        res.status(500).json({
+                                                            status: "error",
+                                                            error: err,
+                                                            data:
+                                                                {
+                                                                    message: "Internal server error!"
+                                                                }
+                                                        });
+                                                    });
+                                                }).catch(err => {
+                                                console.log(err);
+                                                res.status(500).json({
+                                                    status: "error",
+                                                    error: err,
+                                                    data:
+                                                        {
+                                                            message: "Internal server error!"
+                                                        }
+                                                });
+                                            });
+
+                                        }).catch(err => {
+                                        console.log(err);
+                                        res.status(500).json({
+                                            status: "error",
+                                            error: err,
+                                            data:
+                                                {
+                                                    message: "Internal server error!"
+                                                }
+                                        });
+                                    });
+                                })
+                        }
+                        else {
+                            Product.remove({PRODUCT_SUB_CATEGORY_ID: id})
+                                .exec()
+                                .then(res3 => {
+                                    EcommProd.remove({SUB_CATEGORY_ID: id})
+                                        .exec()
+                                        .then(res4 => {
+                                            Rating.remove({PRODUCT_ID: {$in: {prod_arr}}})
+                                                .exec()
+                                                .then(res7 => {
+                                                    Review.remove({PRODUCT_ID: {$in: prod_arr}})
+                                                        .exec()
+                                                        .then(res8 => {
+                                                            HotDeals.remove({PRODUCT_ID: {$in: prod_arr}})
+                                                                .exec()
+                                                                .then(res9 => {
+                                                                    TrendDeals.remove({PRODUCT_ID: {$in: prod_arr}})
+                                                                        .exec()
+                                                                        .then(res10 => {
+                                                                            SubSubCategory.remove({SUB_CATEGORY_ID: id})
+                                                                                .exec()
+                                                                                .then(result => {
+                                                                                    Subcategory.remove({_id: id})
+                                                                                        .exec()
+                                                                                        .then(res11 => {
+                                                                                            res.status(200).json({
+                                                                                                status: "success",
+                                                                                                data: {
+                                                                                                    message: 'subcategory and all dependencies deleted'
+                                                                                                }
+                                                                                            });
+                                                                                        })
+                                                                                        .catch(err => {
+                                                                                            console.log(err);
+                                                                                            res.status(500).json({
+                                                                                                status: "error",
+                                                                                                error: err,
+                                                                                                data:
+                                                                                                    {
+                                                                                                        message: "Internal server error!"
+                                                                                                    }
+                                                                                            });
+                                                                                        });
+                                                                                        }).catch(err => {
+                                                                                console.log(err);
+                                                                                res.status(500).json({
+                                                                                    status: "error",
+                                                                                    error: err,
+                                                                                    data:
+                                                                                        {
+                                                                                            message: "Internal server error!"
+                                                                                        }
+                                                                                });
+                                                                            });
+                                                                        }).catch(err => {
+                                                                        console.log(err);
+                                                                        res.status(500).json({
+                                                                            status: "error",
+                                                                            error: err,
+                                                                            data:
+                                                                                {
+                                                                                    message: "Internal server error!"
+                                                                                }
+                                                                        });
+                                                                    });
+                                                                }).catch(err => {
+                                                                console.log(err);
+                                                                res.status(500).json({
+                                                                    status: "error",
+                                                                    error: err,
+                                                                    data:
+                                                                        {
+                                                                            message: "Internal server error!"
+                                                                        }
+                                                                });
+                                                            });
+                                                        }).catch(err => {
+                                                        console.log(err);
+                                                        res.status(500).json({
+                                                            status: "error",
+                                                            error: err,
+                                                            data:
+                                                                {
+                                                                    message: "Internal server error!"
+                                                                }
+                                                        });
+                                                    });
+                                                }).catch(err => {
+                                                console.log(err);
+                                                res.status(500).json({
+                                                    status: "error",
+                                                    error: err,
+                                                    data:
+                                                        {
+                                                            message: "Internal server error!"
+                                                        }
+                                                });
+                                            });
+                                        }).catch(err => {
+                                        console.log(err);
+                                        res.status(500).json({
+                                            status: "error",
+                                            error: err,
+                                            data:
+                                                {
+                                                    message: "Internal server error!"
+                                                }
+                                        });
+                                    });
+                                }).catch(err => {
+                                console.log(err);
+                                res.status(500).json({
+                                    status: "error",
+                                    error: err,
+                                    data:
+                                        {
+                                            message: "Internal server error!"
+                                        }
+                                });
+                            });
+                        }
+                    }).catch(err => {
+                    console.log(err);
+                    res.status(500).json({
+                        status: "error",
+                        error: err,
+                        data:
+                            {
+                                message: "Internal server error!"
+                            }
+                    });
+                });
+            }
+        }).catch(err => {
+        console.log(err);
+        res.status(500).json({
+            status: "error",
+            error: err,
+            data:
+                {
+                    message: "Internal server error!"
+                }
         });
+    });
 };

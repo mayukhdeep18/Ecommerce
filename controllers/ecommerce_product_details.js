@@ -336,14 +336,57 @@ exports.ecommproduct_update_by_id = (req, res, next) => {
 //delete ecommerce product details by id
 exports.ecommproduct_delete_by_id = (req, res, next) => {
     const id = req.params.ecommcategoryId;
+
     EcommProduct.remove({ _id: id })
         .exec()
         .then(result => {
-            res.status(200).json({
-                status: "success",
-                data: {
-                    message: 'ecommerce product deleted'
-                }
+            Rating.remove({ECOMMERCE_PRODUCT_ID: id})
+                .exec()
+                .then(res1 => {
+                    Review.remove({ECOMMERCE_PRODUCT_ID: id})
+                        .exec()
+                        .then(res2 => {
+                            Product.update({ECOMMERCE_PRODUCT_DETAILS_ID: id},{$unset: {ECOMMERCE_PRODUCT_DETAILS_ID: 1, ECOMMERCE_CATEGORY_ID: 1}},{multi: true})
+                                .exec()
+                                .then(res3 => {
+                                    res.status(200).json({
+                                        status: "success",
+                                        data: {
+                                            message: 'ecommerce product and dependencies deleted'
+                                        }
+                                    });
+                                }).catch(err => {
+                                console.log(err);
+                                res.status(500).json({
+                                    status: "error",
+                                    error: err,
+                                    data:
+                                        {
+                                            message: "Internal server error!"
+                                        }
+                                });
+                            });
+                        }).catch(err => {
+                        console.log(err);
+                        res.status(500).json({
+                            status: "error",
+                            error: err,
+                            data:
+                                {
+                                    message: "Internal server error!"
+                                }
+                        });
+                    });
+                }).catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    status: "error",
+                    error: err,
+                    data:
+                        {
+                            message: "Internal server error!"
+                        }
+                });
             });
         })
         .catch(err => {
@@ -657,12 +700,12 @@ exports.ecommproduct_new_create = (req, res, next) => {
     });
 };
 
-
 //update ecommerce table details only
 exports.ecommproduct_update_ecom_only = (req, res, next) => {
     const id = req.params.ecommcategoryId;
     var Ecom_name = req.body.ECOMMERCE_NAME.replace(/[^a-zA-Z0-9]/g,'-');
     const updateOps = {};
+    const updatedRes = {};
 
     EcommCategory.find({ECOMMERCE_ID: Ecom_name.toLowerCase()})
         .select('ECOMMERCE_ID _id')
@@ -677,18 +720,54 @@ exports.ecommproduct_update_ecom_only = (req, res, next) => {
                 updateOps['ECOMMERCE_PRODUCT_ID'] = req.body.ECOMMERCE_PRODUCT_ID;
                 updateOps['ECOMMERCE_PRODUCT_PRICE'] = parseFloat(req.body.ECOMMERCE_PRODUCT_PRICE);
                 updateOps['PRODUCT_URL'] = req.body.PRODUCT_URL;
+                updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
+                updateOps['UPDATED_DATE'] = new Date();
+                updatedRes['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
+                updatedRes['UPDATED_DATE'] = new Date();
 
                 EcommProduct.update({_id: id},{$set: updateOps})
                     .exec()
                     .then(result => {
-                        res.status(201).json({
-                            status: "success",
-                            ECOMMERCE_PRODUCT_ID: req.body.ECOMMERCE_PRODUCT_ID,
-                            data: {
-                                message: "Ecommerce Product details udpated!"
-                            }
-                        });
-                    })
+                                Rating.update({ECOMMERCE_PRODUCT_ID: id},{$set: updatedRes})
+                                    .exec()
+                                    .then(res2 => {
+                                        Review.update({ECOMMERCE_PRODUCT_ID: id},{$set: updatedRes})
+                                            .exec()
+                                            .then(res1 => {
+                                                res.status(201).json({
+                                                    status: "success",
+                                                    ECOMMERCE_PRODUCT_ID: req.body.ECOMMERCE_PRODUCT_ID,
+                                                    data: {
+                                                        message: "Ecommerce Product details and dependencies udpated!"
+                                                    }
+                                                });
+                                            }).catch(err => {
+                                            res.status(500).json({
+                                                status: "error",
+                                                error: err,
+                                                data: {
+                                                    message: "Internal server error!"
+                                                }
+                                            });
+                                        });
+                                    }).catch(err => {
+                                    res.status(500).json({
+                                        status: "error",
+                                        error: err,
+                                        data: {
+                                            message: "Internal server error!"
+                                        }
+                                    });
+                                });
+                    }).catch(err => {
+                    res.status(500).json({
+                        status: "error",
+                        error: err,
+                        data: {
+                            message: "Internal server error!"
+                        }
+                    });
+                });
             }
             else {
                     res.status(404).json({

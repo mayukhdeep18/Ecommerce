@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Ecommerce_category = require("../models/ecommerce_category");
+const EcomProd = require("../models/ecommerce_product_details");
+const Product = require("../models/product_details");
 
 //get all active ecommerce category details
 exports.ecomm_category_get_all = (req, res, next) => {
@@ -180,6 +182,7 @@ exports.ecommerce_category_get_by_id = (req, res, next) => {
 exports.ecommerce_category_update_by_id = (req, res, next) =>  {
     const id = req.params.ecommcategoryId;
     const updateOps = {};
+    const updateRes = {};
     var ecom_id = req.body.ECOMMERCE_NAME.replace(/[^a-zA-Z0-9]/g,'-');
 
     updateOps['ECOMMERCE_NAME'] = req.body.ECOMMERCE_NAME;
@@ -189,15 +192,28 @@ exports.ecommerce_category_update_by_id = (req, res, next) =>  {
     updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
     updateOps['UPDATED_DATE'] = new Date();
     updateOps['ECOMMERCE_ID'] = ecom_id.toLowerCase();
+    updateRes['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
+    updateRes['UPDATED_DATE'] = new Date();
 
     Ecommerce_category.update({ ECOMMERCE_ID: id }, { $set: updateOps })
         .exec()
         .then(result => {
-            res.status(200).json({
-                status: "success",
-                data: {
-                    message: 'details have been updated'
-                }
+            EcomProd.update({ECOMMERCE_CATEGORY_ID: id},{$set: updateRes},{multi:true})
+                .exec()
+                .then(res1 => {
+                    res.status(200).json({
+                        status: "success",
+                        data: {
+                            message: 'details have been updated'
+                        }
+                    });
+                }).catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    status: "error",
+                    error: err,
+                    message: "Internal server error!"
+                });
             });
         })
         .catch(err => {
@@ -241,26 +257,65 @@ exports.ecom_logo_update_by_id = (req, res, next) =>  {
 //Delete ecommerce category details by id
 exports.ecommerce_category_delete_by_id = (req, res, next) => {
     const id = req.params.ecommcategoryId;
+    var arr = [];
 
-    Ecommerce_category.remove({ ECOMMERCE_ID: id })
+    Product.find({ECOMMERCE_CATEGORY_ID: id})
+        .select('ECOMMERCE_CATEGORY_ID ECOMMERCE_PRODUCT_DETAILS_ID ACTIVE_FLAG _id')
         .exec()
-        .then(result => {
-            res.status(200).json({
-                status: "success",
-                data: {
-                    message: 'product image deleted'
-                }
-            });
+        .then(doc => {
+            for(var item of doc)
+            {
+                arr.push(item.ECOMMERCE_PRODUCT_DETAILS_ID);
+            }
+            Ecommerce_category.remove({ _id: id })
+                .exec()
+                .then(result => {
+                    EcomProd.remove({ECOMMERCE_CATEGORY_ID: id})
+                        .exec()
+                        .then(res1 => {
+                            Product.update({ECOMMERCE_PRODUCT_DETAILS_ID: {$in: arr} },{$unset: {ECOMMERCE_CATEGORY_ID: 1,ECOMMERCE_PRODUCT_DETAILS_ID: 1}},{multi: true})
+                                .exec()
+                                .then(res2 => {
+                                    res.status(200).json({
+                                        status: "success",
+                                        data: {
+                                            message: 'ecommerce category deleted and dependencies have been deleted/updated!'
+                                        }
+                                    });
+                                }).catch(err => {
+                                console.log(err);
+                                res.status(500).json({
+                                    status: "error",
+                                    error: err,
+                                    data:
+                                        {
+                                            message: "Internal server error!"
+                                        }
+                                });
+                            });
+                        }).catch(err => {
+                        console.log(err);
+                        res.status(500).json({
+                            status: "error",
+                            error: err,
+                            data:
+                                {
+                                    message: "Internal server error!"
+                                }
+                        });
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(500).json({
+                        status: "error",
+                        error: err,
+                        data:
+                            {
+                                message: "Internal server error!"
+                            }
+                    });
+                });
         })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                status: "error",
-                error: err,
-                data:
-                    {
-                        message: "Internal server error!"
-                    }
-            });
-        });
+
 };

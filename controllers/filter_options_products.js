@@ -45,7 +45,6 @@ exports.filter_opt_prod_conn_get_all = (req, res, next) => {
         });
 };
 
-
 //create a new filter option product connection
 exports.filter_opt_prod_conn_create = (req, res, next) => {
 
@@ -174,9 +173,8 @@ exports.filter_opt_prod_conn_delete = (req, res, next) => {
         .then(result => {
             res.status(200).json({
                 status: "success",
-                error: "",
                 data: {
-                    message: 'filter option product connection deleted'
+                    message: 'filter value deleted'
                 }
             });
         })

@@ -75,7 +75,8 @@ exports.trending_create = (req, res, next) => {
         .select('PRODUCT_ID ACTIVE_FLAG _id')
         .exec()
         .then(doc => {
-            if(doc!=null)
+            console.log(doc);
+            if(doc.length > 0)
             {
                 res.status(500).json({
                     status: "error",
