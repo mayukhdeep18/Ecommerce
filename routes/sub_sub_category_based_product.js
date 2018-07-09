@@ -8,4 +8,6 @@ const checkAuth = require('../middleware/check-auth');
 
 router.get("/:subsubcategoryId/:page", SubSubCategoryController.get_product_by_subsubcategoryId);
 
+router.post("/:subsubcategoryId/:page", SubSubCategoryController.product_get_all);
+
 module.exports = router;
