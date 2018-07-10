@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22d33094-d95f-4e1e-897e-0a67ac0d8ed3" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/routes/banner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/banner.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/banner.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/hot_deals.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/hot_deals.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/trending_products.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/trending_products.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -32,8 +33,8 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="220" selection-start-line="220" selection-end-line="220" />
+            <state relative-caret-position="53">
+              <caret line="220" column="31" selection-start-line="220" selection-start-column="31" selection-end-line="220" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -50,29 +51,17 @@
       <file leaf-file-name="banner.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/banner.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="310" selection-start-line="310" selection-end-line="310" />
+            <state relative-caret-position="165">
+              <caret line="67" column="21" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="hot_deals.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/controllers/hot_deals.js">
+      <file leaf-file-name="banner.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/routes/banner.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="469">
-              <caret line="432" column="33" lean-forward="true" selection-start-line="432" selection-start-column="33" selection-end-line="432" selection-end-column="33" />
-              <folding>
-                <element signature="e#701#2601#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="trending_products.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/trending_products.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="74">
-              <caret line="408" column="25" lean-forward="true" selection-start-line="408" selection-start-column="25" selection-end-line="408" selection-end-column="25" />
+            <state relative-caret-position="210">
+              <caret line="14" column="29" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -100,7 +89,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/controllers/user.js" />
         <option value="$PROJECT_DIR$/nodemon.json" />
         <option value="$PROJECT_DIR$/middleware/check_admin_auth.js" />
         <option value="$PROJECT_DIR$/routes/user.js" />
@@ -123,7 +111,6 @@
         <option value="$PROJECT_DIR$/routes/trending_products.js" />
         <option value="$PROJECT_DIR$/models/hot_deals.js" />
         <option value="$PROJECT_DIR$/routes/hot_deals.js" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/models/filter_options.js" />
         <option value="$PROJECT_DIR$/models/filter_options_products.js" />
         <option value="$PROJECT_DIR$/models/trending_products.js" />
@@ -148,9 +135,11 @@
         <option value="$PROJECT_DIR$/routes/sub_sub_category_based_product.js" />
         <option value="$PROJECT_DIR$/controllers/search.js" />
         <option value="$PROJECT_DIR$/models/banner.js" />
-        <option value="$PROJECT_DIR$/controllers/banner.js" />
         <option value="$PROJECT_DIR$/controllers/trending_products.js" />
         <option value="$PROJECT_DIR$/controllers/hot_deals.js" />
+        <option value="$PROJECT_DIR$/controllers/banner.js" />
+        <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/routes/banner.js" />
       </list>
     </option>
   </component>
@@ -195,6 +184,11 @@
               <item name="Zoommyprice" type="b2602c69:ProjectViewProjectNode" />
               <item name="Zoommyprice" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Zoommyprice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Zoommyprice" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -334,12 +328,12 @@
       <workItem from="1530688486218" duration="27899000" />
       <workItem from="1530771602723" duration="25160000" />
       <workItem from="1530858742140" duration="53053000" />
-      <workItem from="1531210227199" duration="2842000" />
+      <workItem from="1531210227199" duration="4609000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="732759000" />
+    <option name="totallyTimeSpent" value="734526000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -356,10 +350,10 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="right" id="Mongo Explorer" order="7" weight="0.32956383" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3034483" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3034483" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
       <window_info anchor="right" id="Database" order="6" weight="0.32956383" />
       <window_info id="Learn" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -429,13 +423,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/nodemon.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/filters_categories.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -475,13 +462,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="16" column="23" selection-end-line="16" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/trending_products.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="59" selection-end-line="18" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -761,20 +741,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="220" selection-start-line="220" selection-end-line="220" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/banner.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="310" selection-start-line="310" selection-end-line="310" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/trending_products.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="74">
@@ -784,11 +750,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/hot_deals.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
+        <state relative-caret-position="148">
           <caret line="432" column="33" lean-forward="true" selection-start-line="432" selection-start-column="33" selection-end-line="432" selection-end-column="33" />
           <folding>
             <element signature="e#701#2601#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/trending_products.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="23" selection-end-line="18" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="53">
+          <caret line="220" column="31" selection-start-line="220" selection-start-column="31" selection-end-line="220" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/banner.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="67" column="21" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/banner.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="29" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
         </state>
       </provider>
     </entry>

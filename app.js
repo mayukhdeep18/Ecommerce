@@ -116,6 +116,7 @@ const SearchRoutes = require("./routes/search");
 const adminSignup = require("./routes/admin_signup");
 const TrendRoutes = require("./routes/trending_products");
 const HotDealsRoutes = require("./routes/hot_deals");
+const BannerRoutes = require("./routes/banner");
 
 mongoose.connect(
     "mongodb://zoom_user:"+
@@ -217,6 +218,7 @@ app.use("/search",SearchRoutes);
 app.use("/admin_signup",adminSignup);
 app.use("/trending_products",TrendRoutes);
 app.use("/hot_deals",HotDealsRoutes);
+app.use("banner",BannerRoutes);
 
 
 app.use((req, res, next) => {
