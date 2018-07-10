@@ -1,134 +1,70 @@
 const mongoose = require("mongoose");
-const Category = require("../models/category");
-const Subcategory = require("../models/subcategory");
-const Subsubcategory = require("../models/subsubcategory");
-const EcommCategory = require("../models/ecommerce_category");
-const Review = require("../models/review_details");
-const Rating = require("../models/rating_details");
-const EcommProduct = require("../models/ecommerce_product_details");
-const Product = require("../models/product_details");
-const HotDeals = require("../models/hot_deals");
-const Ecommerce_prod_details = require("../models/ecommerce_product_details");
+const Banner = require("../models/banner");
 
+//add in banner table
+exports.banner_create = (req, res, next) => {
+    var ban_id = req.body.BANNER_NAME.replace(/[^a-zA-Z0-9]/g,'-') ;
 
-//get all products by searching
-exports.hot_product_search = (req, res, next) => {
-
-    var prod_arr = [];
-
-    const search_term = req.body.SearchTerm;
-
-    var regex = new RegExp(search_term,"i");
-    console.log('search_term',search_term);
-
-
-//search in product database
-    Product.find({$or:[ {PRODUCT_NAME: regex}, {PRODUCT_SUB_TITLE:regex}, {PRODUCT_DESCRIPTION:regex}], ACTIVE_FLAG:'Y'})
-        .select("PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_AVAILABILITY_COUNT PERCENTAGE_DISCOUNT_ON_PRODUCT PRODUCT_SPECIAL_OFFER_PRICE SPECIAL_OFFER_DISCOUNT_FACTOR MINIMUM_ALLOWED_BUY_QUANTITY MAXIMUM_ALLOWED_BUY_QUANTITY PRODUCT_SPECIFICATIONS MEAN_RATING REVIEW_COUNT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
+    Banner.find({BANNER_ID:})
+        .select('PRODUCT_ID ACTIVE_FLAG _id')
         .exec()
-        .then(docs => {
-            if(docs.length > 0) {
-                for (var prod_item of docs) {
-                    //create an array with the product id, product name, product specifications, product price, product image url
-
-
-                    prod_arr.push({
-                        prod_id: prod_item._id,
-                        prod_name: prod_item.PRODUCT_NAME,
-                        isActive: prod_item.ACTIVE_FLAG
-                    })
-                }
-                //final output
-                res.status(200).json({
-                    status: "success",
+        .then(doc => {
+            console.log(doc);
+            if(doc.length > 0)
+            {
+                res.status(500).json({
+                    status: "error",
                     data: {
-                        prod_arr
+                        message: "Product already exists in trending!"
                     }
+
                 });
             }
             else
             {
-                res.status(404).json({
-                    status: "error",
-                    data: {
-                        message: "No products found!"
-                    }
+                const trending = new Trending({
+                    _id: new mongoose.Types.ObjectId(),
+                    PRODUCT_ID: req.body.PRODUCT_ID ,
+                    UPDATED_DATE: new Date(),
+                    ACTIVE_FLAG: req.body.ACTIVE_FLAG
                 });
+                trending
+                    .save()
+                    .then(result => {
+                        res.status(201).json({
+                            status: "success",
+                            product_id: result._id,
+                            data: {
+                                message: "Product details stored"
+                            }
+                        });
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        res.status(500).json({
+                            status: "error",
+                            error: err,
+                            data: {
+                                message: "Internal server error!"
+                            }
+                        });
+                    });
             }
-        })
-        .catch(err => {
-            res.status(500).json({
-                status: "error",
-                error: err,
-                data: {
-                    message: "An error has occurred as mentioned above"
-                }
-            });
+        }).catch(err => {
+        console.log(err);
+        res.status(500).json({
+            status: "error",
+            error: err,
+            data: {
+                message: "Internal server error!"
+            }
         });
-
-
-};
-
-//add in hot table
-exports.hot_create = (req, res, next) => {
-HotDeals.find({PRODUCT_ID: req.body.PRODUCT_ID})
-    .select('PRODUCT_ID ACTIVE_FLAG _id')
-    .exec()
-    .then(doc => {
-        if(doc.length > 0)
-        {
-            res.status(500).json({
-                status: "error",
-                data: {
-                    message: "Product already exists in hot deals!"
-                }
-            });
-        }
-        else
-        {
-            const hot = new HotDeals({
-                _id: new mongoose.Types.ObjectId(),
-                PRODUCT_ID: req.body.PRODUCT_ID ,
-                UPDATED_DATE: new Date(),
-                ACTIVE_FLAG: req.body.ACTIVE_FLAG
-            });
-            hot
-                .save()
-                .then(result => {
-                    res.status(201).json({
-                        status: "success",
-                        product_id: result._id,
-                        data: {
-                            message: "Product details stored"
-                        }
-                    });
-                })
-                .catch(err => {
-                    console.log(err);
-                    res.status(500).json({
-                        status: "error",
-                        error: err,
-                        data: {
-                            message: "Internal server error!"
-                        }
-                    });
-                });
-        }
-    }).catch(err => {
-    console.log(err);
-    res.status(500).json({
-        status: "error",
-        error: err,
-        data: {
-            message: "Internal server error!"
-        }
     });
-});
 };
 
-//get all hot products
-exports.get_all_hot = (req, res, next) => {
-    HotDeals.find()
+//get all trending products
+exports.get_all_trending = (req, res, next) => {
+    Trending.find()
         .select('UPDATED_DATE UPDATED_BY ACTIVE_FLAG _id')
         .populate('PRODUCT_ID')
         .exec()
@@ -136,9 +72,9 @@ exports.get_all_hot = (req, res, next) => {
 
             if (docs.length > 0) {
                 const response = {
-                    hot: docs.map(prod_item => {
+                    trending: docs.map(prod_item => {
                         return {
-                            hot_doc_id: prod_item._id,
+                            trend_doc_id: prod_item._id,
                             product_doc_id: prod_item.PRODUCT_ID._id,
                             product_id: prod_item.PRODUCT_ID.PRODUCT_ID,
                             prod_name: prod_item.PRODUCT_ID.PRODUCT_NAME,
@@ -401,19 +337,19 @@ exports.product_get_by_id = (req, res, next) => {
     }
 };
 
-//update hot product
-exports.hot_update_by_id = (req, res, next) =>{
+//update trending product
+exports.trending_update_by_id = (req, res, next) =>{
     const id = req.params.trendId;
     const updateOps = {};
     updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
     updateOps['UPDATED_DATE'] = new Date();
-    HotDeals.update({ PRODUCT_ID: id }, { $set: updateOps },{multi: true})
+    Trending.update({ PRODUCT_ID: id }, { $set: updateOps },{multi: true})
         .exec()
         .then(result => {
             res.status(200).json({
                 status: "success",
                 data: {
-                    message: "hot product details updated"
+                    message: "trending details updated"
                 }
             });
         })
@@ -429,16 +365,16 @@ exports.hot_update_by_id = (req, res, next) =>{
         });
 };
 
-//delete a hot product by id
-exports.hot_delete = (req, res, next) =>{
+//delete a trending product by id
+exports.trending_delete = (req, res, next) =>{
     const id = req.params.trendId;
-    HotDeals.remove({PRODUCT_ID: id })
+    Trending.remove({ PRODUCT_ID: id })
         .exec()
         .then(result => {
             res.status(200).json({
                 status: "success",
                 data: {
-                    message: 'hot product product deleted'
+                    message: 'trending product deleted'
                 }
             });
         })
