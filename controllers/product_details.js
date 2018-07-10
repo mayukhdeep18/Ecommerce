@@ -20,7 +20,7 @@ exports.product_get_all = (req, res, next) => {
     var rev_arr = [];
     var prod_final_rev_arr = [];
 
-    var perPage = 9;
+    var perPage = 100;
     var page = req.params.page || 1;
 
     if( page > 0 && page < 20)

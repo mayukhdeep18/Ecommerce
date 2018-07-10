@@ -10,7 +10,7 @@ const Review = require("../models/review_details");
 exports.get_product_by_subsubcategoryId = (req, res, next) => {
     const id = req.params.subsubcategoryId;
 
-    var perPage = 9;
+    var perPage = 100;
     var page = req.params.page || 1;
 
     var fil_arr = [];
@@ -303,7 +303,7 @@ exports.get_product_by_subsubcategoryId = (req, res, next) => {
 exports.product_get_all = (req, res, next) => {
 
     const id = req.params.subsubcategoryId;
-    var perPage = 9;
+    var perPage = 100;
     var page = req.params.page || 1;
 
     var fil_arr = [];
