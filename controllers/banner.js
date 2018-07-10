@@ -211,7 +211,7 @@ exports.banner_delete = (req, res, next) =>{
             res.status(200).json({
                 status: "success",
                 data: {
-                    message: 'trending product deleted'
+                    message: 'banner product deleted'
                 }
             });
         })

@@ -218,7 +218,7 @@ app.use("/search",SearchRoutes);
 app.use("/admin_signup",adminSignup);
 app.use("/trending_products",TrendRoutes);
 app.use("/hot_deals",HotDealsRoutes);
-app.use("banner",BannerRoutes);
+app.use("/banner",BannerRoutes);
 
 
 app.use((req, res, next) => {
