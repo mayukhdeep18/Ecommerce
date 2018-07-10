@@ -407,7 +407,7 @@ exports.hot_update_by_id = (req, res, next) =>{
     const updateOps = {};
     updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
     updateOps['UPDATED_DATE'] = new Date();
-    HotDeals.update({ PRODUCT_ID: id }, { $set: updateOps },{multi: true})
+    HotDeals.update({ _id: id }, { $set: updateOps },{multi: true})
         .exec()
         .then(result => {
             res.status(200).json({
@@ -432,7 +432,7 @@ exports.hot_update_by_id = (req, res, next) =>{
 //delete a hot product by id
 exports.hot_delete = (req, res, next) =>{
     const id = req.params.trendId;
-    HotDeals.remove({PRODUCT_ID: id })
+    HotDeals.remove({_id: id })
         .exec()
         .then(result => {
             res.status(200).json({

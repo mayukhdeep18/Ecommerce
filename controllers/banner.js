@@ -5,11 +5,11 @@ const Banner = require("../models/banner");
 exports.banner_create = (req, res, next) => {
     var ban_id = req.body.BANNER_NAME.replace(/[^a-zA-Z0-9]/g,'-') ;
 
-    Banner.find({BANNER_ID:})
-        .select('PRODUCT_ID ACTIVE_FLAG _id')
+    Banner.find({BANNER_ID: ban_id.toLowerCase()})
+        .select('BANNER_ID ACTIVE_FLAG _id')
         .exec()
         .then(doc => {
-            console.log(doc);
+
             if(doc.length > 0)
             {
                 res.status(500).json({
@@ -22,20 +22,22 @@ exports.banner_create = (req, res, next) => {
             }
             else
             {
-                const trending = new Trending({
+                const banner = new Banner({
                     _id: new mongoose.Types.ObjectId(),
-                    PRODUCT_ID: req.body.PRODUCT_ID ,
+                    BANNER_ID: req.body.PRODUCT_ID ,
+                    BANNER_NAME: req.body.BANNER_NAME,
+                    BANNER_PICTURE: JSON.stringify(req.body.BANNER_PICTURE),
+                    BANNER_PRODUCT_URL: req.body.BANNER_PRODUCT_URL,
                     UPDATED_DATE: new Date(),
                     ACTIVE_FLAG: req.body.ACTIVE_FLAG
                 });
-                trending
+                banner
                     .save()
                     .then(result => {
                         res.status(201).json({
                             status: "success",
-                            product_id: result._id,
                             data: {
-                                message: "Product details stored"
+                                message: "Banner details stored"
                             }
                         });
                     })
@@ -63,9 +65,9 @@ exports.banner_create = (req, res, next) => {
 };
 
 //get all trending products
-exports.get_all_trending = (req, res, next) => {
-    Trending.find()
-        .select('UPDATED_DATE UPDATED_BY ACTIVE_FLAG _id')
+exports.get_all_banner = (req, res, next) => {
+    Banner.find()
+        .select('BANNER_ID BANNER_NAME BANNER_PICTURE BANNER_PRODUCT_URL UPDATED_DATE UPDATED_BY ACTIVE_FLAG _id')
         .populate('PRODUCT_ID')
         .exec()
         .then(docs => {
@@ -74,27 +76,17 @@ exports.get_all_trending = (req, res, next) => {
                 const response = {
                     trending: docs.map(prod_item => {
                         return {
-                            trend_doc_id: prod_item._id,
-                            product_doc_id: prod_item.PRODUCT_ID._id,
-                            product_id: prod_item.PRODUCT_ID.PRODUCT_ID,
-                            prod_name: prod_item.PRODUCT_ID.PRODUCT_NAME,
-                            prod_spec: JSON.parse(prod_item.PRODUCT_ID.PRODUCT_SPECIFICATIONS),
-                            product_sub_title: prod_item.PRODUCT_ID.PRODUCT_SUB_TITLE,
-                            product_description: prod_item.PRODUCT_ID.PRODUCT_DESCRIPTION,
-                            prod_url: prod_item.PRODUCT_ID.PRODUCT_URL,
-                            prod_rating: parseFloat(prod_item.PRODUCT_ID.MEAN_RATING).toFixed(2),
-                            prod_rating_count: prod_item.PRODUCT_ID.RATING_COUNT,
-                            prod_review_count: prod_item.PRODUCT_ID.REVIEW_COUNT,
-                            prod_price: prod_item.PRODUCT_ID.PRODUCT_PRICE,
-                            prod_price_ecomm: prod_item.PRODUCT_ID.LEAST_PRICE_ECOMMERCE,
-                            product_images: JSON.parse(prod_item.PRODUCT_ID.PRODUCT_IMAGE_LINKS),
+                           banner_doc_id: prod_item._id,
+                           banner_id: prod_item.BANNER_ID,
+                           banner_name: prod_item.BANNER_NAME,
+                           banner_picture: JSON.parse(prod_item.BANNER_PICTURE),
+                           banner_prod_url: prod_item.BANNER_PRODUCT_URL,
                             updated_by_user: prod_item.UPDATED_BY,
                             updated_on: prod_item.UPDATED_DATE,
                             isActive: prod_item.ACTIVE_FLAG
                         }
                     })
                 };
-
                 res.status(200).json({
                     status:"success",
                     data: {
@@ -107,7 +99,7 @@ exports.get_all_trending = (req, res, next) => {
                 res.status(404).json({
                     status:"error",
                     data: {
-                        message: 'No trending products found!'
+                        message: 'No banner products found!'
                     }
                 });
             }
