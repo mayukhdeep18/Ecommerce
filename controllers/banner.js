@@ -26,7 +26,7 @@ exports.banner_create = (req, res, next) => {
                     _id: new mongoose.Types.ObjectId(),
                     BANNER_ID: ban_id.toLowerCase() ,
                     BANNER_NAME: req.body.BANNER_NAME,
-                    BANNER_PICTURE: JSON.stringify(req.body.BANNER_PICTURE),
+                    BANNER_PICTURE: req.body.BANNER_PICTURE,
                     BANNER_PRODUCT_URL: req.body.BANNER_PRODUCT_URL,
                     UPDATED_DATE: new Date(),
                     ACTIVE_FLAG: req.body.ACTIVE_FLAG
@@ -79,7 +79,7 @@ exports.get_all_banner = (req, res, next) => {
                            banner_doc_id: prod_item._id,
                            banner_id: prod_item.BANNER_ID,
                            banner_name: prod_item.BANNER_NAME,
-                           banner_picture: JSON.parse(prod_item.BANNER_PICTURE),
+                           banner_picture: prod_item.BANNER_PICTURE,
                            banner_prod_url: prod_item.BANNER_PRODUCT_URL,
                             updated_by_user: prod_item.UPDATED_BY,
                             updated_on: prod_item.UPDATED_DATE,
@@ -131,7 +131,7 @@ exports.banner_get_by_id = (req, res, next) => {
                             banner_doc_id: prod_item._id,
                             banner_id: prod_item.BANNER_ID,
                             banner_name: prod_item.BANNER_NAME,
-                            banner_picture: JSON.parse(prod_item.BANNER_PICTURE),
+                            banner_picture: prod_item.BANNER_PICTURE,
                             banner_prod_url: prod_item.BANNER_PRODUCT_URL,
                             updated_by_user: prod_item.UPDATED_BY,
                             updated_on: prod_item.UPDATED_DATE,
@@ -176,7 +176,7 @@ exports.banner_update_by_id = (req, res, next) =>{
 
     updateOps['BANNER_ID'] = ban_id.toLowerCase();
         updateOps['BANNER_NAME']= req.body.BANNER_NAME;
-        updateOps['BANNER_PICTURE']= JSON.stringify(req.body.BANNER_PICTURE);
+        updateOps['BANNER_PICTURE']= req.body.BANNER_PICTURE;
         updateOps['BANNER_PRODUCT_URL']= req.body.BANNER_PRODUCT_URL;
     updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
     updateOps['UPDATED_DATE'] = new Date();

@@ -11,15 +11,12 @@ exports.get_product_by_categoryId = (req, res, next) => {
     const id = req.params.categoryId;
     const fil_value = req.params.fil_id;
 
-    var perPage = 9;
+    var perPage = 100;
     var page = req.params.page || 1;
 
     var prod_arr = [];
     var prod_cat_arr = [];
     var prod_final_arr = [];
-
-    var img_arr = [];
-    var prod_final_img_arr = [];
 
     var rev_arr = [];
     var prod_final_rev_arr = [];
