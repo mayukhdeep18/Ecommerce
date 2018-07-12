@@ -93,19 +93,21 @@ exports.filter_opt_prod_conn_create = (req, res, next) => {
 };
 
 
-//get filter option product connection details by id
+//get filter option product connection details by product id
 exports.filter_opt_prod_conn_get_by_id = (req, res, next) => {
     const id = req.params.filtercategoryId;
-    Filter_opt_prod.findById(id)
+    Filter_opt_prod.find({PRODUCT_ID: id})
         .select("UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         .populate('PRODUCT_ID')
         .populate('FILTER_ID')
         .populate('FILTER_OPTION_ID')
         .exec()
-        .then(doc => {
+        .then(docs => {
             res.status(200).json({
                 status: "success",
                 data: {
+                    filter_opt_prod: docs.map(doc => {
+                        return {
                             filter_opt_prod_conn_id: doc._id,
                             prod_id: doc.PRODUCT_ID._id,
                             product_id: doc.PRODUCT_ID.PRODUCT_ID,
@@ -117,6 +119,8 @@ exports.filter_opt_prod_conn_get_by_id = (req, res, next) => {
                             updated_by_user: doc.UPDATED_BY,
                             updated_on: doc.UPDATED_DATE,
                             isActive: doc.ACTIVE_FLAG
+                        };
+                    })
                 }
             });
         })
@@ -142,7 +146,7 @@ exports.filter_opt_prod_conn_update = (req, res, next) => {
             updateOps['UPDATED_DATE']= new Date();
             updateOps['ACTIVE_FLAG']= req.body.ACTIVE_FLAG;
 
-    Filter_opt_prod.update({ _id: id }, { $set: updateOps })
+    Filter_opt_prod.update({ PRODUCT_ID: id }, { $set: updateOps },{multi: true})
         .exec()
         .then(result => {
             res.status(200).json({
