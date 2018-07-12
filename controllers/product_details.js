@@ -322,7 +322,7 @@ exports.product_details_get_by_id = (req, res, next) => {
     if( page > 0 && page < 20)
     {
         Product.find({PRODUCT_ID:id})
-            .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT PRODUCT_IMAGE_LINKS UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
+            .select("PRODUCT_ID PRODUCT_CATEGORY_ID PRODUCT_SUB_CATEGORY_ID PRODUCT_SUB_SUB_CATEGORY_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT PRODUCT_IMAGE_LINKS UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
             .populate('PRODUCT_CATEGORY_ID')
             .populate('PRODUCT_SUB_CATEGORY_ID')
             .populate('PRODUCT_SUB_SUB_CATEGORY_ID',null)
@@ -333,6 +333,7 @@ exports.product_details_get_by_id = (req, res, next) => {
             .sort({UPDATED_DATE: -1, MEAN_RATING: -1, PRODUCT_PRICE: 1})
             .exec()
             .then(docs => {
+                var cat_id = docs.PRODUCT_CATEGORY_ID;
 
                 Product.count()
                     .exec()
@@ -540,7 +541,7 @@ exports.product_update_by_id = (req, res, next) => {
     updateOps['PRODUCT_ID'] = Prod_id.toLowerCase();
     updateRest['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
     updateRest['UPDATED_DATE'] = new Date();
-Product.find({PRODUCT_ID: id})
+Product.find({_id: id})
     .select('PRODUCT_ID _id')
     .exec()
     .then(doc => {

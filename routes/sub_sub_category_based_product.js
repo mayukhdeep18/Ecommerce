@@ -4,10 +4,14 @@ const SubSubCategoryController = require("../controllers/sub_sub_category_based_
 const checkAuth = require('../middleware/check-auth');
 
 
-// Handle incoming GET requests to /product by sub category id
+// Handle incoming GET requests to /product by category id
 
-router.get("/:subsubcategoryId/:page", SubSubCategoryController.get_product_by_subsubcategoryId);
+router.get("/:categoryId/:page", SubSubCategoryController.get_product_by_categoryId);
 
-router.post("/:subsubcategoryId/:page", SubSubCategoryController.product_get_all);
+router.get("/:categoryId/:page/:fil_id", SubSubCategoryController.get_product_by_sorting_filter);
+
+router.post("/:categoryId/:page", SubSubCategoryController.product_get_all);
+
+router.post("/:categoryId/:page/:fil_id", SubSubCategoryController.get_product_by_filter_sorting_filter);
 
 module.exports = router;
