@@ -493,7 +493,7 @@ exports.product_details_get_by_id = (req, res, next) => {
                                                     }
 
                                                     //recommended products
-                                                    Product.find({PRODUCT_CATEGORY_ID:prod_final_rev_arr[0].prod_details.prod_details.prod_category_id})
+                                                    Product.find({PRODUCT_SUB_CATEGORY_ID:prod_final_rev_arr[0].prod_details.prod_details.prod_sub_category_id})
                                                         .select("PRODUCT_ID PRODUCT_CATEGORY_ID PRODUCT_SUB_CATEGORY_ID PRODUCT_SUB_SUB_CATEGORY_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT PRODUCT_IMAGE_LINKS UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
                                                         .populate('PRODUCT_CATEGORY_ID')
                                                         .populate('PRODUCT_SUB_CATEGORY_ID')
