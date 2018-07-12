@@ -500,8 +500,8 @@ exports.product_details_get_by_id = (req, res, next) => {
                                                         .populate('PRODUCT_SUB_SUB_CATEGORY_ID',null)
                                                         .populate('ECOMMERCE_CATEGORY_ID')
                                                         .populate('ECOMMERCE_PRODUCT_DETAILS_ID')
-                                                        .skip((perPage1 * page1) - perPage1)
-                                                        .limit(perPage1)
+                                                        //.skip((perPage1 * page1) - perPage1)
+                                                        .limit(5)
                                                         .sort({UPDATED_DATE: -1, MEAN_RATING: -1, PRODUCT_PRICE: 1})
                                                         .exec()
                                                         .then(docs => {
@@ -629,8 +629,8 @@ exports.product_details_get_by_id = (req, res, next) => {
                                                                                                     data: {
                                                                                                         product_details: prod_final_rev_arr,
                                                                                                         filter_values: fil_arr,
-                                                                                                        recommended_products: prod_final_rev_arr1,
-                                                                                                        pages: Math.ceil(count / perPage1)
+                                                                                                        recommended_products: prod_final_rev_arr1
+                                                                                                        //pages: Math.ceil(count / perPage1)
                                                                                                     }
                                                                                                 });
 
