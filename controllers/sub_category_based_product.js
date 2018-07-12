@@ -1990,7 +1990,7 @@ exports.get_product_by_sorting_filter = (req, res, next) => {
 };
 
 
-//get product and filter details by category id
+//get product and filter details by sub category id
 exports.get_product_by_filter_sorting_filter = (req, res, next) => {
     const id = req.params.categoryId;
     const fil_value = req.params.fil_id;
@@ -2013,7 +2013,7 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
 
 
     if(fil_value === 'oldest-to-newest') {
-        Category.find({CATEGORY_ID: id})
+        Subcategory.find({SUB_CATEGORY_ID: id})
             .select('CATEGORY_ID _id')
             .exec()
             .then(cat_res => {
@@ -2048,7 +2048,7 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                         }
 
                         // look up ecommerce product details and product details on the basis of category id
-                        Product.find({PRODUCT_CATEGORY_ID: cat_res[0]._id})
+                        Product.find({PRODUCT_SUB_CATEGORY_ID: cat_res[0]._id})
                             .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT PRODUCT_IMAGE_LINKS UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
                             .populate('PRODUCT_CATEGORY_ID')
                             .populate('PRODUCT_SUB_CATEGORY_ID')
@@ -2213,7 +2213,15 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                                                                 }
                                                             });
                                                         }
-                                                    })
+                                                    }).catch(err => {
+                                                    console.log(err);
+                                                    res.status(500).json({
+                                                        status: "error",
+                                                        data: {
+                                                            message: "Internal server error!"
+                                                        }
+                                                    });
+                                                });
                                             }).catch(err => {
                                             console.log(err);
                                             res.status(500).json({
