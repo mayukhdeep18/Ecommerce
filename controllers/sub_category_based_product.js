@@ -103,9 +103,10 @@ exports.get_product_by_categoryId = (req, res, next) => {
                                                     for( var prod_item of docs)
                                                     {
 
-                                                        var product_sub_sub_category_name;
-                                                        var product_sub_sub_category_id;
-                                                        if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
+                                                        var product_sub_sub_category_name = undefined;
+                                                        var product_sub_sub_category_id = undefined;
+                                                        //console.log('sub_sub_category_id',prod_item.PRODUCT_SUB_SUB_CATEGORY_ID);
+                                                        if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID != null)
                                                         {
                                                             product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                                             product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
@@ -389,9 +390,10 @@ exports.product_get_all = (req, res, next) => {
                                     for( var prod_item of doc_2)
                                     {
                                         //create an array with the product id, product name, product specifications, product price, product image url
-                                        var product_sub_sub_category_name;
-                                        var product_sub_sub_category_id;
-                                        if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
+                                        var product_sub_sub_category_name = undefined;
+                                        var product_sub_sub_category_id = undefined;
+                                        //console.log('sub_sub_category_id',prod_item.PRODUCT_SUB_SUB_CATEGORY_ID);
+                                        if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID != null)
                                         {
                                             product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                             product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
@@ -509,15 +511,29 @@ exports.product_get_all = (req, res, next) => {
                                                             }
                                                         }
                                                     }
-                                                    //final output
-                                                    res.status(200).json({
-                                                        status: "success",
-                                                        data: {
-                                                            product_id: prod_id_arr,
-                                                            product_details: final_arr,
-                                                            pages: Math.ceil(count / perPage)
-                                                        }
-                                                    });
+                                                    if(fil_arr.length > 0)
+                                                    {
+                                                        //final output
+                                                        res.status(200).json({
+                                                            status: "success",
+                                                            data: {
+                                                                product_id: prod_id_arr,
+                                                                product_details: final_arr,
+                                                                pages: Math.ceil(count / perPage)
+                                                            }
+                                                        });
+                                                    }
+                                                    else {
+                                                        //final output
+                                                        res.status(200).json({
+                                                            status: "success",
+                                                            data: {
+                                                                product_id: prod_id_arr,
+                                                                product_details: prod_final_rev_arr,
+                                                                pages: Math.ceil(count / perPage)
+                                                            }
+                                                        });
+                                                    }
                                                 })
                                         }).catch(err => {
                                         console.log(err);
@@ -613,9 +629,10 @@ exports.get_product_by_sorting_filter = (req, res, next) => {
                                     for( var prod_item of docs)
                                     {
 
-                                        var product_sub_sub_category_name;
-                                        var product_sub_sub_category_id;
-                                        if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
+                                        var product_sub_sub_category_name = undefined;
+                                        var product_sub_sub_category_id = undefined;
+                                        //console.log('sub_sub_category_id',prod_item.PRODUCT_SUB_SUB_CATEGORY_ID);
+                                        if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID != null)
                                         {
                                             product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                             product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
@@ -810,9 +827,10 @@ exports.get_product_by_sorting_filter = (req, res, next) => {
                                     for( var prod_item of docs)
                                     {
 
-                                        var product_sub_sub_category_name;
-                                        var product_sub_sub_category_id;
-                                        if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
+                                        var product_sub_sub_category_name = undefined;
+                                        var product_sub_sub_category_id = undefined;
+                                        //console.log('sub_sub_category_id',prod_item.PRODUCT_SUB_SUB_CATEGORY_ID);
+                                        if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID != null)
                                         {
                                             product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                             product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
@@ -1007,9 +1025,10 @@ exports.get_product_by_sorting_filter = (req, res, next) => {
                                     for( var prod_item of docs)
                                     {
 
-                                        var product_sub_sub_category_name;
-                                        var product_sub_sub_category_id;
-                                        if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
+                                        var product_sub_sub_category_name = undefined;
+                                        var product_sub_sub_category_id = undefined;
+                                        //console.log('sub_sub_category_id',prod_item.PRODUCT_SUB_SUB_CATEGORY_ID);
+                                        if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID != null)
                                         {
                                             product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                             product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
@@ -1204,9 +1223,10 @@ exports.get_product_by_sorting_filter = (req, res, next) => {
                                     for( var prod_item of docs)
                                     {
 
-                                        var product_sub_sub_category_name;
-                                        var product_sub_sub_category_id;
-                                        if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
+                                        var product_sub_sub_category_name = undefined;
+                                        var product_sub_sub_category_id = undefined;
+                                        //console.log('sub_sub_category_id',prod_item.PRODUCT_SUB_SUB_CATEGORY_ID);
+                                        if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID != null)
                                         {
                                             product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                             product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
@@ -1401,9 +1421,10 @@ exports.get_product_by_sorting_filter = (req, res, next) => {
                                     for( var prod_item of docs)
                                     {
 
-                                        var product_sub_sub_category_name;
-                                        var product_sub_sub_category_id;
-                                        if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
+                                        var product_sub_sub_category_name = undefined;
+                                        var product_sub_sub_category_id = undefined;
+                                        //console.log('sub_sub_category_id',prod_item.PRODUCT_SUB_SUB_CATEGORY_ID);
+                                        if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID != null)
                                         {
                                             product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                             product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
@@ -1598,9 +1619,10 @@ exports.get_product_by_sorting_filter = (req, res, next) => {
                                     for( var prod_item of docs)
                                     {
 
-                                        var product_sub_sub_category_name;
-                                        var product_sub_sub_category_id;
-                                        if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
+                                        var product_sub_sub_category_name = undefined;
+                                        var product_sub_sub_category_id = undefined;
+                                        //console.log('sub_sub_category_id',prod_item.PRODUCT_SUB_SUB_CATEGORY_ID);
+                                        if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID != null)
                                         {
                                             product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                             product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
@@ -1795,9 +1817,10 @@ exports.get_product_by_sorting_filter = (req, res, next) => {
                                     for( var prod_item of docs)
                                     {
 
-                                        var product_sub_sub_category_name;
-                                        var product_sub_sub_category_id;
-                                        if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
+                                        var product_sub_sub_category_name = undefined;
+                                        var product_sub_sub_category_id = undefined;
+                                        //console.log('sub_sub_category_id',prod_item.PRODUCT_SUB_SUB_CATEGORY_ID);
+                                        if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID != null)
                                         {
                                             product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                             product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
@@ -2046,9 +2069,10 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                                         for( var prod_item of doc_2)
                                         {
                                             //create an array with the product id, product name, product specifications, product price, product image url
-                                            var product_sub_sub_category_name;
-                                            var product_sub_sub_category_id;
-                                            if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
+                                            var product_sub_sub_category_name = undefined;
+                                            var product_sub_sub_category_id = undefined;
+                                            //console.log('sub_sub_category_id',prod_item.PRODUCT_SUB_SUB_CATEGORY_ID);
+                                            if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID != null)
                                             {
                                                 product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                                 product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
@@ -2166,15 +2190,29 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                                                                 }
                                                             }
                                                         }
-                                                        //final output
-                                                        res.status(200).json({
-                                                            status: "success",
-                                                            data: {
-                                                                product_id: prod_id_arr,
-                                                                product_details: final_arr,
-                                                                pages: Math.ceil(count / perPage)
-                                                            }
-                                                        });
+                                                        if(fil_arr.length > 0)
+                                                        {
+                                                            //final output
+                                                            res.status(200).json({
+                                                                status: "success",
+                                                                data: {
+                                                                    product_id: prod_id_arr,
+                                                                    product_details: final_arr,
+                                                                    pages: Math.ceil(count / perPage)
+                                                                }
+                                                            });
+                                                        }
+                                                        else {
+                                                            //final output
+                                                            res.status(200).json({
+                                                                status: "success",
+                                                                data: {
+                                                                    product_id: prod_id_arr,
+                                                                    product_details: prod_final_rev_arr,
+                                                                    pages: Math.ceil(count / perPage)
+                                                                }
+                                                            });
+                                                        }
                                                     })
                                             }).catch(err => {
                                             console.log(err);
@@ -2280,9 +2318,10 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                                         for( var prod_item of doc_2)
                                         {
                                             //create an array with the product id, product name, product specifications, product price, product image url
-                                            var product_sub_sub_category_name;
-                                            var product_sub_sub_category_id;
-                                            if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
+                                            var product_sub_sub_category_name = undefined;
+                                            var product_sub_sub_category_id = undefined;
+                                            //console.log('sub_sub_category_id',prod_item.PRODUCT_SUB_SUB_CATEGORY_ID);
+                                            if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID != null)
                                             {
                                                 product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                                 product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
@@ -2400,15 +2439,29 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                                                                 }
                                                             }
                                                         }
-                                                        //final output
-                                                        res.status(200).json({
-                                                            status: "success",
-                                                            data: {
-                                                                product_id: prod_id_arr,
-                                                                product_details: final_arr,
-                                                                pages: Math.ceil(count / perPage)
-                                                            }
-                                                        });
+                                                        if(fil_arr.length > 0)
+                                                        {
+                                                            //final output
+                                                            res.status(200).json({
+                                                                status: "success",
+                                                                data: {
+                                                                    product_id: prod_id_arr,
+                                                                    product_details: final_arr,
+                                                                    pages: Math.ceil(count / perPage)
+                                                                }
+                                                            });
+                                                        }
+                                                        else {
+                                                            //final output
+                                                            res.status(200).json({
+                                                                status: "success",
+                                                                data: {
+                                                                    product_id: prod_id_arr,
+                                                                    product_details: prod_final_rev_arr,
+                                                                    pages: Math.ceil(count / perPage)
+                                                                }
+                                                            });
+                                                        }
                                                     })
                                             }).catch(err => {
                                             console.log(err);
@@ -2514,9 +2567,10 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                                         for( var prod_item of doc_2)
                                         {
                                             //create an array with the product id, product name, product specifications, product price, product image url
-                                            var product_sub_sub_category_name;
-                                            var product_sub_sub_category_id;
-                                            if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
+                                            var product_sub_sub_category_name = undefined;
+                                            var product_sub_sub_category_id = undefined;
+                                            //console.log('sub_sub_category_id',prod_item.PRODUCT_SUB_SUB_CATEGORY_ID);
+                                            if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID != null)
                                             {
                                                 product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                                 product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
@@ -2634,15 +2688,29 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                                                                 }
                                                             }
                                                         }
-                                                        //final output
-                                                        res.status(200).json({
-                                                            status: "success",
-                                                            data: {
-                                                                product_id: prod_id_arr,
-                                                                product_details: final_arr,
-                                                                pages: Math.ceil(count / perPage)
-                                                            }
-                                                        });
+                                                        if(fil_arr.length > 0)
+                                                        {
+                                                            //final output
+                                                            res.status(200).json({
+                                                                status: "success",
+                                                                data: {
+                                                                    product_id: prod_id_arr,
+                                                                    product_details: final_arr,
+                                                                    pages: Math.ceil(count / perPage)
+                                                                }
+                                                            });
+                                                        }
+                                                        else {
+                                                            //final output
+                                                            res.status(200).json({
+                                                                status: "success",
+                                                                data: {
+                                                                    product_id: prod_id_arr,
+                                                                    product_details: prod_final_rev_arr,
+                                                                    pages: Math.ceil(count / perPage)
+                                                                }
+                                                            });
+                                                        }
                                                     })
                                             }).catch(err => {
                                             console.log(err);
@@ -2748,9 +2816,10 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                                         for( var prod_item of doc_2)
                                         {
                                             //create an array with the product id, product name, product specifications, product price, product image url
-                                            var product_sub_sub_category_name;
-                                            var product_sub_sub_category_id;
-                                            if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
+                                            var product_sub_sub_category_name = undefined;
+                                            var product_sub_sub_category_id = undefined;
+                                            //console.log('sub_sub_category_id',prod_item.PRODUCT_SUB_SUB_CATEGORY_ID);
+                                            if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID != null)
                                             {
                                                 product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                                 product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
@@ -2868,15 +2937,29 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                                                                 }
                                                             }
                                                         }
-                                                        //final output
-                                                        res.status(200).json({
-                                                            status: "success",
-                                                            data: {
-                                                                product_id: prod_id_arr,
-                                                                product_details: final_arr,
-                                                                pages: Math.ceil(count / perPage)
-                                                            }
-                                                        });
+                                                        if(fil_arr.length > 0)
+                                                        {
+                                                            //final output
+                                                            res.status(200).json({
+                                                                status: "success",
+                                                                data: {
+                                                                    product_id: prod_id_arr,
+                                                                    product_details: final_arr,
+                                                                    pages: Math.ceil(count / perPage)
+                                                                }
+                                                            });
+                                                        }
+                                                        else {
+                                                            //final output
+                                                            res.status(200).json({
+                                                                status: "success",
+                                                                data: {
+                                                                    product_id: prod_id_arr,
+                                                                    product_details: prod_final_rev_arr,
+                                                                    pages: Math.ceil(count / perPage)
+                                                                }
+                                                            });
+                                                        }
                                                     })
                                             }).catch(err => {
                                             console.log(err);
@@ -2982,9 +3065,10 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                                         for( var prod_item of doc_2)
                                         {
                                             //create an array with the product id, product name, product specifications, product price, product image url
-                                            var product_sub_sub_category_name;
-                                            var product_sub_sub_category_id;
-                                            if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
+                                            var product_sub_sub_category_name = undefined;
+                                            var product_sub_sub_category_id = undefined;
+                                            //console.log('sub_sub_category_id',prod_item.PRODUCT_SUB_SUB_CATEGORY_ID);
+                                            if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID != null)
                                             {
                                                 product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                                 product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
@@ -3102,15 +3186,29 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                                                                 }
                                                             }
                                                         }
-                                                        //final output
-                                                        res.status(200).json({
-                                                            status: "success",
-                                                            data: {
-                                                                product_id: prod_id_arr,
-                                                                product_details: final_arr,
-                                                                pages: Math.ceil(count / perPage)
-                                                            }
-                                                        });
+                                                        if(fil_arr.length > 0)
+                                                        {
+                                                            //final output
+                                                            res.status(200).json({
+                                                                status: "success",
+                                                                data: {
+                                                                    product_id: prod_id_arr,
+                                                                    product_details: final_arr,
+                                                                    pages: Math.ceil(count / perPage)
+                                                                }
+                                                            });
+                                                        }
+                                                        else {
+                                                            //final output
+                                                            res.status(200).json({
+                                                                status: "success",
+                                                                data: {
+                                                                    product_id: prod_id_arr,
+                                                                    product_details: prod_final_rev_arr,
+                                                                    pages: Math.ceil(count / perPage)
+                                                                }
+                                                            });
+                                                        }
                                                     })
                                             }).catch(err => {
                                             console.log(err);
@@ -3216,9 +3314,10 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                                         for( var prod_item of doc_2)
                                         {
                                             //create an array with the product id, product name, product specifications, product price, product image url
-                                            var product_sub_sub_category_name;
-                                            var product_sub_sub_category_id;
-                                            if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
+                                            var product_sub_sub_category_name = undefined;
+                                            var product_sub_sub_category_id = undefined;
+                                            //console.log('sub_sub_category_id',prod_item.PRODUCT_SUB_SUB_CATEGORY_ID);
+                                            if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID != null)
                                             {
                                                 product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                                 product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
@@ -3336,15 +3435,29 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                                                                 }
                                                             }
                                                         }
-                                                        //final output
-                                                        res.status(200).json({
-                                                            status: "success",
-                                                            data: {
-                                                                product_id: prod_id_arr,
-                                                                product_details: final_arr,
-                                                                pages: Math.ceil(count / perPage)
-                                                            }
-                                                        });
+                                                        if(fil_arr.length > 0)
+                                                        {
+                                                            //final output
+                                                            res.status(200).json({
+                                                                status: "success",
+                                                                data: {
+                                                                    product_id: prod_id_arr,
+                                                                    product_details: final_arr,
+                                                                    pages: Math.ceil(count / perPage)
+                                                                }
+                                                            });
+                                                        }
+                                                        else {
+                                                            //final output
+                                                            res.status(200).json({
+                                                                status: "success",
+                                                                data: {
+                                                                    product_id: prod_id_arr,
+                                                                    product_details: prod_final_rev_arr,
+                                                                    pages: Math.ceil(count / perPage)
+                                                                }
+                                                            });
+                                                        }
                                                     })
                                             }).catch(err => {
                                             console.log(err);
@@ -3450,9 +3563,10 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                                         for( var prod_item of doc_2)
                                         {
                                             //create an array with the product id, product name, product specifications, product price, product image url
-                                            var product_sub_sub_category_name;
-                                            var product_sub_sub_category_id;
-                                            if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID !=null)
+                                            var product_sub_sub_category_name = undefined;
+                                            var product_sub_sub_category_id = undefined;
+                                            //console.log('sub_sub_category_id',prod_item.PRODUCT_SUB_SUB_CATEGORY_ID);
+                                            if(prod_item.PRODUCT_SUB_SUB_CATEGORY_ID != null)
                                             {
                                                 product_sub_sub_category_name = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID.SUB_SUB_CATEGORY_NAME;
                                                 product_sub_sub_category_id = prod_item.PRODUCT_SUB_SUB_CATEGORY_ID._id;
@@ -3570,16 +3684,38 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                                                                 }
                                                             }
                                                         }
-                                                        //final output
-                                                        res.status(200).json({
-                                                            status: "success",
-                                                            data: {
-                                                                product_id: prod_id_arr,
-                                                                product_details: final_arr,
-                                                                pages: Math.ceil(count / perPage)
-                                                            }
-                                                        });
-                                                    })
+                                                        if(fil_arr.length > 0)
+                                                        {
+                                                            //final output
+                                                            res.status(200).json({
+                                                                status: "success",
+                                                                data: {
+                                                                    product_id: prod_id_arr,
+                                                                    product_details: final_arr,
+                                                                    pages: Math.ceil(count / perPage)
+                                                                }
+                                                            });
+                                                        }
+                                                        else {
+                                                            //final output
+                                                            res.status(200).json({
+                                                                status: "success",
+                                                                data: {
+                                                                    product_id: prod_id_arr,
+                                                                    product_details: prod_final_rev_arr,
+                                                                    pages: Math.ceil(count / perPage)
+                                                                }
+                                                            });
+                                                        }
+                                                    }).catch(err => {
+                                                    console.log(err);
+                                                    res.status(500).json({
+                                                        status: "error",
+                                                        data: {
+                                                            message: "Internal server error!"
+                                                        }
+                                                    });
+                                                });
                                             }).catch(err => {
                                             console.log(err);
                                             res.status(500).json({
