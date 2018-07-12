@@ -24,7 +24,7 @@ exports.trending_product_search = (req, res, next) => {
 
 //search in product database
     Product.find({$or:[ {PRODUCT_NAME: regex}, {PRODUCT_SUB_TITLE:regex}, {PRODUCT_DESCRIPTION:regex}], ACTIVE_FLAG:'Y'})
-        .select("PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_AVAILABILITY_COUNT PERCENTAGE_DISCOUNT_ON_PRODUCT PRODUCT_SPECIAL_OFFER_PRICE SPECIAL_OFFER_DISCOUNT_FACTOR MINIMUM_ALLOWED_BUY_QUANTITY MAXIMUM_ALLOWED_BUY_QUANTITY PRODUCT_SPECIFICATIONS MEAN_RATING REVIEW_COUNT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
+        .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_AVAILABILITY_COUNT PERCENTAGE_DISCOUNT_ON_PRODUCT PRODUCT_SPECIAL_OFFER_PRICE SPECIAL_OFFER_DISCOUNT_FACTOR MINIMUM_ALLOWED_BUY_QUANTITY MAXIMUM_ALLOWED_BUY_QUANTITY PRODUCT_SPECIFICATIONS MEAN_RATING REVIEW_COUNT UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         .exec()
         .then(docs => {
             if(docs.length > 0) {
@@ -34,6 +34,7 @@ exports.trending_product_search = (req, res, next) => {
 
                     prod_arr.push({
                         prod_id: prod_item._id,
+                        product_id: prod_item.PRODUCT_ID,
                         prod_name: prod_item.PRODUCT_NAME,
                         isActive: prod_item.ACTIVE_FLAG
                     })
