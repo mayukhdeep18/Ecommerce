@@ -1,32 +1,41 @@
 const mongoose = require("mongoose");
-const Customer = require("../models/filters");
+const User = require("../models/user");
 const product = require("../models/product_details");
 const Wishlist = require("../models/wishlist");
 
 //get all active wishlist  details
 exports.wishlist_conn_get_all = (req, res, next) => {
+    var wish_arr = [];
     Wishlist.find({ACTIVE_FLAG:'Y'})
         .select("UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         .populate('CUSTOMER_ID')
         .populate('PRODUCT_ID')
         .exec()
         .then(docs => {
+            for (var item of docs)
+            {
+                wish_arr.push({
+                    customer_id: item.CUSTOMER_ID.userid,
+                    customer_name: item.CUSTOMER_ID.userinfo.fullname,
+                    prod_id: item.PRODUCT_ID._id,
+                    product_id: item.PRODUCT_ID,
+                    product_name: item.PRODUCT_ID.PRODUCT_NAME,
+                    prod_spec: JSON.parse(item.PRODUCT_SPECIFICATIONS),
+                    product_sub_title: item.PRODUCT_SUB_TITLE,
+                    product_description: item.PRODUCT_DESCRIPTION,
+                    prod_url: item.PRODUCT_URL,
+                    prod_rating: parseFloat(item.MEAN_RATING).toFixed(2),
+                    prod_rating_count: item.RATING_COUNT,
+                    prod_review_count: item.REVIEW_COUNT,
+                    prod_price: item.PRODUCT_PRICE,
+                    prod_price_ecomm: item.LEAST_PRICE_ECOMMERCE,
+                updated_date: item.UPDATED_DATE,
+                active_flag: item.ACTIVE_FLAG})
+            }
             res.status(200).json({
                 status: "success",
-                error: "",
                 data: {
-                    wishlist: docs.map(doc => {
-                        return {
-                            wishlist_id: doc._id,
-                            filter_id: doc.CUSTOMER_ID._id,
-                            customer_name: doc.CUSTOMER_ID.CUSTOMER_NAME,
-                            product_id: doc.PRODUCT_ID._id,
-                            product_name: doc.PRODUCT_ID.PRODUCT_NAME,
-                            updated_by_user: doc.UPDATED_BY,
-                            updated_on: doc.UPDATED_DATE,
-                            isActive: doc.ACTIVE_FLAG
-                        };
-                    })
+                    wish_arr
                 }
             });
         })
@@ -42,70 +51,74 @@ exports.wishlist_conn_get_all = (req, res, next) => {
 };
 
 
-
 //create a new wishlist
 exports.wishlist_conn_create = (req, res, next) => {
 
-    if(Customer.findById(req.body.CUSTOMER_ID) && product.findById(req.body.PRODUCT_ID))
-    {
-        const wishlist = new Wishlist({
-            _id: new mongoose.Types.ObjectId(),
-            CUSTOMER_ID: req.body.CUSTOMER_ID,
-            PRODUCT_ID: req.body.PRODUCT_ID,
-            UPDATED_BY: req.body.UPDATED_BY,
-            UPDATED_DATE: new Date(),
-            ACTIVE_FLAG: req.body.ACTIVE_FLAG
-        });
-       wishlist
-            .save()
-            .then(result => {
-                console.log(result);
-                res.status(201).json({
-                    status: "success",
-                    error: "",
-                    data: {
-                        message: "wishlist  stored",
-                        wishlsit_created: {
-                            _id: result._id,
-                            CUSTOMER_ID: result.CUSTOMER_ID,
-                            PRODUCT_ID: result.PRODUCT_ID,
-                            UPDATED_BY: result.UPDATED_BY,
-                            UPDATED_DATE: result.UPDATED_DATE,
-                            ACTIVE_FLAG: result.ACTIVE_FLAG
-                        }
-                    }
-                });
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(500).json({
-                    status: "error",
-                    error: err,
-                    data: {
-                        message: "An error has occurred as mentioned above"
-                    }
-                });
-            });
+    var id = req.body.PRODUCT_ID;
 
-    }
-    else {
-        res
-            .status(404)
-            .json({
+        Wishlist.find({PRODUCT_ID: id})
+        .select('CUSTOMER_ID PRODUCT_ID ACTIVE_FLAG')
+        .exec()
+            .then( res1 => {
+                if(res1.length > 0)
+                {
+                    res.status(500)
+                        .json({
+                            status: "error",
+                            data: {
+                                message: "product already in wishlist!"
+                            }
+                        });
+                }
+                else
+                {
+                    const wishlist = new Wishlist({
+                        _id: new mongoose.Types.ObjectId(),
+                        CUSTOMER_ID: req.body.CUSTOMER_ID,
+                        PRODUCT_ID: req.body.PRODUCT_ID,
+                        UPDATED_BY: req.body.UPDATED_BY,
+                        UPDATED_DATE: new Date(),
+                        ACTIVE_FLAG: req.body.ACTIVE_FLAG
+                    });
+                    wishlist
+                        .save()
+                        .then(result => {
+                            console.log(result);
+                            res.status(201).json({
+                                status: "success",
+                                data: {
+                                    message: "Product stored in wishlist"
+                                }
+                            });
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            res.status(500).json({
+                                status: "error",
+                                error: err,
+                                data: {
+                                    message: "An error has occurred as mentioned above"
+                                }
+                            });
+                        });
+                }
+            }).catch(err => {
+            console.log(err);
+            res.status(500).json({
                 status: "error",
-                error: "ID doesn't exist",
+                error: err,
                 data: {
-                    message: "product id or customer id does not exist"
+                    message: "An error has occurred as mentioned above"
                 }
             });
-    }
+        });
 };
 
-
+/*
 //get wishlist details by id
 exports.wishlist_conn_get_by_id = (req, res, next) => {
     const id = req.params.wishlistId;
-    Wishlist.findById(id)
+    Wishlist.findById({id})
         .select("UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
         .populate('CUSTOMER_ID')
         .populate('PRODUCT_ID')
@@ -118,8 +131,8 @@ exports.wishlist_conn_get_by_id = (req, res, next) => {
                     error_msg:"",
                     data: {
                         wishlist_id: doc._id,
-                        filter_id: doc.CUSTOMER_ID._id,
-                        customer_name: doc.CUSTOMER_ID.CUSTOMER_NAME,
+                        filter_id: doc.CUSTOMER_ID.userid,
+                        customer_name: doc.CUSTOMER_ID.userinfo.fullname,
                         product_id: doc.PRODUCT_ID._id,
                         product_name: doc.PRODUCT_ID.PRODUCT_NAME,
                         updated_by_user: doc.UPDATED_BY,
@@ -144,8 +157,9 @@ exports.wishlist_conn_get_by_id = (req, res, next) => {
             });
         });
 };
+*/
 
-
+/*
 //update wishlist details by id
 exports.wishlist_conn_update = (req, res, next) => {
     const id = req.params.wishlistId;
@@ -174,7 +188,7 @@ exports.wishlist_conn_update = (req, res, next) => {
                 }
             });
         });
-};
+};*/
 
 
 //delete a wishlist by id
@@ -185,9 +199,8 @@ exports.wishlist_conn_delete = (req, res, next) => {
         .then(result => {
             res.status(200).json({
                 status: "success",
-                error: "",
                 data: {
-                    message: 'wishlist  deleted'
+                    message: 'Product deleted from wishlist'
                 }
             });
         })

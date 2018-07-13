@@ -4,14 +4,14 @@ const WishlistController = require("../controllers/wishlist");
 const checkAuth = require('../middleware/check-auth');
 
 
-router.get("/", WishlistController.wishlist_conn_get_all);
+router.get("/",checkAuth, WishlistController.wishlist_conn_get_all);
 
-router.post("/",/*checkAuth,*/ WishlistController.wishlist_conn_create);
+router.post("/",checkAuth, WishlistController.wishlist_conn_create);
 
-router.get("/:wishlistId", WishlistController.wishlist_conn_get_by_id);
+//router.get("/:wishlistId", WishlistController.wishlist_conn_get_by_id);
 
-router.patch("/:wishlistId",/*checkAuth,*/  WishlistController.wishlist_conn_update);
+//router.patch("/:wishlistId",/*checkAuth,*/  WishlistController.wishlist_conn_update);
 
-router.delete("/:wishlistId",/*checkAuth,*/ WishlistController.wishlist_conn_delete);
+router.delete("/:wishlistId",checkAuth, WishlistController.wishlist_conn_delete);
 
 module.exports = router;

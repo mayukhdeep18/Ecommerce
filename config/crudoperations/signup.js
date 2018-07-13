@@ -87,15 +87,10 @@ const dbOperations={
         data.emailverified=false;
 
         User.create(data,function(error,result){
-
-
             if(error){
                 logger.error(error);
-
             }
             else{
-
-
                 logger.debug('crud result'+ result);
                 var crypt_email = cryptr.encrypt(result.useremail);
 

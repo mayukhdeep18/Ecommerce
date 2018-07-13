@@ -9,6 +9,7 @@ const Trending = require("../models/trending_products");
 const Hot = require("../models/hot_deals");
 const Rating = require("../models/rating_details");
 const FilterValues = require("../models/filter_options_products");
+const Wishlist = require("../models/wishlist");
 
 
 //get all active product details
@@ -16,6 +17,8 @@ exports.product_get_all = (req, res, next) => {
     var prod_arr = [];
     var prod_cat_arr = [];
     var prod_final_arr = [];
+
+    var wish_arr = [];
 
     var rev_arr = [];
     var prod_final_rev_arr = [];
