@@ -12,34 +12,49 @@ exports.wishlist_conn_get_all = (req, res, next) => {
         .populate('PRODUCT_ID')
         .exec()
         .then(docs => {
-            for (var item of docs)
+            if(docs.length > 0)
             {
-                wish_arr.push({
-                    customer_id: item.CUSTOMER_ID.userid,
-                    customer_name: item.CUSTOMER_ID.userinfo.fullname,
-                    prod_id: item.PRODUCT_ID._id,
-                    product_id: item.PRODUCT_ID,
-                    product_name: item.PRODUCT_ID.PRODUCT_NAME,
-                    prod_spec: JSON.parse(item.PRODUCT_SPECIFICATIONS),
-                    product_sub_title: item.PRODUCT_SUB_TITLE,
-                    product_description: item.PRODUCT_DESCRIPTION,
-                    prod_url: item.PRODUCT_URL,
-                    prod_rating: parseFloat(item.MEAN_RATING).toFixed(2),
-                    prod_rating_count: item.RATING_COUNT,
-                    prod_review_count: item.REVIEW_COUNT,
-                    prod_price: item.PRODUCT_PRICE,
-                    prod_price_ecomm: item.LEAST_PRICE_ECOMMERCE,
-                updated_date: item.UPDATED_DATE,
-                active_flag: item.ACTIVE_FLAG})
-            }
-            res.status(200).json({
-                status: "success",
-                data: {
-                    wish_arr
+                for (var item of docs)
+                {
+                    wish_arr.push({
+                        wishlist_id: item._id,
+                        customer_id: item.CUSTOMER_ID.userid,
+                        customer_name: item.CUSTOMER_ID.userinfo.fullname,
+                        prod_id: item.PRODUCT_ID._id,
+                        product_id: item.PRODUCT_ID.PRODUCT_ID,
+                        product_name: item.PRODUCT_ID.PRODUCT_NAME,
+                        prod_spec: JSON.parse(item.PRODUCT_ID.PRODUCT_SPECIFICATIONS),
+                        product_sub_title: item.PRODUCT_ID.PRODUCT_SUB_TITLE,
+                        product_description: item.PRODUCT_ID.PRODUCT_DESCRIPTION,
+                        prod_url: item.PRODUCT_ID.PRODUCT_URL,
+                        prod_rating: parseFloat(item.PRODUCT_ID.MEAN_RATING).toFixed(2),
+                        prod_rating_count: item.PRODUCT_ID.RATING_COUNT,
+                        prod_review_count: item.PRODUCT_ID.REVIEW_COUNT,
+                        prod_price: item.PRODUCT_ID.PRODUCT_PRICE,
+                        prod_price_ecomm: item.PRODUCT_ID.LEAST_PRICE_ECOMMERCE,
+                        updated_date: item.UPDATED_DATE,
+                        active_flag: item.ACTIVE_FLAG})
                 }
-            });
+                res.status(200).json({
+                    status: "success",
+                    data: {
+                        wish_arr
+                    }
+                });
+            }
+            else
+            {
+                res.status(404).json({
+                    status: "error",
+                    data: {
+                       message: "No wishlist products added!"
+                    }
+                });
+            }
+
         })
         .catch(err => {
+            console.log(err);
             res.status(500).json({
                 status: "error",
                 error: err,
@@ -83,7 +98,7 @@ exports.wishlist_conn_create = (req, res, next) => {
                     wishlist
                         .save()
                         .then(result => {
-                            console.log(result);
+
                             res.status(201).json({
                                 status: "success",
                                 data: {

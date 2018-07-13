@@ -93,7 +93,7 @@ const dbOperations={
                                     },
                                     sessionData.role,
                                     {
-                                        expiresIn: "1h"
+                                        expiresIn: "1y"
                                     }
                                     );
                                 var responseObject={
