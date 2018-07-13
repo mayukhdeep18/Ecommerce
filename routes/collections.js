@@ -1,17 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const CollectionsController = require("../controllers/collections");
+const CollectionController = require("../controllers/collections");
 const checkAuth = require('../middleware/check-auth');
 
 
-router.get("/", CollectionsController.collections_get_all);
+router.post("/searchtrend", CollectionController.collection_product_search);
 
-router.post("/",/*checkAuth,*/ CollectionsController.collections_create);
+router.post("/", CollectionController.collection_create);
 
-router.get("/:collectionsId", CollectionsController.collections_get_collections);
+router.get("/", CollectionController.get_all_collection);
 
-router.patch("/:collectionsId",/*checkAuth,*/ CollectionsController.collections_update);
+router.get("/:prodId", CollectionController.product_get_by_id);
 
-router.delete("/:collectionsId",/*checkAuth,*/ CollectionsController.collections_delete);
+router.patch("/:trendId",/*checkAuth,*/ CollectionController.collection_update_by_id);
+
+router.delete("/:trendId",/*checkAuth,*/ CollectionController.collection_delete);
 
 module.exports = router;
