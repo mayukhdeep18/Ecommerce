@@ -117,6 +117,7 @@ const adminSignup = require("./routes/admin_signup");
 const TrendRoutes = require("./routes/trending_products");
 const HotDealsRoutes = require("./routes/hot_deals");
 const BannerRoutes = require("./routes/banner");
+const HomeBannerRoutes = require("./routes/home_banner");
 
 mongoose.connect(
     "mongodb://zoom_user:"+
@@ -219,7 +220,7 @@ app.use("/admin_signup",adminSignup);
 app.use("/trending_products",TrendRoutes);
 app.use("/hot_deals",HotDealsRoutes);
 app.use("/banner",BannerRoutes);
-
+app.use("/home_banner",HomeBannerRoutes);
 
 app.use((req, res, next) => {
     const error = new Error("Not found");
