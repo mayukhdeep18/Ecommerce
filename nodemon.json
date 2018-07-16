@@ -1,7 +1,7 @@
 {
   "env": {
     "Zoom_user": "zoom_admin",
-    "ZOOM_PWD": "zoom123",
+    "ECOMM_PWD": "ecomm123",
     "JWT_KEY": "Customer",
     "JWT_KEY_ADMIN": "Administrator",
     "JWT_KEY_SUPER_ADMIN": "SuperAdministrator",
