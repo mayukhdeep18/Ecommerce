@@ -1,6 +1,6 @@
 {
   "env": {
-    "Zoom_user": "zoom_admin",
+    "Zoom_user": "zoom_user",
     "ZOOM_PWD": "zoom123",
     "JWT_KEY": "Customer",
     "JWT_KEY_ADMIN": "Administrator",
