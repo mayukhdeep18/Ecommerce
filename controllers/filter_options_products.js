@@ -48,48 +48,62 @@ exports.filter_opt_prod_conn_get_all = (req, res, next) => {
 //create a new filter option product connection
 exports.filter_opt_prod_conn_create = (req, res, next) => {
 
-    if(req.body.PRODUCT_ID != null)
-    {
-        const filteroptprod = new Filter_opt_prod({
-            _id: new mongoose.Types.ObjectId(),
-            PRODUCT_ID: req.body.PRODUCT_ID,
-            FILTER_ID: req.body.FILTER_ID,
-            FILTER_OPTION_ID: req.body.FILTER_OPTION_ID,
-            UPDATED_BY: req.body.UPDATED_BY,
-            UPDATED_DATE: new Date(),
-            ACTIVE_FLAG: req.body.ACTIVE_FLAG
-        });
-        filteroptprod
-            .save()
-            .then(result => {
-                res.status(201).json({
-                    status: "success",
-                    data: {
-                        message: "filter option product connection stored"
-                    }
-                });
-            })
-            .catch(err => {
-                console.log(err);
+    Filter_opt_prod.find({$and:[{PRODUCT_ID:req.body.PRODUCT_ID},{FILTER_OPTION_ID:req.body.FILTER_OPTION_ID}]})
+        .select('PRODUCT_ID ACTIVE_FLAG _id')
+        .exec()
+        .then(res_opt => {
+
+            if(res_opt.length > 0)
+            {
                 res.status(500).json({
                     status: "error",
-                    error: err,
                     data: {
-                        message: "An error has occurred as mentioned above"
+                        message: "Filter already exists!"
                     }
                 });
-            });
-    }
-    else
-    {
+            }
+            else
+            {
+                const filteroptprod = new Filter_opt_prod({
+                    _id: new mongoose.Types.ObjectId(),
+                    PRODUCT_ID: req.body.PRODUCT_ID,
+                    FILTER_ID: req.body.FILTER_ID,
+                    FILTER_OPTION_ID: req.body.FILTER_OPTION_ID,
+                    UPDATED_BY: req.body.UPDATED_BY,
+                    UPDATED_DATE: new Date(),
+                    ACTIVE_FLAG: req.body.ACTIVE_FLAG
+                });
+                filteroptprod
+                    .save()
+                    .then(result => {
+                        res.status(201).json({
+                            status: "success",
+                            data: {
+                                message: "filter option product connection stored"
+                            }
+                        });
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        res.status(500).json({
+                            status: "error",
+                            error: err,
+                            data: {
+                                message: "Internal server error!"
+                            }
+                        });
+                    });
+            }
+        }) .catch(err => {
+        console.log(err);
         res.status(500).json({
             status: "error",
+            error: err,
             data: {
-                message: "Please add product first!"
+                message: "Internal server error!"
             }
         });
-    }
-
+    });
 };
 
 
