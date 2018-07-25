@@ -120,7 +120,7 @@ const BannerRoutes = require("./routes/banner");
 const HomeBannerRoutes = require("./routes/home_banner");
 
 mongoose.connect(
-    "mongodb://zoom_user:"+process.env.ZOOM_PWD+"@localhost:27017/zoomzoom", {useMongoClient: true}, { autoIndex: false  }
+    "mongodb://"+process.env.Zoom_user+":"+process.env.ZOOM_PWD+"@localhost:27017/zoomzoom", {useMongoClient: true}, { autoIndex: false  }
 );
 
 app.use(morgan("dev"));

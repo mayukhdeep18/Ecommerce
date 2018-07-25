@@ -780,7 +780,7 @@ Product.find({_id: id})
     .select('PRODUCT_ID _id')
     .exec()
     .then(doc => {
-        if (doc != null)
+        if (doc.length > 0)
         {
             Product.update({ _id: id }, { $set: updateOps })
                 .exec()

@@ -805,65 +805,65 @@ exports.filters_categories_conn_update = (req, res, next) => {
 //delete a filter category connection by id
 exports.filters_categories_conn_delete = (req, res, next) => {
     const id = req.params.filtercategoryId;
-    Filters_categories.findById(id)
+    Filters_categories.find({_id: id})
         .select('FILTER_ID ACTIVE_FLAG _id')
         .exec()
         .then(res1 =>{
-            var fil_id = res1.FILTER_ID;
-            Filters_categories.remove({ _id: id })
-                .exec()
-                .then(result => {
-                    Filter_options.remove({FILTER_ID: fil_id})
-                        .exec()
-                        .then(res2 => {
-                            Filter_prod_con.remove({FILTER_ID: fil_id})
-                                .exec()
-                                .then(res3 => {
-                                    Filters.remove({_id: fil_id})
-                                        .exec()
-                                        .then(res4 => {
-                                            res.status(200).json({
-                                                status: "success",
-                                                data: {
-                                                    message: 'filter category connection deleted'
-                                                }
+            if(res1.length > 0)
+            {
+                var fil_id = res1.FILTER_ID;
+                Filters_categories.remove({ _id: id })
+                    .exec()
+                    .then(result => {
+                        Filter_options.remove({FILTER_ID: fil_id})
+                            .exec()
+                            .then(res2 => {
+                                Filter_prod_con.remove({FILTER_ID: fil_id})
+                                    .exec()
+                                    .then(res3 => {
+                                        Filters.remove({_id: fil_id})
+                                            .exec()
+                                            .then(res4 => {
+                                                res.status(200).json({
+                                                    status: "success",
+                                                    data: {
+                                                        message: 'filter category connection deleted'
+                                                    }
+                                                });
+                                            }).catch(err => {
+                                            console.log(err);
+                                            res.status(500).json({
+                                                status: "error",
+                                                error: err,
+                                                data:
+                                                    {
+                                                        message: "Internal server error!"
+                                                    }
                                             });
-                                        }).catch(err => {
-                                        console.log(err);
-                                        res.status(500).json({
-                                            status: "error",
-                                            error: err,
-                                            data:
-                                                {
-                                                    message: "Internal server error!"
-                                                }
                                         });
+                                    }).catch(err => {
+                                    console.log(err);
+                                    res.status(500).json({
+                                        status: "error",
+                                        error: err,
+                                        data:
+                                            {
+                                                message: "Internal server error!"
+                                            }
                                     });
-                                }).catch(err => {
-                                console.log(err);
-                                res.status(500).json({
-                                    status: "error",
-                                    error: err,
-                                    data:
-                                        {
-                                            message: "Internal server error!"
-                                        }
                                 });
+                            }).catch(err => {
+                            console.log(err);
+                            res.status(500).json({
+                                status: "error",
+                                error: err,
+                                data:
+                                    {
+                                        message: "Internal server error!"
+                                    }
                             });
-                        }).catch(err => {
-                        console.log(err);
-                        res.status(500).json({
-                            status: "error",
-                            error: err,
-                            data:
-                                {
-                                    message: "Internal server error!"
-                                }
                         });
-                    });
-
-                })
-                .catch(err => {
+                    }).catch(err => {
                     console.log(err);
                     res.status(500).json({
                         status: "error",
@@ -874,7 +874,28 @@ exports.filters_categories_conn_delete = (req, res, next) => {
                             }
                     });
                 });
-        })
+            }
+            else
+            {
+                res.status(500).json({
+                    status: "error",
+                    data:
+                        {
+                            message: "Filter does not exist!"
+                        }
+                });
+            }
+        }).catch(err => {
+        console.log(err);
+        res.status(500).json({
+            status: "error",
+            error: err,
+            data:
+                {
+                    message: "Internal server error!"
+                }
+        });
+    });
 };
 
 //get all filter category connection details
