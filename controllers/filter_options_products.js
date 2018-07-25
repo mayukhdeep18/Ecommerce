@@ -138,15 +138,15 @@ exports.filter_opt_prod_conn_get_by_id = (req, res, next) => {
 
 //update filter option product connection details by id
 exports.filter_opt_prod_conn_update = (req, res, next) => {
-    const id = req.params.filtercategoryId;
+   // const id = req.params.filtercategoryId;
     const updateOps = {};
-        updateOps['PRODUCT_ID']= req.body.PRODUCT_ID;
-        updateOps['FILTER_ID'] = req.body.FILTER_ID;
+       // updateOps['PRODUCT_ID']= req.body.PRODUCT_ID;
+       // updateOps['FILTER_ID'] = req.body.FILTER_ID;
             updateOps['FILTER_OPTION_ID'] = req.body.FILTER_OPTION_ID;
             updateOps['UPDATED_DATE']= new Date();
-            updateOps['ACTIVE_FLAG']= req.body.ACTIVE_FLAG;
+            //updateOps['ACTIVE_FLAG']= req.body.ACTIVE_FLAG;
 
-    Filter_opt_prod.update({ PRODUCT_ID: id }, { $set: updateOps },{multi: true})
+    Filter_opt_prod.update({$and: [{ PRODUCT_ID: req.body.PRODUCT_ID },{ FILTER_ID: req.body.FILTER_ID }]}, { $set: updateOps },{multi: true})
         .exec()
         .then(result => {
             res.status(200).json({
