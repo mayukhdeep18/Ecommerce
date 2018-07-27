@@ -5,28 +5,31 @@ const Product = require("../models/product_details");
 
 //get all active ecommerce category details
 exports.ecomm_category_get_all = (req, res, next) => {
+    var ecomm_arr = [];
     Ecommerce_category.find()
         .select('ECOMMERCE_ID ECOMMERCE_NAME ECOMMERCE_DESCRIPTION ECOMMERCE_LOGO ECOMMERCE_WEB_URL ACTIVE_FLAG _id')
         .exec()
         .then(docs => {
             if(docs.length > 0)
             {
+                for(var doc of docs)
+                {
+                     ecomm_arr.push({
+                         doc_id: doc._id,
+                         ecommerce_id: doc.ECOMMERCE_ID,
+                         ecommerce_name: doc.ECOMMERCE_NAME,
+                         ecommerce_description: doc.ECOMMERCE_DESCRIPTION,
+                         ecommerce_logo: doc.ECOMMERCE_LOGO,
+                         ecommerce_web_url: doc.ECOMMERCE_WEB_URL,
+                         updated_by_user: doc.UPDATED_BY,
+                         updated_on: doc.UPDATED_DATE,
+                         isActive: doc.ACTIVE_FLAG
+                     })
+                }
                 res.status(200).json({
                     status: "success",
                     data: {
-                        ecommerce_details: docs.map(doc => {
-                            return {
-                                doc_id: doc._id,
-                                ecommerce_id: doc.ECOMMERCE_ID,
-                                ecommerce_name: doc.ECOMMERCE_NAME,
-                                ecommerce_description: doc.ECOMMERCE_DESCRIPTION,
-                                ecommerce_logo: JSON.parse(doc.ECOMMERCE_LOGO),
-                                ecommerce_web_url: doc.ECOMMERCE_WEB_URL,
-                                updated_by_user: doc.UPDATED_BY,
-                                updated_on: doc.UPDATED_DATE,
-                                isActive: doc.ACTIVE_FLAG
-                            };
-                        })
+                        ecomm_arr
                     }
                 });
             }
@@ -34,13 +37,14 @@ exports.ecomm_category_get_all = (req, res, next) => {
                 res.status(404).json({
                     status: "error",
                     data: {
-                        message: "Internal server error!"
+                        message: "No ecommerce category found!"
                     }
                 });
             }
 
         })
         .catch(err => {
+            console.log(err);
             res.status(500).json({
                 status: "error",
                 error: err,
@@ -132,28 +136,31 @@ exports.ecommerce_create_category = (req, res, next) =>  {
 //get  ecommerce category details by id
 exports.ecommerce_category_get_by_id = (req, res, next) => {
     const id = req.params.ecommcategoryId;
-    Ecommerce_category.find({ECOMMERCE_ID: id})
+    var ecomm_arr = [];
+    Ecommerce_category.find({_id: id})
         .select('ECOMMERCE_ID ECOMMERCE_NAME ECOMMERCE_DESCRIPTION ECOMMERCE_LOGO ECOMMERCE_WEB_URL ACTIVE_FLAG _id')
         .exec()
         .then(docs => {
             if(docs.length > 0)
             {
+                for(var doc of docs)
+                {
+                    ecomm_arr.push({
+                        doc_id: doc._id,
+                        ecommerce_id: doc.ECOMMERCE_ID,
+                        ecommerce_name: doc.ECOMMERCE_NAME,
+                        ecommerce_description: doc.ECOMMERCE_DESCRIPTION,
+                        ecommerce_logo: doc.ECOMMERCE_LOGO,
+                        ecommerce_web_url: doc.ECOMMERCE_WEB_URL,
+                        updated_by_user: doc.UPDATED_BY,
+                        updated_on: doc.UPDATED_DATE,
+                        isActive: doc.ACTIVE_FLAG
+                    })
+                }
                 res.status(200).json({
                     status: "success",
                     data: {
-                        ecommerce_details: docs.map(doc => {
-                            return {
-                                doc_id: doc._id,
-                                ecommerce_id: doc.ECOMMERCE_ID,
-                                ecommerce_name: doc.ECOMMERCE_NAME,
-                                ecommerce_description: doc.ECOMMERCE_DESCRIPTION,
-                                ecommerce_logo: JSON.parse(doc.ECOMMERCE_LOGO),
-                                ecommerce_web_url: doc.ECOMMERCE_WEB_URL,
-                                updated_by_user: doc.UPDATED_BY,
-                                updated_on: doc.UPDATED_DATE,
-                                isActive: doc.ACTIVE_FLAG
-                            };
-                        })
+                        ecomm_arr
                     }
                 });
             }
@@ -161,13 +168,14 @@ exports.ecommerce_category_get_by_id = (req, res, next) => {
                 res.status(404).json({
                     status: "error",
                     data: {
-                        message: "Internal server error!"
+                        message: "No ecommerce category found!"
                     }
                 });
             }
 
         })
         .catch(err => {
+            console.log(err);
             res.status(500).json({
                 status: "error",
                 error: err,
@@ -195,7 +203,7 @@ exports.ecommerce_category_update_by_id = (req, res, next) =>  {
     updateRes['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
     updateRes['UPDATED_DATE'] = new Date();
 
-    Ecommerce_category.update({ ECOMMERCE_ID: id }, { $set: updateOps })
+    Ecommerce_category.update({ _id: id }, { $set: updateOps })
         .exec()
         .then(result => {
             EcomProd.update({ECOMMERCE_CATEGORY_ID: id},{$set: updateRes},{multi:true})

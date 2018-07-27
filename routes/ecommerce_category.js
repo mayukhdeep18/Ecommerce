@@ -43,6 +43,6 @@ router.patch("/:ecommcategoryId", EcommerceCategoryController.ecommerce_category
 
 router.patch("/logo_update/:ecommcategoryId", upload.single('ECOMMERCE_LOGO'), EcommerceCategoryController.ecom_logo_update_by_id);
 
-router.delete("/:ecommcategoryId",checkAuth, EcommerceCategoryController.ecommerce_category_delete_by_id);
+router.delete("/:ecommcategoryId", EcommerceCategoryController.ecommerce_category_delete_by_id);
 
 module.exports = router;
