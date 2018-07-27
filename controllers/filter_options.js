@@ -334,7 +334,7 @@ exports.filters_options_conn_delete = (req, res, next) => {
     Filter_options.remove({ _id: id })
         .exec()
         .then(result => {
-            Filter_prod_conn.remove({FILTER_OPTION_ID: _id})
+            Filter_prod_conn.remove({FILTER_OPTION_ID: id})
                 .exec()
                 .then(res1 => {
                     res.status(200).json({
@@ -350,7 +350,7 @@ exports.filters_options_conn_delete = (req, res, next) => {
                     error: err,
                     data:
                         {
-                            message: "An error has occurred as mentioned above"
+                            message: "Internal server error!"
                         }
                 });
             });
@@ -362,7 +362,7 @@ exports.filters_options_conn_delete = (req, res, next) => {
                 error: err,
                 data:
                     {
-                        message: "An error has occurred as mentioned above"
+                        message: "Internal server error!"
                     }
             });
         });
