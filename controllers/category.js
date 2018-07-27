@@ -209,8 +209,8 @@ exports.category_update_category = (req, res, next) =>{
     updateRes['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
     updateRes['UPDATED_DATE'] = new Date();
 
-    var prod_arr = {};
-    var fil_arr = {};
+    var prod_arr = [];
+    var fil_arr = [];
     Product.find({PRODUCT_CATEGORY_ID: id})
         .select('PRODUCT_ID ACTIVE_FLAG _id')
         .exec()
@@ -249,7 +249,7 @@ exports.category_update_category = (req, res, next) =>{
                                                                     Filprod.update({FILTER_ID: {$in: fil_arr}},{$set: updateRes})
                                                                         .exec()
                                                                         .then(res8 => {
-                                                                            Rating.update({PRODUCT_ID: {$in: {prod_arr}}},{$set: updateRes})
+                                                                            Rating.update({PRODUCT_ID: {$in: prod_arr}},{$set: updateRes})
                                                                                 .exec()
                                                                                 .then(res7 => {
                                                                                     Review.update({PRODUCT_ID: {$in: prod_arr}},{$set: updateRes})
@@ -426,7 +426,7 @@ exports.category_update_category = (req, res, next) =>{
                                     EcommProd.update({CATEGORY_ID: id},{$set: updateRes})
                                         .exec()
                                         .then(res4 => {
-                                            Rating.update({PRODUCT_ID: {$in: {prod_arr}}},{$set: updateRes})
+                                            Rating.update({PRODUCT_ID: {$in: prod_arr}},{$set: updateRes})
                                                 .exec()
                                                 .then(res7 => {
                                                     Review.update({PRODUCT_ID: {$in: prod_arr}},{$set: updateRes})
@@ -812,6 +812,8 @@ exports.category_update_category = (req, res, next) =>{
 //delete a category by id
 exports.category_delete = (req, res, next) =>{
     const id = req.params.categoryId;
+    var prod_arr = [];
+    var fil_arr = [];
     Product.find({PRODUCT_CATEGORY_ID: id})
         .select('PRODUCT_ID ACTIVE_FLAG _id')
         .exec()
@@ -850,7 +852,7 @@ exports.category_delete = (req, res, next) =>{
                                                                     Filprod.remove({FILTER_ID: {$in: fil_arr}})
                                                                         .exec()
                                                                         .then(res8 => {
-                                                                            Rating.remove({PRODUCT_ID: {$in: {prod_arr}}})
+                                                                            Rating.remove({PRODUCT_ID: {$in: prod_arr}})
                                                                                 .exec()
                                                                                 .then(res7 => {
                                                                                     Review.remove({PRODUCT_ID: {$in: prod_arr}})
@@ -1030,7 +1032,7 @@ exports.category_delete = (req, res, next) =>{
                                     EcommProd.remove({CATEGORY_ID: id})
                                         .exec()
                                         .then(res4 => {
-                                            Rating.remove({PRODUCT_ID: {$in: {prod_arr}}})
+                                            Rating.remove({PRODUCT_ID: {$in: prod_arr}})
                                                 .exec()
                                                 .then(res7 => {
                                                     Review.remove({PRODUCT_ID: {$in: prod_arr}})

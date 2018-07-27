@@ -120,8 +120,8 @@ const BannerRoutes = require("./routes/banner");
 const HomeBannerRoutes = require("./routes/home_banner");
 
 /*mongoose.connect(
-    "mongodb://"+process.env.Zoom_user+":"+process.env.ZOOM_PWD+"@localhost:27017/zoomzoom", {useMongoClient: true}, { autoIndex: false  }
-);*/
+    "mongodb://"+process.env.Zoom_user+":"+process.env.ZOOM_PWD+"@localhost:27017/zoomzoom",
+    {useMongoClient: true}, { autoIndex: false  });*/
 
 /*mongoose.connect(
     "mongodb://"+process.env.Zoom_user+":"+process.env.ZOOM_PWD+"@ds125821.mlab.com:25821/zoomzoom", {useMongoClient: true}, { autoIndex: false  }
