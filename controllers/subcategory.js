@@ -219,14 +219,14 @@ exports.subcategory_get_subcategory = (req, res, next) => {
 //update sub subcategory details by id
 exports.subcategory_update = (req, res, next) => {
     const id = req.params.subcategoryId;
-    var Sub_sub_id = req.body.SUB_SUB_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
+    var Sub_sub_id = req.body.PRODUCT_SUB_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
     const updateOps = {};
     const updateRes = {};
 
     //updateOps['CATEGORY_ID'] = req.body.CATEGORY_ID;
     //updateOps['SUB_CATEGORY_ID'] = req.body.SUB_CATEGORY_ID;
-    updateOps['PRODUCT_SUB_CATEGORY_NAME'] = req.body.SUB_SUB_CATEGORY_NAME;
-    updateOps['PRODUCT_SUB_CATEGORY_DESCRIPTION']= req.body.SUB_SUB_CATEGORY_DESCRIPTION;
+    updateOps['PRODUCT_SUB_CATEGORY_NAME'] = req.body.PRODUCT_SUB_CATEGORY_NAME;
+    updateOps['PRODUCT_SUB_CATEGORY_DESCRIPTION']= req.body.PRODUCT_SUB_CATEGORY_DESCRIPTION;
     updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
     updateOps['UPDATED_DATE'] = new Date();
     updateOps['SUB_CATEGORY_ID'] = Sub_sub_id.toLowerCase();
