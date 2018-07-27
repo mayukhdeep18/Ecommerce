@@ -16,6 +16,6 @@ router.patch("/:ecommcategoryId",/*checkAuth,*/  EcommProdController.ecommproduc
 
 router.patch("/ecomupd/:ecommcategoryId",/*checkAuth,*/  EcommProdController.ecommproduct_update_ecom_only);
 
-router.delete("/:ecommcategoryId",checkAuth, EcommProdController.ecommproduct_delete_by_id);
+router.delete("/:ecommcategoryId", EcommProdController.ecommproduct_delete_by_id);
 
 module.exports = router;
