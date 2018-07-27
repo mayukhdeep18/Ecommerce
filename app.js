@@ -128,8 +128,9 @@ const HomeBannerRoutes = require("./routes/home_banner");
 );*/
 
 mongoose.connect(
-    "mongodb://"+process.env.Zoom_user+":"+process.env.ZOOM_PWD+"@ds247101.mlab.com:47101/zoombackup", {useMongoClient: true}, { autoIndex: false  }
+    "mongodb://"+process.env.Zoom_user+":"+process.env.ZOOM_PWD+"@ds135061.mlab.com:35061/zoombackup", {useMongoClient: true}, { autoIndex: false  }
 );
+
 
 app.use(morgan("dev"));
 app.use('/uploads', express.static('uploads'));
