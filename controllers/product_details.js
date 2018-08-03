@@ -258,6 +258,7 @@ exports.product_create = (req, res, next) => {
                             PRODUCT_NAME: req.body.PRODUCT_NAME,
                             PRODUCT_SUB_TITLE: req.body.PRODUCT_SUB_TITLE,
                             PRODUCT_DESCRIPTION: req.body.PRODUCT_DESCRIPTION,
+                            PRODUCT_PRICE: req.body.PRODUCT_PRICE,
                             PRODUCT_SPECIFICATIONS: JSON.stringify(req.body.PRODUCT_SPECIFICATIONS),
                             PRODUCT_URL: Prod_id.toLowerCase(),
                             PRODUCT_IMAGE_LINKS: JSON.stringify(req.body.PRODUCT_IMAGE_LINKS),
@@ -768,6 +769,7 @@ exports.product_update_by_id = (req, res, next) => {
     updateOps['PRODUCT_NAME'] = req.body.PRODUCT_NAME;
     updateOps['PRODUCT_SUB_TITLE']= req.body.PRODUCT_SUB_TITLE;
     updateOps['PRODUCT_DESCRIPTION'] = req.body.PRODUCT_DESCRIPTION;
+    updateOps['PRODUCT_PRICE'] = req.body.PRODUCT_PRICE;
     updateOps['PRODUCT_SPECIFICATIONS'] = JSON.stringify(req.body.PRODUCT_SPECIFICATIONS);
     updateOps['PRODUCT_URL'] = Prod_id.toLowerCase();
     updateOps['PRODUCT_IMAGE_LINKS'] = JSON.stringify(req.body.PRODUCT_IMAGE_LINKS);

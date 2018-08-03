@@ -284,7 +284,7 @@ exports.get_product_by_categoryId = (req, res, next) => {
                             .json({
                                 status: "error",
                                 error: "Id not found",
-                                message: "No valid entry found for provided category ID"
+                                message: "filters don't exist! Please add filters"
                             });
                     }
                 })
@@ -331,6 +331,16 @@ exports.product_get_all = (req, res, next) => {
     var prod_final_rev_arr = [];
 
     var final_arr = [];
+    var min_price = 0;
+    var max_price = 100000000;
+    if(req.body.MIN_PRICE!=null || req.body.MIN_PRICE!=undefined)
+    {
+        min_price = req.body.MIN_PRICE;
+    }
+    if(req.body.MAX_PRICE!=null || req.body.MAX_PRICE!=undefined)
+    {
+        max_price = req.body.MAX_PRICE;
+    }
 
     Category.find({CATEGORY_ID: id})
         .select('CATEGORY_ID _id')
@@ -367,7 +377,7 @@ exports.product_get_all = (req, res, next) => {
                     }
 
                     // look up ecommerce product details and product details on the basis of category id
-                    Product.find({PRODUCT_CATEGORY_ID: cat_res[0]._id})
+                    Product.find({$and: [{PRODUCT_CATEGORY_ID: cat_res[0]._id},{PRODUCT_PRICE: {$gte: min_price,$lte: max_price}}]})
                         .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT PRODUCT_IMAGE_LINKS UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
                         .populate('PRODUCT_CATEGORY_ID')
                         .populate('PRODUCT_SUB_CATEGORY_ID')
@@ -2008,6 +2018,17 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
     var prod_final_rev_arr = [];
 
     var final_arr = [];
+    var min_price = 0;
+    var max_price = 100000000;
+
+    if(req.body.MIN_PRICE!=null || req.body.MIN_PRICE!=undefined)
+    {
+        min_price = req.body.MIN_PRICE;
+    }
+    if(req.body.MAX_PRICE!=null || req.body.MAX_PRICE!=undefined)
+    {
+        max_price = req.body.MAX_PRICE;
+    }
 
 
     if(fil_value === 'oldest-to-newest') {
@@ -2046,7 +2067,7 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                         }
 
                         // look up ecommerce product details and product details on the basis of category id
-                        Product.find({PRODUCT_CATEGORY_ID: cat_res[0]._id})
+                        Product.find({$and: [{PRODUCT_CATEGORY_ID: cat_res[0]._id},{PRODUCT_PRICE: {$gte: min_price,$lte: max_price}}]})
                             .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT PRODUCT_IMAGE_LINKS UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
                             .populate('PRODUCT_CATEGORY_ID')
                             .populate('PRODUCT_SUB_CATEGORY_ID')
@@ -2296,7 +2317,7 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                         }
 
                         // look up ecommerce product details and product details on the basis of category id
-                        Product.find({PRODUCT_CATEGORY_ID: cat_res[0]._id})
+                        Product.find({$and:[{PRODUCT_CATEGORY_ID: cat_res[0]._id},{PRODUCT_PRICE: {$gte: min_price,$lte: max_price}}]})
                             .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT PRODUCT_IMAGE_LINKS UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
                             .populate('PRODUCT_CATEGORY_ID')
                             .populate('PRODUCT_SUB_CATEGORY_ID')
@@ -2545,7 +2566,7 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                         }
 
                         // look up ecommerce product details and product details on the basis of category id
-                        Product.find({PRODUCT_CATEGORY_ID: cat_res[0]._id})
+                        Product.find({$and: [{PRODUCT_CATEGORY_ID: cat_res[0]._id},{PRODUCT_PRICE: {$gte: min_price,$lte: max_price}}]})
                             .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT PRODUCT_IMAGE_LINKS UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
                             .populate('PRODUCT_CATEGORY_ID')
                             .populate('PRODUCT_SUB_CATEGORY_ID')
@@ -2794,7 +2815,7 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                         }
 
                         // look up ecommerce product details and product details on the basis of category id
-                        Product.find({PRODUCT_CATEGORY_ID: cat_res[0]._id})
+                        Product.find({$and: [{PRODUCT_CATEGORY_ID: cat_res[0]._id},{PRODUCT_PRICE: {$gte: min_price,$lte: max_price}}]})
                             .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT PRODUCT_IMAGE_LINKS UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
                             .populate('PRODUCT_CATEGORY_ID')
                             .populate('PRODUCT_SUB_CATEGORY_ID')
@@ -3043,7 +3064,7 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                         }
 
                         // look up ecommerce product details and product details on the basis of category id
-                        Product.find({PRODUCT_CATEGORY_ID: cat_res[0]._id})
+                        Product.find({$and: [{PRODUCT_CATEGORY_ID: cat_res[0]._id},{PRODUCT_PRICE: {$gte: min_price,$lte: max_price}}]})
                             .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT PRODUCT_IMAGE_LINKS UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
                             .populate('PRODUCT_CATEGORY_ID')
                             .populate('PRODUCT_SUB_CATEGORY_ID')
@@ -3292,7 +3313,7 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                         }
 
                         // look up ecommerce product details and product details on the basis of category id
-                        Product.find({PRODUCT_CATEGORY_ID: cat_res[0]._id})
+                        Product.find({$and: [{PRODUCT_CATEGORY_ID: cat_res[0]._id},{PRODUCT_PRICE: {$gte: min_price,$lte: max_price}}]})
                             .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT PRODUCT_IMAGE_LINKS UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
                             .populate('PRODUCT_CATEGORY_ID')
                             .populate('PRODUCT_SUB_CATEGORY_ID')
@@ -3541,7 +3562,7 @@ exports.get_product_by_filter_sorting_filter = (req, res, next) => {
                         }
 
                         // look up ecommerce product details and product details on the basis of category id
-                        Product.find({PRODUCT_CATEGORY_ID: cat_res[0]._id})
+                        Product.find({$and: [{PRODUCT_CATEGORY_ID: cat_res[0]._id},{PRODUCT_PRICE: {$gte: min_price,$lte: max_price}}]})
                             .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT PRODUCT_IMAGE_LINKS UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
                             .populate('PRODUCT_CATEGORY_ID')
                             .populate('PRODUCT_SUB_CATEGORY_ID')
