@@ -11,7 +11,7 @@ router.patch("/:filtercategoryId",/*checkAuth,*/  FilterCategoryController.filte
 
 //ONLY THE BELOW APIs ARE TO BE USED TO ADD/DELETE FILTERS AND ESTABLISH FILTER AND CATEGORY/SUB/SUB SUB CATEGORY CONNECTIONS
 
-router.get("/", FilterCategoryController.filters_categories_conn_get_all);
+router.get("/cat/:catId", FilterCategoryController.filters_categories_conn_get_all);
 
 router.post("/",/*checkAuth,*/ FilterCategoryController.filters_categories_conn_create);
 

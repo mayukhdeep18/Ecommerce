@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22d33094-d95f-4e1e-897e-0a67ac0d8ed3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/controllers/category_based_product.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/category_based_product.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/sub_category_based_product.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/sub_category_based_product.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/sub_sub_category_based_product.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/sub_sub_category_based_product.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -32,72 +30,22 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1320">
+            <state relative-caret-position="177">
               <caret line="130" column="100" selection-start-line="130" selection-start-column="100" selection-end-line="130" selection-end-column="100" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="category_based_product.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/category_based_product.js">
+      <file leaf-file-name="filters_categories.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/controllers/filters_categories.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="379" column="128" selection-start-line="379" selection-start-column="128" selection-end-line="379" selection-end-column="128" />
+            <state relative-caret-position="480">
+              <caret line="1076" column="13" lean-forward="true" selection-start-line="1076" selection-start-column="13" selection-end-line="1076" selection-end-column="13" />
               <folding>
-                <element signature="e#531#20617#0" />
-                <element signature="e#37168#128461#0" />
-                <element signature="e#128944#249254#0" />
-                <element signature="e#129020#146081#0" />
-                <element signature="e#146133#163124#0" />
-                <element signature="e#163177#180168#0" />
-                <element signature="e#180221#197213#0" />
-                <element signature="e#198150#215201#0" />
-                <element signature="e#214311#231302#0" />
-                <element signature="e#231316#248307#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sub_category_based_product.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/sub_category_based_product.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="2004" column="67" selection-start-line="2004" selection-start-column="67" selection-end-line="2004" selection-end-column="67" />
-              <folding>
-                <element signature="e#585#20843#0" />
-                <element signature="e#20926#37381#0" />
-                <element signature="e#37493#128893#0" />
-                <element signature="e#129016#249871#0" />
-                <element signature="e#129437#146995#0" />
-                <element signature="e#147047#164053#0" />
-                <element signature="e#164106#181112#0" />
-                <element signature="e#181165#198172#0" />
-                <element signature="e#198226#215231#0" />
-                <element signature="e#215285#232291#0" />
-                <element signature="e#232305#249868#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sub_sub_category_based_product.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/controllers/sub_sub_category_based_product.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="1995" column="67" selection-start-line="1995" selection-start-column="67" selection-end-line="1995" selection-end-column="67" />
-              <folding>
-                <element signature="e#644#20808#0" />
-                <element signature="e#20891#37240#0" />
-                <element signature="e#37352#128010#0" />
-                <element signature="e#128129#247096#0" />
-                <element signature="e#128550#145437#0" />
-                <element signature="e#145489#162385#0" />
-                <element signature="e#162438#179334#0" />
-                <element signature="e#179387#196284#0" />
-                <element signature="e#196338#213233#0" />
-                <element signature="e#213287#230183#0" />
-                <element signature="e#230197#247093#0" />
+                <element signature="e#557#3413#0" />
+                <element signature="e#3527#19101#0" />
+                <element signature="e#19418#48038#0" />
+                <element signature="e#48146#51647#0" />
               </folding>
             </state>
           </provider>
@@ -158,7 +106,6 @@
         <option value="$PROJECT_DIR$/controllers/home_banner.js" />
         <option value="$PROJECT_DIR$/routes/home_banner.js" />
         <option value="$PROJECT_DIR$/nodemon.json" />
-        <option value="$PROJECT_DIR$/controllers/product_details.js" />
         <option value="$PROJECT_DIR$/controllers/category.js" />
         <option value="$PROJECT_DIR$/controllers/subsubcategory.js" />
         <option value="$PROJECT_DIR$/controllers/subcategory.js" />
@@ -177,6 +124,7 @@
         <option value="$PROJECT_DIR$/controllers/category_based_product.js" />
         <option value="$PROJECT_DIR$/controllers/sub_category_based_product.js" />
         <option value="$PROJECT_DIR$/controllers/sub_sub_category_based_product.js" />
+        <option value="$PROJECT_DIR$/controllers/product_details.js" />
       </list>
     </option>
   </component>
@@ -370,12 +318,12 @@
       <workItem from="1532153648835" duration="75000" />
       <workItem from="1532504061166" duration="13214000" />
       <workItem from="1532588383531" duration="15990000" />
-      <workItem from="1533120228738" duration="5557000" />
+      <workItem from="1533120228738" duration="6350000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="821946000" />
+    <option name="totallyTimeSpent" value="822739000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="191" y="24" width="1081" height="717" extended-state="0" />
@@ -696,13 +644,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/product_details.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3790">
-          <caret line="1008" column="2" lean-forward="true" selection-start-line="1008" selection-start-column="2" selection-end-line="1008" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/ecommerce_product_details.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
@@ -741,20 +682,6 @@
             <element signature="e#3002#4586#0" />
             <element signature="e#4680#5274#0" />
             <element signature="e#5462#6423#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/filters_categories.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="1156" column="2" selection-start-line="1156" selection-start-column="2" selection-end-line="1156" selection-end-column="2" />
-          <folding>
-            <element signature="e#557#3413#0" />
-            <element signature="e#3527#19101#0" />
-            <element signature="e#19418#50379#0" />
-            <element signature="e#50487#53988#0" />
-            <element signature="e#54140#57816#0" />
           </folding>
         </state>
       </provider>
@@ -825,13 +752,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1320">
-          <caret line="130" column="100" selection-start-line="130" selection-start-column="100" selection-end-line="130" selection-end-column="100" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/sub_category_based_product.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -873,8 +793,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/sub_sub_category_based_product.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="1995" column="67" selection-start-line="1995" selection-start-column="67" selection-end-line="1995" selection-end-column="67" />
+        <state relative-caret-position="264">
+          <caret line="1995" column="14" selection-start-line="1995" selection-start-column="14" selection-end-line="1995" selection-end-column="14" />
           <folding>
             <element signature="e#644#20808#0" />
             <element signature="e#20891#37240#0" />
@@ -887,6 +807,38 @@
             <element signature="e#196338#213233#0" />
             <element signature="e#213287#230183#0" />
             <element signature="e#230197#247093#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/product_details.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="772" column="39" selection-start-line="772" selection-start-column="39" selection-end-line="772" selection-end-column="39" />
+          <folding>
+            <element signature="e#724#12989#0" />
+            <element signature="e#13067#16199#0" />
+            <element signature="e#16286#49434#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="130" column="100" selection-start-line="130" selection-start-column="100" selection-end-line="130" selection-end-column="100" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/filters_categories.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="1076" column="13" lean-forward="true" selection-start-line="1076" selection-start-column="13" selection-end-line="1076" selection-end-column="13" />
+          <folding>
+            <element signature="e#557#3413#0" />
+            <element signature="e#3527#19101#0" />
+            <element signature="e#19418#48038#0" />
+            <element signature="e#48146#51647#0" />
           </folding>
         </state>
       </provider>
