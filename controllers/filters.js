@@ -52,7 +52,6 @@ exports.filter_category_get_all = (req, res, next) => {
         });
 };
 
-
 //create a new filter category --NOT USED ANYMORE, DONE DIRECTLY WHILE LINKING CATEGORIES
 exports.filter_create_category = (req, res, next) =>{
 
@@ -147,35 +146,6 @@ exports.filter_category_get_by_id = (req, res, next) =>{
         });
 };
 
-//update filter_category details by id
-exports.filter_category_update_by_id = (req, res, next) =>{
-    const id = req.params.filter_categoryId;
-    const updateOps = {};
-    for (const ops of req.body) {
-        updateOps[ops.propName] = ops.value;
-    }
-    Filters.update({ FILTER_ID: id }, { $set: updateOps })
-        .exec()
-        .then(result => {
-            res.status(200).json({
-                status: "success",
-                data: {
-                    message: "filter_category updated"
-                }
-            });
-        })
-        .catch(err => {
-
-            res.status(500).json({
-                status: "error",
-                error: err,
-                data: {
-                    message: "Internal server error!"
-                }
-            });
-        });
-};
-
 //delete a filter_category by id
 exports.filter_category_delete_by_id = (req, res, next) =>{
     const id = req.params.filter_categoryId;
@@ -196,8 +166,45 @@ exports.filter_category_delete_by_id = (req, res, next) =>{
                 error: err,
                 data:
                     {
-                       message: "Internal server error!"
+                        message: "Internal server error!"
                     }
+            });
+        });
+};
+
+
+
+//ONLY THE BELOW THE API WILL BE USED CURRENTLY, IT WILL BE USED TO UPDATE FILTER TYPE VALUES
+
+//update filter details by id
+exports.filter_category_update_by_id = (req, res, next) =>{
+    const id = req.params.filter_categoryId;
+    const updateOps = {};
+    const fil_type = req.body.FILTER_CATEGORY_NAME.toLowerCase();
+    var fil_id = req.body.FILTER_CATEGORY_NAME.replace(/[^a-zA-Z0-9]/g,'-');
+    updateOps['FILTER_ID'] = fil_id.toLowerCase();
+    updateOps['FILTER_CATEGORY_NAME'] = fil_type.toLowerCase();
+    updateOps['ACTIVE_FLAG'] = req.body.ACTIVE_FLAG;
+    updateOps['UPDATED_DATE'] = new Date();
+
+    Filters.update({ _id: id }, { $set: updateOps })
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                status: "success",
+                data: {
+                    message: "filter updated"
+                }
+            });
+        })
+        .catch(err => {
+
+            res.status(500).json({
+                status: "error",
+                error: err,
+                data: {
+                    message: "Filter could not be updated!"
+                }
             });
         });
 };
