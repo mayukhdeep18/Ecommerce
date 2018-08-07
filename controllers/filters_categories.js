@@ -481,6 +481,7 @@ exports.filters_categories_conn_create = (req, res, next) => {
                                                     }
                                                 });
                                             }).catch(err => {
+                                            console.log(err);
                                             res.status(500).json({
                                                 status: "error",
                                                 error: err,
@@ -491,6 +492,7 @@ exports.filters_categories_conn_create = (req, res, next) => {
                                         });
                                     })
                                     .catch(err => {
+                                        console.log(err);
                                         res.status(500).json({
                                             status: "error",
                                             error: err,
@@ -501,6 +503,7 @@ exports.filters_categories_conn_create = (req, res, next) => {
                                     });
                             }
                         }).catch(err => {
+                        console.log(err);
                         res.status(500).json({
                             status: "error",
                             error: err,
@@ -563,6 +566,7 @@ exports.filters_categories_conn_create = (req, res, next) => {
                                                 }
                                             });
                                         }).catch(err => {
+                                        console.log(err);
                                         res.status(500).json({
                                             status: "error",
                                             error: err,
@@ -574,6 +578,7 @@ exports.filters_categories_conn_create = (req, res, next) => {
 
                                 })
                                 .catch(err => {
+                                    console.log(err);
                                     res.status(500).json({
                                         status: "error",
                                         error: err,
@@ -584,6 +589,7 @@ exports.filters_categories_conn_create = (req, res, next) => {
                                 });
 
                         }).catch(err => {
+                        console.log(err);
                         res.status(500).json({
                             status: "error",
                             error: err,
@@ -594,6 +600,7 @@ exports.filters_categories_conn_create = (req, res, next) => {
                     });
                 }
             }).catch(err => {
+            console.log(err);
             res.status(500).json({
                 status: "error",
                 error: err,
@@ -1127,7 +1134,6 @@ exports.filters_categories_conn_get_all = (req, res, next) => {
 
                 res.status(200).json({
                     status:"success",
-                    error_msg:"",
                     data: {
                         response
                     }

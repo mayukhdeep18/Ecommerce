@@ -294,7 +294,7 @@ exports.subcategory_update = (req, res, next) => {
                                                                                                                             res.status(200).json({
                                                                                                                                 status: "success",
                                                                                                                                 data: {
-                                                                                                                                    message: 'sub subcategory updated'
+                                                                                                                                    message: 'sub category updated'
                                                                                                                                 }
                                                                                                                             });
                                                                                                                         }).catch(err => {

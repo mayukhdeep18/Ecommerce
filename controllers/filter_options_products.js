@@ -138,10 +138,10 @@ exports.filter_opt_prod_conn_create = (req, res, next) => {
         fil_prod.push({
             FILTER_ID: item.FILTER_ID,
             FILTER_OPTION_ID: item.FILTER_OPTION_ID,
-            PRODUCT_ID: item.PRODUCT_NAME,
+            PRODUCT_ID: item.PRODUCT_ID,
             UPDATED_BY: req.body.UPDATED_BY,
             UPDATED_DATE: new Date(),
-            ACTIVE_FLAG: req.body.ACTIVE_FLAG
+            ACTIVE_FLAG: item.ACTIVE_FLAG
         });
     }
 
