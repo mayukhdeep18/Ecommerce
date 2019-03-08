@@ -10,7 +10,7 @@ const Hot = require("../models/hot_deals");
 const Rating = require("../models/rating_details");
 const FilterValues = require("../models/filter_options_products");
 const Wishlist = require("../models/wishlist");
-
+var amazon = require('amazon-product-api');
 
 //get all active product details
 exports.product_get_all = (req, res, next) => {
@@ -1009,3 +1009,41 @@ exports.product_delete_by_id = (req, res, next) => {
             });
         });
 };
+
+
+/*
+exports.product_get_from_amazon = (req, res, next) =>
+{
+    var client = amazon.createClient({
+        awsId: "AKIAJDNIFOH36NLSPZVA",
+        awsSecret: "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"
+        //awsTag: "aws Tag"
+    });
+
+    client.itemSearch({
+        director: 'Quentin Tarantino',
+        actor: 'Samuel L. Jackson',
+        searchIndex: 'DVD',
+        audienceRating: 'R',
+        responseGroup: 'ItemAttributes,Offers,Images'
+    }).then(function(results){
+        console.log(results);
+
+        res.status(200).json({
+            status: "success",
+            data: {
+                results
+            }
+        });
+    }).catch(function(err){
+        console.log(err);
+        res.status(500).json({
+            status: "error",
+            error: err,
+            data: {
+               message: "error occurred"
+            }
+        });
+    });
+};
+*/

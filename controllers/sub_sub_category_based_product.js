@@ -377,13 +377,17 @@ exports.product_get_all = (req, res, next) => {
                             }
                         }
                     }
+                    console.log("sub_sub_category_id",cat_res[0]._id);
+                    //console.log("min_price",min_price);
+                    //console.log("max_price",max_price);
 
+                    //{$and: [{PRODUCT_SUB_SUB_CATEGORY_ID: cat_res[0]._id},{PRODUCT_PRICE: {$gte: min_price,$lte: max_price}}]}
                     // look up ecommerce product details and product details on the basis of category id
-                    Product.find({$and: [{PRODUCT_SUB_SUB_CATEGORY_ID: cat_res[0]._id},{PRODUCT_PRICE: {$gte: min_price,$lte: max_price}}]})
+                    Product.find({PRODUCT_SUB_SUB_CATEGORY_ID: cat_res[0]._id})
                         .select("PRODUCT_ID PRODUCT_NAME PRODUCT_SUB_TITLE PRODUCT_DESCRIPTION PRODUCT_PRICE PRODUCT_SPECIFICATIONS PRODUCT_URL MEAN_RATING RATING_COUNT LEAST_PRICE_ECOMMERCE REVIEW_COUNT PRODUCT_IMAGE_LINKS UPDATED_BY UPDATED_DATE ACTIVE_FLAG _id")
                         .populate('PRODUCT_CATEGORY_ID')
                         .populate('PRODUCT_SUB_CATEGORY_ID')
-                        .populate('PRODUCT_SUB_SUB_CATEGORY_ID',null)
+                        .populate('PRODUCT_SUB_SUB_CATEGORY_ID')
                         .populate('ECOMMERCE_CATEGORY_ID')
                         .populate('ECOMMERCE_PRODUCT_DETAILS_ID')
                         .skip((perPage * page) - perPage)
@@ -391,6 +395,8 @@ exports.product_get_all = (req, res, next) => {
                         .sort({UPDATED_DATE: -1, MEAN_RATING: -1, PRODUCT_PRICE: 1})
                         .exec()
                         .then(doc_2 => {
+
+                           console.log("dco_2",doc_2);
 
                             Product.count()
                                 .exec()
@@ -431,6 +437,7 @@ exports.product_get_all = (req, res, next) => {
                                             updated_on: prod_item.UPDATED_DATE,
                                             isActive: prod_item.ACTIVE_FLAG})
                                     }
+                                    //console.log(prod_cat_arr);
 
                                     //look up ecommerce details on the basis of category id
                                     EcommProduct.find({ACTIVE_FLAG: 'Y'})
@@ -470,6 +477,7 @@ exports.product_get_all = (req, res, next) => {
                                                 //clear the temporary array to store ecommerce details value
                                                 prod_arr = [];
                                             }
+                                            //console.log(prod_final_arr);
 
                                             Review.find({ACTIVE_FLAG:'Y'})
                                                 .select("REVIEW_TITLE REVIEW_DESCRIPTION ECOMMERCE_REVIEW REVIEWER_NAME ACTIVE_FLAG _id")
@@ -504,6 +512,8 @@ exports.product_get_all = (req, res, next) => {
                                                         //clear the temporary array to store review details value
                                                         rev_arr = [];
                                                     }
+                                                    //console.log(prod_id_arr);
+                                                    //console.log(prod_final_rev_arr);
 
                                                     for (var item_3 of prod_id_arr)
                                                     {
